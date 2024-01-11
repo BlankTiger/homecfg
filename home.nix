@@ -1,0 +1,62 @@
+{ config, pkgs, ... }:
+
+{
+  home.username = "blanktiger";
+  home.homeDirectory = "/home/blanktiger";
+  home.stateVersion = "23.11";
+
+  home.packages = with pkgs; [
+    zsh
+    zsh-completions
+    zsh-syntax-highlighting
+    zsh-autosuggestions
+    
+    git
+    neovim
+    kitty
+    tmux
+    ripgrep
+    fd
+    bat
+    fzf
+    jq
+    fx
+    silver-searcher
+    eza
+    tldr
+    htop
+    bottom
+
+    firefox
+  ];
+
+  home.file = {
+    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
+    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
+    # # symlink to the Nix store copy.
+    # ".screenrc".source = dotfiles/screenrc;
+
+    # # You can also set the file content immediately.
+    # ".gradle/gradle.properties".text = ''
+    #   org.gradle.console=verbose
+    #   org.gradle.daemon.idletimeout=3600000
+    # '';
+  };
+
+  home.sessionVariables = {
+    EDITOR = "neovim";
+    BROWSER = "firefox";
+  };
+
+  xdg.mimeApps.defaultApplications = {
+    "text/html" = "firefox.desktop";
+    "text/plain" = "nvim.desktop";
+    "application/pdf" = "zathura.desktop";
+    "video/mp4" = "mpv.desktop";
+    "video/*" = "mpv.desktop";
+  };
+
+  programs.home-manager.enable = true;
+
+  manual.manpages.enable = false;
+}
