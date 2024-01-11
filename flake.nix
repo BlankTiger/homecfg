@@ -26,6 +26,7 @@
           # ./programs/zsh.nix
           # ./programs/fish.nix
           ./programs/starship.nix
+          ./programs/kitty
           # ./programs/nvim.nix
           # ./programs/firefox.nix
         ];

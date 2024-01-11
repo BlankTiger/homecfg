@@ -13,7 +13,7 @@
     python3
     python3Packages.pip
     python3Packages.virtualenv
-	sccache
+    sccache
     rustup
 
     git
