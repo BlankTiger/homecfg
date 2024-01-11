@@ -1,5 +1,4 @@
-{ config, pkgs, ... }:
-
+{ config, pkgs, inputs, ... }:
 {
   home.username = "blanktiger";
   home.homeDirectory = "/home/blanktiger";
@@ -10,7 +9,13 @@
     zsh-completions
     zsh-syntax-highlighting
     zsh-autosuggestions
-    
+
+    python3
+    python3Packages.pip
+    python3Packages.virtualenv
+	sccache
+    rustup
+
     git
     neovim
     kitty
@@ -22,12 +27,19 @@
     jq
     fx
     silver-searcher
+
     eza
     tldr
     htop
     bottom
 
-    firefox
+    ueberzug
+    imagemagick
+    inkscape
+    gimp
+    zathura
+    mpv
+    youtube-dl
   ];
 
   home.file = {
@@ -46,6 +58,7 @@
   home.sessionVariables = {
     EDITOR = "neovim";
     BROWSER = "firefox";
+	SHELL = "zsh";
   };
 
   xdg.mimeApps.defaultApplications = {
@@ -57,6 +70,5 @@
   };
 
   programs.home-manager.enable = true;
-
   manual.manpages.enable = false;
 }
