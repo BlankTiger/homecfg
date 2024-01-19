@@ -12,9 +12,5 @@
         "git"
       ];
     };
-
-    shellAliases = {
-      "ll" = "ls -l";
-    };
   };
 }

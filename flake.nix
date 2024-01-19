@@ -25,6 +25,7 @@
           ./home.nix
           # ./programs/zsh.nix
           # ./programs/fish.nix
+          ./programs/git.nix
           ./programs/starship.nix
           ./programs/kitty
           # ./programs/nvim.nix

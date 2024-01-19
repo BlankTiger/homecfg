@@ -58,7 +58,7 @@
   home.sessionVariables = {
     EDITOR = "neovim";
     BROWSER = "firefox";
-	SHELL = "zsh";
+    SHELL = "zsh";
   };
 
   xdg.mimeApps.defaultApplications = {
