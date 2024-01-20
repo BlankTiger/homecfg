@@ -38,8 +38,9 @@
     inkscape
     gimp
     zathura
-    mpv
+    #mpv
     youtube-dl
+    ffmpeg
   ];
 
   home.file = {
