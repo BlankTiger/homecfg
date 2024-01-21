@@ -16,8 +16,12 @@
     sccache
     rustup
 
+    musl
+    cmake
+    gcc
+
     git
-    neovim
+    #neovim
     kitty
     tmux
     ripgrep
