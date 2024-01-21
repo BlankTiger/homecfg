@@ -75,5 +75,5 @@
   };
 
   programs.home-manager.enable = true;
-  manual.manpages.enable = false;
+  manual.manpages.enable = true;
 }
