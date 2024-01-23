@@ -40,7 +40,7 @@
     htop
     bottom
 
-    ueberzug
+    ueberzugpp
     imagemagick
     inkscape
     gimp
