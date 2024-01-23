@@ -19,6 +19,9 @@
     musl
     cmake
     gcc
+    perf-tools
+    linuxPackages_latest.perf
+    flamegraph
 
     git
     #neovim
