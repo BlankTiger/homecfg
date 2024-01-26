@@ -17,8 +17,10 @@
     rustup
 
     musl
+    mold
     cmake
-    gcc
+    # gcc
+    clang
     perf-tools
     linuxPackages_latest.perf
     flamegraph
