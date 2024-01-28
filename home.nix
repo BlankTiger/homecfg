@@ -15,6 +15,7 @@
     python3Packages.virtualenv
     sccache
     rustup
+    tokei
 
     musl
     mold
