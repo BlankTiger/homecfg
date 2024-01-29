@@ -27,8 +27,8 @@
     flamegraph
 
     git
-    #neovim
-    kitty
+    neovim-nightly
+    # kitty
     tmux
     ripgrep
     fd
