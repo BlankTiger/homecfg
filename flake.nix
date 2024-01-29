@@ -29,11 +29,11 @@
            nixpkgs.overlays = overlays;
           })
           ./home.nix
-          # ./programs/zsh.nix
+          ./programs/zsh.nix
           # ./programs/fish.nix
           ./programs/git.nix
           ./programs/starship.nix
-          ./programs/kitty
+          # ./programs/kitty
           # ./programs/nvim.nix
           # ./programs/firefox.nix
         ];

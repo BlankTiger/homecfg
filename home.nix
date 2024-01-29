@@ -67,8 +67,11 @@
   };
 
   home.sessionVariables = {
-    EDITOR = "neovim";
-    BROWSER = "firefox";
+    EDITOR = "nvim";
+    RUSTC_WRAPPER = "sccache";
+    ENABLE_CORRECTION = "true";
+    TERMINAL="kitty";
+    BROWSER="firefox";
     SHELL = "zsh";
   };
 
