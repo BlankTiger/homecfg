@@ -16,7 +16,6 @@
     initExtra = ''
       source $HOME/.cargo/env
       source $HOME/.config/keys
-      eval "$(starship init zsh)"
     '';
 
     shellAliases = {
@@ -54,12 +53,12 @@
 
       # other
       dps = "docker ps";
-      ldsh = "docker exec -it '$(dps --quiet)' sh";
+      ldsh = "docker exec -it \"$(dps --quiet)\" sh";
       venv = ". ~/venv/bin/activate";
       venv311 = ". ~/venv311/bin/activate";
       vimrg = "rg --vimgrep";
       o = "fd --type f --hidden --exclude .git | fzf-tmux -p --reverse | xargs -r nvim";
-      d = "cd '$(director)'";
+      d = "cd \"$(director)\"";
       m = "mkdir";
 
       # idea.sh
