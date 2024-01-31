@@ -36,10 +36,10 @@
           ./programs/starship.nix
           ./programs/kitty
           ./programs/tmux
+          ./programs/nvim
           # hyprland.homeManagerModules.default
           # { wayland.windowManager.hyprland.enable = true; }
           # ./programs/hyprland.nix
-          # ./programs/nvim.nix
           # ./programs/firefox.nix
         ];
       };

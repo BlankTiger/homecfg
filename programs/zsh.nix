@@ -21,7 +21,7 @@
 
     shellAliases = {
       tmux = "tmux -u";
-      ls = "exa";
+      ls = "eza";
       f = "sk";
       s = "source ~/.zshrc";
       v = "nvim";

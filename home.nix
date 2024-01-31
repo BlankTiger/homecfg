@@ -39,8 +39,6 @@
     curl
     wget
     git
-    neovim-nightly
-    # kitty
     tmux
     ripgrep
     fd
@@ -90,6 +88,7 @@
     # LD_LIBRARY_PATH = pkgs.openssl.out + "/lib";
   };
 
+  xdg.enable = true;
   xdg.mimeApps.defaultApplications = {
     "text/html" = "firefox.desktop";
     "text/plain" = "nvim.desktop";
