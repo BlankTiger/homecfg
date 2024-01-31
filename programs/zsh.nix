@@ -16,6 +16,7 @@
     initExtra = ''
       source $HOME/.cargo/env
       source $HOME/.config/keys
+      export PATH="$PATH:/home/blanktiger/.local/bin:/home/blanktiger/.nvm/versions/node/v19.9.0/bin"
     '';
 
     shellAliases = {
@@ -73,8 +74,8 @@
       EDITOR = "nvim";
       RUSTC_WRAPPER = "sccache";
       ENABLE_CORRECTION = "true";
-      TERMINAL="kitty";
-      BROWSER="firefox";
+      TERMINAL = "kitty";
+      BROWSER = "firefox";
     };
   };
 }

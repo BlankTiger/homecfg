@@ -1,4 +1,5 @@
 { inputs, system, ... }:
+
 {
   programs.firefox = {
     enable = true;

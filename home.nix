@@ -17,15 +17,27 @@
     rustup
     tokei
 
-    musl
+    # musl
     mold
     cmake
+    # clang
+    # libcxx
+    # glibc
+
+    # cacert
+    # libiconv
+    # pkg-config
+    # openssl
+    # openssl_1_1
+    # openssl_3_1
+
     # gcc
-    clang
     perf-tools
     linuxPackages_latest.perf
     flamegraph
 
+    curl
+    wget
     git
     neovim-nightly
     # kitty
@@ -73,6 +85,9 @@
     TERMINAL="kitty";
     BROWSER="firefox";
     SHELL = "zsh";
+    # OPENSSL_DEV = pkgs.openssl.dev;
+    # PKG_CONFIG_PATH = pkgs.openssl.dev + "/lib/pkgconfig";
+    # LD_LIBRARY_PATH = pkgs.openssl.out + "/lib";
   };
 
   xdg.mimeApps.defaultApplications = {

@@ -12,9 +12,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = { nixpkgs, home-manager, ... }@inputs:
+  outputs = { nixpkgs, home-manager, hyprland, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -33,7 +34,10 @@
           # ./programs/fish.nix
           ./programs/git.nix
           ./programs/starship.nix
-          # ./programs/kitty
+          ./programs/kitty
+          # hyprland.homeManagerModules.default
+          # { wayland.windowManager.hyprland.enable = true; }
+          # ./programs/hyprland.nix
           # ./programs/nvim.nix
           # ./programs/firefox.nix
         ];
