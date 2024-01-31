@@ -23,7 +23,7 @@
       tmux = "tmux -u";
       ls = "eza";
       f = "sk";
-      s = "source ~/.zshrc";
+      s = "source ~/.config/zsh/.zshrc";
       v = "nvim";
       vi = "nvim";
       vim = "nvim";
