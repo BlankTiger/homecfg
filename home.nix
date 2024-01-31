@@ -53,6 +53,7 @@
     htop
     bottom
 
+    bitwarden
     ueberzugpp
     imagemagick
     inkscape
