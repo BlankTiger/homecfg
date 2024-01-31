@@ -1,7 +1,7 @@
 return {
 	"nvim-lua/plenary.nvim",
 
-	{ "chaoren/vim-wordmotion" },
+	"chaoren/vim-wordmotion",
 
 	{
 		"nvim-lualine/lualine.nvim",
@@ -118,18 +118,9 @@ return {
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-nvim-lua",
-			"zbirenbaum/copilot-cmp",
+			--[[ "hrsh7th/cmp-copilot", ]]
 			"saadparwaiz1/cmp_luasnip",
 		}
-	},
-
-	{
-		"zbirenbaum/copilot.lua",
-		cmd = "Copilot",
-		event = "InsertEnter",
-		config = function()
-			require("config.copilot")
-		end,
 	},
 
 	-- "rafamadriz/friendly-snippets",
@@ -171,6 +162,8 @@ return {
 	{ "ThePrimeagen/git-worktree.nvim", event = "VeryLazy" },
 	{ "mbbill/undotree",                event = "VeryLazy" },
 
+	--[[ "github/copilot.vim", ]]
+	--
 	{ "tpope/vim-fugitive",             event = "VeryLazy" },
 	-- { "tpope/vim-surround",             event = "VeryLazy" },
 	{ "tpope/vim-repeat",               event = "VeryLazy" },
@@ -188,7 +181,6 @@ return {
 	--[[ "amadeus/vim-evokai", ]]
 	--[[ "B4mbus/oxocarbon-lua.nvim", ]]
 	--[[ "kyazdani42/nvim-tree.lua", ]]
-
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v3.x",
