@@ -39,6 +39,12 @@
           tree-style-tab
           bitwarden
         ];
+        settings = {
+          "browser.toolbars.bookmarks.visibility" = "never";
+        };
+        extraConfig = ''
+          user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
+        '';
         userChrome = ''
 @-moz-document url(chrome://browser/content/browser.xhtml) {
   /* tabs on bottom of window */

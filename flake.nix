@@ -37,10 +37,10 @@
           ./programs/kitty
           ./programs/tmux
           ./programs/nvim
+          # ./programs/firefox
           # hyprland.homeManagerModules.default
           # { wayland.windowManager.hyprland.enable = true; }
-          # ./programs/hyprland.nix
-          # ./programs/firefox.nix
+# ./programs/hyprland.nix
         ];
       };
     };
