@@ -35,6 +35,7 @@
           ./programs/git.nix
           ./programs/starship.nix
           ./programs/kitty
+          ./programs/tmux
           # hyprland.homeManagerModules.default
           # { wayland.windowManager.hyprland.enable = true; }
           # ./programs/hyprland.nix
