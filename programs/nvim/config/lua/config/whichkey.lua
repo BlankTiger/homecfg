@@ -94,7 +94,13 @@ local mappings = {
 	--[[ ["<S-h>"] = { "<cmd>BufferLineCyclePrev<CR>", "Cycle to previous buffer" }, ]]
 	["<leader>"] = {
 		name = "Some utility leader mappings",
-		["<leader>"] = { "<cmd>lua require('prettier')<CR><cmd>Prettier<CR>", "Use prettier" },
+		["<leader>"] = {
+			function()
+				require('prettier')
+				vim.api.nvim_command("Prettier")
+			end,
+			"Use prettier"
+		},
 	},
 	-- ["<leader>c"] = { "<cmd>Bdelete!<CR>", "Close current buffer" },
 	["<leader>b"] = {
@@ -105,7 +111,7 @@ local mappings = {
 			c = { "<cmd>BufferLinePickClose<CR>", "Choose buffer" },
 		},
 		s = {
-			"<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+			function() require('telescope.builtin').buffers(require('telescope.themes').get_dropdown { previewer = false }) end,
 			"Show buffers",
 		},
 	},
@@ -148,8 +154,8 @@ local mappings = {
 	["<C-q>"] = { "<cmd>q<CR>", "Quit" },
 	["<leader>c"] = { "<cmd>quitall<CR>", "Quit all" },
 	["<leader>C"] = { "<cmd>quitall!<CR>", "Quit all. NOW!" },
-	["<leader>y"] = { "<cmd>lua require('telescope').extensions.neoclip.default()<CR>", "Neoclip saved yanks" },
-	["<leader>z"] = { "<cmd>lua require('zen-mode').toggle()<CR>", "Toggle zen-mode" },
+	["<leader>y"] = { function() require('telescope').extensions.neoclip.default() end, "Neoclip saved yanks" },
+	["<leader>z"] = { function() require('zen-mode').toggle() end, "Toggle zen-mode" },
 	["<leader>x"] = { "<cmd>HopWord<CR>", "Hop to any word" },
 	["<leader>X"] = { "<cmd>HopAnywhere<CR>", "Hop to anywhere" },
 	["<F8>"] = { "<cmd>TagbarToggle<CR>", "Show ctags" },
@@ -182,16 +188,16 @@ local mappings = {
 		end, "Use rg to find files"
 	},
 	["<leader>f"] = {
-		"<cmd>lua require('telescope.builtin').find_files()<cr>",
+		function() require('telescope.builtin').find_files() end,
 		"Find files",
 	},
 	["<leader>i"] = {
-		"<cmd>lua require('telescope.builtin').git_files()<cr>",
+		function() require('telescope.builtin').git_files() end,
 		"Find files",
 	},
-	["<leader>F"] = { "<cmd>lua require('telescope.builtin').live_grep()<cr>", "Find Text" },
+	["<leader>F"] = { function() require('telescope.builtin').live_grep() end, "Find Text" },
 	-- ["<leader>F"] = { "<cmd>Telescope live_grep<cr>", "Find Text" },
-	["<leader>P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
+	["<leader>P"] = { function() require('telescope').extensions.projects.projects() end, "Projects" },
 	-- UndoTree
 	["<leader>U"] = { "<cmd>UndotreeToggle<cr>", "Toggle Undotree" },
 	["r"] = {
@@ -214,38 +220,38 @@ local mappings = {
 	},
 
 	-- still harpoon
-	["<M-A>"] = { "<cmd>lua require('harpoon.ui').nav_file(1)<cr>", "Navigate to 1st harpoon file" },
-	["<M-S>"] = { "<cmd>lua require('harpoon.ui').nav_file(2)<cr>", "Navigate to 2st harpoon file"},
-	["<M-D>"] = { "<cmd>lua require('harpoon.ui').nav_file(3)<cr>", "Navigate to 3st harpoon file"},
-	["<M-F>"] = { "<cmd>lua require('harpoon.ui').nav_file(4)<cr>", "Navigate to 4st harpoon file"},
-	["<M-G>"] = { "<cmd>lua require('harpoon.ui').nav_file(5)<cr>", "Navigate to 5st harpoon file"},
-	["<M-H>"] = { "<cmd>lua require('harpoon.ui').nav_file(6)<cr>", "Navigate to 6st harpoon file"},
-	["<M-J>"] = { "<cmd>lua require('harpoon.ui').nav_file(7)<cr>", "Navigate to 7st harpoon file"},
+	["<M-A>"] = { function() require('harpoon.ui').nav_file(1) end, "Navigate to 1st harpoon file" },
+	["<M-S>"] = { function() require('harpoon.ui').nav_file(2) end, "Navigate to 2st harpoon file" },
+	["<M-D>"] = { function() require('harpoon.ui').nav_file(3) end, "Navigate to 3st harpoon file" },
+	["<M-F>"] = { function() require('harpoon.ui').nav_file(4) end, "Navigate to 4st harpoon file" },
+	["<M-G>"] = { function() require('harpoon.ui').nav_file(5) end, "Navigate to 5st harpoon file" },
+	["<M-H>"] = { function() require('harpoon.ui').nav_file(6) end, "Navigate to 6st harpoon file" },
+	["<M-J>"] = { function() require('harpoon.ui').nav_file(7) end, "Navigate to 7st harpoon file" },
 
 	["<space>"] = {
 		-- harpoon
-		["H"] = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", "Harpoon menu" },
-		["m"] = { "<cmd>lua require('harpoon.mark').add_file()<cr>", "Add file to harpoon" },
-		["n"] = { "<cmd>lua require('harpoon.ui').nav_next()<cr>", "Navigate to next harpoon file" },
-		["p"] = { "<cmd>lua require('harpoon.ui').nav_prev()<cr>", "Navigate to prev harpoon file" },
-		["1"] = { "<cmd>lua require('harpoon.ui').nav_file(1)<cr>", "Navigate to 1st harpoon file" },
-		["a"] = { "<cmd>lua require('harpoon.ui').nav_file(1)<cr>", "Navigate to 1st harpoon file" },
-		["2"] = { "<cmd>lua require('harpoon.ui').nav_file(2)<cr>", "Navigate to 2nd harpoon file" },
-		["s"] = { "<cmd>lua require('harpoon.ui').nav_file(2)<cr>", "Navigate to 2nd harpoon file" },
-		["3"] = { "<cmd>lua require('harpoon.ui').nav_file(3)<cr>", "Navigate to 3rd harpoon file" },
-		["d"] = { "<cmd>lua require('harpoon.ui').nav_file(3)<cr>", "Navigate to 3rd harpoon file" },
-		["4"] = { "<cmd>lua require('harpoon.ui').nav_file(4)<cr>", "Navigate to 4th harpoon file" },
-		["f"] = { "<cmd>lua require('harpoon.ui').nav_file(4)<cr>", "Navigate to 4th harpoon file" },
-		["5"] = { "<cmd>lua require('harpoon.ui').nav_file(5)<cr>", "Navigate to 5th harpoon file" },
-		["h"] = { "<cmd>lua require('harpoon.ui').nav_file(5)<cr>", "Navigate to 5th harpoon file" },
-		["6"] = { "<cmd>lua require('harpoon.ui').nav_file(6)<cr>", "Navigate to 6th harpoon file" },
-		["j"] = { "<cmd>lua require('harpoon.ui').nav_file(6)<cr>", "Navigate to 6th harpoon file" },
-		["7"] = { "<cmd>lua require('harpoon.ui').nav_file(7)<cr>", "Navigate to 7th harpoon file" },
-		["k"] = { "<cmd>lua require('harpoon.ui').nav_file(7)<cr>", "Navigate to 7th harpoon file" },
-		["8"] = { "<cmd>lua require('harpoon.ui').nav_file(8)<cr>", "Navigate to 8th harpoon file" },
-		["l"] = { "<cmd>lua require('harpoon.ui').nav_file(8)<cr>", "Navigate to 8th harpoon file" },
-		["9"] = { "<cmd>lua require('harpoon.ui').nav_file(9)<cr>", "Navigate to 9th harpoon file" },
-		["z"] = { "<cmd>lua require('harpoon.ui').nav_file(9)<cr>", "Navigate to 9th harpoon file" },
+		["H"] = { function() require('harpoon.ui').toggle_quick_menu() end, "Harpoon menu" },
+		["m"] = { function() require('harpoon.mark').add_file() end, "Add file to harpoon" },
+		["n"] = { function() require('harpoon.ui').nav_next() end, "Navigate to next harpoon file" },
+		["p"] = { function() require('harpoon.ui').nav_prev() end, "Navigate to prev harpoon file" },
+		["1"] = { function() require('harpoon.ui').nav_file(1) end, "Navigate to 1st harpoon file" },
+		["a"] = { function() require('harpoon.ui').nav_file(1) end, "Navigate to 1st harpoon file" },
+		["2"] = { function() require('harpoon.ui').nav_file(2) end, "Navigate to 2nd harpoon file" },
+		["s"] = { function() require('harpoon.ui').nav_file(2) end, "Navigate to 2nd harpoon file" },
+		["3"] = { function() require('harpoon.ui').nav_file(3) end, "Navigate to 3rd harpoon file" },
+		["d"] = { function() require('harpoon.ui').nav_file(3) end, "Navigate to 3rd harpoon file" },
+		["4"] = { function() require('harpoon.ui').nav_file(4) end, "Navigate to 4th harpoon file" },
+		["f"] = { function() require('harpoon.ui').nav_file(4) end, "Navigate to 4th harpoon file" },
+		["5"] = { function() require('harpoon.ui').nav_file(5) end, "Navigate to 5th harpoon file" },
+		["h"] = { function() require('harpoon.ui').nav_file(5) end, "Navigate to 5th harpoon file" },
+		["6"] = { function() require('harpoon.ui').nav_file(6) end, "Navigate to 6th harpoon file" },
+		["j"] = { function() require('harpoon.ui').nav_file(6) end, "Navigate to 6th harpoon file" },
+		["7"] = { function() require('harpoon.ui').nav_file(7) end, "Navigate to 7th harpoon file" },
+		["k"] = { function() require('harpoon.ui').nav_file(7) end, "Navigate to 7th harpoon file" },
+		["8"] = { function() require('harpoon.ui').nav_file(8) end, "Navigate to 8th harpoon file" },
+		["l"] = { function() require('harpoon.ui').nav_file(8) end, "Navigate to 8th harpoon file" },
+		["9"] = { function() require('harpoon.ui').nav_file(9) end, "Navigate to 9th harpoon file" },
+		["z"] = { function() require('harpoon.ui').nav_file(9) end, "Navigate to 9th harpoon file" },
 
 		-- quickfix jumping
 		[","] = { "<cmd>cprev<cr>", "Go to prev quickfix entry" },
@@ -273,7 +279,7 @@ local mappings = {
 			"Get all git diff hunks into a quickfix list",
 		},
 		g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
-		q = { "<cmd>lua require('gitsigns').setqflist()<cr>", "hunks into quickfix" },
+		q = { function() require('gitsigns').setqflist() end, "hunks into quickfix" },
 		j = {
 			function()
 				gitsigns = require("gitsigns")
@@ -307,20 +313,20 @@ local mappings = {
 			end,
 			"Prev Hunk"
 		},
-		l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
-		p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
-		P = { "<cmd>lua require 'gitsigns'.preview_hunk_inline()<cr>", "Preview Hunk" },
-		r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
-		R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
-		s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
-		S = { "<cmd>lua require('gitsigns').stage_buffer()<cr>", "stage buffer" },
-		u = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk" },
-		o = { "<cmd>lua require('telescope.builtin').git_status()<cr>", "Open changed file" },
-		b = { "<cmd>lua require('telescope.builtin').git_branches()<cr>", "Checkout branch" },
-		c = { "<cmd>lua require('telescope.builtin').git_commits()<cr>", "Checkout commit" },
+		l = { function() require 'gitsigns'.blame_line() end, "Blame" },
+		p = { function() require 'gitsigns'.preview_hunk() end, "Preview Hunk" },
+		P = { function() require 'gitsigns'.preview_hunk_inline() end, "Preview Hunk" },
+		r = { function() require 'gitsigns'.reset_hunk() end, "Reset Hunk" },
+		R = { function() require 'gitsigns'.reset_buffer() end, "Reset Buffer" },
+		s = { function() require 'gitsigns'.stage_hunk() end, "Stage Hunk" },
+		S = { function() require('gitsigns').stage_buffer() end, "stage buffer" },
+		u = { function() require 'gitsigns'.undo_stage_hunk() end, "Undo Stage Hunk" },
+		o = { function() require('telescope.builtin').git_status() end, "Open changed file" },
+		b = { function() require('telescope.builtin').git_branches() end, "Checkout branch" },
+		c = { function() require('telescope.builtin').git_commits() end, "Checkout commit" },
 		d = { "<cmd>Gitsigns diffthis HEAD<cr>", "Diff" },
-		w = { "<cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<cr>", "Change worktree" },
-		C = { "<cmd>lua require('telescope').extensions.git_worktree.create_git_worktree()<cr>", "Create a work tree" },
+		w = { function() require('telescope').extensions.git_worktree.git_worktrees() end, "Change worktree" },
+		C = { function() require('telescope').extensions.git_worktree.create_git_worktree() end, "Create a work tree" },
 	},
 
 	-- LSP utilities
@@ -340,31 +346,37 @@ local mappings = {
 		s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
 		S = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols" },
 		t = { "<cmd> Telescope tags<cr>", "Show tags" },
-		R = { "<cmd>LspRestart<cr>", "Restart LSP" },
+		R = {
+			function()
+				vim.api.nvim_command("LspRestart")
+				vim.diagnostic.reset()
+			end,
+			"Restart LSP"
+		},
 	},
 
 	-- DAP
 	["<leader>d"] = {
 		name = "DAP",
-		-- keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
-		-- keymap("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", opts)
-		-- keymap("n", "<leader>di", "<cmd>lua require'dap'.step_into()<cr>", opts)
-		-- keymap("n", "<leader>do", "<cmd>lua require'dap'.step_over()<cr>", opts)
-		-- keymap("n", "<leader>dO", "<cmd>lua require'dap'.step_out()<cr>", opts)
-		-- keymap("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", opts)
-		-- keymap("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", opts)
-		-- keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
-		-- keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
-		b = { "<cmd>lua require'dap'.toggle_breakpoint()<CR>", "Toggle breakpoint" },
-		c = { "<cmd>lua require'dap'.continue()<CR>", "Continue" },
-		p = { "<cmd>lua require'dap'.pause()<CR>", "Pause" },
-		i = { "<cmd>lua require'dap'.step_into()<CR>", "Step into" },
-		o = { "<cmd>lua require'dap'.step_over()<CR>", "Step over" },
-		O = { "<cmd>lua require'dap'.step_out()<CR>", "Step out" },
-		r = { "<cmd>lua require'dap'.repl.toggle()<CR>", "Toggle REPL" },
-		l = { "<cmd>lua require'dap'.run_last()<CR>", "Run last" },
-		u = { "<cmd>lua require'dapui'.toggle()<CR>", "Toggle UI" },
-		t = { "<cmd>lua require'dap'.terminate()<CR>", "Terminate" },
+		-- keymap("n", "<leader>db", function() require'dap'.toggle_breakpoint() end, opts)
+		-- keymap("n", "<leader>dc", function() require'dap'.continue() end, opts)
+		-- keymap("n", "<leader>di", function() require'dap'.step_into() end, opts)
+		-- keymap("n", "<leader>do", function() require'dap'.step_over() end, opts)
+		-- keymap("n", "<leader>dO", function() require'dap'.step_out() end, opts)
+		-- keymap("n", "<leader>dr", function() require'dap'.repl.toggle() end, opts)
+		-- keymap("n", "<leader>dl", function() require'dap'.run_last() end, opts)
+		-- keymap("n", "<leader>du", function() require'dapui'.toggle() end, opts)
+		-- keymap("n", "<leader>dt", function() require'dap'.terminate() end, opts)
+		b = { function() require 'dap'.toggle_breakpoint() end, "Toggle breakpoint" },
+		c = { function() require 'dap'.continue() end, "Continue" },
+		p = { function() require 'dap'.pause() end, "Pause" },
+		i = { function() require 'dap'.step_into() end, "Step into" },
+		o = { function() require 'dap'.step_over() end, "Step over" },
+		O = { function() require 'dap'.step_out() end, "Step out" },
+		r = { function() require 'dap'.repl.toggle() end, "Toggle REPL" },
+		l = { function() require 'dap'.run_last() end, "Run last" },
+		u = { function() require 'dapui'.toggle() end, "Toggle UI" },
+		t = { function() require 'dap'.terminate() end, "Terminate" },
 	},
 
 	["<leader>s"] = {
@@ -376,7 +388,7 @@ local mappings = {
 		R = { "<cmd>Telescope registers<cr>", "Registers" },
 		k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
 		C = { "<cmd>Telescope commands<cr>", "Commands" },
-		r = { "<cmd>lua require('spectre').open()<cr>", "Replace with Spectre" },
+		r = { function() require('spectre').open() end, "Replace with Spectre" },
 	},
 
 	["<leader>T"] = {
@@ -395,7 +407,7 @@ local mappings = {
 
 	["<leader>n"] = {
 		name = "Notifications",
-		d = { "<cmd>lua require('notify').dismiss()<cr>", "Dismiss all notifications" },
+		d = { function() require('notify').dismiss() end, "Dismiss all notifications" },
 		s = { "<cmd>Notifications<cr>", "Show notifications" },
 	},
 
@@ -412,8 +424,8 @@ local mappings = {
 	-- },
 	["\\"] = { "<cmd>lua vim.lsp.buf.format{async=true}<cr>", "Format" },
 
-	["<leader>o"] = { "<cmd>lua require('oil').open_float()<cr>", "Open oil.nvim in a floating window" },
-	-- ["<leader>e"] = { "<cmd>lua require('oil').open()<cr>", "Open oil.nvim" },
+	["<leader>o"] = { function() require('oil').open_float() end, "Open oil.nvim in a floating window" },
+	-- ["<leader>e"] = { function() require('oil').open() end, "Open oil.nvim" },
 	-- ["<leader>e"] = { ",
 
 	["zm"] = { "zz", "Center screen vertically" },
