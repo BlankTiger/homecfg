@@ -329,7 +329,13 @@ local mappings = {
 		s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
 		S = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols" },
 		t = { "<cmd> Telescope tags<cr>", "Show tags" },
-		R = { "<cmd>LspRestart<cr>", "Restart LSP" },
+		R = {
+			function()
+				vim.api.nvim_command("LspRestart")
+				vim.diagnostic.reset()
+			end,
+			"Restart LSP"
+		},
 	},
 
 	-- DAP
