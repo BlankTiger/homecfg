@@ -372,6 +372,7 @@ local mappings = {
 		name = "Trouble",
 		s = { "<cmd>TroubleToggle<cr>", "Show/Hide (Toggle)" },
 		r = { "<cmd>TroubleRefresh<cr>", "Refresh" },
+		t = { "<cmd>TodoTrouble<cr>", "Open todo items in trouble" },
 	},
 
 	["<C-t>"] = { "<cmd>6 split term://zsh<cr>", "Open horizontal terminal" },
