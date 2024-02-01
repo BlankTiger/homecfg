@@ -368,14 +368,14 @@ local mappings = {
 		r = { "<cmd>lua require('spectre').open()<cr>", "Replace with Spectre" },
 	},
 
-	["<leader>T"] = {
+	["<leader>t"] = {
 		name = "Trouble",
-		t = { "<cmd>TroubleToggle<cr>", "Toggle" },
+		s = { "<cmd>TroubleToggle<cr>", "Show/Hide (Toggle)" },
 		r = { "<cmd>TroubleRefresh<cr>", "Refresh" },
 	},
 
 	["<C-t>"] = { "<cmd>6 split term://zsh<cr>", "Open horizontal terminal" },
-	["<leader>t"] = {
+	["<leader>T"] = {
 		name = "Terminal",
 		f = { "<cmd>terminal<cr>", "Open fullscreen terminal" },
 		v = { "<cmd>vsplit term://zsh<cr>", "Open vertical split terminal" },
@@ -405,6 +405,29 @@ local mappings = {
 	-- ["<leader>e"] = { "<cmd>lua require('oil').open()<cr>", "Open oil.nvim" },
 
 	["zm"] = { "zz", "Center screen vertically" },
+
+	["<M-,>"] = {
+		function()
+			local a = vim.fn.getqflist({ winid = 1 }).winid
+			if a ~= 0 then
+				vim.api.nvim_command("cprev")
+			else
+				require("trouble").previous({ skip_groups = true, jump = true })
+			end
+		end,
+		"Prev entry in qflist or trouble"
+	},
+	["<M-.>"] = {
+		function()
+			local a = vim.fn.getqflist({ winid = 1 }).winid
+			if a ~= 0 then
+				vim.api.nvim_command("cnext")
+			else
+				require("trouble").next({ skip_groups = true, jump = true })
+			end
+		end,
+		"Prev entry in qflist or trouble"
+	},
 }
 
 -- Bindings for moving lines up and down
@@ -450,8 +473,8 @@ vim.api.nvim_set_keymap("n", "<C-u>", "<C-u>zz", {})
 vim.api.nvim_set_keymap("n", "<C-f>", "<C-f>zz", {})
 vim.api.nvim_set_keymap("n", "<C-b>", "<C-b>zz", {})
 
-vim.api.nvim_set_keymap("n", "<M-,>", "<cmd>cprev<cr>", {})
-vim.api.nvim_set_keymap("n", "<M-.>", "<cmd>cnext<cr>", {})
+-- vim.api.nvim_set_keymap("n", "<M-,>", get_prev_entry, {})
+-- vim.api.nvim_set_keymap("n", "<M-.>", get_next_entry, {})
 vim.api.nvim_set_keymap("n", "<M-;>", "<cmd>cpfile<cr>", {})
 vim.api.nvim_set_keymap("n", "<M-'>", "<cmd>cnfile<cr>", {})
 vim.api.nvim_set_keymap("n", "<C-i>", "<C-i>zz", {})
