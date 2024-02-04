@@ -136,9 +136,10 @@ return {
 	-- { "L3MON4D3/LuaSnip",               lazy = true },
 	{
 		"L3MON4D3/LuaSnip",
-		-- follow latest release.
-		version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-		-- install jsregexp (optional!).
+		version = "v2.*",
+		config = function()
+			require("config.snippets")
+		end,
 		build = "make install_jsregexp"
 	},
 
