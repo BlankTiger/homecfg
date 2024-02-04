@@ -7,6 +7,7 @@
     userEmail   = "maciej-urban@outlook.com";
     extraConfig = {
       core = {
+        autocrlf = "input";
         autocrif = "input";
       };
     };
