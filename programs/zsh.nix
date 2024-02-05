@@ -20,7 +20,8 @@
     '';
 
     shellAliases = {
-	  hms = "home-manager switch";
+      de = "deactivate";
+      hms = "home-manager switch";
       tmux = "tmux -u";
       ls = "eza";
       f = "sk";
