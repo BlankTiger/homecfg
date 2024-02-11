@@ -13,7 +13,7 @@ return {
 
 	{
 		"nvim-treesitter/nvim-treesitter",
-		lazy = true,
+		-- lazy = true,
 		-- event = "VeryLazy",
 		config = function()
 			require("config.treesitter")
@@ -368,8 +368,8 @@ return {
 
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		version = "2.20.8",
 		event = "InsertEnter",
+		main = "ibl",
 		config = function()
 			require("config.indentline")
 		end

@@ -10,9 +10,9 @@
     zsh-syntax-highlighting
     zsh-autosuggestions
 
-    python3
-    python3Packages.pip
-    python3Packages.virtualenv
+    # python3
+    # python3Packages.pip
+    # python3Packages.virtualenv
     sccache
     rustup
     tokei
