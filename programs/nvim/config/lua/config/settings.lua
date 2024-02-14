@@ -20,6 +20,7 @@ g.maplocalleader = ','
 g.tagbar_position = 'topleft vertical'
 
 -- User settings --
+opt.clipboard = "unnamedplus"
 opt.mouse = 'a'
 opt.autoindent = true
 opt.tabstop = 4
