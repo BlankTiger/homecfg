@@ -19,7 +19,7 @@
       export PATH="$PATH:/home/blanktiger/.local/bin:/home/blanktiger/.nvm/versions/node/v19.9.0/bin"
 
       git() {
-        if [[ $@ == 'push -f'* || $@ == 'push --force'*  ]]; then
+        if [[ $@ == 'push --force'*  ]]; then
           echo "Hey stupid, use --force-with-lease instead (git pushfwl)"
         else
           command git "$@"
