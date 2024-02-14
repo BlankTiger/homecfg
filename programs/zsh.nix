@@ -52,6 +52,7 @@
       rgw = "rg -g '!*.bin' -T json -i ";
 
       # git
+	  g = "git";
       gp = "git pull";
       gs = "git status";
       gst = "git stash";
