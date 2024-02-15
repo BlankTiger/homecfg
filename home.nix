@@ -13,6 +13,7 @@
     # python3
     # python3Packages.pip
     # python3Packages.virtualenv
+    pyenv
     sccache
     rustup
     tokei
@@ -48,11 +49,13 @@
     fx
     silver-searcher
 
+	just
     eza
     tldr
     htop
     bottom
 
+	neofetch
     bitwarden
     ueberzugpp
     imagemagick

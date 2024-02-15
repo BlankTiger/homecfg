@@ -119,7 +119,6 @@ return {
 			"hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-nvim-lua",
-			--[[ "hrsh7th/cmp-copilot", ]]
 			"saadparwaiz1/cmp_luasnip",
 		}
 	},
@@ -128,13 +127,11 @@ return {
 	-- { "L3MON4D3/LuaSnip",               lazy = true },
 	{
 		"L3MON4D3/LuaSnip",
-		-- follow latest release.
-		version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-		-- install jsregexp (optional!).
-		build = "make install_jsregexp",
+		version = "v2.*",
 		config = function()
 			require("config.snippets")
-		end
+		end,
+		build = "make install_jsregexp"
 	},
 
 	{
@@ -166,8 +163,6 @@ return {
 	{ "ThePrimeagen/git-worktree.nvim", event = "VeryLazy" },
 	{ "mbbill/undotree",                event = "VeryLazy" },
 
-	--[[ "github/copilot.vim", ]]
-	--
 	{ "tpope/vim-fugitive",             event = "VeryLazy" },
 	-- { "tpope/vim-surround",             event = "VeryLazy" },
 	{ "tpope/vim-repeat",               event = "VeryLazy" },

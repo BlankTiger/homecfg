@@ -14,6 +14,7 @@
     };
     extraConfig = {
       core = {
+        autocrlf = "input";
         autocrif = "input";
       };
     };
