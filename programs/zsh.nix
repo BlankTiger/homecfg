@@ -16,10 +16,19 @@
     initExtra = ''
       source $HOME/.cargo/env
       source $HOME/.config/keys
-      export PATH="$PATH:/home/blanktiger/.local/bin:/home/blanktiger/.nvm/versions/node/v19.9.0/bin:/home/blanktiger/.pyenv/shims"
+      export PATH="$PATH:/home/blanktiger/.local/bin:/home/blanktiger/.nvm/versions/node/v19.9.0/bin"
+
+      git() {
+        if [[ $@ == 'push --force'*  ]]; then
+          echo "Hey stupid, use --force-with-lease instead (git pushfwl)"
+        else
+          command git "$@"
+        fi
+      }
     '';
 
     shellAliases = {
+      de = "deactivate";
       hms = "home-manager switch";
       tmux = "tmux -u";
       ls = "eza";
@@ -43,6 +52,7 @@
       rgw = "rg -g '!*.bin' -T json -i ";
 
       # git
+	  g = "git";
       gp = "git pull";
       gs = "git status";
       gst = "git stash";

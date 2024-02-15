@@ -453,7 +453,6 @@ local mappings = {
 		end,
 		"Prev entry in qflist or trouble"
 	},
-
 }
 
 -- Bindings for moving lines up and down
@@ -499,8 +498,8 @@ vim.api.nvim_set_keymap("n", "<C-u>", "<C-u>zz", {})
 vim.api.nvim_set_keymap("n", "<C-f>", "<C-f>zz", {})
 vim.api.nvim_set_keymap("n", "<C-b>", "<C-b>zz", {})
 
--- vim.api.nvim_set_keymap("n", "<M-,>", "<cmd>cprev<cr>", {})
--- vim.api.nvim_set_keymap("n", "<M-.>", "<cmd>cnext<cr>", {})
+-- vim.api.nvim_set_keymap("n", "<M-,>", get_prev_entry, {})
+-- vim.api.nvim_set_keymap("n", "<M-.>", get_next_entry, {})
 vim.api.nvim_set_keymap("n", "<M-;>", "<cmd>cpfile<cr>", {})
 vim.api.nvim_set_keymap("n", "<M-'>", "<cmd>cnfile<cr>", {})
 vim.api.nvim_set_keymap("n", "<C-i>", "<C-i>zz", {})

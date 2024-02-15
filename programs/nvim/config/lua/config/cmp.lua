@@ -9,15 +9,15 @@ if not snip_status_ok then
   return
 end
 
-vim.keymap.set({"i"}, "<C-K>", function() luasnip.expand() end, {silent = true})
-vim.keymap.set({"i", "s"}, "<C-L>", function() luasnip.jump( 1) end, {silent = true})
-vim.keymap.set({"i", "s"}, "<C-J>", function() luasnip.jump(-1) end, {silent = true})
+vim.keymap.set({ "i" }, "<C-K>", function() luasnip.expand() end, { silent = true })
+vim.keymap.set({ "i", "s" }, "<C-L>", function() luasnip.jump(1) end, { silent = true })
+vim.keymap.set({ "i", "s" }, "<C-J>", function() luasnip.jump(-1) end, { silent = true })
 
-vim.keymap.set({"i", "s"}, "<C-E>", function()
-	if luasnip.choice_active() then
-		luasnip.change_choice(1)
-	end
-end, {silent = true})
+vim.keymap.set({ "i", "s" }, "<C-E>", function()
+  if luasnip.choice_active() then
+    luasnip.change_choice(1)
+  end
+end, { silent = true })
 
 -- require("luasnip/loaders/from_vscode").lazy_load({ paths = { "./snippets.lua" } })
 
@@ -56,6 +56,27 @@ local kind_icons = {
 }
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
+cmp.setup.cmdline('/', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    {
+      name = 'cmdline',
+      option = {
+        ignore_cmds = { 'Man', '!' }
+      }
+    }
+  })
+})
+
 cmp.setup {
   snippet = {
     expand = function(args)
@@ -93,6 +114,7 @@ cmp.setup {
   },
   sources = {
     --[[ { name = "copilot" }, ]]
+    { name = "cmdline" },
     { name = "nvim_lsp" },
     { name = "luasnip" },
     { name = "path" },
