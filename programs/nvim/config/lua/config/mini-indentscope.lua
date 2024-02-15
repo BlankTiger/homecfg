@@ -8,4 +8,8 @@ mini_indentscope.setup({
     try_as_border = true,
   },
   symbol = "│",
+  draw = {
+    delay = 0,
+    animation = mini_indentscope.gen_animation.none(),
+  },
 })

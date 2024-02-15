@@ -16,7 +16,7 @@
     initExtra = ''
       source $HOME/.cargo/env
       source $HOME/.config/keys
-      export PATH="$PATH:/home/blanktiger/.local/bin:/home/blanktiger/.nvm/versions/node/v19.9.0/bin"
+      export PATH="$PATH:/home/blanktiger/.local/bin:/home/blanktiger/.nvm/versions/node/v19.9.0/bin:/home/blanktiger/.pyenv/shims"
     '';
 
     shellAliases = {
