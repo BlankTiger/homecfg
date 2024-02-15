@@ -49,13 +49,13 @@
     fx
     silver-searcher
 
-	just
+    just
     eza
     tldr
     htop
     bottom
 
-	neofetch
+    neofetch
     bitwarden
     ueberzugpp
     imagemagick
