@@ -1,7 +1,10 @@
 return {
     "nvim-lua/plenary.nvim",
 
-    "chaoren/vim-wordmotion",
+    {
+        "chaoren/vim-wordmotion",
+        -- lazy = true,
+    },
 
     {
         "nvim-lualine/lualine.nvim",
@@ -69,8 +72,8 @@ return {
     },
     {
         "neovim/nvim-lspconfig",
-        lazy = false,
-        priority = 50,
+        event = { "BufReadPre", "BufNewFile" },
+        cmd = { "LspInfo", "LspInstall", "LspUninstall" },
         config = function()
             require("config.lsp")
         end,
@@ -112,6 +115,14 @@ return {
             require("config.cmp")
         end,
         dependencies = {
+            {
+                "L3MON4D3/LuaSnip",
+                version = "v2.*",
+                config = function()
+                    require("config.snippets")
+                end,
+                build = "make install_jsregexp",
+            },
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-cmdline",
@@ -119,17 +130,6 @@ return {
             "hrsh7th/cmp-nvim-lua",
             "saadparwaiz1/cmp_luasnip",
         },
-    },
-
-    -- "rafamadriz/friendly-snippets",
-    -- { "L3MON4D3/LuaSnip",               lazy = true },
-    {
-        "L3MON4D3/LuaSnip",
-        version = "v2.*",
-        config = function()
-            require("config.snippets")
-        end,
-        build = "make install_jsregexp",
     },
 
     {
