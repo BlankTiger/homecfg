@@ -60,6 +60,7 @@ local kind_icons = {
     Operator = "",
     TypeParameter = "",
 }
+-- find more here: https://www.nerdfonts.com/cheat-sheet
 
 cmp.setup.cmdline("/", {
     mapping = cmp.mapping.preset.cmdline(),
@@ -82,19 +83,7 @@ cmp.setup.cmdline(":", {
     }),
 })
 
-local is_whitespace = function()
-    -- returns true if the character under the cursor is whitespace.
-    local col = vim.fn.col(".") - 1
-    local line = vim.fn.getline(".")
-    local char_under_cursor = string.sub(line, col, col)
-
-    return col == 0 or string.match(char_under_cursor, "%s")
-end
-
 cmp.setup({
-    enabled = function()
-        return not is_whitespace()
-    end,
     snippet = {
         expand = function(args)
             luasnip.lsp_expand(args.body) -- For `luasnip` users.
@@ -114,19 +103,12 @@ cmp.setup({
         ["<TAB>"] = cmp.mapping.confirm({ select = true }),
     },
     sources = {
-        { name = "copilot", priority = 3000000 },
-        { name = "luasnip", priority = 1000000 },
-        { name = "nvim_lsp", priority = 900000 },
-        { name = "cmdline", priority = 300000 },
-        { name = "async_path", priority = 100000 },
-        { name = "buffer", priority = 50000 },
-    },
-    sorting = {
-        comparators = {
-            cmp.config.compare.score,
-            cmp.config.compare.order,
-        },
-        priority_weight = 10,
+        { name = "copilot" },
+        { name = "cmdline" },
+        { name = "nvim_lsp" },
+        { name = "luasnip" },
+        { name = "path" },
+        { name = "buffer" },
     },
     formatting = {
         fields = { "kind", "abbr", "menu" },
@@ -138,9 +120,8 @@ cmp.setup({
                 copilot = "[Copilot]",
                 luasnip = "[Snippet]",
                 nvim_lsp = "[LSP]",
-                cmdline = "[CMD]",
-                async_path = "[Path]",
                 buffer = "[Buffer]",
+                path = "[Path]",
             })[entry.source.name]
             return vim_item
         end,
