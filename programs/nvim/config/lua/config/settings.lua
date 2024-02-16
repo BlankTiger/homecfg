@@ -24,6 +24,7 @@ g.tagbar_position = 'topleft vertical'
 opt.clipboard = "unnamedplus"
 opt.mouse = 'a'
 opt.autoindent = true
+opt.expandtab = true
 opt.tabstop = 4
 opt.shiftwidth = 4
 opt.smarttab = true
