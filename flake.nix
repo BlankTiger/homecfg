@@ -35,6 +35,7 @@
           ./programs/git.nix
           ./programs/starship.nix
           ./programs/kitty
+          ./programs/wezterm
           ./programs/tmux
           ./programs/nvim
           # ./programs/firefox
