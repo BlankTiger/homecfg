@@ -14,7 +14,7 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
         -- lazy = true,
-        -- event = "VeryLazy",
+        event = "VeryLazy",
         config = function()
             require("config.treesitter")
         end,
@@ -69,8 +69,8 @@ return {
     },
     {
         "neovim/nvim-lspconfig",
-        lazy = false,
-        priority = 50,
+        event = { "BufReadPre", "BufNewFile" },
+        cmd = { "LspInfo", "LspInstall", "LspUninstall" },
         config = function()
             require("config.lsp")
         end,
