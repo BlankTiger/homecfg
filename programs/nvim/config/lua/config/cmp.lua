@@ -60,7 +60,6 @@ local kind_icons = {
     Operator = "",
     TypeParameter = "",
 }
--- find more here: https://www.nerdfonts.com/cheat-sheet
 
 cmp.setup.cmdline("/", {
     mapping = cmp.mapping.preset.cmdline(),
@@ -115,11 +114,17 @@ cmp.setup({
         ["<TAB>"] = cmp.mapping.confirm({ select = true }),
     },
     sources = {
-        { name = "nvim_lsp" },
-        { name = "luasnip" },
-        { name = "cmdline" },
-        { name = "path" },
-        { name = "buffer" },
+        { name = "luasnip",    priority = 1000000 },
+        { name = "nvim_lsp",   priority = 900000 },
+        { name = "cmdline",    priority = 300 },
+        { name = "async_path", priority = 100 },
+        { name = "buffer",     priority = 50 },
+    },
+    sorting = {
+        comparators = {
+            cmp.config.compare.order,
+        },
+        priority_weight = 2,
     },
     formatting = {
         fields = { "kind", "abbr", "menu" },
@@ -133,7 +138,7 @@ cmp.setup({
                 nvim_lsp = "[LSP]",
                 cmdline = "[CMD]",
                 buffer = "[Buffer]",
-                path = "[Path]",
+                async_path = "[Path]",
             })[entry.source.name]
             return vim_item
         end,
