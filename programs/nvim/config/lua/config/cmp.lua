@@ -114,17 +114,18 @@ cmp.setup({
         ["<TAB>"] = cmp.mapping.confirm({ select = true }),
     },
     sources = {
-        { name = "luasnip",    priority = 1000000 },
-        { name = "nvim_lsp",   priority = 900000 },
-        { name = "cmdline",    priority = 300 },
-        { name = "async_path", priority = 100 },
-        { name = "buffer",     priority = 50 },
+        { name = "luasnip", priority = 1000000 },
+        { name = "nvim_lsp", priority = 900000 },
+        { name = "cmdline", priority = 300000 },
+        { name = "async_path", priority = 100000 },
+        { name = "buffer", priority = 50000 },
     },
     sorting = {
         comparators = {
+            cmp.config.compare.score,
             cmp.config.compare.order,
         },
-        priority_weight = 2,
+        priority_weight = 10,
     },
     formatting = {
         fields = { "kind", "abbr", "menu" },
@@ -137,8 +138,8 @@ cmp.setup({
                 luasnip = "[Snippet]",
                 nvim_lsp = "[LSP]",
                 cmdline = "[CMD]",
-                buffer = "[Buffer]",
                 async_path = "[Path]",
+                buffer = "[Buffer]",
             })[entry.source.name]
             return vim_item
         end,
