@@ -52,16 +52,20 @@
       rgw = "rg -g '!*.bin' -T json -i ";
 
       # git
-	  g = "git";
+      g = "git";
       gp = "git pull";
       gs = "git status";
       gst = "git stash";
       gstc = "git stash clear";
       gstp = "git stash pop";
       gl = "git log";
-      gpf = "git push --force";
+      glo = "git log --oneline";
+      gh = "git log --oneline | fzf-tmux -p | xargs echo | cut -d' ' -f1 | tr -d '\n' | xsel -b";
+      gd = "git diff ";
+      gc = "git checkout ";
       gcm = "git checkout master";
-      gc = "git commit";
+      gco = "git commit";
+      gap = "git add -p";
 
       # other
       dps = "docker ps";
