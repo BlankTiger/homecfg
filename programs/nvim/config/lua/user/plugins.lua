@@ -128,18 +128,21 @@ return {
             "hrsh7th/cmp-cmdline",
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-nvim-lua",
-            "zbirenbaum/copilot-cmp",
             "saadparwaiz1/cmp_luasnip",
+            {
+                "zbirenbaum/copilot.lua",
+                cmd = "Copilot",
+                config = function()
+                    require("config.copilot")
+                end,
+            },
+            {
+                "zbirenbaum/copilot-cmp",
+                config = function()
+                    require("copilot_cmp").setup()
+                end,
+            },
         },
-    },
-
-    {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        event = "InsertEnter",
-        config = function()
-            require("config.copilot")
-        end,
     },
 
     {
