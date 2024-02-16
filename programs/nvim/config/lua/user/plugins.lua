@@ -1,7 +1,10 @@
 return {
     "nvim-lua/plenary.nvim",
 
-    "chaoren/vim-wordmotion",
+    {
+        "chaoren/vim-wordmotion",
+        -- lazy = true,
+    },
 
     {
         "nvim-lualine/lualine.nvim",
@@ -14,7 +17,7 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
         -- lazy = true,
-        event = "VeryLazy",
+        -- event = "VeryLazy",
         config = function()
             require("config.treesitter")
         end,
@@ -112,6 +115,14 @@ return {
             require("config.cmp")
         end,
         dependencies = {
+            {
+                "L3MON4D3/LuaSnip",
+                version = "v2.*",
+                config = function()
+                    require("config.snippets")
+                end,
+                build = "make install_jsregexp",
+            },
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-cmdline",
@@ -129,17 +140,6 @@ return {
         config = function()
             require("config.copilot")
         end,
-    },
-
-    -- "rafamadriz/friendly-snippets",
-    -- { "L3MON4D3/LuaSnip",               lazy = true },
-    {
-        "L3MON4D3/LuaSnip",
-        version = "v2.*",
-        config = function()
-            require("config.snippets")
-        end,
-        build = "make install_jsregexp",
     },
 
     {
