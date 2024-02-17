@@ -61,7 +61,19 @@ local kind_icons = {
     TypeParameter = "",
 }
 
+local is_whitespace = function()
+    -- returns true if the character under the cursor is whitespace.
+    local col = vim.fn.col(".") - 1
+    local line = vim.fn.getline(".")
+    local char_under_cursor = string.sub(line, col, col)
+
+    return col == 0 or string.match(char_under_cursor, "%s")
+end
+
 cmp.setup({
+    enabled = function()
+        return not is_whitespace()
+    end,
     snippet = {
         expand = function(args)
             luasnip.lsp_expand(args.body) -- For `luasnip` users.
