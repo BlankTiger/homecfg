@@ -150,6 +150,7 @@ local mappings = {
 	-- [";"] = { ":", "Allow to save a keystroke" },
 	-- ["<C-b>"] = { "<C-v>", "Visual block mode" },
 	["<leader>w"] = { "<cmd>w!<CR>", "Save" },
+	["<leader>W"] = { "<cmd>wq!<CR>", "Save and quit" },
 	["<leader>q"] = { "<cmd>q<CR>", "Quit" },
 	["<C-q>"] = { "<cmd>q<CR>", "Quit" },
 	["<leader>c"] = { "<cmd>quitall<CR>", "Quit all" },
