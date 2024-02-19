@@ -54,6 +54,7 @@
     tldr
     htop
     bottom
+    xsel
 
     neofetch
     bitwarden
