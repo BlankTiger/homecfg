@@ -79,11 +79,11 @@ telescope.setup({
     pickers = {
         find_files = {
             path_display = { "absolute" },
-            -- theme = "dropdown",
+            theme = "dropdown",
         },
         git_files = {
             path_display = { "absolute" },
-            -- theme = "dropdown",
+            theme = "dropdown",
         },
         live_grep = {
             path_display = { "absolute" },
@@ -92,10 +92,10 @@ telescope.setup({
     },
     extensions = {
         fzf = {
-            fuzzy = true, -- false will only do exact matching
-            override_generic_sorter = true, -- override the generic sorter
-            override_file_sorter = true, -- override the file sorter
-            case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = "smart_case",
         },
         notify = {},
         git_diffs = {
