@@ -1,3 +1,4 @@
+local custom_auto = require("lualine.themes.auto")
 local status_ok, lualine = pcall(require, "lualine")
 if not status_ok then
   return
@@ -31,10 +32,19 @@ local mode = {
   end,
 }
 
-local filetype = {
+local function filename()
+  return vim.fn.expand("%")
+end
+
+local filetype_no_icon = {
   "filetype",
   icons_enabled = false,
-  icon = nil,
+}
+
+local filetype = {
+  "filetype",
+  colored = true,
+  icon_only = true,
 }
 
 local branch = {
@@ -62,38 +72,44 @@ local spaces = function()
   return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
 end
 
-function isRecording ()
+local function is_recording()
   local reg = vim.fn.reg_recording()
   if reg == "" then return "" end -- not recording
   return "@" .. reg
 end
 
+custom_auto.normal.x = custom_auto.normal.c
+custom_auto.insert.x = custom_auto.insert.c
+custom_auto.visual.x = custom_auto.visual.c
+custom_auto.replace.x = custom_auto.replace.c
+custom_auto.command.x = custom_auto.command.c
+custom_auto.inactive.x = custom_auto.inactive.c
+
 lualine.setup({
   options = {
     icons_enabled = true,
-    theme = "auto",
+    theme = custom_auto,
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
     disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
     always_divide_middle = true,
   },
   sections = {
-    lualine_a = { branch, diagnostics },
-    lualine_b = { isRecording, mode },
-    lualine_c = { "filename" },
-    -- lualine_x = { "encoding", "fileformat", "filetype" },
-    lualine_x = { "searchcount", "selectioncount", diff, spaces, "encoding", filetype },
-    -- lualine_y = { location },
-    -- lualine_z = { progress },
+    lualine_a = { mode, is_recording },
+    lualine_b = { branch, diagnostics },
+    lualine_c = { "%=", filetype, filename, diff },
+    lualine_x = { "searchcount", "selectioncount", spaces, "encoding", filetype_no_icon },
+    lualine_y = { "progress" },
+    lualine_z = { "location" },
   },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = { "filename" },
-    lualine_x = { "location" },
-    lualine_y = {},
-    lualine_z = {},
-  },
+  -- inactive_sections = {
+  --   lualine_a = {},
+  --   lualine_b = {},
+  --   lualine_c = { "filename" },
+  --   lualine_x = { "location" },
+  --   lualine_y = {},
+  --   lualine_z = {},
+  -- },
   tabline = {},
   extensions = {},
 })
