@@ -398,7 +398,13 @@ return {
         },
         config = function()
             local noice = require("noice")
-            noice.setup()
+            noice.setup({
+                lsp = {
+                    progress = {
+                        enabled = false,
+                    },
+                },
+            })
         end,
         dependencies = {
             {
