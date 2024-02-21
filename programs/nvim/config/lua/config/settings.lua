@@ -77,7 +77,6 @@ g.silicon = {
 g.jukit_inline_plotting = 0
 g.jupytext_fmt = 'py'
 g.jupytext_style = 'hydrogen'
--- g.python3_host_prog = HOME .. '/.local/venv/nvim/Scripts/python.exe'
 
 -- Set colorscheme
 opt.termguicolors = true

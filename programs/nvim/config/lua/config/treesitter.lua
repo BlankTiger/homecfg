@@ -33,15 +33,15 @@ configs.setup({
 
 	indent = { enable = true, disable = { "python" } },
 
-	incremental_selection = {
-		enable = true,
-		keymaps = {
-			init_selection = "<C-space>",
-			node_incremental = "<C-space>",
-			scope_incremental = false,
-			node_decremental = "<bs>",
-		}
-	},
+	-- incremental_selection = {
+	-- 	enable = true,
+	-- 	keymaps = {
+	-- 		init_selection = "<C-space>",
+	-- 		node_incremental = "<C-space>",
+	-- 		scope_incremental = false,
+	-- 		node_decremental = "<bs>",
+	-- 	}
+	-- },
 
 	textobjects = {
 		select = {
