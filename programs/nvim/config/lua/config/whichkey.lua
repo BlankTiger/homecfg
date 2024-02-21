@@ -5,6 +5,9 @@ end
 
 local vim = vim
 
+vim.g.mapleader = ','
+vim.g.maplocalleader = ','
+
 local setup = {
 	plugins = {
 		marks = true, -- shows a list of your marks on ' and `

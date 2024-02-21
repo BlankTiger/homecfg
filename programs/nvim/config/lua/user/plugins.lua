@@ -110,14 +110,12 @@ return {
     {
         "hrsh7th/nvim-cmp",
         event = { "InsertEnter", "CmdlineEnter" },
-        -- lazy = true,
         config = function()
             require("config.cmp")
         end,
         dependencies = {
             {
                 "L3MON4D3/LuaSnip",
-                version = "v2.*",
                 config = function()
                     require("config.snippets")
                 end,
@@ -189,7 +187,12 @@ return {
     --[[ "windwp/nvim-autopairs", ]]
     --[[ { "numToStr/Comment.nvim", event = "VeryLazy" }, ]]
     --[[ "moll/vim-bbye", ]]
-    { "folke/which-key.nvim", lazy = true },
+    {
+        "folke/which-key.nvim",
+        config = function()
+            require("config.whichkey")
+        end,
+    },
     { "fedepujol/move.nvim", event = "VeryLazy" },
     --[[ "ggandor/leap.nvim", ]]
     { "preservim/tagbar", event = "VeryLazy" },

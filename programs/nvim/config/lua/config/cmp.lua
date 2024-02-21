@@ -4,29 +4,6 @@ if not cmp_status_ok then
     return
 end
 
-local snip_status_ok, luasnip = pcall(require, "luasnip")
-if not snip_status_ok then
-    return
-end
-
-vim.keymap.set({ "i" }, "<C-K>", function()
-    luasnip.expand()
-end, { silent = true })
-vim.keymap.set({ "i", "s" }, "<C-L>", function()
-    luasnip.jump(1)
-end, { silent = true })
-vim.keymap.set({ "i", "s" }, "<C-J>", function()
-    luasnip.jump(-1)
-end, { silent = true })
-
-vim.keymap.set({ "i", "s" }, "<C-E>", function()
-    if luasnip.choice_active() then
-        luasnip.change_choice(1)
-    end
-end, { silent = true })
-
--- require("luasnip/loaders/from_vscode").lazy_load({ paths = { "./snippets.lua" } })
-
 local check_backspace = function()
     local col = vim.fn.col(".") - 1
     return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
@@ -61,36 +38,23 @@ local kind_icons = {
     TypeParameter = "",
 }
 
-local is_whitespace = function()
-    -- returns true if the character under the cursor is whitespace.
-    local col = vim.fn.col(".") - 1
-    local line = vim.fn.getline(".")
-    local char_under_cursor = string.sub(line, col, col)
-
-    return col == 0 or string.match(char_under_cursor, "%s")
-end
-
 cmp.setup({
-    enabled = function()
-        return not is_whitespace()
-    end,
     snippet = {
         expand = function(args)
-            luasnip.lsp_expand(args.body) -- For `luasnip` users.
+            require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
         end,
     },
-    mapping = {
-        ["<C-k>"] = cmp.mapping.select_prev_item(),
-        ["<C-j>"] = cmp.mapping.select_next_item(),
-        ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
-        ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
-        ["<C-y>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-        ["<S-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-        ["<C-e>"] = cmp.mapping({
-            i = cmp.mapping.abort(),
-            c = cmp.mapping.close(),
-        }),
-        ["<TAB>"] = cmp.mapping.confirm({ select = true }),
+    completion = {
+        copleteopt = "menu,menuone,noinsert,noselect",
+    },
+    mapping = cmp.mapping.preset.insert {
+        ["<C-p>"] = cmp.mapping.select_prev_item(),
+        ["<C-n>"] = cmp.mapping.select_next_item(),
+        ["<C-b>"] = cmp.mapping.scroll_docs(-1),
+        ["<C-f>"] = cmp.mapping.scroll_docs(1),
+        ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+        ["<C-e>"] = cmp.mapping.close(),
+        ["<C-Space>"] = cmp.mapping.complete(),
     },
     sorting = {
         comparators = {
@@ -126,19 +90,6 @@ cmp.setup({
             return vim_item
         end,
     },
-    -- confirm_opts = {
-    --   behavior = cmp.ConfirmBehavior.Replace,
-    --   select = false,
-    -- },
-    -- window = {
-    --   documentation = {
-    --     border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-    --   },
-    -- },
-    experimental = {
-        ghost_text = false,
-        native_menu = false,
-    },
 })
 
 cmp.setup.cmdline("/", {
@@ -161,4 +112,3 @@ cmp.setup.cmdline(":", {
         },
     }),
 })
-
