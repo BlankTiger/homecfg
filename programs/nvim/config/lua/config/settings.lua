@@ -1,11 +1,7 @@
 -- load keymapping
-require('config.whichkey')
-
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.netrw_banner = 0
-
-HOME = os.getenv("HOME")
 
 local opt = vim.opt
 local g = vim.g
@@ -13,14 +9,11 @@ local cmd = vim.cmd
 
 g.rg_command = 'rg --vimgrep'
 
--- Keymapping (most of which is in whichkey config in lua/user/whichkey.lua) --
-g.mapleader = ','
-g.maplocalleader = ','
-
 -- tagbar
 g.tagbar_position = 'topleft vertical'
 
 -- User settings --
+opt.laststatus = 3
 opt.clipboard = "unnamedplus"
 opt.mouse = 'a'
 opt.autoindent = true

@@ -16,8 +16,7 @@ return {
 
     {
         "nvim-treesitter/nvim-treesitter",
-        -- lazy = true,
-        -- event = "VeryLazy",
+        event = "VeryLazy",
         config = function()
             require("config.treesitter")
         end,
@@ -406,6 +405,12 @@ return {
                 "rcarriga/nvim-notify",
                 config = function()
                     require("config.notify")
+                end,
+            },
+            {
+                "j-hui/fidget.nvim",
+                config = function()
+                    require("config.fidget")
                 end,
             },
             "MunifTanjim/nui.nvim",
