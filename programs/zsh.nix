@@ -31,6 +31,8 @@
     '';
 
     shellAliases = {
+      venv = ". ./venv/bin/activate";
+      ve = ". ./.venv/bin/activate";
       de = "deactivate";
       hms = "home-manager switch";
       tmux = "tmux -u";
@@ -73,7 +75,7 @@
       # other
       dps = "docker ps";
       ldsh = "docker exec -it \"$(dps --quiet)\" sh";
-      venv = ". ~/venv/bin/activate";
+      venv38 = ". ~/venv/bin/activate";
       venv311 = ". ~/venv311/bin/activate";
       vimrg = "rg --vimgrep";
       o = "fd --type f --hidden --exclude .git | fzf-tmux -p --reverse | xargs -r nvim";
