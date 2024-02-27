@@ -270,7 +270,14 @@ return {
     --[[ { dir = "/home/blanktiger/Projects/unorphanize.nvim" }, ]]
     --[[ "vale1410/vim-minizinc", ]]
     { "NoahTheDuke/vim-just", event = "VeryLazy" },
-    { "kevinhwang91/nvim-bqf", event = "VeryLazy" },
+    {
+        "kevinhwang91/nvim-bqf",
+        event = "VeryLazy",
+        dependencies = {
+
+            "junegunn/fzf",
+        },
+    },
     {
         "rcarriga/nvim-dap-ui",
         dependencies = {
