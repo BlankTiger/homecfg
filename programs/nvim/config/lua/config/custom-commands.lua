@@ -1,0 +1,7 @@
+vim.api.nvim_create_user_command("ParseCreatedIssues", function(opts)
+    vim.cmd([[%v/Created issue/s/.*//]])
+    vim.cmd([[%s/^\n//]])
+    vim.cmd([[%s/.*browse\//]])
+    vim.cmd([[%s/.*/'\0',]])
+    vim.cmd([[norm Gdd$xa)ggIkey in (]])
+end, {})

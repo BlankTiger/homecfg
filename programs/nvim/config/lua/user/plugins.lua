@@ -16,7 +16,6 @@ return {
 
     {
         "nvim-treesitter/nvim-treesitter",
-        event = "VeryLazy",
         config = function()
             require("config.treesitter")
         end,
@@ -72,7 +71,7 @@ return {
     {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
-        cmd = { "LspInfo", "LspInstall", "LspUninstall" },
+        cmd = { "Mason", "LspInfo", "LspInstall", "LspUninstall" },
         config = function()
             require("config.lsp")
         end,
@@ -89,10 +88,19 @@ return {
         "sindrets/diffview.nvim",
         lazy = true,
     },
+
     {
         "nvimtools/none-ls.nvim",
         lazy = true,
     },
+    {
+        "stevearc/conform.nvim",
+        lazy = true,
+        config = function()
+            require("config.conform")
+        end,
+    },
+
     {
         "MunifTanjim/prettier.nvim",
         -- ft = { "html", "css", "js", "ts", "jsx", "tsx" },
@@ -249,7 +257,14 @@ return {
     --[[ { dir = "/home/blanktiger/Projects/unorphanize.nvim" }, ]]
     --[[ "vale1410/vim-minizinc", ]]
     { "NoahTheDuke/vim-just", event = "VeryLazy" },
-    { "kevinhwang91/nvim-bqf", event = "VeryLazy" },
+    {
+        "kevinhwang91/nvim-bqf",
+        event = "VeryLazy",
+        dependencies = {
+
+            "junegunn/fzf",
+        },
+    },
     {
         "rcarriga/nvim-dap-ui",
         dependencies = {

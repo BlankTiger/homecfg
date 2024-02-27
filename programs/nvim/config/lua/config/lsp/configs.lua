@@ -11,10 +11,11 @@ local servers = {
   -- "ocamllsp",
   -- "ocamlformat",
   "gopls",
-  "pyright",
+  "ruff_lsp",
+  -- "pyright",
   "arduino_language_server",
   -- "pylyzer",
-  -- "jedi_language_server",
+  "jedi_language_server",
   "rust_analyzer",
   "ltex",
   "texlab",
@@ -26,11 +27,11 @@ local servers = {
   "html",
   "marksman",
   -- "taplo",
-  "yamlls",
+  -- "yamlls",
   "marksman",
   "kotlin_language_server",
   "bashls",
-  "tailwindcss",
+  -- "tailwindcss",
   "zls",
   "nil_ls",
 }
@@ -49,11 +50,11 @@ for _, server in pairs(servers) do
     on_attach = require("config.lsp.handlers").on_attach,
     capabilities = require("config.lsp.handlers").capabilities,
   }
-  --
-  -- local has_custom_opts, server_custom_opts = pcall(require, "config.lsp.settings." .. server)
-  -- if has_custom_opts then
-  --   opts = vim.tbl_deep_extend("force", opts, server_custom_opts)
-  -- end
+
+  local has_custom_opts, server_custom_opts = pcall(require, "config.lsp.settings." .. server)
+  if has_custom_opts then
+    opts = vim.tbl_deep_extend("force", opts, server_custom_opts)
+  end
 
   if server == "ltex" then
     require("lspconfig").ltex.setup {
