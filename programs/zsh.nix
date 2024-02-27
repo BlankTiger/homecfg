@@ -16,7 +16,10 @@
     initExtra = ''
       source $HOME/.cargo/env
       source $HOME/.config/keys
-      export PATH="$PATH:/home/blanktiger/.local/bin:/home/blanktiger/.nvm/versions/node/v19.9.0/bin"
+      export PATH="$PATH:/home/blanktiger/.local/bin:/home/blanktiger/.nvm/versions/node/v19.9.0/bin:/home/blanktiger/.android/sdk/platform-tools"
+      export NDK_HOME="/home/blanktiger/.android/sdk/ndk/26.2.11394342"
+      export JAVA_HOME="/home/blanktiger/.local/bin/android-studio/jbr"
+      export ANDROID_HOME="/home/blanktiger/.android/sdk"
 
       git() {
         if [[ $@ == 'push --force'*  ]]; then
