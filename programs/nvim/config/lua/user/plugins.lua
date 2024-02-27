@@ -89,10 +89,19 @@ return {
         "sindrets/diffview.nvim",
         lazy = true,
     },
+
     {
         "nvimtools/none-ls.nvim",
         lazy = true,
     },
+    {
+        "stevearc/conform.nvim",
+        lazy = true,
+        config = function()
+            require("config.conform")
+        end,
+    },
+
     {
         "MunifTanjim/prettier.nvim",
         -- ft = { "html", "css", "js", "ts", "jsx", "tsx" },

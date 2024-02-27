@@ -13,6 +13,7 @@ g.rg_command = 'rg --vimgrep'
 g.tagbar_position = 'topleft vertical'
 
 -- User settings --
+vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 opt.laststatus = 3
 opt.clipboard = "unnamedplus"
 opt.mouse = 'a'
