@@ -5,7 +5,6 @@ vim.g.netrw_banner = 0
 
 local opt = vim.opt
 local g = vim.g
-local cmd = vim.cmd
 
 g.rg_command = 'rg --vimgrep'
 
