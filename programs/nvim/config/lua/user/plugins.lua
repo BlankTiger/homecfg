@@ -72,7 +72,7 @@ return {
     {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
-        cmd = { "LspInfo", "LspInstall", "LspUninstall" },
+        cmd = { "Mason", "LspInfo", "LspInstall", "LspUninstall" },
         config = function()
             require("config.lsp")
         end,
