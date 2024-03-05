@@ -793,6 +793,7 @@ local mappings = {
             else
                 require("trouble").previous({ skip_groups = true, jump = true })
             end
+            vim.api.nvim_command("norm zz")
         end,
         "Prev entry in qflist or trouble",
     },
@@ -804,6 +805,7 @@ local mappings = {
             else
                 require("trouble").next({ skip_groups = true, jump = true })
             end
+            vim.api.nvim_command("norm zz")
         end,
         "Prev entry in qflist or trouble",
     },
