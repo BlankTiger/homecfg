@@ -16,7 +16,6 @@ local servers = {
   "arduino_language_server",
   -- "pylyzer",
   "jedi_language_server",
-  "rust_analyzer",
   "ltex",
   "texlab",
   "jsonls",
@@ -28,10 +27,9 @@ local servers = {
   "marksman",
   -- "taplo",
   -- "yamlls",
-  "marksman",
   "kotlin_language_server",
   "bashls",
-  "tailwindcss",
+  -- "tailwindcss",
   "zls",
   "nil_ls",
 }
@@ -40,10 +38,10 @@ local servers = {
 mason_lspconfig.setup({
   ensure_installed = servers,
 })
+table.insert(servers, "rust_analyzer")
 
 local cargotomllsp_cfg = require("config.lsp.cargotomllsp")
 cargotomllsp_cfg.setup_cargotomllsp()
-
 
 for _, server in pairs(servers) do
   local opts = {
