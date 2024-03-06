@@ -16,7 +16,7 @@ return {
 
     {
         "nvim-treesitter/nvim-treesitter",
-        event = { "BufReadPre", },
+        event = { "BufReadPre" },
         lazy = true,
         config = function()
             require("config.treesitter")
@@ -77,6 +77,14 @@ return {
         config = function()
             require("config.lsp")
         end,
+        dependencies = {
+            {
+                "stevearc/conform.nvim",
+                config = function()
+                    require("config.conform")
+                end,
+            },
+        },
     },
     {
         "williamboman/mason.nvim",
@@ -94,13 +102,6 @@ return {
     {
         "nvimtools/none-ls.nvim",
         lazy = true,
-    },
-    {
-        "stevearc/conform.nvim",
-        lazy = true,
-        config = function()
-            require("config.conform")
-        end,
     },
 
     {
