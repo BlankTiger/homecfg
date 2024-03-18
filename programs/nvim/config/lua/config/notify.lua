@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 notify.setup({
-    top_down = true,
+    top_down = false,
     stages = "static",
     -- fps = 90,
 })
