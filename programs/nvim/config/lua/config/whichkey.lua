@@ -789,7 +789,7 @@ local mappings = {
         function()
             local a = vim.fn.getqflist({ winid = 1 }).winid
             if a ~= 0 then
-                vim.api.nvim_command("cprev")
+                pcall(vim.api.nvim_command, "cprev")
             else
                 require("trouble").previous({ skip_groups = true, jump = true })
             end
@@ -801,7 +801,7 @@ local mappings = {
         function()
             local a = vim.fn.getqflist({ winid = 1 }).winid
             if a ~= 0 then
-                vim.api.nvim_command("cnext")
+                pcall(vim.api.nvim_command, "cnext")
             else
                 require("trouble").next({ skip_groups = true, jump = true })
             end
