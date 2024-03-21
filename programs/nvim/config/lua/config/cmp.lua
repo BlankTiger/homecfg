@@ -47,7 +47,7 @@ cmp.setup({
     completion = {
         copleteopt = "menu,menuone,noinsert,noselect",
     },
-    mapping = cmp.mapping.preset.insert {
+    mapping = cmp.mapping.preset.insert({
         ["<C-p>"] = cmp.mapping.select_prev_item(),
         ["<C-n>"] = cmp.mapping.select_next_item(),
         ["<C-b>"] = cmp.mapping.scroll_docs(-1),
@@ -55,22 +55,31 @@ cmp.setup({
         ["<C-y>"] = cmp.mapping.confirm({ select = true }),
         ["<C-e>"] = cmp.mapping.close(),
         ["<C-Space>"] = cmp.mapping.complete(),
-    },
-    sorting = {
-        comparators = {
-            cmp.config.compare.score,
-            cmp.config.compare.order,
-        },
-        priority_weight = 10,
-    },
+    }),
+    -- sorting = {
+    --     comparators = {
+    --         cmp.config.compare.score,
+    --         cmp.config.compare.order,
+    --     },
+    --     priority_weight = 10,
+    -- },
+    -- sources = {
+    --     { name = "luasnip", priority = 1000 },
+    --     { name = "copilot", priority = 800 },
+    --     { name = "nvim_lua", priority = 500 },
+    --     { name = "nvim_lsp", priority = 250 },
+    --     { name = "cmdline", priority = 150 },
+    --     { name = "path", priority = 100 },
+    --     { name = "buffer", priority = 50 },
+    -- },
     sources = {
-        { name = "luasnip", priority = 3000 },
-        { name = "copilot", priority = 2000 },
-        { name = "nvim_lua", priority = 1000 },
-        { name = "nvim_lsp", priority = 500 },
-        { name = "cmdline", priority = 150 },
-        { name = "path", priority = 100 },
-        { name = "buffer", priority = 50 },
+        { name = "luasnip" },
+        { name = "copilot" },
+        { name = "nvim_lua" },
+        { name = "nvim_lsp" },
+        -- { name = "cmdline" },
+        { name = "path" },
+        { name = "buffer" },
     },
     formatting = {
         fields = { "kind", "abbr", "menu" },
