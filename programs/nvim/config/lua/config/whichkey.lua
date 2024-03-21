@@ -742,7 +742,8 @@ local mappings = {
         t = { "<cmd>TodoTrouble<cr>", "Open todo items in trouble" },
     },
 
-    ["<C-t>"] = { "<cmd>6 split term://zsh<cr>", "Open horizontal terminal" },
+    -- ["<C-t>"] = { "<cmd>6 split term://zsh<cr>", "Open horizontal terminal" },
+    ["<C-t>"] = { "<cmd>TermToggle<cr>", "Open horizontal terminal" },
     ["<leader>T"] = {
         name = "Terminal",
         f = { "<cmd>terminal<cr>", "Open fullscreen terminal" },
@@ -848,6 +849,7 @@ vim.api.nvim_set_keymap("v", "<C-b>", "<CMD>SearchReplaceWithinVisualSelectionCW
 
 vim.api.nvim_set_keymap("t", "<C-q>", "<CMD>q!<CR>", {})
 vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", {})
+vim.api.nvim_set_keymap("t", "<C-t>", "<CMD>TermToggle<CR>", {})
 
 vim.api.nvim_set_keymap("n", "<C-d>", "<C-d>zz", {})
 vim.api.nvim_set_keymap("n", "<C-u>", "<C-u>zz", {})
