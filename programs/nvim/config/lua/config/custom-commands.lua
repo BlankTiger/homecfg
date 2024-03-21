@@ -8,14 +8,18 @@ end, {})
 
 vim.api.nvim_create_user_command("TermToggle", function()
     local is_open = vim.g.term_win_id ~= nil and vim.api.nvim_win_is_valid(vim.g.term_win_id)
+    if vim.g.term_win_height == nil then
+        vim.g.term_win_height = 8
+    end
 
     if is_open then
+        vim.g.term_win_height = vim.api.nvim_win_get_height(vim.g.term_win_id)
         vim.api.nvim_win_hide(vim.g.term_win_id)
         vim.g.term_win_id = nil
         return
     end
 
-    vim.cmd("botright 8 new")
+    vim.cmd("botright " .. vim.g.term_win_height .. " new")
     vim.g.term_win_id = vim.api.nvim_get_current_win()
 
     local has_term_buf = vim.g.term_buf_id ~= nil and vim.api.nvim_buf_is_valid(vim.g.term_buf_id)
