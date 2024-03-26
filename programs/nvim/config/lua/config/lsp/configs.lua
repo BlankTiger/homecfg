@@ -12,10 +12,11 @@ local servers = {
   -- "ocamlformat",
   "gopls",
   "ruff_lsp",
+  "basedpyright",
   -- "pyright",
   "arduino_language_server",
   -- "pylyzer",
-  "jedi_language_server",
+  -- "jedi_language_server",
   "rust_analyzer",
   "ltex",
   "texlab",
@@ -78,19 +79,42 @@ for _, server in pairs(servers) do
     goto continue
   end
 
-  -- if server == "pyright" then
-  --   require("lspconfig").pyright.setup {
-  --     on_attach = opts.on_attach,
-  --     settings = {
-  --       python = {
-  --         analysis = {
-  --           typeCheckingMode = "off",
-  --         },
-  --       },
-  --     }
-  --   }
-  --   goto continue
-  -- end
+  if server == "basedpyright" then
+    local settings = {
+      on_attach = opts.on_attach,
+      settings = {
+        basedpyright = {
+          disableOrganizeImports = true, -- Using Ruff
+          analysis = {
+            ignore = { '*' }, -- Using Ruff
+            typeCheckingMode = 'off', -- Using mypy
+            diagnosticMode = "workspace",
+          },
+        }
+      }
+    }
+    require("lspconfig").basedpyright.setup(settings)
+    goto continue
+  end
+
+  if server == "pyright" then
+    local settings = {
+      on_attach = opts.on_attach,
+      settings = {
+        pyright = {
+          disableOrganizeImports = true, -- Using Ruff
+        },
+        python = {
+          analysis = {
+            ignore = { '*' }, -- Using Ruff
+            typeCheckingMode = 'off', -- Using mypy
+          },
+        },
+      }
+    }
+    require("lspconfig").pyright.setup(settings)
+    goto continue
+  end
   --[[ if server == "pylsp" then ]]
   --[[   require("lspconfig").pylsp.setup { ]]
   --[[     settings = { ]]

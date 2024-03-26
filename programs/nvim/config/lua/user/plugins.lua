@@ -284,6 +284,7 @@ return {
                     require("dap-python").setup(path)
                 end,
             },
+            "nvim-neotest/nvim-nio",
         },
         lazy = true,
         config = function()
