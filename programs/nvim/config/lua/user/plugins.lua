@@ -346,6 +346,14 @@ return {
             require("config.mini-comment")
         end,
     },
+    {
+        "echasnovski/mini.jump",
+        version = false,
+        event = "VeryLazy",
+        config = function()
+            require("mini.jump").setup()
+        end,
+    },
 
     {
         "folke/todo-comments.nvim",
@@ -364,22 +372,22 @@ return {
         end,
     },
 
-    {
-        "folke/flash.nvim",
-        event = "VeryLazy",
-        opts = {
-            highlight = {
-                backdrop = true,
-                matches = true,
-                groups = {
-                    match = "FlashMatch",
-                    current = "FlashLabel",
-                    backdrop = "FlashBackdrop",
-                    label = "FlashCurrent",
-                },
-            },
-        },
-    },
+    -- {
+    --     "folke/flash.nvim",
+    --     event = "VeryLazy",
+    --     opts = {
+    --         highlight = {
+    --             backdrop = false,
+    --             matches = true,
+    --             groups = {
+    --                 match = "FlashMatch",
+    --                 current = "FlashLabel",
+    --                 backdrop = "FlashBackdrop",
+    --                 label = "FlashCurrent",
+    --             },
+    --         },
+    --     },
+    -- },
 
     {
         "RRethy/vim-illuminate",
