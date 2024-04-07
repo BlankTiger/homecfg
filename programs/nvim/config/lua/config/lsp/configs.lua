@@ -18,7 +18,7 @@ local servers = {
   -- "pylyzer",
   -- "jedi_language_server",
   "rust_analyzer",
-  "ltex",
+  -- "ltex",
   "texlab",
   "jsonls",
   "lua_ls",

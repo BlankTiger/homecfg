@@ -20,7 +20,7 @@
 
     # musl
     mold
-    cmake
+    # cmake
     # clang
     # libcxx
     # glibc
