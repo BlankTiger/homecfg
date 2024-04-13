@@ -29,7 +29,7 @@
 
     shellAliases = {
       venv = ". ./venv/bin/activate";
-      ve = ". ./.venv/bin/activate";
+      ve = ". ./v/bin/activate";
       de = "deactivate";
       hms = "home-manager switch";
       tmux = "tmux -u";
