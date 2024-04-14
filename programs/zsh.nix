@@ -16,7 +16,7 @@
     initExtra = ''
       source $HOME/.cargo/env
       source $HOME/.config/keys
-      export PATH="$PATH:/home/blanktiger/.local/bin:/home/blanktiger/.nvm/versions/node/v19.9.0/bin:/home/blanktiger/.android/sdk/platform-tools"
+      export PATH="/home/blanktiger/.pyenv/shims:$PATH:/home/blanktiger/.local/bin:/home/blanktiger/.nvm/versions/node/v19.9.0/bin:/home/blanktiger/.android/sdk/platform-tools"
       export NDK_HOME="/home/blanktiger/.android/sdk/ndk/26.2.11394342"
       export JAVA_HOME="/home/blanktiger/.local/bin/android-studio/jbr"
       export ANDROID_HOME="/home/blanktiger/.android/sdk"
@@ -32,7 +32,7 @@
 
     shellAliases = {
       venv = ". ./venv/bin/activate";
-      ve = ". ./.venv/bin/activate";
+      ve = ". ./v/bin/activate";
       de = "deactivate";
       hms = "home-manager switch";
       tmux = "tmux -u";

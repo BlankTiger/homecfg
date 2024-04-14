@@ -38,10 +38,10 @@
           ./programs/wezterm
           ./programs/tmux
           ./programs/nvim
-          # ./programs/firefox
+          ./programs/firefox
           # hyprland.homeManagerModules.default
           # { wayland.windowManager.hyprland.enable = true; }
-# ./programs/hyprland.nix
+          # ./programs/hyprland.nix
         ];
       };
     };
