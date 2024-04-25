@@ -859,6 +859,8 @@ vim.api.nvim_set_keymap("n", "<C-d>", "<C-d>zz", {})
 vim.api.nvim_set_keymap("n", "<C-u>", "<C-u>zz", {})
 vim.api.nvim_set_keymap("n", "<C-f>", "<C-f>zz", {})
 vim.api.nvim_set_keymap("n", "<C-b>", "<C-b>zz", {})
+vim.api.nvim_set_keymap("n", "n", "nzz", {})
+vim.api.nvim_set_keymap("n", "N", "Nzz", {})
 
 -- vim.api.nvim_set_keymap("n", "<M-,>", get_prev_entry, {})
 -- vim.api.nvim_set_keymap("n", "<M-.>", get_next_entry, {})
