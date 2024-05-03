@@ -16,10 +16,7 @@
     initExtra = ''
       source $HOME/.cargo/env
       source $HOME/.config/keys
-      export PATH="/home/blanktiger/.pyenv/shims:$PATH:/home/blanktiger/.local/bin:/home/blanktiger/.nvm/versions/node/v19.9.0/bin:/home/blanktiger/.android/sdk/platform-tools"
-      export NDK_HOME="/home/blanktiger/.android/sdk/ndk/26.2.11394342"
-      export JAVA_HOME="/home/blanktiger/.local/bin/android-studio/jbr"
-      export ANDROID_HOME="/home/blanktiger/.android/sdk"
+      export PATH="$PATH:/home/blanktiger/.local/bin:/home/blanktiger/.nvm/versions/node/v19.9.0/bin"
 
       git() {
         if [[ $@ == 'push --force'*  ]]; then
@@ -38,8 +35,7 @@
       hms = "home-manager switch";
       tmux = "tmux -u";
       ls = "eza";
-      f = "sk";
-      s = "source ~/.config/zsh/.zshrc";
+      so = "source ~/.config/zsh/.zshrc";
       v = "nvim";
       vi = "nvim";
       vim = "nvim";
@@ -80,6 +76,7 @@
       venv311 = ". ~/venv311/bin/activate";
       vimrg = "rg --vimgrep";
       o = "fd --type f --hidden --exclude .git | fzf-tmux -p --reverse | xargs -r nvim";
+      s = "echo ',F' | nvim -s -";
       d = "cd \"$(director)\"";
       m = "mkdir";
 

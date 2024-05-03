@@ -40,7 +40,8 @@ return {
             "junegunn/fzf",
             {
                 "nvim-telescope/telescope-fzf-native.nvim",
-                build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+                build =
+                "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
             },
             {
                 "kelly-lin/telescope-ag",
@@ -112,9 +113,9 @@ return {
             require("config.prettier")
         end,
     },
-    { "lervag/vimtex", ft = "tex", lazy = true },
-    { "barreiroleo/ltex-extra.nvim", lazy = true },
-    { "simrat39/rust-tools.nvim", lazy = true },
+    { "lervag/vimtex",                 ft = "tex", lazy = true },
+    { "barreiroleo/ltex-extra.nvim",   lazy = true },
+    { "simrat39/rust-tools.nvim",      lazy = true },
     { "Vimjas/vim-python-pep8-indent", lazy = true },
 
     {
@@ -160,6 +161,7 @@ return {
             require("config.gitsigns")
         end,
     },
+    { "akinsho/git-conflict.nvim", version = "*",     config = true },
     --[[ 'luk400/vim-jukit', ]]
     {
         "norcalli/nvim-colorizer.lua",
@@ -176,9 +178,9 @@ return {
             require("config.zen-mode")
         end,
     },
-    { "folke/twilight.nvim", event = "VeryLazy" },
-    { "romainl/vim-cool", event = "VeryLazy" },
-    { "ThePrimeagen/harpoon", event = "VeryLazy" },
+    { "folke/twilight.nvim",       event = "VeryLazy" },
+    { "romainl/vim-cool",          event = "VeryLazy" },
+    { "ThePrimeagen/harpoon",      event = "VeryLazy" },
     {
         "ThePrimeagen/git-worktree.nvim",
         event = "VeryLazy",
@@ -186,12 +188,12 @@ return {
             require("config.git-worktree")
         end,
     },
-    { "mbbill/undotree", event = "VeryLazy" },
+    { "mbbill/undotree",     event = "VeryLazy" },
 
-    { "tpope/vim-fugitive", event = "VeryLazy" },
+    { "tpope/vim-fugitive",  event = "VeryLazy" },
     -- { "tpope/vim-surround",             event = "VeryLazy" },
-    { "tpope/vim-repeat", event = "VeryLazy" },
-    { "tpope/vim-sleuth", event = "VeryLazy" },
+    { "tpope/vim-repeat",    event = "VeryLazy" },
+    { "tpope/vim-sleuth",    event = "VeryLazy" },
     { "tpope/vim-obsession", event = "VeryLazy" },
 
     --[[ "windwp/nvim-autopairs", ]]
@@ -205,7 +207,7 @@ return {
     },
     { "fedepujol/move.nvim", event = "VeryLazy" },
     --[[ "ggandor/leap.nvim", ]]
-    { "preservim/tagbar", event = "VeryLazy" },
+    { "preservim/tagbar",    event = "VeryLazy" },
     --"TimUntersberger/neogit",
     --[[ "amadeus/vim-evokai", ]]
     --[[ "B4mbus/oxocarbon-lua.nvim", ]]
@@ -251,7 +253,8 @@ return {
         priority = 900,
         opts = {},
     },
-
+    { "tiagovla/tokyodark.nvim",   lazy = false,     priority = 1000 },
+    { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false,   priority = 1000 },
     {
         "folke/tokyonight.nvim",
         lazy = false,
@@ -270,9 +273,10 @@ return {
             require("config.neoclip")
         end,
     },
+
     --[[ { dir = "/home/blanktiger/Projects/unorphanize.nvim" }, ]]
     --[[ "vale1410/vim-minizinc", ]]
-    { "NoahTheDuke/vim-just", event = "VeryLazy" },
+    { "NoahTheDuke/vim-just",            event = "VeryLazy" },
     {
         "kevinhwang91/nvim-bqf",
         event = "VeryLazy",
@@ -359,6 +363,14 @@ return {
             require("config.mini-comment")
         end,
     },
+    {
+        "echasnovski/mini.jump",
+        version = false,
+        event = "VeryLazy",
+        config = function()
+            require("mini.jump").setup()
+        end,
+    },
 
     {
         "folke/todo-comments.nvim",
@@ -377,22 +389,22 @@ return {
         end,
     },
 
-    {
-        "folke/flash.nvim",
-        event = "VeryLazy",
-        opts = {
-            highlight = {
-                backdrop = true,
-                matches = true,
-                groups = {
-                    match = "FlashMatch",
-                    current = "FlashLabel",
-                    backdrop = "FlashBackdrop",
-                    label = "FlashCurrent",
-                },
-            },
-        },
-    },
+    -- {
+    --     "folke/flash.nvim",
+    --     event = "VeryLazy",
+    --     opts = {
+    --         highlight = {
+    --             backdrop = false,
+    --             matches = true,
+    --             groups = {
+    --                 match = "FlashMatch",
+    --                 current = "FlashLabel",
+    --                 backdrop = "FlashBackdrop",
+    --                 label = "FlashCurrent",
+    --             },
+    --         },
+    --     },
+    -- },
 
     {
         "RRethy/vim-illuminate",
@@ -442,7 +454,7 @@ return {
         },
     },
 
-    { "nvim-pack/nvim-spectre", event = "VeryLazy" },
+    { "nvim-pack/nvim-spectre",          event = "VeryLazy" },
 
     { "eandrju/cellular-automaton.nvim", lazy = true },
 

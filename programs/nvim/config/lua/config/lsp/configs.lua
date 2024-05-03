@@ -17,6 +17,8 @@ local servers = {
   "arduino_language_server",
   -- "pylyzer",
   "ltex",
+  -- "jedi_language_server",
+  "rust_analyzer",
   "texlab",
   "jsonls",
   "lua_ls",
@@ -27,6 +29,7 @@ local servers = {
   "marksman",
   -- "taplo",
   -- "yamlls",
+  "marksman",
   "kotlin_language_server",
   "bashls",
   -- "tailwindcss",
@@ -83,8 +86,8 @@ for _, server in pairs(servers) do
         basedpyright = {
           disableOrganizeImports = true, -- Using Ruff
           analysis = {
-            ignore = { '*' }, -- Using Ruff
-            typeCheckingMode = 'off', -- Using mypy
+            ignore = { '*' },            -- Using Ruff
+            typeCheckingMode = 'off',    -- Using mypy
             diagnosticMode = "workspace",
           },
         }
@@ -103,7 +106,7 @@ for _, server in pairs(servers) do
         },
         python = {
           analysis = {
-            ignore = { '*' }, -- Using Ruff
+            ignore = { '*' },         -- Using Ruff
             typeCheckingMode = 'off', -- Using mypy
           },
         },

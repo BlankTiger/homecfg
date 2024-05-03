@@ -23,7 +23,7 @@ null_ls.setup({
         diagnostics.mypy.with({
             extra_args = {
                 "--ignore-missing-imports",
-                "--install-types",
+                -- "--install-types",
                 "--disallow-untyped-defs",
                 "--warn-redundant-casts",
                 "--warn-unused-ignores",
