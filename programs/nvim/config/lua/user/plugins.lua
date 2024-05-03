@@ -147,6 +147,7 @@ return {
             require("config.gitsigns")
         end,
     },
+    { "akinsho/git-conflict.nvim", version = "*", config = true },
     --[[ 'luk400/vim-jukit', ]]
     {
         "norcalli/nvim-colorizer.lua",
@@ -238,13 +239,12 @@ return {
         priority = 900,
         opts = {},
     },
-
+    { "tiagovla/tokyodark.nvim", lazy = false, priority = 1000 },
     { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false, priority = 1000 },
     {
         "folke/tokyonight.nvim",
         lazy = false,
         priority = 1000,
-        opts = {},
     },
     {
         "blazkowolf/gruber-darker.nvim",
@@ -258,6 +258,7 @@ return {
             require("config.neoclip")
         end,
     },
+
     --[[ { dir = "/home/blanktiger/Projects/unorphanize.nvim" }, ]]
     --[[ "vale1410/vim-minizinc", ]]
     { "NoahTheDuke/vim-just", event = "VeryLazy" },

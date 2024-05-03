@@ -75,5 +75,6 @@ g.jupytext_style = "hydrogen"
 opt.termguicolors = true
 -- vim.cmd.colorscheme('tokyonight-moon')
 -- vim.cmd.colorscheme('gruber-darker')
+-- vim.cmd.colorscheme("tokyonight-night")
 vim.cmd.colorscheme("moonfly")
 --[[ cmd('hi Normal guibg=NONE ctermbg=NONE') ]]

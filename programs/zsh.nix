@@ -34,8 +34,7 @@
       hms = "home-manager switch";
       tmux = "tmux -u";
       ls = "eza";
-      f = "sk";
-      s = "source ~/.config/zsh/.zshrc";
+      so = "source ~/.config/zsh/.zshrc";
       v = "nvim";
       vi = "nvim";
       vim = "nvim";
@@ -76,6 +75,7 @@
       venv311 = ". ~/venv311/bin/activate";
       vimrg = "rg --vimgrep";
       o = "fd --type f --hidden --exclude .git | fzf-tmux -p --reverse | xargs -r nvim";
+      s = "echo ',F' | nvim -s -";
       d = "cd \"$(director)\"";
       m = "mkdir";
 
