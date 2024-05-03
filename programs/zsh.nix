@@ -33,6 +33,7 @@
       ve = ". ./v/bin/activate";
       de = "deactivate";
       hms = "home-manager switch";
+      hmsb = "rm /home/blanktiger/.mozilla/firefox/blanktiger/search.json.mozlz4.backup; home-manager switch -b backup";
       tmux = "tmux -u";
       ls = "eza";
       so = "source ~/.config/zsh/.zshrc";
