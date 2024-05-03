@@ -31,6 +31,7 @@
     '';
 
     shellAliases = {
+      sp = "sudo pacman";
       venv = ". ./venv/bin/activate";
       ve = ". ./v/bin/activate";
       de = "deactivate";
