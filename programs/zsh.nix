@@ -78,7 +78,7 @@
       venv311 = ". ~/venv311/bin/activate";
       vimrg = "rg --vimgrep";
       o = "fd --type f --hidden --exclude .git | fzf-tmux -p --reverse | xargs -r nvim";
-      s = "echo ',F' | nvim -s -";
+      s = "echo ',A' | nvim -s -";
       d = "cd \"$(director)\"";
       m = "mkdir";
 

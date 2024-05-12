@@ -194,15 +194,27 @@ local mappings = {
     --[[ }, ]]
 
     -- telescope
+    ["<leader>A"] = {
+        function()
+            require("telescope.builtin").live_grep()
+        end,
+        "Find Text",
+    },
     ["<leader>a"] = {
         function()
-            require("telescope").extensions.ripgrep.ripgrep_text({})
+            require("telescope").extensions.ripgrep.ripgrep_text({
+                path_display = { "absolute" },
+            })
         end,
         "Use rg to find files",
     },
-    ["<leader>A"] = {
+    ["<leader>F"] = {
         function()
-            require("telescope").extensions.ripgrep.ripgrep_files({})
+            require("telescope").extensions.ripgrep.ripgrep_files({
+                path_display = { "absolute" },
+                layout_strategy = "vertical",
+                theme = "dropdown",
+            })
         end,
         "Use rg to find files",
     },
@@ -217,12 +229,6 @@ local mappings = {
             require("telescope.builtin").git_files()
         end,
         "Find files",
-    },
-    ["<leader>F"] = {
-        function()
-            require("telescope.builtin").live_grep()
-        end,
-        "Find Text",
     },
     -- ["<leader>F"] = { "<cmd>Telescope live_grep<cr>", "Find Text" },
     ["<leader>P"] = {
