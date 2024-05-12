@@ -9,7 +9,7 @@ local config = {
         bottom = 0,
     },
     enable_tab_bar = false,
-    font = wezterm.font("Iosevka Nerd Font"),
+    font = wezterm.font("IosevkaTerm Nerd Font"),
     font_size = 13.5,
     color_scheme = "Tokyo Night",
 }

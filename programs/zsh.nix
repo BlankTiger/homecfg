@@ -16,7 +16,8 @@
     initExtra = ''
       source $HOME/.cargo/env
       source $HOME/.config/keys
-      export PATH="$PATH:/home/blanktiger/.local/bin:/home/blanktiger/.nvm/versions/node/v19.9.0/bin"
+      export PATH="/home/blanktiger/.pyenv/shims:$PATH:/home/blanktiger/.local/bin:/home/blanktiger/.nvm/versions/node/v19.9.0/bin"
+      setopt nocorrectall
 
       git() {
         if [[ $@ == 'push --force'*  ]]; then
@@ -28,10 +29,12 @@
     '';
 
     shellAliases = {
+      sp = "sudo pacman";
       venv = ". ./venv/bin/activate";
       ve = ". ./v/bin/activate";
       de = "deactivate";
       hms = "home-manager switch";
+      hmsb = "rm /home/blanktiger/.mozilla/firefox/blanktiger/search.json.mozlz4.backup; home-manager switch -b backup";
       tmux = "tmux -u";
       ls = "eza";
       so = "source ~/.config/zsh/.zshrc";
@@ -75,7 +78,7 @@
       venv311 = ". ~/venv311/bin/activate";
       vimrg = "rg --vimgrep";
       o = "fd --type f --hidden --exclude .git | fzf-tmux -p --reverse | xargs -r nvim";
-      s = "echo ',F' | nvim -s -";
+      s = "echo ',A' | nvim -s -";
       d = "cd \"$(director)\"";
       m = "mkdir";
 

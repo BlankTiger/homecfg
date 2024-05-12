@@ -34,6 +34,13 @@ return {
         lazy = true,
         config = function()
             require("config.telescope")
+            local telescope = require("telescope")
+            telescope.load_extension("ripgrep")
+            telescope.load_extension("fzf")
+            telescope.load_extension("notify")
+            telescope.load_extension("git_worktree")
+            telescope.load_extension("git_diffs")
+            telescope.load_extension("harpoon")
         end,
         dependencies = {
             "nvim-telescope/telescope-file-browser.nvim",
@@ -43,24 +50,17 @@ return {
                 build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
             },
             {
-                "kelly-lin/telescope-ag",
-                config = function()
-                    local telescope_ag = require("telescope-ag")
-                    telescope_ag.setup({
-                        cmd = telescope_ag.cmds.rg, -- defaults to telescope_ag.cmds.ag
-                    })
-                end,
-            },
-            {
                 "paopaol/telescope-git-diffs.nvim",
                 config = function()
                     require("diffview")
                 end,
             },
+            {
+                "blanktiger/telescope-rg.nvim",
+                dev = true,
+            },
         },
     },
-
-    { "duane9/nvim-rg" },
 
     {
         "folke/neodev.nvim",
@@ -166,7 +166,20 @@ return {
     },
     { "folke/twilight.nvim", event = "VeryLazy" },
     { "romainl/vim-cool", event = "VeryLazy" },
+
+    {
+        "christoomey/vim-tmux-navigator",
+        event = "VeryLazy",
+        cmd = {
+            "TmuxNavigateLeft",
+            "TmuxNavigateDown",
+            "TmuxNavigateUp",
+            "TmuxNavigateRight",
+            "TmuxNavigatePrevious",
+        },
+    },
     { "ThePrimeagen/harpoon", event = "VeryLazy" },
+
     {
         "ThePrimeagen/git-worktree.nvim",
         event = "VeryLazy",
@@ -176,7 +189,18 @@ return {
     },
     { "mbbill/undotree", event = "VeryLazy" },
 
-    { "tpope/vim-fugitive", event = "VeryLazy" },
+    {
+        "TimUntersberger/neogit",
+        event = "VeryLazy",
+        branch = "nightly",
+        config = function()
+            require("config.neogit")
+        end,
+        dependencies = {
+            "sindrets/diffview.nvim",
+        },
+    },
+    -- { "tpope/vim-fugitive", event = "VeryLazy" },
     -- { "tpope/vim-surround",             event = "VeryLazy" },
     { "tpope/vim-repeat", event = "VeryLazy" },
     { "tpope/vim-sleuth", event = "VeryLazy" },
@@ -194,7 +218,6 @@ return {
     { "fedepujol/move.nvim", event = "VeryLazy" },
     --[[ "ggandor/leap.nvim", ]]
     { "preservim/tagbar", event = "VeryLazy" },
-    --"TimUntersberger/neogit",
     --[[ "amadeus/vim-evokai", ]]
     --[[ "B4mbus/oxocarbon-lua.nvim", ]]
     --[[ "kyazdani42/nvim-tree.lua", ]]
@@ -245,6 +268,7 @@ return {
         "folke/tokyonight.nvim",
         lazy = false,
         priority = 1000,
+        opts = {},
     },
     {
         "blazkowolf/gruber-darker.nvim",

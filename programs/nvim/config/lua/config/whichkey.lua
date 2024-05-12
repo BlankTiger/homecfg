@@ -105,7 +105,7 @@ local mappings = {
             "Use prettier",
         },
     },
-    -- ["<leader>c"] = { "<cmd>Bdelete!<CR>", "Close current buffer" },
+    ["<leader>c"] = { "<cmd>TSContextToggle<CR>", "Toggle treesitter context" },
     ["<leader>b"] = {
         c = {
             name = "Closing buffers (options)",
@@ -144,10 +144,11 @@ local mappings = {
     ["<C-A-L>"] = { "<cmd>vertical resize +2<CR>", "Resize window right" },
 
     -- Moving around in windows
-    ["<C-h>"] = { "<C-w>h", "Move to window on the left" },
-    ["<C-l>"] = { "<C-w>l", "Move to window on the right" },
-    ["<C-j>"] = { "<C-w>j", "Move to the bottom window" },
-    ["<C-k>"] = { "<C-w>k", "Move to the upper window" },
+    ["<C-h>"] = { "<cmd>TmuxNavigateLeft<cr>", "Move to window on the left" },
+    ["<C-l>"] = { "<cmd>TmuxNavigateRight<cr>", "Move to window on the right" },
+    ["<C-j>"] = { "<cmd>TmuxNavigateDown<cr>", "Move to the bottom window" },
+    ["<C-k>"] = { "<cmd>TmuxNavigateUp<cr>", "Move to the upper window" },
+    ["<C-\\>"] = { "<cmd>TmuxNavigatePrevious<cr>", "Move to previous window" },
 
     -- Move between prev and next buffer
     ["<C-A-i>"] = { "<cmd>bnext<cr>", "Jump to next buffer" },
@@ -160,7 +161,7 @@ local mappings = {
     ["<leader>W"] = { "<cmd>wq!<CR>", "Save and quit" },
     ["<leader>q"] = { "<cmd>q<CR>", "Quit" },
     ["<C-q>"] = { "<cmd>q<CR>", "Quit" },
-    ["<leader>c"] = { "<cmd>quitall<CR>", "Quit all" },
+    -- ["<leader>c"] = { "<cmd>quitall<CR>", "Quit all" },
     ["<leader>C"] = { "<cmd>quitall!<CR>", "Quit all. NOW!" },
     ["<leader>y"] = {
         function()
@@ -194,15 +195,27 @@ local mappings = {
     --[[ }, ]]
 
     -- telescope
+    ["<leader>A"] = {
+        function()
+            require("telescope.builtin").live_grep()
+        end,
+        "Find Text",
+    },
     ["<leader>a"] = {
         function()
-            require("telescope")
-            local input = vim.fn.input("Search pattern (ripgrep): ")
-            if input == "" then
-                vim.notify("You didn't enter any search pattern")
-            else
-                vim.cmd("Ag " .. input)
-            end
+            require("telescope").extensions.ripgrep.ripgrep_text({
+                path_display = { "absolute" },
+            })
+        end,
+        "Use rg to find files",
+    },
+    ["<leader>F"] = {
+        function()
+            require("telescope").extensions.ripgrep.ripgrep_files({
+                path_display = { "absolute" },
+                layout_strategy = "vertical",
+                theme = "dropdown",
+            })
         end,
         "Use rg to find files",
     },
@@ -217,12 +230,6 @@ local mappings = {
             require("telescope.builtin").git_files()
         end,
         "Find files",
-    },
-    ["<leader>F"] = {
-        function()
-            require("telescope.builtin").live_grep()
-        end,
-        "Find Text",
     },
     -- ["<leader>F"] = { "<cmd>Telescope live_grep<cr>", "Find Text" },
     ["<leader>P"] = {
@@ -304,6 +311,12 @@ local mappings = {
 
     ["<space>"] = {
         -- harpoon
+        ["h"] = {
+            function()
+                require("telescope").extensions.harpoon.marks()
+            end,
+            "Harpoon marks in telescope",
+        },
         ["H"] = {
             function()
                 require("harpoon.ui").toggle_quick_menu()
@@ -334,19 +347,7 @@ local mappings = {
             end,
             "Navigate to 1st harpoon file",
         },
-        ["a"] = {
-            function()
-                require("harpoon.ui").nav_file(1)
-            end,
-            "Navigate to 1st harpoon file",
-        },
         ["2"] = {
-            function()
-                require("harpoon.ui").nav_file(2)
-            end,
-            "Navigate to 2nd harpoon file",
-        },
-        ["s"] = {
             function()
                 require("harpoon.ui").nav_file(2)
             end,
@@ -358,19 +359,7 @@ local mappings = {
             end,
             "Navigate to 3rd harpoon file",
         },
-        ["d"] = {
-            function()
-                require("harpoon.ui").nav_file(3)
-            end,
-            "Navigate to 3rd harpoon file",
-        },
         ["4"] = {
-            function()
-                require("harpoon.ui").nav_file(4)
-            end,
-            "Navigate to 4th harpoon file",
-        },
-        ["f"] = {
             function()
                 require("harpoon.ui").nav_file(4)
             end,
@@ -382,19 +371,7 @@ local mappings = {
             end,
             "Navigate to 5th harpoon file",
         },
-        ["h"] = {
-            function()
-                require("harpoon.ui").nav_file(5)
-            end,
-            "Navigate to 5th harpoon file",
-        },
         ["6"] = {
-            function()
-                require("harpoon.ui").nav_file(6)
-            end,
-            "Navigate to 6th harpoon file",
-        },
-        ["j"] = {
             function()
                 require("harpoon.ui").nav_file(6)
             end,
@@ -406,31 +383,13 @@ local mappings = {
             end,
             "Navigate to 7th harpoon file",
         },
-        ["k"] = {
-            function()
-                require("harpoon.ui").nav_file(7)
-            end,
-            "Navigate to 7th harpoon file",
-        },
         ["8"] = {
             function()
                 require("harpoon.ui").nav_file(8)
             end,
             "Navigate to 8th harpoon file",
         },
-        ["l"] = {
-            function()
-                require("harpoon.ui").nav_file(8)
-            end,
-            "Navigate to 8th harpoon file",
-        },
         ["9"] = {
-            function()
-                require("harpoon.ui").nav_file(9)
-            end,
-            "Navigate to 9th harpoon file",
-        },
-        ["z"] = {
             function()
                 require("harpoon.ui").nav_file(9)
             end,
@@ -455,6 +414,30 @@ local mappings = {
     -- git utilities
     ["<leader>g"] = {
         name = "Git",
+        s = {
+            function()
+                require("neogit").open()
+            end,
+            "Open neogit menu",
+        },
+        d = {
+            function()
+                require("diffview").open()
+            end,
+            "Open diffview",
+        },
+        c = {
+            function()
+                require("diffview").close()
+            end,
+            "Close diffview",
+        },
+        r = {
+            function()
+                require("diffview").refresh()
+            end,
+            "Refresh diffview",
+        },
         h = {
             function()
                 vim.cmd([[cgetexpr system("hunkqf")]])
@@ -520,29 +503,11 @@ local mappings = {
             end,
             "Preview Hunk",
         },
-        r = {
-            function()
-                require("gitsigns").reset_hunk()
-            end,
-            "Reset Hunk",
-        },
         R = {
             function()
                 require("gitsigns").reset_buffer()
             end,
             "Reset Buffer",
-        },
-        s = {
-            function()
-                require("gitsigns").stage_hunk()
-            end,
-            "Stage Hunk",
-        },
-        S = {
-            function()
-                require("gitsigns").stage_buffer()
-            end,
-            "stage buffer",
         },
         u = {
             function()
@@ -562,13 +527,12 @@ local mappings = {
             end,
             "Checkout branch",
         },
-        c = {
-            function()
-                require("telescope.builtin").git_commits()
-            end,
-            "Checkout commit",
-        },
-        d = { "<cmd>Gitsigns diffthis HEAD<cr>", "Diff" },
+        -- c = {
+        --     function()
+        --         require("telescope.builtin").git_commits()
+        --     end,
+        --     "Checkout commit",
+        -- },
         w = {
             function()
                 require("telescope").extensions.git_worktree.git_worktrees()

@@ -16,9 +16,9 @@ local servers = {
   -- "pyright",
   "arduino_language_server",
   -- "pylyzer",
+  "ltex",
   -- "jedi_language_server",
   "rust_analyzer",
-  -- "ltex",
   "texlab",
   "jsonls",
   "lua_ls",
@@ -41,10 +41,10 @@ local servers = {
 mason_lspconfig.setup({
   ensure_installed = servers,
 })
+table.insert(servers, "rust_analyzer")
 
 local cargotomllsp_cfg = require("config.lsp.cargotomllsp")
 cargotomllsp_cfg.setup_cargotomllsp()
-
 
 for _, server in pairs(servers) do
   local opts = {
@@ -86,8 +86,8 @@ for _, server in pairs(servers) do
         basedpyright = {
           disableOrganizeImports = true, -- Using Ruff
           analysis = {
-            ignore = { '*' }, -- Using Ruff
-            typeCheckingMode = 'off', -- Using mypy
+            ignore = { '*' },            -- Using Ruff
+            typeCheckingMode = 'off',    -- Using mypy
             diagnosticMode = "workspace",
           },
         }
@@ -106,7 +106,7 @@ for _, server in pairs(servers) do
         },
         python = {
           analysis = {
-            ignore = { '*' }, -- Using Ruff
+            ignore = { '*' },         -- Using Ruff
             typeCheckingMode = 'off', -- Using mypy
           },
         },
