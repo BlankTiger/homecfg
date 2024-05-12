@@ -1,8 +1,12 @@
-local autocmd_group = vim.api.nvim_create_augroup(
-	"My custom auto commands",
-	{ clear = true }
-)
+local autocmd_group = vim.api.nvim_create_augroup("My custom auto commands", { clear = true })
 
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+    group = autocmd_group,
+    pattern = "term://*",
+    callback = function()
+        vim.api.nvim_command("startinsert")
+    end,
+})
 
 -- vim.g.treesitter_loaded = false
 -- vim.api.nvim_create_autocmd(
