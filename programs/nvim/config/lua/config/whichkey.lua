@@ -414,6 +414,30 @@ local mappings = {
     -- git utilities
     ["<leader>g"] = {
         name = "Git",
+        s = {
+            function()
+                require("neogit").open()
+            end,
+            "Open neogit menu",
+        },
+        d = {
+            function()
+                require("diffview").open()
+            end,
+            "Open diffview",
+        },
+        c = {
+            function()
+                require("diffview").close()
+            end,
+            "Close diffview",
+        },
+        r = {
+            function()
+                require("diffview").refresh()
+            end,
+            "Refresh diffview",
+        },
         h = {
             function()
                 vim.cmd([[cgetexpr system("hunkqf")]])
@@ -479,29 +503,11 @@ local mappings = {
             end,
             "Preview Hunk",
         },
-        r = {
-            function()
-                require("gitsigns").reset_hunk()
-            end,
-            "Reset Hunk",
-        },
         R = {
             function()
                 require("gitsigns").reset_buffer()
             end,
             "Reset Buffer",
-        },
-        s = {
-            function()
-                require("gitsigns").stage_hunk()
-            end,
-            "Stage Hunk",
-        },
-        S = {
-            function()
-                require("gitsigns").stage_buffer()
-            end,
-            "stage buffer",
         },
         u = {
             function()
@@ -521,13 +527,12 @@ local mappings = {
             end,
             "Checkout branch",
         },
-        c = {
-            function()
-                require("telescope.builtin").git_commits()
-            end,
-            "Checkout commit",
-        },
-        d = { "<cmd>Gitsigns diffthis HEAD<cr>", "Diff" },
+        -- c = {
+        --     function()
+        --         require("telescope.builtin").git_commits()
+        --     end,
+        --     "Checkout commit",
+        -- },
         w = {
             function()
                 require("telescope").extensions.git_worktree.git_worktrees()

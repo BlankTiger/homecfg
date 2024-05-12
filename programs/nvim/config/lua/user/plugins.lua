@@ -202,7 +202,18 @@ return {
     },
     { "mbbill/undotree", event = "VeryLazy" },
 
-    { "tpope/vim-fugitive", event = "VeryLazy" },
+    {
+        "TimUntersberger/neogit",
+        event = "VeryLazy",
+        branch = "nightly",
+        config = function()
+            require("config.neogit")
+        end,
+        dependencies = {
+            "sindrets/diffview.nvim",
+        },
+    },
+    -- { "tpope/vim-fugitive", event = "VeryLazy" },
     -- { "tpope/vim-surround",             event = "VeryLazy" },
     { "tpope/vim-repeat", event = "VeryLazy" },
     { "tpope/vim-sleuth", event = "VeryLazy" },
@@ -220,7 +231,6 @@ return {
     { "fedepujol/move.nvim", event = "VeryLazy" },
     --[[ "ggandor/leap.nvim", ]]
     { "preservim/tagbar", event = "VeryLazy" },
-    --"TimUntersberger/neogit",
     --[[ "amadeus/vim-evokai", ]]
     --[[ "B4mbus/oxocarbon-lua.nvim", ]]
     --[[ "kyazdani42/nvim-tree.lua", ]]
