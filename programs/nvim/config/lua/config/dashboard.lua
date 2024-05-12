@@ -7,8 +7,10 @@ dashboard.setup {
   theme = 'hyper',
   config = {
     project = { enable = false, },
+    header = {},
+    footer = {},
     week_header = {
-      enable = true,
+      enable = false,
     },
     shortcut = {
       -- { desc = ' Update', group = '@property', action = 'Lazy update', key = 'u' },
