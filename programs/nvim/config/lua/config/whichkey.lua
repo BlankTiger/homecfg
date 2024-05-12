@@ -105,7 +105,7 @@ local mappings = {
             "Use prettier",
         },
     },
-    -- ["<leader>c"] = { "<cmd>Bdelete!<CR>", "Close current buffer" },
+    ["<leader>c"] = { "<cmd>TSContextToggle<CR>", "Toggle treesitter context" },
     ["<leader>b"] = {
         c = {
             name = "Closing buffers (options)",
@@ -160,7 +160,7 @@ local mappings = {
     ["<leader>W"] = { "<cmd>wq!<CR>", "Save and quit" },
     ["<leader>q"] = { "<cmd>q<CR>", "Quit" },
     ["<C-q>"] = { "<cmd>q<CR>", "Quit" },
-    ["<leader>c"] = { "<cmd>quitall<CR>", "Quit all" },
+    -- ["<leader>c"] = { "<cmd>quitall<CR>", "Quit all" },
     ["<leader>C"] = { "<cmd>quitall!<CR>", "Quit all. NOW!" },
     ["<leader>y"] = {
         function()
