@@ -178,7 +178,20 @@ return {
     },
     { "folke/twilight.nvim", event = "VeryLazy" },
     { "romainl/vim-cool", event = "VeryLazy" },
+
+    {
+        "christoomey/vim-tmux-navigator",
+        event = "VeryLazy",
+        cmd = {
+            "TmuxNavigateLeft",
+            "TmuxNavigateDown",
+            "TmuxNavigateUp",
+            "TmuxNavigateRight",
+            "TmuxNavigatePrevious",
+        },
+    },
     { "ThePrimeagen/harpoon", event = "VeryLazy" },
+
     {
         "ThePrimeagen/git-worktree.nvim",
         event = "VeryLazy",
