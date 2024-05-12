@@ -311,6 +311,12 @@ local mappings = {
 
     ["<space>"] = {
         -- harpoon
+        ["h"] = {
+            function()
+                require("telescope").extensions.harpoon.marks()
+            end,
+            "Harpoon marks in telescope",
+        },
         ["H"] = {
             function()
                 require("harpoon.ui").toggle_quick_menu()
@@ -341,19 +347,7 @@ local mappings = {
             end,
             "Navigate to 1st harpoon file",
         },
-        ["a"] = {
-            function()
-                require("harpoon.ui").nav_file(1)
-            end,
-            "Navigate to 1st harpoon file",
-        },
         ["2"] = {
-            function()
-                require("harpoon.ui").nav_file(2)
-            end,
-            "Navigate to 2nd harpoon file",
-        },
-        ["s"] = {
             function()
                 require("harpoon.ui").nav_file(2)
             end,
@@ -365,19 +359,7 @@ local mappings = {
             end,
             "Navigate to 3rd harpoon file",
         },
-        ["d"] = {
-            function()
-                require("harpoon.ui").nav_file(3)
-            end,
-            "Navigate to 3rd harpoon file",
-        },
         ["4"] = {
-            function()
-                require("harpoon.ui").nav_file(4)
-            end,
-            "Navigate to 4th harpoon file",
-        },
-        ["f"] = {
             function()
                 require("harpoon.ui").nav_file(4)
             end,
@@ -389,19 +371,7 @@ local mappings = {
             end,
             "Navigate to 5th harpoon file",
         },
-        ["h"] = {
-            function()
-                require("harpoon.ui").nav_file(5)
-            end,
-            "Navigate to 5th harpoon file",
-        },
         ["6"] = {
-            function()
-                require("harpoon.ui").nav_file(6)
-            end,
-            "Navigate to 6th harpoon file",
-        },
-        ["j"] = {
             function()
                 require("harpoon.ui").nav_file(6)
             end,
@@ -413,31 +383,13 @@ local mappings = {
             end,
             "Navigate to 7th harpoon file",
         },
-        ["k"] = {
-            function()
-                require("harpoon.ui").nav_file(7)
-            end,
-            "Navigate to 7th harpoon file",
-        },
         ["8"] = {
             function()
                 require("harpoon.ui").nav_file(8)
             end,
             "Navigate to 8th harpoon file",
         },
-        ["l"] = {
-            function()
-                require("harpoon.ui").nav_file(8)
-            end,
-            "Navigate to 8th harpoon file",
-        },
         ["9"] = {
-            function()
-                require("harpoon.ui").nav_file(9)
-            end,
-            "Navigate to 9th harpoon file",
-        },
-        ["z"] = {
             function()
                 require("harpoon.ui").nav_file(9)
             end,

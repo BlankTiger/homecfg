@@ -40,6 +40,7 @@ return {
             telescope.load_extension("notify")
             telescope.load_extension("git_worktree")
             telescope.load_extension("git_diffs")
+            telescope.load_extension("harpoon")
         end,
         dependencies = {
             "nvim-telescope/telescope-file-browser.nvim",
