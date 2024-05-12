@@ -38,113 +38,123 @@ vim.keymap.set({ "i", "s" }, "<C-E>", function()
     end
 end, { silent = true })
 
-
-ls.add_snippets("all", {
-  -- def some_func(foo: bar) -> None: ...
-  s("def", {
-    t("def "),
-    i(1),
-    t("("),
-    i(2, "foo: bar"),
-    t(") -> "),
-    i(3, "None"),
-    t({ ":", "\t" }),
-    i(4, "...")
-  }),
-  -- class Class:
-  --   def __init__(self, foo: bar) -> None:
-  --     ...
-  s("cls", {
-    t("class "),
-    i(1),
-    t({ ":", "\tdef __init__(self" }),
-    c(2, {
-      t(""),
-      sn(nil, {
-        t(", "),
-        i(1, "foo: bar"),
-      }),
+ls.add_snippets("python", {
+    -- def some_func(foo: bar) -> None: ...
+    s("def", {
+        t("def "),
+        i(1),
+        t("("),
+        i(2, "foo: bar"),
+        t(") -> "),
+        i(3, "None"),
+        t({ ":", "\t" }),
+        i(4, "..."),
     }),
-    t({ ") -> None:", "\t\t" }),
-    i(3, "...")
-  }),
-  s("runner", {
-    t({ "from blajira import Issue, IssueContainer, JiraClient", "" }),
-    t({ "from itertools import chain", "" }),
-    t({ "from typing import Dict, List", "", "", "" }),
-    t({ "class Runner:", "" }),
-    t({ "\tdef __init__(self, jira_client: JiraClient" }),
-    c(1, {
-      t(""),
-      sn(nil, {
-        t(", "),
-        i(1, "foo: bar"),
-      }),
+    -- class Class:
+    --   def __init__(self, foo: bar) -> None:
+    --     ...
+    s("cls", {
+        t("class "),
+        i(1),
+        t({ ":", "\tdef __init__(self" }),
+        c(2, {
+            t(""),
+            sn(nil, {
+                t(", "),
+                i(1, "foo: bar"),
+            }),
+        }),
+        t({ ") -> None:", "\t\t" }),
+        i(3, "..."),
     }),
-    t({ ") -> None:", "\t\tself._jira_client = jira_client", "" }),
-    t({ "\t\tself._issue_container = IssueContainer()", "\t\t" }),
-    i(2, "..."),
-    t({ "", "", "" }),
-    t({ "\tdef run(self) -> None:", "" }),
-    t({ "\t\tissues = self._fetch_issues()", "\t\t" }),
-    i(3, "..."),
-    t({ "", "", "" }),
-    t({ "\tdef _fetch_issues(self) -> Dict[str, List[Issue]]:", "" }),
-    t({ "\t\tjqls = JQLs()", "" }),
-    t({ "\t\tissues = {", "\t\t\t\"some_issues\": self._jira_client.get_issues(jqls.some_issues),", "\t\t}", "" }),
-    t({ "\t\tself._issue_container.add_issues(chain.from_iterable(issues.values()))", "" }),
-    t({ "\t\treturn issues" }),
-  }),
-  s("jqls", {
-    t({ "from blajira import JQL", "" }),
-    t({ "from typing import List", "", "", "" }),
-    t({ "class JQLs:", "" }),
-    t({ "\t@property", "" }),
-    t({ "\tdef all(self) -> List[JQL]:", "" }),
-    t({ "\t\treturn []" }),
-  }),
-  s("jql", {
-    t({ "\t@property", "" }),
-    t({ "\tdef " }),
-    i(1, "jql_name"),
-    t({ "(self) -> JQL:", "" }),
-    t({ "\t\treturn JQL(CONFIG[\"" }),
-    i(2, "jql_name"),
-    t({ "\"].get(str)).format(", "\t\t\t" }),
-    i(3, "project=CONFIG[\"project\"].get(str)"),
-    t({ ",", "\t\t)" }),
-  }),
-  s("test_jqls", {
-    t({ "from blajira import JiraClient", "" }),
-    t({ "from blajira.jira_test import OnlineJiraTest", "", "", "" }),
-    t({ "class TestJQLs(OnlineJiraTest):", "" }),
-    t({ "\tdef test_jqls(self, jira_client: JiraClient) -> None:", "" }),
-    t({ "\t\tfor jql in JQLs().all:", "" }),
-    t({ "\t\t\tself.verify_jql(jql, jira_client)" }),
-  }),
-  s("main", {
-    t({ "from blajira import OnlineJiraClient", "", "", "" }),
-    t({ "def run_" }),
-    i(1, "something"),
-    t({ "(config_filename: str) -> None:", "" }),
-    t({ "\tload_module_config(CONFIG_DIR, config_filename)", "" }),
-    t({ "\tjira_client = OnlineJiraClient(CONFIG[\"jira_address\"].get(str))", "" }),
-    t({ "\tRunner(jira_client).run()" }),
-  }),
-  s("clsdef", {
-    t("def "),
-    i(1),
-    t("(self"),
-    c(2, {
-      t(""),
-      sn(nil, {
-        t(", "),
-        i(1, "foo: bar"),
-      }),
+    s("runner", {
+        t({ "from blajira import Issue, IssueContainer, JiraClient", "" }),
+        t({ "from itertools import chain", "" }),
+        t({ "from typing import Dict, List", "", "", "" }),
+        t({ "class Runner:", "" }),
+        t({ "\tdef __init__(self, jira_client: JiraClient" }),
+        c(1, {
+            t(""),
+            sn(nil, {
+                t(", "),
+                i(1, "foo: bar"),
+            }),
+        }),
+        t({ ") -> None:", "\t\tself._jira_client = jira_client", "" }),
+        t({ "\t\tself._issue_container = IssueContainer()", "\t\t" }),
+        i(2, "..."),
+        t({ "", "", "" }),
+        t({ "\tdef run(self) -> None:", "" }),
+        t({ "\t\tissues = self._fetch_issues()", "\t\t" }),
+        i(3, "..."),
+        t({ "", "", "" }),
+        t({ "\tdef _fetch_issues(self) -> Dict[str, List[Issue]]:", "" }),
+        t({ "\t\tjqls = JQLs()", "" }),
+        t({
+            "\t\tissues = {",
+            '\t\t\t"some_issues": self._jira_client.get_issues(jqls.some_issues),',
+            "\t\t}",
+            "",
+        }),
+        t({ "\t\tself._issue_container.add_issues(chain.from_iterable(issues.values()))", "" }),
+        t({ "\t\treturn issues" }),
     }),
-    t(") -> "),
-    i(3, "None"),
-    t({ ":", "\t" }),
-    i(4, "...")
-  }),
+    s("jqls", {
+        t({ "from blajira import JQL", "" }),
+        t({ "from typing import List", "", "", "" }),
+        t({ "class JQLs:", "" }),
+        t({ "\t@property", "" }),
+        t({ "\tdef all(self) -> List[JQL]:", "" }),
+        t({ "\t\treturn []" }),
+    }),
+    s("jql", {
+        t({ "\t@property", "" }),
+        t({ "\tdef " }),
+        i(1, "jql_name"),
+        t({ "(self) -> JQL:", "" }),
+        t({ '\t\treturn JQL(CONFIG["' }),
+        i(2, "jql_name"),
+        t({ '"].get(str)).format(', "\t\t\t" }),
+        i(3, 'project=CONFIG["project"].get(str)'),
+        t({ ",", "\t\t)" }),
+    }),
+    s("test_jqls", {
+        t({ "from blajira import JiraClient", "" }),
+        t({ "from blajira.jira_test import OnlineJiraTest", "", "", "" }),
+        t({ "class TestJQLs(OnlineJiraTest):", "" }),
+        t({ "\tdef test_jqls(self, jira_client: JiraClient) -> None:", "" }),
+        t({ "\t\tfor jql in JQLs().all:", "" }),
+        t({ "\t\t\tself.verify_jql(jql, jira_client)" }),
+    }),
+    s("main", {
+        t({ "from blajira import OnlineJiraClient", "", "", "" }),
+        t({ "def run_" }),
+        i(1, "something"),
+        t({ "(config_filename: str) -> None:", "" }),
+        t({ "\tload_module_config(CONFIG_DIR, config_filename)", "" }),
+        t({ '\tjira_client = OnlineJiraClient(CONFIG["jira_address"].get(str))', "" }),
+        t({ "\tRunner(jira_client).run()" }),
+    }),
+    s("clsdef", {
+        t("def "),
+        i(1),
+        t("(self"),
+        c(2, {
+            t(""),
+            sn(nil, {
+                t(", "),
+                i(1, "foo: bar"),
+            }),
+        }),
+        t(") -> "),
+        i(3, "None"),
+        t({ ":", "\t" }),
+        i(4, "..."),
+    }),
+    s("pyc", {
+        t({ "# %%", "" }),
+    }),
+    s("mdc", {
+        t({ "# %% [markdown]", "" }),
+    }),
 })
