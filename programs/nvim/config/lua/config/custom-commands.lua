@@ -6,6 +6,37 @@ vim.api.nvim_create_user_command("ParseCreatedIssues", function(opts)
     vim.cmd([[norm Gdd$xa)ggIkey in (]])
 end, {})
 
+vim.api.nvim_create_user_command("Rg", function(opts)
+    local function highlight(text)
+        if string.find(text, "--vimgrep") == nil then
+            return {}
+        end
+
+        local first_space, _ = string.find(text, " ")
+        local highlight_groups = {
+            { 0, first_space - 1, "Directory" },
+            { first_space, string.len(text), "Question" },
+        }
+        return highlight_groups
+    end
+
+    local function on_confirm(input)
+        if input == nil or input == "rg --vimgrep " then
+            return
+        end
+
+        local cmd = "cexpr system('" .. input .. "') | copen"
+        vim.api.nvim_command(cmd)
+    end
+
+    vim.ui.input({
+        prompt = "",
+        default = "rg --vimgrep ",
+        completion = "shellcmd",
+        highlight = highlight,
+    }, on_confirm)
+end, {})
+
 vim.api.nvim_create_user_command("TermToggle", function()
     local is_open = vim.g.term_win_id ~= nil and vim.api.nvim_win_is_valid(vim.g.term_win_id)
     if vim.g.term_win_height == nil then
