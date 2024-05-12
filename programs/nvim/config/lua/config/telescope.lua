@@ -104,11 +104,6 @@ telescope.setup({
         git_diffs = {
             git_command = { "git", "log", "--oneline", "--decorate", "--all", "." }, -- list result
         },
+        ripgrep = { path_display = { "absolute" } },
     },
 })
-
-telescope.load_extension("fzf")
-telescope.load_extension("notify")
-telescope.load_extension("git_worktree")
-telescope.load_extension("ag")
-telescope.load_extension("git_diffs")
