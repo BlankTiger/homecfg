@@ -57,7 +57,7 @@ return {
             },
             {
                 "blanktiger/telescope-rg.nvim",
-                dev = true,
+                dev = false,
             },
         },
     },
