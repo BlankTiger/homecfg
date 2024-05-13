@@ -73,8 +73,18 @@ g.jupytext_style = "hydrogen"
 
 -- Set colorscheme
 opt.termguicolors = true
--- vim.cmd.colorscheme('tokyonight-moon')
--- vim.cmd.colorscheme('gruber-darker')
--- vim.cmd.colorscheme("tokyonight-night")
-vim.cmd.colorscheme("moonfly")
---[[ cmd('hi Normal guibg=NONE ctermbg=NONE') ]]
+vim.cmd.colorscheme("paragon")
+vim.cmd([[
+highlight DiffAdd guibg=NONE guifg=#5fd7af
+highlight DiffText guibg=NONE guifg=#d7d787 
+highlight DiffDelete ctermfg=NONE ctermbg=NONE guifg=#d78787 guibg=NONE
+highlight DiffChange ctermbg=NONE guifg=NONE guibg=NONE
+highlight Visual guibg=#333333 guifg=#ffffff
+
+highlight NeogitDiffAdd guibg=#1a1a1a guifg=#5fd7af
+highlight NeogitDiffAddHighlight guibg=#1a1a1a guifg=#5fd7af
+highlight NeogitDiffAddCursor guibg=#0f0f0f guifg=#5fd7af
+highlight NeogitDiffDelete ctermfg=NONE ctermbg=NONE guifg=#d78787 guibg=#1a1a1a
+highlight NeogitDiffDeleteHighlight guifg=#d78787 guibg=#1a1a1a
+highlight NeogitDiffDeleteCursor guibg=#0f0f0f guifg=#d78787
+]])

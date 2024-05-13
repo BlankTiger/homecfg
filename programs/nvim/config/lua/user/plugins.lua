@@ -255,6 +255,12 @@ return {
     },
 
     --[[ { "roobert/search-replace.nvim" }, ]]
+    -- {
+    --     "folke/tokyonight.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     opts = {},
+    -- },
     {
         "catppuccin/nvim",
         name = "catppuccin",
@@ -262,19 +268,13 @@ return {
         priority = 900,
         opts = {},
     },
-    { "tiagovla/tokyodark.nvim", lazy = false, priority = 1000 },
+    {
+        "seandewar/paragon.vim",
+        lazy = false,
+        priority = 1000,
+    },
     { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false, priority = 1000 },
-    {
-        "folke/tokyonight.nvim",
-        lazy = false,
-        priority = 1000,
-        opts = {},
-    },
-    {
-        "blazkowolf/gruber-darker.nvim",
-        lazy = false,
-        priority = 1000,
-    },
+
     {
         "AckslD/nvim-neoclip.lua",
         event = "VeryLazy",
