@@ -6,5 +6,5 @@
     extraConfig = builtins.readFile ./tmux.conf;
   };
 
-  home.file.".config/tmux/theme".source = ./theme;
+  # home.file.".config/tmux/theme".source = ./theme;
 }
