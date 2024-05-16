@@ -739,12 +739,36 @@ local mappings = {
     -- },
     ["\\"] = { "<cmd>lua require('conform').format({ async = true })<cr>", "Format" },
 
-    ["<leader>o"] = {
+    ["-"] = {
         function()
-            require("oil").open_float()
+            local oil = require("oil")
+            local curr_buf = vim.api.nvim_get_current_buf()
+            local buf_name = vim.api.nvim_buf_get_name(curr_buf)
+            -- check if oil is in buf_name
+            local is_open = buf_name:find("oil://") ~= nil
+            if is_open then
+                oil.close()
+            else
+                oil.open()
+            end
         end,
-        "Open oil.nvim in a floating window",
+        "Toggle oil.nvim",
     },
+    ["<leader>o"] = {
+        ["s"] = {
+            function()
+                require("oil").open()
+            end,
+            "Open oil.nvim",
+        },
+        ["c"] = {
+            function()
+                require("oil").close()
+            end,
+            "Close oil.nvim",
+        },
+    },
+
     -- ["<leader>e"] = { function() require('oil').open() end, "Open oil.nvim" },
     -- ["<leader>e"] = { ",
 
