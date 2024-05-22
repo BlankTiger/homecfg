@@ -6,5 +6,15 @@ end
 oil.setup({
     keymaps = {
         ["<C-t>"] = false,
+        ["<C-h>"] = false,
+        ["<C-l>"] = false,
+        ["<C-j>"] = false,
+        ["<C-k>"] = false,
+        ["-"] = false,
+        ["<leader>r"] = "actions.refresh",
+        ["<BS>"] = "actions.parent",
+    },
+    view_options = {
+        show_hidden = true,
     },
 })

@@ -29,6 +29,7 @@ null_ls.setup({
                 "--warn-unused-ignores",
             },
         }),
+        diagnostics.cppcheck,
         --[[ formatting.stylua, ]]
         -- diagnostics.flake8
     },

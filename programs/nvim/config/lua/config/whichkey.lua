@@ -82,14 +82,6 @@ local opts = {
     nowait = true, -- use `nowait` when creating keymaps
 }
 
-local opts_v = {
-    mode = "v",
-    buffer = nil,
-    silent = true,
-    noremap = true,
-    nowait = true,
-}
-
 local mappings = {
     -- Bufferline and buffer management
     ["gb"] = { "<cmd>BufferLinePick<CR>", "Pick a buffer" },
@@ -739,12 +731,36 @@ local mappings = {
     -- },
     ["\\"] = { "<cmd>lua require('conform').format({ async = true })<cr>", "Format" },
 
-    ["<leader>o"] = {
+    ["-"] = {
         function()
-            require("oil").open_float()
+            local oil = require("oil")
+            local curr_buf = vim.api.nvim_get_current_buf()
+            local buf_name = vim.api.nvim_buf_get_name(curr_buf)
+            -- check if oil is in buf_name
+            local is_open = buf_name:find("oil://") ~= nil
+            if is_open then
+                oil.close()
+            else
+                oil.open()
+            end
         end,
-        "Open oil.nvim in a floating window",
+        "Toggle oil.nvim",
     },
+    ["<leader>o"] = {
+        ["s"] = {
+            function()
+                require("oil").open()
+            end,
+            "Open oil.nvim",
+        },
+        ["c"] = {
+            function()
+                require("oil").close()
+            end,
+            "Close oil.nvim",
+        },
+    },
+
     -- ["<leader>e"] = { function() require('oil').open() end, "Open oil.nvim" },
     -- ["<leader>e"] = { ",
 
@@ -806,6 +822,46 @@ local mappings_v = {
     --[[ ["<space>P"] = { "+P" }, ]]
 }
 
+local opts_v = {
+    mode = "v",
+    buffer = nil,
+    silent = true,
+    noremap = true,
+    nowait = true,
+}
+
+local mappings_i = {
+    ["<C-t>"] = { "<cmd>TermToggle<cr>", "Open horizontal terminal" },
+    ["<C-h>"] = { "<cmd>exe 'norm b' | startinsert<cr>", "Move one word to the left" },
+    ["<C-l>"] = { "<cmd>exe 'norm w' | startinsert<cr>", "Move one word to the right" },
+    ["<C-j>"] = { "<Down>", "Move one line up" },
+    ["<C-k>"] = { "<Up>", "Move one line down" },
+    ["<M-w>"] = { "<cmd>exe 'norm dw' | startinsert<cr>", "Remove word in front" },
+}
+
+local opts_i = {
+    mode = "i",
+    buffer = nil,
+    silent = true,
+    noremap = true,
+    nowait = true,
+}
+
+local mappings_x = {
+    ["l"] = { "l", "move right" },
+}
+
+local opts_x = {
+    mode = "x",
+    buffer = nil,
+    silent = true,
+    noremap = true,
+    nowait = true,
+}
+
+-- remove binding that prevents movement in visual mode from being instant
+-- vim.keymap.del({ "x" }, "l=")
+
 -- visual selection replacement
 vim.api.nvim_set_keymap("v", "<C-r>", "<CMD>SearchReplaceSingleBufferVisualSelection<CR>", {})
 vim.api.nvim_set_keymap("v", "<C-s>", "<CMD>SearchReplaceWithinVisualSelection<CR>", {})
@@ -841,3 +897,5 @@ which_key.setup(setup)
 which_key.register(mappings, opts)
 which_key.register(mappings_n, opts)
 which_key.register(mappings_v, opts_v)
+which_key.register(mappings_i, opts_i)
+which_key.register(mappings_x, opts_x)
