@@ -75,6 +75,7 @@ g.jupytext_style = "hydrogen"
 opt.termguicolors = true
 vim.cmd.colorscheme("paragon")
 -- highlight Keyword guifg=#ffdd33
+-- highlight Keyword guifg=#ffaf00
 vim.cmd([[
 highlight DiffAdd guibg=NONE guifg=#5fd7af
 highlight DiffText guibg=NONE guifg=#d7d787 

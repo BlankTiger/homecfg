@@ -50,7 +50,7 @@ configs.setup({
             keymaps = {
                 ["a="] = { query = "@assignment.outer" },
                 ["i="] = { query = "@assignment.inner" },
-                ["e="] = { query = "@assignment.lhs" },
+                -- ["e="] = { query = "@assignment.lhs" },
                 ["r="] = { query = "@assignment.rhs" },
 
                 ["aa"] = { query = "@parameter.outer" },

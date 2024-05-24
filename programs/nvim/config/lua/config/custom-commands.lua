@@ -40,7 +40,7 @@ end, {})
 vim.api.nvim_create_user_command("TermToggle", function()
     local is_open = vim.g.term_win_id ~= nil and vim.api.nvim_win_is_valid(vim.g.term_win_id)
     if vim.g.term_win_height == nil then
-        vim.g.term_win_height = 8
+        vim.g.term_win_height = 18
     end
 
     if is_open then

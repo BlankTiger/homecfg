@@ -11,6 +11,7 @@ oil.setup({
         ["<C-j>"] = false,
         ["<C-k>"] = false,
         ["-"] = false,
+        ["q"] = "actions.close",
         ["<leader>r"] = "actions.refresh",
         ["<BS>"] = "actions.parent",
     },

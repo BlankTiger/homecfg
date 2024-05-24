@@ -192,6 +192,16 @@ return {
         },
     },
     { "ThePrimeagen/harpoon", event = "VeryLazy" },
+    {
+        "ThePrimeagen/refactoring.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+        },
+        config = function()
+            require("refactoring").setup()
+        end,
+    },
 
     {
         "ThePrimeagen/git-worktree.nvim",
@@ -205,7 +215,6 @@ return {
     {
         "TimUntersberger/neogit",
         event = "VeryLazy",
-        branch = "nightly",
         config = function()
             require("config.neogit")
         end,
@@ -234,19 +243,19 @@ return {
     --[[ "amadeus/vim-evokai", ]]
     --[[ "B4mbus/oxocarbon-lua.nvim", ]]
     --[[ "kyazdani42/nvim-tree.lua", ]]
-    {
-        "nvim-neo-tree/neo-tree.nvim",
-        branch = "v3.x",
-        event = "VeryLazy",
-        config = function()
-            require("config.neotree")
-        end,
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-tree/nvim-web-devicons",
-            "MunifTanjim/nui.nvim",
-        },
-    },
+    -- {
+    --     "nvim-neo-tree/neo-tree.nvim",
+    --     branch = "v3.x",
+    --     event = "VeryLazy",
+    --     config = function()
+    --         require("config.neotree")
+    --     end,
+    --     dependencies = {
+    --         "nvim-lua/plenary.nvim",
+    --         "nvim-tree/nvim-web-devicons",
+    --         "MunifTanjim/nui.nvim",
+    --     },
+    -- },
 
     {
         url = "https://github.com/BlankTiger/oil.nvim",
