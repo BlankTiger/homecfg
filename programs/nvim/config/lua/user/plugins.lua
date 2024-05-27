@@ -404,6 +404,8 @@ return {
         end,
     },
 
+    { "buztard/vim-rel-jump", event = "VeryLazy" },
+
     {
         "folke/todo-comments.nvim",
         event = "VeryLazy",
