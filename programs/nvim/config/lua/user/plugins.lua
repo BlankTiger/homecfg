@@ -214,6 +214,7 @@ return {
 
     {
         "TimUntersberger/neogit",
+        branch = "nightly",
         event = "VeryLazy",
         config = function()
             require("config.neogit")
