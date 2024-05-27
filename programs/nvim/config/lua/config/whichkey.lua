@@ -87,6 +87,12 @@ local mappings = {
     ["gb"] = { "<cmd>BufferLinePick<CR>", "Pick a buffer" },
     --[[ ["<S-l>"] = { "<cmd>BufferLineCycleNext<CR>", "Cycle to next buffer" }, ]]
     --[[ ["<S-h>"] = { "<cmd>BufferLineCyclePrev<CR>", "Cycle to previous buffer" }, ]]
+    ["gf"] = {
+        function()
+            vim.api.nvim_command("vertical wincmd F")
+        end,
+        "goto file in specified line in vertical split",
+    },
     ["<leader>"] = {
         name = "Some utility leader mappings",
         ["<leader>"] = {
