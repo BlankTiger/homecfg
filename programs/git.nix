@@ -4,7 +4,7 @@
   programs.git = {
     enable      = true;
     userName    = "Maciej Urban";
-    userEmail   = "maciej.urban@nokia.com";
+    userEmail   = "maciej.urban@tietoevry.com";
     aliases     = {
       mr = ''!sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -'';
       fetch-all = ''!git fetch origin "*:*" --update-head-ok'';
