@@ -183,7 +183,7 @@ local mappings = {
     --[[ ["<space>P"] = { '"+P' }, ]]
 
     -- nvim-tree/file explorer
-    ["<leader>e"] = { "<cmd>Neotree toggle<CR>", "Open neotree" },
+    -- ["<leader>e"] = { "<cmd>Neotree toggle<CR>", "Open neotree" },
     --[[ ["<leader>e"] = { ]]
     --[[ 	name = "Explorer", ]]
     --[[ 	e = { "<cmd>NvimTreeToggle<cr>", "Toggle" }, ]]
