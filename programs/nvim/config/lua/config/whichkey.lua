@@ -589,6 +589,13 @@ local mappings = {
             end,
             "Toggle breakpoint",
         },
+        B = {
+            function()
+                local conditional = vim.fn.input("Enter conditional: ")
+                require("dap").set_breakpoint(conditional)
+            end,
+            "Toggle breakpoint",
+        },
         c = {
             function()
                 require("dap").continue()

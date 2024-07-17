@@ -8,11 +8,6 @@ if not dap_ui_status_ok then
     return
 end
 
-local dap_install_status_ok, dap_install = pcall(require, "dap-install")
-if not dap_install_status_ok then
-    return
-end
-
 local ext_path = "C:/Users/work/.vscode/extensions/lldb-172/"
 local codelldb_path = ext_path .. "adapter/codelldb"
 -- local liblldb_path = ext_path .. "lldb/lib/liblldb.dll"
@@ -20,18 +15,9 @@ local codelldb_path = ext_path .. "adapter/codelldb"
 local port = "3434"
 
 dap.adapters.codelldb = {
-    type = "server",
-    port = port,
-    -- port = "${port}",
-    executable = {
-        -- CHANGE THIS to your path!
-        command = codelldb_path,
-        -- args = {"--port", "${port}"},
-        args = { "--port", port },
-
-        -- On windows you may have to uncomment this:
-        detached = false,
-    },
+    type = "executable",
+    command = "/home/blanktiger/.local/share/nvim/mason/bin/codelldb", -- adjust as needed
+    name = "lldb",
 }
 
 dap.configurations.cpp = {
@@ -47,16 +33,35 @@ dap.configurations.cpp = {
     },
 }
 
-dap.configurations.rust = dap.configurations.cpp
+-- dap.configurations.rust = dap.configurations.cpp
+dap.configurations.rust = {
+    {
+        name = "hello-world",
+        type = "lldb",
+        request = "launch",
+        program = function()
+            return vim.fn.getcwd() .. "/target/debug/hello-world"
+        end,
+        cwd = "${workspaceFolder}",
+        stopOnEntry = false,
+    },
+    {
+        name = "hello-dap",
+        type = "lldb",
+        request = "launch",
+        program = function()
+            return vim.fn.getcwd() .. "/target/debug/hello-dap"
+        end,
+        cwd = "${workspaceFolder}",
+        stopOnEntry = false,
+    },
+}
 dap.configurations.c = dap.configurations.cpp
 
-dap_install.setup()
---
--- dap_install.config("python", {})
--- dap_install.config("rust", {})
--- -- add other configs here
---
---
+for _, v in pairs(dap.configurations.python) do
+    v["justMyCode"] = false
+end
+
 dapui.setup({
     layouts = {
         {
@@ -82,6 +87,10 @@ dapui.setup({
 vim.fn.sign_define(
     "DapBreakpoint",
     { text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "" }
+)
+vim.fn.sign_define(
+    "DapBreakpointCondition",
+    { text = "", texthl = "DiagnosticSignWarn", linehl = "", numhl = "" }
 )
 
 dap.listeners.after.event_initialized["dapui_config"] = function()
