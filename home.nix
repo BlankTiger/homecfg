@@ -44,7 +44,7 @@
     ripgrep
     fd
     bat
-    fzf
+    # fzf
     jq
     fx
     silver-searcher
