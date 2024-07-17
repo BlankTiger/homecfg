@@ -78,6 +78,7 @@ null_ls.setup({
         }),
 
         diagnostics.cppcheck,
+        -- diagnostics.eslint_d,
         --[[ formatting.stylua, ]]
         -- diagnostics.flake8
     },
