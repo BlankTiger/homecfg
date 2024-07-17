@@ -832,10 +832,10 @@ local opts_v = {
 
 local mappings_i = {
     ["<C-t>"] = { "<cmd>TermToggle<cr>", "Open horizontal terminal" },
-    ["<C-h>"] = { "<cmd>exe 'norm b' | startinsert<cr>", "Move one word to the left" },
-    ["<C-l>"] = { "<cmd>exe 'norm w' | startinsert<cr>", "Move one word to the right" },
-    ["<C-j>"] = { "<Down>", "Move one line up" },
-    ["<C-k>"] = { "<Up>", "Move one line down" },
+    -- ["<C-h>"] = { "<cmd>exe 'norm b' | startinsert<cr>", "Move one word to the left" },
+    -- ["<C-l>"] = { "<cmd>exe 'norm w' | startinsert<cr>", "Move one word to the right" },
+    -- ["<C-j>"] = { "<Down>", "Move one line up" },
+    -- ["<C-k>"] = { "<Up>", "Move one line down" },
     ["<M-w>"] = { "<cmd>exe 'norm dw' | startinsert<cr>", "Remove word in front" },
 }
 
@@ -875,12 +875,21 @@ vim.api.nvim_set_keymap("t", "<C-k>", "<cmd>TmuxNavigateUp<cr>", {})
 vim.api.nvim_set_keymap("t", "<C-h>", "<cmd>TmuxNavigateLeft<cr>", {})
 vim.api.nvim_set_keymap("t", "<C-l>", "<cmd>TmuxNavigateRight<cr>", {})
 
+vim.api.nvim_set_keymap("i", "<C-j>", "<esc><cmd>TmuxNavigateDown<cr>", {})
+vim.api.nvim_set_keymap("i", "<C-k>", "<esc><cmd>TmuxNavigateUp<cr>", {})
+vim.api.nvim_set_keymap("i", "<C-h>", "<esc><cmd>TmuxNavigateLeft<cr>", {})
+vim.api.nvim_set_keymap("i", "<C-l>", "<esc><cmd>TmuxNavigateRight<cr>", {})
+
 vim.api.nvim_set_keymap("n", "<C-d>", "<C-d>zz", {})
 vim.api.nvim_set_keymap("n", "<C-u>", "<C-u>zz", {})
 vim.api.nvim_set_keymap("n", "<C-f>", "<C-f>zz", {})
 vim.api.nvim_set_keymap("n", "<C-b>", "<C-b>zz", {})
 vim.api.nvim_set_keymap("n", "n", "nzz", {})
 vim.api.nvim_set_keymap("n", "N", "Nzz", {})
+vim.api.nvim_set_keymap("n", "*", "*zz", {})
+vim.api.nvim_set_keymap("n", "#", "#zz", {})
+vim.api.nvim_set_keymap("n", "g*", "g*zz", {})
+vim.api.nvim_set_keymap("n", "g#", "g#zz", {})
 
 -- vim.api.nvim_set_keymap("n", "<M-,>", get_prev_entry, {})
 -- vim.api.nvim_set_keymap("n", "<M-.>", get_next_entry, {})
@@ -888,6 +897,7 @@ vim.api.nvim_set_keymap("n", "<M-;>", "<cmd>cpfile<cr>", {})
 vim.api.nvim_set_keymap("n", "<M-'>", "<cmd>cnfile<cr>", {})
 vim.api.nvim_set_keymap("n", "<C-i>", "<C-i>zz", {})
 vim.api.nvim_set_keymap("n", "<C-o>", "<C-o>zz", {})
+vim.api.nvim_set_keymap("n", "<F2>", "<cmd>Make<cr>", {})
 
 vim.api.nvim_set_keymap("x", "<M-w>", "<esc><cmd>'<,'>!remove-widows<cr>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<M-w>", "<S-v><esc><cmd>'<,'>!remove-widows<cr>", { noremap = true })
