@@ -79,11 +79,11 @@ telescope.setup({
     pickers = {
         find_files = {
             path_display = { "absolute" },
-            theme = "dropdown",
+            -- theme = "dropdown",
         },
         git_files = {
             path_display = { "absolute" },
-            theme = "dropdown",
+            -- theme = "dropdown",
         },
         live_grep = {
             path_display = { "absolute" },
