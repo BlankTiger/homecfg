@@ -238,30 +238,6 @@ local mappings = {
     },
     -- UndoTree
     ["<leader>U"] = { "<cmd>UndotreeToggle<cr>", "Toggle Undotree" },
-    ["r"] = {
-        name = "SearchReplaceSingleBuffer",
-        ["s"] = {
-            "<CMD>SearchReplaceSingleBufferSelections<CR>",
-            "SearchReplaceSingleBuffer [s]elction list",
-        },
-        ["o"] = { "<CMD>SearchReplaceSingleBufferOpen<CR>", "[o]pen" },
-        ["w"] = { "<CMD>SearchReplaceSingleBufferCWord<CR>", "[w]ord" },
-        ["W"] = { "<CMD>SearchReplaceSingleBufferCWORD<CR>", "[W]ORD" },
-        ["e"] = { "<CMD>SearchReplaceSingleBufferCExpr<CR>", "[e]xpr" },
-        ["f"] = { "<CMD>SearchReplaceSingleBufferCFile<CR>", "[f]ile" },
-        ["b"] = {
-            name = "SearchReplaceMultiBuffer",
-            ["s"] = {
-                "<CMD>SearchReplaceMultiBufferSelections<CR>",
-                "SearchReplaceMultiBuffer [s]elction list",
-            },
-            ["o"] = { "<CMD>SearchReplaceMultiBufferOpen<CR>", "[o]pen" },
-            ["w"] = { "<CMD>SearchReplaceMultiBufferCWord<CR>", "[w]ord" },
-            ["W"] = { "<CMD>SearchReplaceMultiBufferCWORD<CR>", "[W]ORD" },
-            ["e"] = { "<CMD>SearchReplaceMultiBufferCExpr<CR>", "[e]xpr" },
-            ["f"] = { "<CMD>SearchReplaceMultiBufferCFile<CR>", "[f]ile" },
-        },
-    },
 
     -- still harpoon
     ["<M-A>"] = {
