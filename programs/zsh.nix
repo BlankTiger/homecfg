@@ -16,7 +16,10 @@
     initExtra = ''
       source $HOME/.cargo/env
       source $HOME/.config/keys
-      export PATH="/home/blanktiger/.pyenv/shims:$PATH:/home/blanktiger/.local/bin:/home/blanktiger/.nvm/versions/node/v19.9.0/bin"
+      export JAVA_HOME="$HOME/.local/bin/android-studio/jbr"
+      export ANDROID_HOME="$HOME/Android/Sdk"
+      export NDK_HOME="$ANDROID_HOME/ndk/$(ls -1 $ANDROID_HOME/ndk)"
+      export PATH="$ANDROID_HOME/platform-tools:$HOME/.local/bin/android-studio/bin:/home/blanktiger/.pyenv/shims:$PATH:/home/blanktiger/.local/bin:/home/blanktiger/.nvm/versions/node/v19.9.0/bin"
       setopt nocorrectall
 
       git() {
@@ -26,6 +29,8 @@
           command git "$@"
         fi
       }
+
+      [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh && source ~/.fzf-git.sh
     '';
 
     shellAliases = {
