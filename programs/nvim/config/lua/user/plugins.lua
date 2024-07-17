@@ -122,7 +122,12 @@ return {
     },
     { "lervag/vimtex", ft = "tex", lazy = true },
     { "barreiroleo/ltex-extra.nvim", lazy = true },
-    { "simrat39/rust-tools.nvim", lazy = true },
+    -- { "simrat39/rust-tools.nvim", lazy = true },
+    {
+        "mrcjkb/rustaceanvim",
+        version = "^4", -- Recommended
+        lazy = false, -- This plugin is already lazy
+    },
     { "Vimjas/vim-python-pep8-indent", lazy = true },
 
     {
