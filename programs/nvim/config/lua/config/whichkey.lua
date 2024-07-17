@@ -807,6 +807,17 @@ local mappings_n = {
     -- ["<S-j>"] = { "<cmd>MoveLine(1)<CR>", "Move line down" },
     [">"] = { ">>", "Indent" },
     ["<"] = { "<<", "Dedent" },
+    ["zR"] = { require("ufo").openAllFolds, "Open all folds" },
+    ["zM"] = { require("ufo").closeAllFolds, "Close all folds" },
+    ["zK"] = {
+        function()
+            local winid = require("ufo").peekFoldedLinesUnderCursor()
+            if not winid then
+                vim.lsp.buf.hover()
+            end
+        end,
+        "Peek into a fold",
+    },
 }
 
 -- better w, e, b, ge motions

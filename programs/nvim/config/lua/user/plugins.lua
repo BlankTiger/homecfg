@@ -29,6 +29,14 @@ return {
     },
 
     {
+        "kevinhwang91/nvim-ufo",
+        dependencies = "kevinhwang91/promise-async",
+        config = function()
+            require("config.ufo")
+        end,
+    },
+
+    {
         "nvim-telescope/telescope.nvim",
         -- event = "VeryLazy",
         lazy = true,
