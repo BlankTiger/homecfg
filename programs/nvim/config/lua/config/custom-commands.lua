@@ -75,3 +75,19 @@ vim.api.nvim_create_user_command("TermKill", function()
         vim.g.term_buf_id = nil
     end
 end, {})
+
+vim.g.mk = "make"
+vim.api.nvim_create_user_command("Make", function()
+    local cmd_check_tmux_win_open = "tmux list-windows -F '#{window_name}'"
+    local res = vim.fn.system(cmd_check_tmux_win_open)
+    local is_tmux_win_open = res:find("make") ~= nil
+
+    if is_tmux_win_open then
+        local cmd = '!tmux send-keys -t ":9" "' .. vim.g.mk .. '" Enter;tmux select-window -t ":9"'
+        vim.api.nvim_command(cmd)
+        return
+    else
+        local cmd = "!tmux new-window -n 'make' -t 9 '" .. vim.g.mk .. ";/usr/bin/env $SHELL'"
+        vim.api.nvim_command(cmd)
+    end
+end, {})
