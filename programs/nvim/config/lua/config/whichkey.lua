@@ -535,6 +535,21 @@ local mappings = {
         l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
         q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
         r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
+        v = {
+            function()
+                if LSP_DIAGNOSTICS_HIDDEN == nil then
+                    LSP_DIAGNOSTICS_HIDDEN = false
+                end
+                if LSP_DIAGNOSTICS_HIDDEN then
+                    vim.diagnostic.config({ virtual_text = true, signs = true, underline = true })
+                    LSP_DIAGNOSTICS_HIDDEN = false
+                    return
+                end
+                vim.diagnostic.config({ virtual_text = false, signs = false, underline = false })
+                LSP_DIAGNOSTICS_HIDDEN = true
+            end,
+            "Toggle virtual text and signs",
+        },
         s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
         S = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols" },
         t = { "<cmd> Telescope tags<cr>", "Show tags" },
