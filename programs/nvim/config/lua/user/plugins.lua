@@ -229,7 +229,11 @@ return {
             "TmuxNavigatePrevious",
         },
     },
-    { "ThePrimeagen/harpoon", event = "VeryLazy" },
+    {
+        url = "https://github.com/BlankTiger/harpoon",
+        -- "ThePrimeagen/harpoon",
+        event = "VeryLazy",
+    },
     {
         "ThePrimeagen/refactoring.nvim",
         dependencies = {
