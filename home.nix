@@ -64,7 +64,7 @@
     gimp
     zathura
     #mpv
-    youtube-dl
+    # youtube-dl
     ffmpeg
   ];
 
