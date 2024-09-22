@@ -37,6 +37,17 @@ return {
     },
 
     {
+        "kr40/nvim-macros",
+        cmd = { "MacroSave", "MacroYank", "MacroSelect", "MacroDelete" },
+        opts = {
+
+            json_file_path = vim.fs.normalize(vim.fn.stdpath("config") .. "/macros.json"),
+            default_macro_register = "q",
+            json_formatter = "jq",
+        },
+    },
+
+    {
         "nvim-telescope/telescope.nvim",
         -- event = "VeryLazy",
         lazy = true,
@@ -138,7 +149,7 @@ return {
     -- { "simrat39/rust-tools.nvim", lazy = true },
     {
         "mrcjkb/rustaceanvim",
-        version = "^4", -- Recommended
+        version = "^5", -- Recommended
         lazy = false, -- This plugin is already lazy
     },
     { "Vimjas/vim-python-pep8-indent", lazy = true },
@@ -163,25 +174,26 @@ return {
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-nvim-lua",
             "saadparwaiz1/cmp_luasnip",
-            {
-                "zbirenbaum/copilot.lua",
-                cmd = "Copilot",
-                config = function()
-                    require("config.copilot")
-                end,
-            },
-            {
-                "zbirenbaum/copilot-cmp",
-                config = function()
-                    require("copilot_cmp").setup()
-                end,
-            },
+            -- {
+            --     "zbirenbaum/copilot.lua",
+            --     cmd = "Copilot",
+            --     config = function()
+            --         require("config.copilot")
+            --     end,
+            -- },
+            -- {
+            --     "zbirenbaum/copilot-cmp",
+            --     config = function()
+            --         require("copilot_cmp").setup()
+            --     end,
+            -- },
         },
     },
 
     {
         "lewis6991/gitsigns.nvim",
         event = "VeryLazy",
+        tag = "v0.8.0",
         config = function()
             require("config.gitsigns")
         end,
@@ -240,7 +252,7 @@ return {
 
     {
         "TimUntersberger/neogit",
-        branch = "nightly",
+        branch = "master",
         event = "VeryLazy",
         config = function()
             require("config.neogit")
@@ -260,6 +272,7 @@ return {
     --[[ "moll/vim-bbye", ]]
     {
         "folke/which-key.nvim",
+        tag = "v2.1.0",
         config = function()
             require("config.whichkey")
         end,
