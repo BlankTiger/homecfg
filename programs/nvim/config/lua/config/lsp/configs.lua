@@ -22,11 +22,12 @@ local servers = {
     "texlab",
     "jsonls",
     "lua_ls",
-    "tsserver",
+    "ts_ls",
     "cssls",
     "emmet_ls",
     "html",
     "marksman",
+    "ols",
     -- "taplo",
     -- "yamlls",
     "marksman",
@@ -37,7 +38,7 @@ local servers = {
     "nil_ls",
     "clangd",
 }
--- local servers = { "pyright", "rust_analyzer", "powershell_es", "asm_lsp", "dockerls", "elixirls", "texlab", "vimls", "terraformls", "jsonls", "sumneko_lua", "tsserver", "ansiblels", "clangd", "cssls", "cssmodules_ls", "emmet_ls", "html", "jdtls", "julials", "marksman" }
+-- local servers = { "pyright", "rust_analyzer", "powershell_es", "asm_lsp", "dockerls", "elixirls", "texlab", "vimls", "terraformls", "jsonls", "sumneko_lua", "ts_ls", "ansiblels", "clangd", "cssls", "cssmodules_ls", "emmet_ls", "html", "jdtls", "julials", "marksman" }
 
 mason_lspconfig.setup({
     ensure_installed = servers,

@@ -115,7 +115,7 @@ M.on_attach = function(client, bufnr)
 
     lsp_keymaps(bufnr)
     lsp_highlight_document(client)
-    if client.name == "tsserver" then
+    if client.name == "ts_ls" then
         require("null-ls").disable({ "prettier" })
     end
 end
