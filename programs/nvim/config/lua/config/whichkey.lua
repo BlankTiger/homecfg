@@ -376,6 +376,13 @@ local mappings = {
         ["c"] = { "<cmd>cclose<cr>", "Close quickfix" },
     },
 
+    ["<leader>m"] = {
+        ["w"] = { "<cmd>MacroSave<cr>", "Save macro" },
+        ["y"] = { "<cmd>MacroYank<cr>", "Yank macro to clipboard" },
+        ["s"] = { "<cmd>MacroSelect<cr>", "Select a saved macro" },
+        ["d"] = { "<cmd>MacroDelete<cr>", "Delete a saved macro" },
+    },
+
     -- ["<leader>w"] = {
     --
     -- },
