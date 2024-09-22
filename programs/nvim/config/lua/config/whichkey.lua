@@ -912,11 +912,15 @@ vim.api.nvim_set_keymap("n", "<M-;>", "<cmd>cpfile<cr>", {})
 vim.api.nvim_set_keymap("n", "<M-'>", "<cmd>cnfile<cr>", {})
 vim.api.nvim_set_keymap("n", "<C-i>", "<C-i>zz", {})
 vim.api.nvim_set_keymap("n", "<C-o>", "<C-o>zz", {})
-vim.api.nvim_set_keymap("n", "<F2>", "<cmd>Make<cr>", {})
+vim.api.nvim_set_keymap("n", "<F2>", "<cmd>Make<cr>", { silent = true })
+vim.api.nvim_set_keymap("n", "<F3>", "<cmd>make<cr>", { silent = true })
+vim.api.nvim_set_keymap("n", "<F4>", "<cmd>AsyncMake<cr>", { silent = true })
 
 vim.api.nvim_set_keymap("x", "<M-w>", "<esc><cmd>'<,'>!remove-widows<cr>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<M-w>", "<S-v><esc><cmd>'<,'>!remove-widows<cr>", { noremap = true })
 -- vim.keymap.set("n", "J", "mzJ`z")
+--
+vim.keymap.set("x", "/", "<Esc>/\\%V")
 
 which_key.setup(setup)
 which_key.register(mappings, opts)
