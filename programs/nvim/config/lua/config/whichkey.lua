@@ -700,6 +700,12 @@ local mappings = {
             end,
             "Replace with Spectre",
         },
+        t = {
+            function()
+                require("telescope.builtin").treesitter()
+            end,
+            "Search in treesitter nodes",
+        },
     },
 
     ["<leader>t"] = {
