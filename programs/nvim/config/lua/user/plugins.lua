@@ -44,6 +44,7 @@ return {
             require("config.telescope")
             local telescope = require("telescope")
             telescope.load_extension("ripgrep")
+            telescope.load_extension("aqf")
             telescope.load_extension("fzf")
             telescope.load_extension("notify")
             telescope.load_extension("git_worktree")
@@ -68,6 +69,18 @@ return {
                 dev = true,
             },
         },
+    },
+
+    {
+        "blanktiger/aqf.nvim",
+        dev = true,
+        lazy = true,
+        config = function()
+            require("aqf").setup({
+                windowed = false,
+                debug = true,
+            })
+        end,
     },
 
     {

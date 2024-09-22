@@ -102,5 +102,6 @@ telescope.setup({
             git_command = { "git", "log", "--oneline", "--decorate", "--all", "." }, -- list result
         },
         ripgrep = { path_display = { "absolute" } },
+        aqf = { path_display = { "absolute" } },
     },
 })
