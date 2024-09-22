@@ -83,11 +83,80 @@ vim.api.nvim_create_user_command("Make", function()
     local is_tmux_win_open = res:find("make") ~= nil
 
     if is_tmux_win_open then
-        local cmd = '!tmux send-keys -t ":9" "' .. vim.g.mk .. '" Enter;tmux select-window -t ":9"'
+        local cmd = 'silent !tmux send-keys -t ":9" "'
+            .. vim.g.mk
+            .. '" Enter;tmux select-window -t ":9"'
         vim.api.nvim_command(cmd)
         return
     else
-        local cmd = "!tmux new-window -n 'make' -t 9 '" .. vim.g.mk .. ";/usr/bin/env $SHELL'"
+        local cmd = "silent !tmux new-window -n 'make' -t 9 '"
+            .. vim.g.mk
+            .. ";/usr/bin/env $SHELL'"
         vim.api.nvim_command(cmd)
     end
+end, {})
+
+vim.api.nvim_create_user_command("AsyncMake", function()
+    local lines = { "" }
+    local winnr = vim.fn.win_getid()
+    local bufnr = vim.api.nvim_win_get_buf(winnr)
+
+    local makeprg = vim.api.nvim_get_option_value("makeprg", {
+        -- buf = bufnr
+    })
+    if not makeprg then
+        return
+    end
+
+    local cmd = vim.fn.expandcmd(makeprg)
+
+    local function on_event(job_id, data, event)
+        if event == "stdout" or event == "stderr" then
+            local msg = ""
+            for _, v in pairs(data) do
+                msg = msg .. v .. "\n"
+            end
+            vim.notify(event .. ": " .. msg)
+            if data then
+                vim.list_extend(lines, data)
+            end
+        end
+
+        if event == "exit" then
+            vim.fn.setqflist({}, " ", {
+                title = cmd,
+                lines = lines,
+                efm = vim.api.nvim_get_option_value("errorformat", {
+                    -- buf = bufnr
+                }),
+            })
+            vim.api.nvim_command("doautocmd QuickFixCmdPost")
+        end
+    end
+
+    vim.fn.jobstart(cmd, {
+        on_stderr = on_event,
+        on_stdout = on_event,
+        on_exit = on_event,
+        stdout_buffered = true,
+        stderr_buffered = true,
+    })
+end, {})
+
+-- filter quickfix, if file contains search pattern then keep it
+vim.api.nvim_create_user_command("Fqf", function(args)
+    local aqf = require("aqf")
+    aqf.filter_qf_by_query(args.bang)
+end, { bang = true })
+
+-- toggle previous quickfix list
+vim.api.nvim_create_user_command("Pqf", function()
+    local aqf = require("aqf")
+    aqf.prev_qf()
+end, {})
+
+-- save current quickfix list as previoous quickfix list
+vim.api.nvim_create_user_command("Sqf", function()
+    local aqf = require("aqf")
+    aqf.save_qf()
 end, {})
