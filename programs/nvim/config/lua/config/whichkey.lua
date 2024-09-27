@@ -240,48 +240,48 @@ local mappings = {
     ["<leader>U"] = { "<cmd>UndotreeToggle<cr>", "Toggle Undotree" },
 
     -- still harpoon
-    ["<M-A>"] = {
-        function()
-            require("harpoon.ui").nav_file(1)
-        end,
-        "Navigate to 1st harpoon file",
-    },
-    ["<M-S>"] = {
-        function()
-            require("harpoon.ui").nav_file(2)
-        end,
-        "Navigate to 2st harpoon file",
-    },
-    ["<M-D>"] = {
-        function()
-            require("harpoon.ui").nav_file(3)
-        end,
-        "Navigate to 3st harpoon file",
-    },
-    ["<M-F>"] = {
-        function()
-            require("harpoon.ui").nav_file(4)
-        end,
-        "Navigate to 4st harpoon file",
-    },
-    ["<M-G>"] = {
-        function()
-            require("harpoon.ui").nav_file(5)
-        end,
-        "Navigate to 5st harpoon file",
-    },
-    ["<M-H>"] = {
-        function()
-            require("harpoon.ui").nav_file(6)
-        end,
-        "Navigate to 6st harpoon file",
-    },
-    ["<M-J>"] = {
-        function()
-            require("harpoon.ui").nav_file(7)
-        end,
-        "Navigate to 7st harpoon file",
-    },
+    -- ["<M-A>"] = {
+    --     function()
+    --         require("harpoon.ui").nav_file(1)
+    --     end,
+    --     "Navigate to 1st harpoon file",
+    -- },
+    -- ["<M-S>"] = {
+    --     function()
+    --         require("harpoon.ui").nav_file(2)
+    --     end,
+    --     "Navigate to 2st harpoon file",
+    -- },
+    -- ["<M-D>"] = {
+    --     function()
+    --         require("harpoon.ui").nav_file(3)
+    --     end,
+    --     "Navigate to 3st harpoon file",
+    -- },
+    -- ["<M-F>"] = {
+    --     function()
+    --         require("harpoon.ui").nav_file(4)
+    --     end,
+    --     "Navigate to 4st harpoon file",
+    -- },
+    -- ["<M-G>"] = {
+    --     function()
+    --         require("harpoon.ui").nav_file(5)
+    --     end,
+    --     "Navigate to 5st harpoon file",
+    -- },
+    -- ["<M-H>"] = {
+    --     function()
+    --         require("harpoon.ui").nav_file(6)
+    --     end,
+    --     "Navigate to 6st harpoon file",
+    -- },
+    -- ["<M-J>"] = {
+    --     function()
+    --         require("harpoon.ui").nav_file(7)
+    --     end,
+    --     "Navigate to 7st harpoon file",
+    -- },
 
     ["<space>"] = {
         -- harpoon
@@ -902,6 +902,52 @@ vim.api.nvim_set_keymap("t", "<C-j>", "<cmd>TmuxNavigateDown<cr>", {})
 vim.api.nvim_set_keymap("t", "<C-k>", "<cmd>TmuxNavigateUp<cr>", {})
 vim.api.nvim_set_keymap("t", "<C-h>", "<cmd>TmuxNavigateLeft<cr>", {})
 vim.api.nvim_set_keymap("t", "<C-l>", "<cmd>TmuxNavigateRight<cr>", {})
+
+-- harpoon
+vim.keymap.set({ "t", "n" }, "<M-A>", function()
+    require("harpoon.ui").nav_file(1)
+end, {})
+vim.keymap.set({ "t", "n" }, "<M-S>", function()
+    require("harpoon.ui").nav_file(2)
+end, {})
+vim.keymap.set({ "t", "n" }, "<M-D>", function()
+    require("harpoon.ui").nav_file(3)
+end, {})
+vim.keymap.set({ "t", "n" }, "<M-F>", function()
+    require("harpoon.ui").nav_file(4)
+end, {})
+vim.keymap.set({ "t", "n" }, "<M-G>", function()
+    require("harpoon.ui").nav_file(5)
+end, {})
+vim.keymap.set({ "t", "n" }, "<M-H>", function()
+    require("harpoon.ui").nav_file(6)
+end, {})
+vim.keymap.set({ "t", "n" }, "<M-J>", function()
+    require("harpoon.ui").nav_file(7)
+end, {})
+
+-- tabs
+vim.keymap.set({ "t", "n" }, "<M-Z>", function()
+    vim.api.nvim_command("tabnext 1")
+end, {})
+vim.keymap.set({ "t", "n" }, "<M-X>", function()
+    vim.api.nvim_command("tabnext 2")
+end, {})
+vim.keymap.set({ "t", "n" }, "<M-C>", function()
+    vim.api.nvim_command("tabnext 3")
+end, {})
+vim.keymap.set({ "t", "n" }, "<M-V>", function()
+    vim.api.nvim_command("tabnext 4")
+end, {})
+vim.keymap.set({ "t", "n" }, "<M-B>", function()
+    vim.api.nvim_command("tabnext 5")
+end, {})
+vim.keymap.set({ "t", "n" }, "<M-N>", function()
+    vim.api.nvim_command("tabnext 6")
+end, {})
+vim.keymap.set({ "t", "n" }, "<M-M>", function()
+    vim.api.nvim_command("tabnext 7")
+end, {})
 
 vim.api.nvim_set_keymap("i", "<C-j>", "<esc><cmd>TmuxNavigateDown<cr>", {})
 vim.api.nvim_set_keymap("i", "<C-k>", "<esc><cmd>TmuxNavigateUp<cr>", {})
