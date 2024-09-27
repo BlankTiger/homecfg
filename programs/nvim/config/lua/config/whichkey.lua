@@ -709,10 +709,15 @@ local mappings = {
     },
 
     ["<leader>t"] = {
-        name = "Trouble",
+        name = "Trouble | tabs",
         s = { "<cmd>TroubleToggle<cr>", "Show/Hide (Toggle)" },
         r = { "<cmd>TroubleRefresh<cr>", "Refresh" },
         t = { "<cmd>TodoTrouble<cr>", "Open todo items in trouble" },
+        f = { "<cmd>tabnew | term<cr>", "fullscreen terminal in new tab" },
+        n = { "<cmd>tabnext<cr>", "change to next tab" },
+        p = { "<cmd>tabprev<cr>", "change to prev tab" },
+        c = { "<cmd>tabclose<cr>", "close current tab" },
+        o = { "<cmd>tabonly<cr>", "close all other tabs other than the current one" },
     },
 
     -- ["<C-t>"] = { "<cmd>6 split term://zsh<cr>", "Open horizontal terminal" },
