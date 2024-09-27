@@ -485,14 +485,14 @@ return {
         -- event = "VeryLazy",
     },
 
-    {
-        "lukas-reineke/indent-blankline.nvim",
-        event = "InsertEnter",
-        main = "ibl",
-        config = function()
-            require("config.indentline")
-        end,
-    },
+    -- {
+    --     "lukas-reineke/indent-blankline.nvim",
+    --     event = "InsertEnter",
+    --     main = "ibl",
+    --     config = function()
+    --         require("config.indentline")
+    --     end,
+    -- },
 
     {
         "folke/noice.nvim",
