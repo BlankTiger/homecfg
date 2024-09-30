@@ -88,6 +88,7 @@ return {
         lazy = true,
         config = function()
             require("aqf").setup({
+                show_instructions = false,
                 windowed = false,
                 debug = true,
             })
