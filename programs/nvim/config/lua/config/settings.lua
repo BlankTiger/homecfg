@@ -12,6 +12,7 @@ g.rg_command = "rg --vimgrep"
 g.tagbar_position = "topleft vertical"
 
 -- User settings --
+vim.o.guifont = "IosevkaTerm Nerd Font Mono:h14"
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
@@ -32,7 +33,6 @@ opt.relativenumber = true
 opt.signcolumn = "number"
 opt.syntax = "on"
 opt.encoding = "utf-8"
-opt.guifont = "Hack Nerd Font"
 opt.shell = "/bin/zsh"
 opt.scrolloff = 10
 opt.inccommand = "split"
@@ -75,22 +75,5 @@ g.jupytext_fmt = "py"
 g.jupytext_style = "hydrogen"
 
 -- Set colorscheme
-opt.termguicolors = true
-vim.cmd.colorscheme("paragon")
--- highlight Keyword guifg=#ffdd33
--- highlight Keyword guifg=#ffaf00
-vim.cmd([[
-highlight DiffAdd guibg=NONE guifg=#5fd7af
-highlight DiffText guibg=NONE guifg=#d7d787 
-highlight DiffDelete ctermfg=NONE ctermbg=NONE guifg=#d78787 guibg=NONE
-highlight DiffChange ctermbg=NONE guifg=NONE guibg=NONE
-highlight Visual guibg=#333333 guifg=#ffffff
-highlight Keyword guifg=#ffaf00
-
-highlight NeogitDiffAdd guibg=#1a1a1a guifg=#5fd7af
-highlight NeogitDiffAddHighlight guibg=#1a1a1a guifg=#5fd7af
-highlight NeogitDiffAddCursor guibg=#0f0f0f guifg=#5fd7af
-highlight NeogitDiffDelete ctermfg=NONE ctermbg=NONE guifg=#d78787 guibg=#1a1a1a
-highlight NeogitDiffDeleteHighlight guifg=#d78787 guibg=#1a1a1a
-highlight NeogitDiffDeleteCursor guibg=#0f0f0f guifg=#d78787
-]])
+local set_theme = require("config.theme")
+set_theme()
