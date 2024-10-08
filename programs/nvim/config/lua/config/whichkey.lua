@@ -954,6 +954,9 @@ vim.keymap.set({ "t", "n" }, "<M-M>", function()
     vim.api.nvim_command("tabnext 7")
 end, {})
 
+-- set : to q: (instead of cmdline have cmdwin)
+vim.keymap.set("n", ":", "q:i", {})
+
 vim.api.nvim_set_keymap("i", "<C-j>", "<esc><cmd>TmuxNavigateDown<cr>", {})
 vim.api.nvim_set_keymap("i", "<C-k>", "<esc><cmd>TmuxNavigateUp<cr>", {})
 vim.api.nvim_set_keymap("i", "<C-h>", "<esc><cmd>TmuxNavigateLeft<cr>", {})

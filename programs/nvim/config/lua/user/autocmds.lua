@@ -1,5 +1,15 @@
 local autocmd_group = vim.api.nvim_create_augroup("My custom auto commands", { clear = true })
 
+vim.api.nvim_create_autocmd({ "CmdwinEnter" }, {
+    group = autocmd_group,
+    pattern = "*",
+    callback = function()
+        local bufnr = vim.api.nvim_get_current_buf()
+        vim.keymap.set({ "n", "i" }, "<C-q>", "<C-c><C-c>", { buffer = bufnr })
+        vim.keymap.set({ "n" }, "q", "<C-c><C-c>", { buffer = bufnr })
+    end,
+})
+
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
     group = autocmd_group,
     pattern = "term://*",
