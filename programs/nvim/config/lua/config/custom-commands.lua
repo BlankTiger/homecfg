@@ -43,6 +43,15 @@ vim.api.nvim_create_user_command("TermToggle", function()
         vim.g.term_win_height = 18
     end
 
+    local dir = nil
+    if not is_open then
+        local cur_buf = vim.api.nvim_get_current_buf()
+        local cur_bufname = vim.api.nvim_buf_get_name(cur_buf)
+        if cur_bufname:find("oil:///") then
+            dir = cur_bufname:sub(7, -1)
+        end
+    end
+
     if is_open then
         vim.g.term_win_height = vim.api.nvim_win_get_height(vim.g.term_win_id)
         vim.api.nvim_win_hide(vim.g.term_win_id)
@@ -60,6 +69,10 @@ vim.api.nvim_create_user_command("TermToggle", function()
     else
         vim.cmd.term()
         vim.g.term_buf_id = vim.api.nvim_get_current_buf()
+        if dir ~= nil then
+            local chan = vim.bo[vim.g.term_buf_id].channel
+            vim.fn.chansend(chan, "cd " .. dir .. ";c\n")
+        end
     end
 
     vim.cmd.startinsert()
