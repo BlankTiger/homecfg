@@ -957,6 +957,14 @@ end, {})
 -- set : to q: (instead of cmdline have cmdwin)
 vim.keymap.set("n", ":", "q:i", {})
 
+vim.keymap.set("n", "<leader>vd", function()
+    local win = vim.api.nvim_get_current_win()
+    local cursorpos = vim.api.nvim_win_get_cursor(win)
+    vim.api.nvim_command("norm yyp")
+    cursorpos[1] = cursorpos[1] + 1
+    vim.api.nvim_win_set_cursor(win, cursorpos)
+end, {})
+
 vim.api.nvim_set_keymap("i", "<C-j>", "<esc><cmd>TmuxNavigateDown<cr>", {})
 vim.api.nvim_set_keymap("i", "<C-k>", "<esc><cmd>TmuxNavigateUp<cr>", {})
 vim.api.nvim_set_keymap("i", "<C-h>", "<esc><cmd>TmuxNavigateLeft<cr>", {})
