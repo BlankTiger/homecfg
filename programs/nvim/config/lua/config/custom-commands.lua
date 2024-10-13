@@ -91,23 +91,38 @@ end, {})
 
 vim.g.mk = "make"
 vim.api.nvim_create_user_command("Make", function()
-    local cmd_check_tmux_win_open = "tmux list-windows -F '#{window_name}'"
-    local res = vim.fn.system(cmd_check_tmux_win_open)
-    local is_tmux_win_open = res:find("make") ~= nil
-
-    if is_tmux_win_open then
-        local cmd = 'silent !tmux send-keys -t ":9" "'
-            .. vim.g.mk
-            .. '" Enter;tmux select-window -t ":9"'
-        vim.api.nvim_command(cmd)
-        return
+    local bufname = "make"
+    local term_exists = vim.fn.bufexists(bufname)
+    local bufnr = nil
+    if term_exists == 0 then
+        vim.api.nvim_command("e term://zsh")
+        bufnr = vim.api.nvim_get_current_buf()
+        vim.api.nvim_buf_set_name(bufnr, bufname)
     else
-        local cmd = "silent !tmux new-window -n 'make' -t 9 '"
-            .. vim.g.mk
-            .. ";/usr/bin/env $SHELL'"
-        vim.api.nvim_command(cmd)
+        bufnr = vim.fn.bufnr(bufname)
+        vim.api.nvim_command("b " .. bufname)
     end
+    local make_channel = vim.bo[bufnr].channel
+    vim.fn.chansend(make_channel, vim.g.mk .. "\n")
 end, {})
+-- vim.api.nvim_create_user_command("Make", function()
+--     local cmd_check_tmux_win_open = "tmux list-windows -F '#{window_name}'"
+--     local res = vim.fn.system(cmd_check_tmux_win_open)
+--     local is_tmux_win_open = res:find("make") ~= nil
+--
+--     if is_tmux_win_open then
+--         local cmd = 'silent !tmux send-keys -t ":9" "'
+--             .. vim.g.mk
+--             .. '" Enter;tmux select-window -t ":9"'
+--         vim.api.nvim_command(cmd)
+--         return
+--     else
+--         local cmd = "silent !tmux new-window -n 'make' -t 9 '"
+--             .. vim.g.mk
+--             .. ";/usr/bin/env $SHELL'"
+--         vim.api.nvim_command(cmd)
+--     end
+-- end, {})
 
 vim.api.nvim_create_user_command("AsyncMake", function()
     local lines = { "" }
