@@ -235,16 +235,16 @@ return {
         -- "ThePrimeagen/harpoon",
         event = "VeryLazy",
     },
-    {
-        "ThePrimeagen/refactoring.nvim",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter",
-        },
-        config = function()
-            require("refactoring").setup()
-        end,
-    },
+    -- {
+    --     "ThePrimeagen/refactoring.nvim",
+    --     dependencies = {
+    --         "nvim-lua/plenary.nvim",
+    --         "nvim-treesitter/nvim-treesitter",
+    --     },
+    --     config = function()
+    --         require("refactoring").setup()
+    --     end,
+    -- },
 
     {
         "ThePrimeagen/git-worktree.nvim",
@@ -328,19 +328,19 @@ return {
     --     priority = 1000,
     --     opts = {},
     -- },
-    {
-        "catppuccin/nvim",
-        name = "catppuccin",
-        lazy = false,
-        priority = 900,
-        opts = {},
-    },
+    -- {
+    --     "catppuccin/nvim",
+    --     name = "catppuccin",
+    --     lazy = false,
+    --     priority = 900,
+    --     opts = {},
+    -- },
     {
         "seandewar/paragon.vim",
         lazy = false,
         priority = 1000,
     },
-    { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false, priority = 1000 },
+    -- { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false, priority = 1000 },
 
     {
         "AckslD/nvim-neoclip.lua",
