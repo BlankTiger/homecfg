@@ -714,6 +714,24 @@ local mappings = {
         r = { "<cmd>TroubleRefresh<cr>", "Refresh" },
         t = { "<cmd>TodoTrouble<cr>", "Open todo items in trouble" },
         f = { "<cmd>tabnew | term<cr>", "fullscreen terminal in new tab" },
+        h = {
+            function()
+                local opt = vim.opt.splitright
+                vim.opt.splitright = false
+                vim.api.nvim_command("vs term://zsh")
+                vim.opt.splitright = opt
+            end,
+            "terminal split to the left",
+        },
+        l = {
+            function()
+                local opt = vim.opt.splitright
+                vim.opt.splitright = true
+                vim.api.nvim_command("vs term://zsh")
+                vim.opt.splitright = opt
+            end,
+            "terminal split to the right",
+        },
         n = { "<cmd>tabnext<cr>", "change to next tab" },
         p = { "<cmd>tabprev<cr>", "change to prev tab" },
         c = { "<cmd>tabclose<cr>", "close current tab" },
