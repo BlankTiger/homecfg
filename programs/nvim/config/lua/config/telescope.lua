@@ -10,6 +10,11 @@ telescope.setup({
         prompt_prefix = "  ",
         path_display = { "smart" },
         layout_strategy = "horizontal",
+        layout_config = {
+            width = 0.95,
+            height = 0.9,
+            prompt_position = "top",
+        },
 
         mappings = {
             i = {
@@ -101,7 +106,11 @@ telescope.setup({
         git_diffs = {
             git_command = { "git", "log", "--oneline", "--decorate", "--all", "." }, -- list result
         },
-        ripgrep = { path_display = { "absolute" } },
+        ripgrep = {
+            path_display = { "absolute" },
+            default_args_text = "--vimgrep --glob-case-insensitive -i",
+            default_args_files = "--files --glob-case-insensitive -i -g",
+        },
         aqf = { path_display = { "absolute" } },
     },
 })
