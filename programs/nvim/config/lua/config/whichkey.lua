@@ -908,6 +908,12 @@ vim.api.nvim_set_keymap("t", "<C-k>", "<cmd>TmuxNavigateUp<cr>", {})
 vim.api.nvim_set_keymap("t", "<C-h>", "<cmd>TmuxNavigateLeft<cr>", {})
 vim.api.nvim_set_keymap("t", "<C-l>", "<cmd>TmuxNavigateRight<cr>", {})
 
+-- remove full line like dd
+vim.keymap.set("n", "<A-d>", "dd", {})
+
+-- search and replace visual selection
+vim.keymap.set("v", "//", [["hy:%s/<C-r>h//gc<left><left><left>]], { noremap = true })
+
 -- harpoon
 vim.keymap.set({ "t", "n" }, "<M-A>", function()
     require("harpoon.ui").nav_file(1)
