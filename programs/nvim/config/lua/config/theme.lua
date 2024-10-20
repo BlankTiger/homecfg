@@ -16,6 +16,10 @@ highlight NeogitDiffAddCursor guibg=#0f0f0f guifg=#5fd7af
 highlight NeogitDiffDelete ctermfg=NONE ctermbg=NONE guifg=#d78787 guibg=#1a1a1a
 highlight NeogitDiffDeleteHighlight guifg=#d78787 guibg=#1a1a1a
 highlight NeogitDiffDeleteCursor guibg=#0f0f0f guifg=#d78787
+highlight! link GitConflictIncoming DiffAdd
+highlight! link GitConflictIncomingLabel DiffAdd
+highlight! link GitConflictCurrent DiffText
+highlight! link GitConflictCurrentLabel DiffText
 ]])
 end
 
