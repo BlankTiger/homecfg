@@ -231,8 +231,17 @@ return {
         },
     },
     {
-        url = "https://github.com/BlankTiger/harpoon",
-        -- "ThePrimeagen/harpoon",
+        "ThePrimeagen/harpoon",
+        branch = "harpoon2",
+        config = function()
+            local harpoon = require("harpoon")
+            harpoon.setup({
+                menu = {
+                    width = 120,
+                    height = 40,
+                },
+            })
+        end,
         event = "VeryLazy",
     },
     -- {
@@ -446,14 +455,14 @@ return {
 
     { "buztard/vim-rel-jump", event = "VeryLazy" },
 
-    {
-        "folke/todo-comments.nvim",
-        event = "VeryLazy",
-        config = function()
-            require("config.todo-comments")
-        end,
-        dependencies = { "nvim-lua/plenary.nvim" },
-    },
+    -- {
+    --     "folke/todo-comments.nvim",
+    --     event = "VeryLazy",
+    --     config = function()
+    --         require("config.todo-comments")
+    --     end,
+    --     dependencies = { "nvim-lua/plenary.nvim" },
+    -- },
 
     {
         "folke/trouble.nvim",

@@ -7,6 +7,7 @@ local vim = vim
 
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
+local harpoon = require("harpoon")
 
 local setup = {
     plugins = {
@@ -242,43 +243,43 @@ local mappings = {
     -- still harpoon
     -- ["<M-A>"] = {
     --     function()
-    --         require("harpoon.ui").nav_file(1)
+    --         harpoon:list():select(1)
     --     end,
     --     "Navigate to 1st harpoon file",
     -- },
     -- ["<M-S>"] = {
     --     function()
-    --         require("harpoon.ui").nav_file(2)
+    --         harpoon:list():select(2)
     --     end,
     --     "Navigate to 2st harpoon file",
     -- },
     -- ["<M-D>"] = {
     --     function()
-    --         require("harpoon.ui").nav_file(3)
+    --         harpoon:list():select(3)
     --     end,
     --     "Navigate to 3st harpoon file",
     -- },
     -- ["<M-F>"] = {
     --     function()
-    --         require("harpoon.ui").nav_file(4)
+    --         harpoon:list():select(4)
     --     end,
     --     "Navigate to 4st harpoon file",
     -- },
     -- ["<M-G>"] = {
     --     function()
-    --         require("harpoon.ui").nav_file(5)
+    --         harpoon:list():select(5)
     --     end,
     --     "Navigate to 5st harpoon file",
     -- },
     -- ["<M-H>"] = {
     --     function()
-    --         require("harpoon.ui").nav_file(6)
+    --         harpoon:list():select(6)
     --     end,
     --     "Navigate to 6st harpoon file",
     -- },
     -- ["<M-J>"] = {
     --     function()
-    --         require("harpoon.ui").nav_file(7)
+    --         harpoon:list():select(7)
     --     end,
     --     "Navigate to 7st harpoon file",
     -- },
@@ -293,79 +294,67 @@ local mappings = {
         },
         ["H"] = {
             function()
-                require("harpoon.ui").toggle_quick_menu()
+                harpoon.ui:toggle_quick_menu(harpoon:list())
             end,
             "Harpoon menu",
         },
         ["m"] = {
             function()
-                require("harpoon.mark").add_file()
+                harpoon:list():add()
             end,
             "Add file to harpoon",
         },
-        ["n"] = {
-            function()
-                require("harpoon.ui").nav_next()
-            end,
-            "Navigate to next harpoon file",
-        },
-        ["p"] = {
-            function()
-                require("harpoon.ui").nav_prev()
-            end,
-            "Navigate to prev harpoon file",
-        },
         ["1"] = {
             function()
-                require("harpoon.ui").nav_file(1)
+                harpoon:list():select(1)
             end,
             "Navigate to 1st harpoon file",
         },
         ["2"] = {
             function()
-                require("harpoon.ui").nav_file(2)
+                harpoon:list():select(2)
             end,
             "Navigate to 2nd harpoon file",
         },
         ["3"] = {
             function()
-                require("harpoon.ui").nav_file(3)
+                harpoon:list():select(3)
             end,
             "Navigate to 3rd harpoon file",
         },
         ["4"] = {
             function()
-                require("harpoon.ui").nav_file(4)
+                harpoon:list():select(4)
             end,
             "Navigate to 4th harpoon file",
         },
         ["5"] = {
             function()
-                require("harpoon.ui").nav_file(5)
+                harpoon:list():select(5)
             end,
             "Navigate to 5th harpoon file",
         },
         ["6"] = {
             function()
-                require("harpoon.ui").nav_file(6)
+                harpoon:list():select(6)
             end,
             "Navigate to 6th harpoon file",
         },
         ["7"] = {
             function()
-                require("harpoon.ui").nav_file(7)
+                harpoon:list():select(7)
             end,
             "Navigate to 7th harpoon file",
         },
         ["8"] = {
             function()
-                require("harpoon.ui").nav_file(8)
+                harpoon:list():select(8)
             end,
             "Navigate to 8th harpoon file",
         },
         ["9"] = {
             function()
-                require("harpoon.ui").nav_file(9)
+                harpoon:list():select(9)
             end,
             "Navigate to 9th harpoon file",
         },
@@ -934,25 +923,25 @@ vim.keymap.set("v", "//", [["hy:%s/<C-r>h//gc<left><left><left>]], { noremap = t
 
 -- harpoon
 vim.keymap.set({ "t", "n" }, "<M-A>", function()
-    require("harpoon.ui").nav_file(1)
+    harpoon:list():select(1)
 end, {})
 vim.keymap.set({ "t", "n" }, "<M-S>", function()
-    require("harpoon.ui").nav_file(2)
+    harpoon:list():select(2)
 end, {})
 vim.keymap.set({ "t", "n" }, "<M-D>", function()
-    require("harpoon.ui").nav_file(3)
+    harpoon:list():select(3)
 end, {})
 vim.keymap.set({ "t", "n" }, "<M-F>", function()
-    require("harpoon.ui").nav_file(4)
+    harpoon:list():select(4)
 end, {})
 vim.keymap.set({ "t", "n" }, "<M-G>", function()
-    require("harpoon.ui").nav_file(5)
+    harpoon:list():select(5)
 end, {})
 vim.keymap.set({ "t", "n" }, "<M-H>", function()
-    require("harpoon.ui").nav_file(6)
+    harpoon:list():select(6)
 end, {})
 vim.keymap.set({ "t", "n" }, "<M-J>", function()
-    require("harpoon.ui").nav_file(7)
+    harpoon:list():select(7)
 end, {})
 
 -- tabs
