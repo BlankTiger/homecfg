@@ -40,6 +40,7 @@ opt.inccommand = "split"
 opt.undofile = true
 opt.splitbelow = true
 opt.cmdwinheight = 15
+opt.matchpairs = "(:),{:},<:>,[:]"
 g.neovide_transparency = 1
 g.do_filetype_lua = 1
 g.oxcarbon_lua_keep_terminal = 1
