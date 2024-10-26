@@ -328,13 +328,13 @@ return {
     --     priority = 1000,
     --     opts = {},
     -- },
-    -- {
-    --     "catppuccin/nvim",
-    --     name = "catppuccin",
-    --     lazy = false,
-    --     priority = 900,
-    --     opts = {},
-    -- },
+    {
+        "catppuccin/nvim",
+        name = "catppuccin",
+        lazy = false,
+        priority = 900,
+        opts = {},
+    },
     {
         "seandewar/paragon.vim",
         lazy = false,

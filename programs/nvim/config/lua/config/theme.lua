@@ -25,6 +25,6 @@ end
 
 return function()
     vim.opt.termguicolors = true
-    custom_paragon()
-    -- vim.cmd.colorscheme("moonfly")
+    -- custom_paragon()
+    vim.cmd.colorscheme("catppuccin-mocha")
 end
