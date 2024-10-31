@@ -37,6 +37,46 @@ vim.api.nvim_create_user_command("Rg", function(opts)
     }, on_confirm)
 end, {})
 
+vim.api.nvim_create_user_command("TermEditPrompt", function()
+    local buf_info = vim.bo["buftype"]
+    if buf_info ~= "terminal" then
+        return
+    end
+
+    local prompt_line = vim.api.nvim_get_current_line()
+    local prompt_char = "❯"
+    local prompt_char_idx = prompt_line:find(prompt_char)
+    if not prompt_char_idx then
+        return
+    end
+
+    local term_bufnr = vim.api.nvim_get_current_buf()
+    local term_chan = vim.bo[term_bufnr].channel
+
+    -- +4 bcs unicode blah blah
+    local prompt = prompt_line:sub(prompt_char_idx + 4, -1)
+    local cmd = "tabnew Edit prompt"
+    vim.api.nvim_command(cmd)
+    vim.api.nvim_set_current_line(prompt)
+
+    -- send prompt back to terminal after quitting
+    local edit_cmd_bufnr = vim.api.nvim_get_current_buf()
+    vim.bo[edit_cmd_bufnr].scratch = true
+    local autocmd_group = vim.api.nvim_create_augroup("prompt edit", { clear = true })
+    vim.api.nvim_create_autocmd({ "QuitPre" }, {
+        group = autocmd_group,
+        buffer = edit_cmd_bufnr,
+        callback = function()
+            -- clear the prompt
+            vim.fn.chansend(term_chan, "")
+
+            -- send the edited one
+            local new_prompt = vim.api.nvim_get_current_line()
+            vim.fn.chansend(term_chan, new_prompt)
+        end,
+    })
+end, {})
+
 vim.api.nvim_create_user_command("TermToggle", function()
     local is_open = vim.g.term_win_id ~= nil and vim.api.nvim_win_is_valid(vim.g.term_win_id)
     if vim.g.term_win_height == nil then
