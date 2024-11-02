@@ -3,7 +3,7 @@ if not status_ok then
     return
 end
 
-local showing_details = false
+local showing_details = true
 oil.setup({
     keymaps = {
         ["<C-t>"] = false,
@@ -31,3 +31,4 @@ oil.setup({
         show_hidden = true,
     },
 })
+oil.set_columns({ "icon", "permissions", "size", "mtime" })
