@@ -58,6 +58,11 @@ local location = {
     padding = 0,
 }
 
+local searchcount = {
+    "searchcount",
+    maxcount = 2000000,
+}
+
 -- cool function for progress
 local progress = function()
     local current_line = vim.fn.line(".")
@@ -105,7 +110,7 @@ lualine.setup({
         lualine_a = { mode, is_recording },
         lualine_b = { branch, diagnostics, time },
         lualine_c = { "%=", filetype, filename, diff },
-        lualine_x = { "searchcount", "selectioncount", spaces, "encoding", filetype_no_icon },
+        lualine_x = { searchcount, "selectioncount", spaces, "encoding", filetype_no_icon },
         lualine_y = { "progress" },
         lualine_z = { "location" },
     },
