@@ -114,12 +114,16 @@ local mappings = {
         },
         s = {
             function()
-                require("telescope.builtin").buffers(
-                    require("telescope.themes").get_dropdown({ previewer = false })
-                )
+                require("telescope.builtin").buffers()
             end,
             "Show buffers",
         },
+    },
+    ["<leader>r"] = {
+        function()
+            require("telescope.builtin").resume()
+        end,
+        "Resume last telescope search window",
     },
     -- vimtex
     ["<leader>v"] = {
