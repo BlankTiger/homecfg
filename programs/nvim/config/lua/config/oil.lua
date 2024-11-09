@@ -26,6 +26,9 @@ oil.setup({
                 end
             end,
         },
+        ["<A-s>"] = "actions.select_vsplit",
+        ["<A-h>"] = "actions.select_split",
+        ["<A-t>"] = "actions.select_tab",
     },
     view_options = {
         show_hidden = true,
