@@ -12,23 +12,24 @@ local diagnostics = {
     "diagnostics",
     sources = { "nvim_diagnostic" },
     sections = { "error", "warn" },
-    symbols = { error = " ", warn = " " },
-    colored = false,
+    symbols = { error = "E: ", warn = "W: " },
+    -- symbols = { error = " ", warn = " " },
+    colored = true,
     update_in_insert = false,
     always_visible = true,
 }
 
 local diff = {
     "diff",
-    colored = false,
+    colored = true,
     symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
     cond = hide_in_width,
 }
 
 local mode = {
     "mode",
-    fmt = function(str)
-        return "-- " .. str .. " --"
+    fmt = function(mode)
+        return "--- " .. mode .. " ---"
     end,
 }
 
@@ -82,6 +83,10 @@ local time = function()
     return os.date("%H:%M:%S")
 end
 
+local spacer = function()
+    return "         "
+end
+
 local function is_recording()
     local reg = vim.fn.reg_recording()
     if reg == "" then
@@ -90,12 +95,12 @@ local function is_recording()
     return "@" .. reg
 end
 
-custom_auto.normal.x = custom_auto.normal.c
-custom_auto.insert.x = custom_auto.insert.c
-custom_auto.visual.x = custom_auto.visual.c
-custom_auto.replace.x = custom_auto.replace.c
-custom_auto.command.x = custom_auto.command.c
-custom_auto.inactive.x = custom_auto.inactive.c
+-- custom_auto.normal.x = custom_auto.normal.c
+-- custom_auto.insert.x = custom_auto.insert.c
+-- custom_auto.visual.x = custom_auto.visual.c
+-- custom_auto.replace.x = custom_auto.replace.c
+-- custom_auto.command.x = custom_auto.command.c
+-- custom_auto.inactive.x = custom_auto.inactive.c
 
 lualine.setup({
     options = {
@@ -108,9 +113,10 @@ lualine.setup({
     },
     sections = {
         lualine_a = { mode, is_recording },
-        lualine_b = { branch, diagnostics, time },
-        lualine_c = { "%=", filetype, filename, diff },
-        lualine_x = { searchcount, "selectioncount", spaces, "encoding", filetype_no_icon },
+        lualine_b = { branch },
+        -- lualine_b = { branch, diagnostics, time },
+        lualine_c = { diagnostics, time, "%=", filetype, filename, diff },
+        lualine_x = { spacer, searchcount, "selectioncount", spaces, "encoding", filetype_no_icon },
         lualine_y = { "progress" },
         lualine_z = { "location" },
     },
