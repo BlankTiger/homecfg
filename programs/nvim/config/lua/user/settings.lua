@@ -27,6 +27,8 @@ opt.smartindent = false
 vim.cmd("filetype indent off")
 opt.indentexpr = ""
 
+opt.pumblend = 0
+
 opt.expandtab = true
 opt.tabstop = 4
 opt.shiftwidth = 4

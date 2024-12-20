@@ -70,6 +70,7 @@ dap.configurations.zig = {
 --         stopOnEntry = false,
 --     },
 -- }
+
 dap.configurations.c = dap.configurations.cpp
 
 for _, v in pairs(dap.configurations.python) do

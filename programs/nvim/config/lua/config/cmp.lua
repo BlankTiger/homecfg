@@ -40,15 +40,17 @@ local kind_icons = {
 
 cmp.setup({
     window = {
-        -- completion = cmp.config.window.bordered(),
-        -- documentation = cmp.config.window.bordered(),
         completion = {
             border = "rounded",
             side_padding = 0,
             scrollbar = false,
+            winblend = 0,
+            winhighlight = "Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None",
         },
         documentation = {
             border = "rounded",
+            winblend = 0,
+            winhighlight = "Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None",
         },
     },
     snippet = {
@@ -120,16 +122,7 @@ cmp.setup({
         fields = { "menu", "abbr", "kind" },
         format = function(entry, vim_item)
             -- Kind icons
-            vim_item.kind = string.format("  %s  %s", kind_icons[vim_item.kind], vim_item.kind)
-            vim_item.menu = ({
-                -- luasnip = "[Snippet]",
-                -- copilot = "[Copilot]",
-                -- nvim_lua = "[Lua]",
-                -- nvim_lsp = "[LSP]",
-                -- cmdline = "[CMD]",
-                -- buffer = "[Buffer]",
-                -- path = "[Path]",
-            })[entry.source.name]
+            vim_item.kind = string.format("  %s ", kind_icons[vim_item.kind])
             return vim_item
         end,
     },
