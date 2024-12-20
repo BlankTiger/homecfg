@@ -11,34 +11,46 @@ end
 
 --   פּ ﯟ   some other good icons
 local kind_icons = {
-    Text = "",
-    Method = "m",
-    Function = "",
-    Constructor = "",
-    Field = "",
-    Variable = "",
-    Class = "",
+    Text = "",
+    Method = "󰆧",
+    Function = "󰊕",
+    Constructor = "",
+    Field = "󰇽",
+    Variable = "󰂡",
+    Class = "󰠱",
     Interface = "",
     Module = "",
-    Property = "",
+    Property = "󰜢",
     Unit = "",
-    Value = "",
+    Value = "󰎠",
     Enum = "",
-    Keyword = "",
-    Snippet = "",
-    Color = "",
-    File = "",
+    Keyword = "󰌋",
+    Snippet = "",
+    Color = "󰏘",
+    File = "󰈙",
     Reference = "",
-    Folder = "",
+    Folder = "󰉋",
     EnumMember = "",
-    Constant = "",
+    Constant = "󰏿",
     Struct = "",
     Event = "",
-    Operator = "",
-    TypeParameter = "",
+    Operator = "󰆕",
+    TypeParameter = "󰅲",
 }
 
 cmp.setup({
+    window = {
+        -- completion = cmp.config.window.bordered(),
+        -- documentation = cmp.config.window.bordered(),
+        completion = {
+            border = "rounded",
+            side_padding = 0,
+            scrollbar = false,
+        },
+        documentation = {
+            border = "rounded",
+        },
+    },
     snippet = {
         expand = function(args)
             require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
@@ -56,6 +68,7 @@ cmp.setup({
         ["<C-e>"] = cmp.mapping.close(),
         ["<C-Space>"] = cmp.mapping.complete(),
     }),
+
     -- sorting = {
     --     comparators = {
     --         cmp.config.compare.score,
@@ -74,27 +87,48 @@ cmp.setup({
     -- },
     sources = {
         { name = "luasnip" },
-        { name = "copilot" },
-        { name = "nvim_lua" },
-        { name = "nvim_lsp" },
+        -- { name = "copilot" },
+        -- { name = "nvim_lua" },
+        -- { name = "nvim_lsp" },
         -- { name = "cmdline" },
+        {
+            name = "buffer",
+            option = {
+                get_bufnrs = function()
+                    -- local bufs = {}
+                    -- local buf_curr = vim.api.nvim_get_current_buf()
+                    -- local buf_alt = vim.fn.bufnr("#")
+                    -- for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+                    --     if
+                    --         vim.bo[buf].buftype ~= "terminal"
+                    --         and not string.gmatch(vim.api.nvim_buf_get_name(buf) or "", "*.json")
+                    --     then
+                    --         bufs[buf] = true
+                    --     end
+                    --     if buf == buf_curr then
+                    --         bufs[buf] = true
+                    --     end
+                    -- end
+                    -- return vim.tbl_keys(bufs)
+                    return vim.api.nvim_list_bufs()
+                end,
+            },
+        },
         { name = "path" },
-        { name = "buffer" },
     },
     formatting = {
-        fields = { "kind", "abbr", "menu" },
+        fields = { "menu", "abbr", "kind" },
         format = function(entry, vim_item)
             -- Kind icons
-            vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-            -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+            vim_item.kind = string.format("  %s  %s", kind_icons[vim_item.kind], vim_item.kind)
             vim_item.menu = ({
-                luasnip = "[Snippet]",
-                copilot = "[Copilot]",
-                nvim_lua = "[Lua]",
-                nvim_lsp = "[LSP]",
-                cmdline = "[CMD]",
-                buffer = "[Buffer]",
-                path = "[Path]",
+                -- luasnip = "[Snippet]",
+                -- copilot = "[Copilot]",
+                -- nvim_lua = "[Lua]",
+                -- nvim_lsp = "[LSP]",
+                -- cmdline = "[CMD]",
+                -- buffer = "[Buffer]",
+                -- path = "[Path]",
             })[entry.source.name]
             return vim_item
         end,

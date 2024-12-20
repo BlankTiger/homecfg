@@ -34,7 +34,7 @@ local servers = {
     "kotlin_language_server",
     "bashls",
     -- "tailwindcss",
-    -- "zls",
+    "zls",
     "nil_ls",
     "clangd",
 }

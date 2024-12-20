@@ -21,7 +21,12 @@ opt.splitright = true
 opt.laststatus = 3
 opt.clipboard = "unnamedplus"
 opt.mouse = "a"
+
 opt.autoindent = true
+opt.smartindent = false
+vim.cmd("filetype indent off")
+opt.indentexpr = ""
+
 opt.expandtab = true
 opt.tabstop = 4
 opt.shiftwidth = 4
@@ -41,6 +46,9 @@ opt.undofile = true
 opt.splitbelow = true
 opt.cmdwinheight = 15
 opt.matchpairs = "(:),{:},<:>,[:]"
+opt.scrollback = 100000
+opt.guicursor = "n-v-i-c:block-Cursor"
+g.searchindex_line_limit = 1000000
 g.neovide_transparency = 1
 g.do_filetype_lua = 1
 g.oxcarbon_lua_keep_terminal = 1

@@ -119,7 +119,8 @@ local mappings = {
             "Show buffers",
         },
     },
-    ["<leader>r"] = {
+    ["<leader>r"] = { "<cmd>e!<cr>", "Reload file from disk" },
+    ["<leader>R"] = {
         function()
             require("telescope.builtin").resume()
         end,
@@ -164,6 +165,7 @@ local mappings = {
     ["<leader>W"] = { "<cmd>wq!<CR>", "Save and quit" },
     ["<leader>q"] = { "<cmd>q<CR>", "Quit" },
     ["<C-q>"] = { "<cmd>q<CR>", "Quit" },
+    ["<A-q>"] = { "<cmd>q!<CR>", "Quit!" },
     -- ["<leader>c"] = { "<cmd>quitall<CR>", "Quit all" },
     ["<leader>C"] = { "<cmd>quitall!<CR>", "Quit all. NOW!" },
     ["<leader>y"] = {
@@ -394,6 +396,18 @@ local mappings = {
             end,
             "Open neogit menu",
         },
+        o = {
+            function()
+                require("neogit").open({ kind = "vsplit" })
+            end,
+            "Open neogit menu in vsplit",
+        },
+        O = {
+            function()
+                require("neogit").open({ kind = "replace" })
+            end,
+            "Open neogit menu in current tab",
+        },
         d = {
             function()
                 require("diffview").open()
@@ -488,12 +502,6 @@ local mappings = {
                 require("gitsigns").undo_stage_hunk()
             end,
             "Undo Stage Hunk",
-        },
-        o = {
-            function()
-                require("telescope.builtin").git_status()
-            end,
-            "Open changed file",
         },
         b = {
             function()
@@ -744,11 +752,22 @@ local mappings = {
         name = "Notifications",
         d = {
             function()
-                require("notify").dismiss()
+                MiniNotify.clear()
             end,
             "Dismiss all notifications",
         },
-        s = { "<cmd>Notifications<cr>", "Show notifications" },
+        s = {
+            function()
+                MiniNotify.show_history()
+            end,
+            "Show all notifications",
+        },
+        r = {
+            function()
+                MiniNotify.refresh()
+            end,
+            "Refresh notifications",
+        },
     },
 
     -- ["<leader>t"] = {
@@ -981,6 +1000,44 @@ vim.keymap.set("n", "<leader>vd", function()
     vim.api.nvim_command("norm yyp")
     cursorpos[1] = cursorpos[1] + 1
     vim.api.nvim_win_set_cursor(win, cursorpos)
+end, {})
+
+-- scrolling with arrow keys
+vim.keymap.set("n", "<left>", "zh")
+vim.keymap.set("n", "<right>", "zl")
+vim.keymap.set("n", "<up>", "<c-y>")
+vim.keymap.set("n", "<down>", "<c-e>")
+
+vim.keymap.set("n", "gs", "<cmd>vs<cr>")
+vim.keymap.set("n", "gh", "<cmd>sp<cr>")
+vim.keymap.set("n", "gi", "`^zzi")
+
+-- repeat last macro with a single key instead of toggling case
+vim.keymap.set("n", "~", "@@", {})
+
+-- remove buffer completely
+vim.keymap.set("n", "<space>w", "<cmd>bw!<cr>", {})
+
+-- reload current buffer from disk
+vim.keymap.set("n", "<leader>r", "<cmd>e!<cr>", {})
+
+-- change neovim directory for all windows and a tab/window or whatever to currently open file path
+vim.keymap.set("n", "<leader>cl", "<cmd>lcd %:h<cr>", {})
+vim.keymap.set("n", "<leader>cbl", "<cmd>lcd -<cr>", {})
+vim.keymap.set("n", "<leader>ca", "<cmd>cd %:h", {})
+vim.keymap.set("n", "<leader>cba", "<cmd>cd -", {})
+
+vim.keymap.set({ "i" }, "<C-w>", function()
+    -- if on last character then remove it too
+    -- if not then just delete backwards
+    local curpos = vim.api.nvim_win_get_cursor(0)
+    if curpos[2] == vim.fn.col("$") - 1 then
+        local res = vim.api.nvim_replace_termcodes("<C-o>dvb", true, false, true)
+        vim.api.nvim_feedkeys(res, "i", false)
+    else
+        local res = vim.api.nvim_replace_termcodes("<C-o>db", true, false, true)
+        vim.api.nvim_feedkeys(res, "i", false)
+    end
 end, {})
 
 vim.api.nvim_set_keymap("i", "<C-j>", "<esc><cmd>TmuxNavigateDown<cr>", {})

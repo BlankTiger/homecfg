@@ -25,7 +25,7 @@ M.setup = function()
         severity_sort = true,
         float = {
             focusable = false,
-            style = "minimal",
+            -- style = "minimal",
             border = "rounded",
             source = "always",
             header = "",
@@ -36,13 +36,11 @@ M.setup = function()
     vim.diagnostic.config(config)
 
     -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-    -- 	border = "rounded",
-    -- 	width = 60,
+    --     border = "rounded",
     -- })
     --
     -- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    -- 	border = "rounded",
-    -- 	width = 60,
+    --     border = "rounded",
     -- })
 end
 
@@ -61,13 +59,13 @@ local function lsp_keymaps(bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>zm", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>zm", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>k", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "gi",
-        "<cmd>lua vim.lsp.buf.implementation()<CR>zm",
-        opts
-    )
+    -- vim.api.nvim_buf_set_keymap(
+    --     bufnr,
+    --     "n",
+    --     "gi",
+    --     "<cmd>lua vim.lsp.buf.implementation()<CR>zm",
+    --     opts
+    -- )
     --[[ vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts) ]]
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
@@ -112,6 +110,7 @@ M.on_attach = function(client, bufnr)
     if client.name == "ruff_lsp" then
         client.server_capabilities.documentFormattingProvider = false
     end
+    client.server_capabilities.semanticTokensProvider = nil
 
     lsp_keymaps(bufnr)
     lsp_highlight_document(client)

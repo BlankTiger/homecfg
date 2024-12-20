@@ -57,7 +57,7 @@ return {
             telescope.load_extension("ripgrep")
             telescope.load_extension("aqf")
             telescope.load_extension("fzf")
-            telescope.load_extension("notify")
+            -- telescope.load_extension("notify")
             telescope.load_extension("git_worktree")
             telescope.load_extension("git_diffs")
             telescope.load_extension("harpoon")
@@ -90,7 +90,7 @@ return {
             require("aqf").setup({
                 show_instructions = false,
                 windowed = false,
-                debug = true,
+                -- debug = true,
             })
         end,
     },
@@ -277,7 +277,6 @@ return {
     },
     -- { "tpope/vim-fugitive", event = "VeryLazy" },
     -- { "tpope/vim-surround",             event = "VeryLazy" },
-    { "tpope/vim-repeat", event = "VeryLazy" },
     { "tpope/vim-sleuth", event = "VeryLazy" },
     { "tpope/vim-obsession", event = "VeryLazy" },
 
@@ -292,7 +291,20 @@ return {
         end,
     },
     { "fedepujol/move.nvim", event = "VeryLazy" },
-    --[[ "ggandor/leap.nvim", ]]
+    {
+        "ggandor/leap.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            { "tpope/vim-repeat", event = "VeryLazy" },
+        },
+        config = function()
+            local leap = require("leap")
+            vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)")
+            vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)")
+            vim.keymap.set({ "n", "x", "o" }, "gS", "<Plug>(leap-from-window)")
+            leap.opts.equivalence_classes = { " \t\r\n", "([{", ")]}", "'\"`" }
+        end,
+    },
     { "preservim/tagbar", event = "VeryLazy" },
     --[[ "amadeus/vim-evokai", ]]
     --[[ "B4mbus/oxocarbon-lua.nvim", ]]
@@ -387,6 +399,7 @@ return {
         lazy = true,
         config = function()
             local dap = require("dap")
+            require("config.dap")
             local dapui = require("dapui")
             dapui.setup()
             dap.listeners.after.event_initialized["dapui_config"] = function()
@@ -472,37 +485,11 @@ return {
         end,
     },
 
-    -- {
-    --     "folke/flash.nvim",
-    --     event = "VeryLazy",
-    --     opts = {
-    --         highlight = {
-    --             backdrop = false,
-    --             matches = true,
-    --             groups = {
-    --                 match = "FlashMatch",
-    --                 current = "FlashLabel",
-    --                 backdrop = "FlashBackdrop",
-    --                 label = "FlashCurrent",
-    --             },
-    --         },
-    --     },
-    -- },
-
     {
         "RRethy/vim-illuminate",
         lazy = true,
         -- event = "VeryLazy",
     },
-
-    -- {
-    --     "lukas-reineke/indent-blankline.nvim",
-    --     event = "InsertEnter",
-    --     main = "ibl",
-    --     config = function()
-    --         require("config.indentline")
-    --     end,
-    -- },
 
     {
         "folke/noice.nvim",
@@ -518,13 +505,26 @@ return {
                         enabled = false,
                     },
                 },
+                notify = {
+                    enabled = false,
+                },
             })
         end,
         dependencies = {
             {
-                "rcarriga/nvim-notify",
+                "echasnovski/mini.notify",
                 config = function()
-                    require("config.notify")
+                    require("mini.notify").setup({
+                        lsp_progress = { enable = false },
+                        window = {
+                            config = {
+                                anchor = "NE",
+                                border = "none",
+                            },
+                            winblend = 50,
+                        },
+                    })
+                    vim.notify = MiniNotify.make_notify()
                 end,
             },
             {
@@ -547,6 +547,17 @@ return {
         ft = { "markdown" },
         build = function()
             vim.fn["mkdp#util#install"]()
+        end,
+    },
+
+    {
+        "chomosuke/term-edit.nvim",
+        event = "TermOpen",
+        version = "1.*",
+        config = function()
+            require("term-edit").setup({
+                prompt_end = "❯",
+            })
         end,
     },
 }

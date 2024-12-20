@@ -94,7 +94,7 @@ vim.api.nvim_create_user_command("TermToggle", function()
 
     if is_open then
         vim.g.term_win_height = vim.api.nvim_win_get_height(vim.g.term_win_id)
-        vim.api.nvim_win_hide(vim.g.term_win_id)
+        pcall(vim.api.nvim_win_hide, vim.g.term_win_id)
         vim.g.term_win_id = nil
         return
     end

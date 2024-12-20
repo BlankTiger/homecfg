@@ -8,16 +8,14 @@ if not dap_ui_status_ok then
     return
 end
 
-local ext_path = "C:/Users/work/.vscode/extensions/lldb-172/"
-local codelldb_path = ext_path .. "adapter/codelldb"
--- local liblldb_path = ext_path .. "lldb/lib/liblldb.dll"
-
-local port = "3434"
-
 dap.adapters.codelldb = {
-    type = "executable",
-    command = "/home/blanktiger/.local/share/nvim/mason/bin/codelldb", -- adjust as needed
+    type = "server",
+    port = "${port}",
     name = "lldb",
+    executable = {
+        command = "/home/blanktiger/.local/share/nvim/mason/bin/codelldb",
+        args = { "--port", "${port}" },
+    },
 }
 
 dap.configurations.cpp = {
@@ -33,29 +31,45 @@ dap.configurations.cpp = {
     },
 }
 
--- dap.configurations.rust = dap.configurations.cpp
-dap.configurations.rust = {
+dap.configurations.zig = {
     {
-        name = "hello-world",
-        type = "lldb",
+        name = "Launch file",
+        type = "codelldb",
         request = "launch",
         program = function()
-            return vim.fn.getcwd() .. "/target/debug/hello-world"
+            local file = vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+            vim.notify(file)
+            return file
         end,
         cwd = "${workspaceFolder}",
         stopOnEntry = false,
-    },
-    {
-        name = "hello-dap",
-        type = "lldb",
-        request = "launch",
-        program = function()
-            return vim.fn.getcwd() .. "/target/debug/hello-dap"
-        end,
-        cwd = "${workspaceFolder}",
-        stopOnEntry = false,
+        args = { "--port", "13000" },
     },
 }
+
+-- dap.configurations.rust = dap.configurations.cpp
+-- dap.configurations.rust = {
+--     {
+--         name = "hello-world",
+--         type = "lldb",
+--         request = "launch",
+--         program = function()
+--             return vim.fn.getcwd() .. "/target/debug/hello-world"
+--         end,
+--         cwd = "${workspaceFolder}",
+--         stopOnEntry = false,
+--     },
+--     {
+--         name = "hello-dap",
+--         type = "lldb",
+--         request = "launch",
+--         program = function()
+--             return vim.fn.getcwd() .. "/target/debug/hello-dap"
+--         end,
+--         cwd = "${workspaceFolder}",
+--         stopOnEntry = false,
+--     },
+-- }
 dap.configurations.c = dap.configurations.cpp
 
 for _, v in pairs(dap.configurations.python) do

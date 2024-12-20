@@ -27,8 +27,8 @@ telescope.setup({
                 ["<C-c>"] = actions.close,
 
                 ["<CR>"] = actions.select_default,
-                ["<C-x>"] = actions.select_horizontal,
-                ["<C-v>"] = actions.select_vertical,
+                ["<C-h>"] = actions.select_horizontal,
+                ["<C-s>"] = actions.select_vertical,
                 ["<C-t>"] = actions.select_tab,
 
                 ["<C-u>"] = actions.preview_scrolling_up,
@@ -51,8 +51,8 @@ telescope.setup({
 
                 ["<esc>"] = actions.close,
                 ["<CR>"] = actions.select_default,
-                ["<C-x>"] = actions.select_horizontal,
-                ["<C-v>"] = actions.select_vertical,
+                ["<C-h>"] = actions.select_horizontal,
+                ["<C-s>"] = actions.select_vertical,
                 ["<C-t>"] = actions.select_tab,
 
                 ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
@@ -102,7 +102,7 @@ telescope.setup({
             override_file_sorter = true,
             case_mode = "smart_case",
         },
-        notify = {},
+        -- notify = {},
         git_diffs = {
             git_command = { "git", "log", "--oneline", "--decorate", "--all", "." }, -- list result
         },

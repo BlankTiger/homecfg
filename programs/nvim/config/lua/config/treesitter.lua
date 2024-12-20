@@ -18,20 +18,31 @@ end
 compiler.compilers = { "clang" }
 
 configs.setup({
-    ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "rust", "python", "yaml", "toml" }, -- one of "all" or a list of languages
+    ensure_installed = {
+        "c",
+        "lua",
+        "vim",
+        "vimdoc",
+        "query",
+        "rust",
+        "python",
+        "yaml",
+        "toml",
+        "zig",
+    }, -- one of "all" or a list of languages
     ignore_install = { "" }, -- List of parsers to ignore installing
     auto_install = true,
 
     highlight = {
         enable = true, -- false will disable the whole extension
-        disable = { "" }, -- list of language that will be disabled
+        disable = { "json" }, -- list of language that will be disabled
     },
 
     autopairs = {
         enable = true,
     },
 
-    indent = { enable = true, disable = { "python" } },
+    indent = { enable = true },
 
     -- incremental_selection = {
     -- 	enable = true,
