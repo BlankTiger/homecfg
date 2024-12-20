@@ -93,24 +93,20 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
     pattern = { "*.zig", "*.lua", "*.rs", ".py", "*.js" },
     callback = function()
         vim.cmd([[
+            " set list listchars=tab:\ \ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨
             highlight ExtraWhitespace ctermbg=red guibg=red
             match ExtraWhitespace /\s\+$/
         ]])
     end,
 })
--- vim.g.treesitter_loaded = false
--- vim.api.nvim_create_autocmd(
--- 	{ "BufEnter" },
--- 	{
--- 		pattern = { "*.*" },
--- 		callback = function()
--- 			if not vim.g.treesitter_loaded then
--- 				-- require("cmp")
--- 				require("nvim-treesitter")
--- 				vim.g.treesitter_loaded = true
--- 				return
--- 			end
--- 		end,
--- 		group = autocmd_group,
--- 	}
--- )
+
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+    group = autocmd_group,
+    desc = "clear highlight for trailing whitespace",
+    pattern = "*",
+    callback = function(state)
+        if vim.bo[state.buf].buftype == "terminal" then
+            vim.cmd([[highlight clear ExtraWhitespace]])
+        end
+    end,
+})
