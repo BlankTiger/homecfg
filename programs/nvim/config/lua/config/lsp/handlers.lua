@@ -38,9 +38,9 @@ M.setup = function()
     -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     --     border = "rounded",
     -- })
-    --
+
     -- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    --     border = "rounded",
+    --     -- border = "rounded",
     -- })
 end
 
@@ -107,7 +107,7 @@ end
 M.on_attach = function(client, bufnr)
     --[[ vim.notify(client.name .. " starting...") ]]
     -- TODO: refactor this into a method that checks if string in list
-    if client.name == "ruff_lsp" then
+    if client.name == "ruff" then
         client.server_capabilities.documentFormattingProvider = false
     end
     client.server_capabilities.semanticTokensProvider = nil
@@ -119,13 +119,14 @@ M.on_attach = function(client, bufnr)
     end
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not status_ok then
-    return
-end
+-- local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+-- if not status_ok then
+--     return
+-- end
 
-M.capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+local client_capabilities = require("blink.cmp").get_lsp_capabilities()
+M.capabilities = client_capabilities
 
 return M

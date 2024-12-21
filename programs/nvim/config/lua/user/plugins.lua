@@ -117,6 +117,7 @@ return {
                     require("config.conform")
                 end,
             },
+            { "saghen/blink.cmp" },
         },
     },
     {
@@ -156,11 +157,7 @@ return {
     { "Vimjas/vim-python-pep8-indent", lazy = true },
 
     {
-        "hrsh7th/nvim-cmp",
-        event = { "InsertEnter", "CmdlineEnter" },
-        config = function()
-            require("config.cmp")
-        end,
+        "saghen/blink.cmp",
         dependencies = {
             {
                 "L3MON4D3/LuaSnip",
@@ -169,27 +166,123 @@ return {
                 end,
                 build = "make install_jsregexp",
             },
-            "hrsh7th/cmp-path",
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-cmdline",
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-nvim-lua",
-            "saadparwaiz1/cmp_luasnip",
-            -- {
-            --     "zbirenbaum/copilot.lua",
-            --     cmd = "Copilot",
-            --     config = function()
-            --         require("config.copilot")
-            --     end,
-            -- },
-            -- {
-            --     "zbirenbaum/copilot-cmp",
-            --     config = function()
-            --         require("copilot_cmp").setup()
-            --     end,
-            -- },
         },
+        version = "*",
+
+        ---@module 'blink.cmp'
+        ---@type blink.cmp.Config
+        opts = {
+            snippets = {
+                expand = function(snippet)
+                    require("luasnip").lsp_expand(snippet)
+                end,
+                active = function(filter)
+                    if filter and filter.direction then
+                        return require("luasnip").jumpable(filter.direction)
+                    end
+                    return require("luasnip").in_snippet()
+                end,
+                jump = function(direction)
+                    require("luasnip").jump(direction)
+                end,
+            },
+
+            keymap = { preset = "default" },
+            appearance = {
+                -- use_nvim_cmp_as_default = true,
+                nerd_font_variant = "mono",
+            },
+            sources = {
+                default = {
+                    -- "lsp",
+                    "path",
+                    "luasnip",
+                    "snippets",
+                    "buffer",
+                },
+                providers = {
+                    buffer = {
+                        opts = {
+                            get_bufnrs = function()
+                                -- use all buffers, even hidden ones
+                                return vim.api.nvim_list_bufs()
+                            end,
+                        },
+                    },
+                },
+            },
+            signature = {
+                enabled = true,
+                window = {
+                    border = "rounded",
+                    scrollbar = false,
+                    winblend = 0,
+                    winhighlight = "Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None",
+                },
+            },
+            completion = {
+                menu = {
+                    border = "rounded",
+                    scrollbar = false,
+                    winblend = 0,
+                    scrolloff = 2,
+                    winhighlight = "Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None",
+                    draw = {
+                        gap = 2,
+                        columns = {
+                            { "label", "label_description", gap = 1 },
+                            { "kind_icon", "space" },
+                        },
+                        components = {
+                            space = {
+                                ellipsis = false,
+                                text = function()
+                                    return " "
+                                end,
+                            },
+                        },
+                    },
+                },
+            },
+        },
+        opts_extend = { "sources.default" },
     },
+
+    -- {
+    --     "hrsh7th/nvim-cmp",
+    --     event = { "InsertEnter", "CmdlineEnter" },
+    --     config = function()
+    --         require("config.cmp")
+    --     end,
+    --     dependencies = {
+    --         {
+    --             "L3MON4D3/LuaSnip",
+    --             config = function()
+    --                 require("config.snippets")
+    --             end,
+    --             build = "make install_jsregexp",
+    --         },
+    --         "hrsh7th/cmp-path",
+    --         "hrsh7th/cmp-buffer",
+    --         "hrsh7th/cmp-cmdline",
+    --         "hrsh7th/cmp-nvim-lsp",
+    --         "hrsh7th/cmp-nvim-lua",
+    --         "saadparwaiz1/cmp_luasnip",
+    --         -- {
+    --         --     "zbirenbaum/copilot.lua",
+    --         --     cmd = "Copilot",
+    --         --     config = function()
+    --         --         require("config.copilot")
+    --         --     end,
+    --         -- },
+    --         -- {
+    --         --     "zbirenbaum/copilot-cmp",
+    --         --     config = function()
+    --         --         require("copilot_cmp").setup()
+    --         --     end,
+    --         -- },
+    --     },
+    -- },
 
     {
         "lewis6991/gitsigns.nvim",
@@ -504,6 +597,7 @@ return {
                     progress = {
                         enabled = false,
                     },
+                    signature = { auto_open = { enabled = false } },
                 },
                 notify = {
                     enabled = false,
