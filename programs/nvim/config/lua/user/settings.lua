@@ -88,5 +88,5 @@ g.jupytext_fmt = "py"
 g.jupytext_style = "hydrogen"
 
 -- Set colorscheme
-local set_theme = require("config.theme")
+local set_theme = require("user.theme")
 set_theme()
