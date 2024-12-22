@@ -1,4 +1,0 @@
-return {
-  language = "pl-PL"
-}
-

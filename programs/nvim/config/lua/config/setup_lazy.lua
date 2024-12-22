@@ -19,4 +19,7 @@ require("lazy").setup({
         enabled = false,
         notify = false,
     },
+    performance = {
+        disabled_plugins = { "netrwPlugin", "tutor" },
+    },
 })

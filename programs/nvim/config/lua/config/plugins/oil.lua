@@ -2,6 +2,7 @@ return {
     {
         url = "https://github.com/BlankTiger/oil.nvim",
         -- "stevearc/oil.nvim",
+        event = "VeryLazy",
         config = function()
             local showing_details = true
             local oil = require("oil")

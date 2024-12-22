@@ -1,10 +1,15 @@
 return {
     {
         "sindrets/diffview.nvim",
-        lazy = true,
+        event = "VeryLazy",
     },
 
-    { "akinsho/git-conflict.nvim", version = "*", config = true },
+    {
+        "akinsho/git-conflict.nvim",
+        event = "VeryLazy",
+        version = "*",
+        config = true,
+    },
 
     {
         "lewis6991/gitsigns.nvim",

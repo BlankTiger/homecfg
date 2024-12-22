@@ -1,9 +1,5 @@
 return {
     "nvim-lua/plenary.nvim",
-    {
-        "williamboman/mason.nvim",
-        lazy = true,
-    },
 
     {
         "folke/trouble.nvim",
