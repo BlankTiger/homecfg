@@ -1030,7 +1030,7 @@ vim.keymap.set("n", "gi", "`^zzi")
 vim.keymap.set("n", "~", "@@", {})
 
 -- refresh keymap
-vim.keymap.set("n", "<leader>Rk", function()
+vim.keymap.set("n", "<leader>kr", function()
     vim.notify("Refreshing keymaps")
     require("user.keymaps")
 end, {})
