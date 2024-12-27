@@ -179,7 +179,7 @@ local mappings = {
     },
     ["<leader>x"] = { "<cmd>HopWord<CR>", "Hop to any word" },
     ["<leader>X"] = { "<cmd>HopAnywhere<CR>", "Hop to anywhere" },
-    ["<F8>"] = { "<cmd>TagbarToggle<CR>", "Show ctags" },
+    ["<F10>"] = { "<cmd>TagbarToggle<CR>", "Show ctags" },
     --[[ -- System clipboard ]]
     --[[ ["<space>yy"] = { '"+yy' }, ]]
     --[[ ["<space>yg_"] = { '"+yg_' }, ]]
@@ -585,6 +585,42 @@ local mappings = {
     },
 
     -- DAP
+    ["<F4>"] = {
+        function()
+            require("dap").pause()
+        end,
+        "dap pause",
+    },
+    ["<F5>"] = {
+        function()
+            require("dap").continue()
+        end,
+        "dap continue",
+    },
+    ["<F6>"] = {
+        function()
+            require("dap").step_over()
+        end,
+        "dap step over",
+    },
+    ["<F7>"] = {
+        function()
+            require("dap").step_into()
+        end,
+        "dap step into",
+    },
+    ["<F8>"] = {
+        function()
+            require("dap").step_out()
+        end,
+        "dap step out",
+    },
+    ["<F9>"] = {
+        function()
+            require("dap").terminate()
+        end,
+        "dap terminate",
+    },
     ["<leader>d"] = {
         name = "DAP",
         -- keymap("n", "<leader>db", function() require'dap'.toggle_breakpoint() end, opts)
@@ -601,6 +637,12 @@ local mappings = {
                 require("dap").toggle_breakpoint()
             end,
             "Toggle breakpoint",
+        },
+        u = {
+            function()
+                require("dapui").toggle()
+            end,
+            "Toggle UI",
         },
         B = {
             function()
@@ -650,12 +692,6 @@ local mappings = {
                 require("dap").run_last()
             end,
             "Run last",
-        },
-        u = {
-            function()
-                require("dapui").toggle()
-            end,
-            "Toggle UI",
         },
         t = {
             function()
