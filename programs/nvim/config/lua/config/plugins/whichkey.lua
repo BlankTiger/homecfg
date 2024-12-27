@@ -217,6 +217,15 @@ return {
                     end,
                     "Use rg to find files",
                 },
+                ["<leader>sa"] = {
+                    function()
+                        require("telescope").extensions.ripgrep.ripgrep_text({
+                            path_display = { "absolute" },
+                            curr_file_dir = true,
+                        })
+                    end,
+                    "use rg to find files in the directory of the current file",
+                },
                 ["<leader>F"] = {
                     function()
                         require("telescope").extensions.ripgrep.ripgrep_files({

@@ -65,6 +65,9 @@ return {
                 },
             },
             completion = {
+                list = {
+                    selection = "auto_insert",
+                },
                 menu = {
                     border = "rounded",
                     scrollbar = false,

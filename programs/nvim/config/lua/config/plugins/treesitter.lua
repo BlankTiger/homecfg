@@ -36,7 +36,10 @@ return {
                     enable = true,
                 },
 
-                indent = { enable = true },
+                indent = {
+                    enable = true,
+                    disable = { "zig" },
+                },
 
                 -- incremental_selection = {
                 -- 	enable = true,
@@ -146,7 +149,13 @@ return {
         end,
         dependencies = {
             "nvim-treesitter/nvim-treesitter-textobjects",
-            "nvim-treesitter/nvim-treesitter-context",
+            {
+                "nvim-treesitter/nvim-treesitter-context",
+                config = function()
+                    -- disable context by default
+                    vim.cmd("TSContextToggle")
+                end,
+            },
             "JoosepAlviste/nvim-ts-context-commentstring",
         },
     },

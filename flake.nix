@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/release-24.11";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -13,9 +14,19 @@
     };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     hyprland.url = "github:hyprwm/Hyprland";
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
+    };
+    zig = {
+      url = "github:mitchellh/zig-overlay";
+      inputs = {
+        nixpkgs.follows = "nixpkgs-stable";
+        flake-compat.follows = "";
+      };
+    };
   };
 
-  outputs = { nixpkgs, home-manager, hyprland, ... }@inputs:
+  outputs = { nixpkgs, nixpkgs-stable, home-manager, hyprland, zig, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -35,6 +46,7 @@
           ./programs/git.nix
           ./programs/starship.nix
           ./programs/kitty
+          ./programs/ghostty
           ./programs/wezterm
           ./programs/tmux
           ./programs/nvim

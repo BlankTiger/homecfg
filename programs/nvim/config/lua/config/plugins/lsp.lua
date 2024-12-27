@@ -120,6 +120,7 @@ return {
             end
 
             local on_attach = function(client, bufnr)
+                client.server_capabilities.documentFormattingProvider = false
                 client.server_capabilities.semanticTokensProvider = nil
                 lsp_keymaps(bufnr)
                 lsp_highlight_document(client)

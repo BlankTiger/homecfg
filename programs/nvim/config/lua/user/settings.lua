@@ -24,7 +24,7 @@ opt.mouse = "a"
 
 opt.autoindent = true
 opt.smartindent = false
-vim.cmd("filetype indent off")
+-- vim.cmd("filetype indent off")
 opt.indentexpr = ""
 
 opt.pumblend = 0
@@ -86,6 +86,9 @@ g.silicon = {
 g.jukit_inline_plotting = 0
 g.jupytext_fmt = "py"
 g.jupytext_style = "hydrogen"
+
+g.zig_fmt_parse_errors = 0
+g.zig_fmt_autosave = 0
 
 -- Set colorscheme
 local set_theme = require("user.theme")
