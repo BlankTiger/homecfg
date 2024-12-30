@@ -129,8 +129,8 @@ vim.api.nvim_create_user_command("TermKill", function()
     end
 end, {})
 
-vim.g.mk = "make"
-vim.api.nvim_create_user_command("Make", function()
+vim.g.mk = "echo 'update g:mk cmd'"
+vim.api.nvim_create_user_command("Make", function(args)
     local bufname = "make"
     local term_exists = vim.fn.bufexists(bufname)
     local bufnr = nil
@@ -140,11 +140,16 @@ vim.api.nvim_create_user_command("Make", function()
         vim.api.nvim_buf_set_name(bufnr, bufname)
     else
         bufnr = vim.fn.bufnr(bufname)
-        vim.api.nvim_command("b " .. bufname)
+        if args.bang then
+            vim.api.nvim_command("b " .. bufname)
+        end
     end
     local make_channel = vim.bo[bufnr].channel
-    vim.fn.chansend(make_channel, vim.g.mk .. "\n")
-end, {})
+    local shellpipe = "2>&1| tee $HOME/.local/share/nvim/make"
+    local cmd = vim.g.mk .. " " .. shellpipe .. "\n"
+    vim.fn.chansend(make_channel, vim.g.mk .. " " .. shellpipe .. "\n")
+    vim.notify("executing g:mk cmd: " .. cmd)
+end, { bang = true })
 -- vim.api.nvim_create_user_command("Make", function()
 --     local cmd_check_tmux_win_open = "tmux list-windows -F '#{window_name}'"
 --     local res = vim.fn.system(cmd_check_tmux_win_open)
