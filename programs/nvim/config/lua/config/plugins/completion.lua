@@ -38,13 +38,25 @@ return {
             },
             sources = {
                 default = {
-                    -- "lsp",
+                    "lsp",
                     "path",
                     "luasnip",
                     "snippets",
                     "buffer",
                 },
                 providers = {
+                    lsp = {
+                        enabled = function()
+                            return vim.g.lsp_completions_enabled
+                        end,
+                        fallbacks = {},
+                    },
+                    path = {
+                        fallbacks = {},
+                    },
+                    luasnip = {
+                        fallbacks = {},
+                    },
                     buffer = {
                         opts = {
                             get_bufnrs = function()

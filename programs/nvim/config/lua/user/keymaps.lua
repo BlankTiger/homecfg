@@ -538,6 +538,12 @@ local mappings = {
     -- LSP utilities
     ["<leader>l"] = {
         name = "LSP",
+        c = {
+            function()
+                vim.g.lsp_completions_enabled = not vim.g.lsp_completions_enabled
+            end,
+            "Toggle lsp completions",
+        },
         a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
         d = { "<cmd>Telescope diagnostics bufnr=0<cr>", "Document Diagnostics" },
         w = { "<cmd>Telescope diagnostics<cr>", "Workspace Diagnostics" },
@@ -764,7 +770,7 @@ local mappings = {
         s = { "<cmd>TroubleToggle<cr>", "Show/Hide (Toggle)" },
         r = { "<cmd>TroubleRefresh<cr>", "Refresh" },
         t = { "<cmd>TodoTrouble<cr>", "Open todo items in trouble" },
-        f = { "<cmd>tabnew | term<cr>", "fullscreen terminal in new tab" },
+        o = { "<cmd>tabnew | term<cr>", "fullscreen terminal in new tab" },
         h = {
             function()
                 local opt = vim.opt.splitright
@@ -786,7 +792,7 @@ local mappings = {
         n = { "<cmd>tabnext<cr>", "change to next tab" },
         p = { "<cmd>tabprev<cr>", "change to prev tab" },
         c = { "<cmd>tabclose<cr>", "close current tab" },
-        o = { "<cmd>tabonly<cr>", "close all other tabs other than the current one" },
+        O = { "<cmd>tabonly<cr>", "close all other tabs other than the current one" },
     },
 
     -- ["<C-t>"] = { "<cmd>6 split term://zsh<cr>", "Open horizontal terminal" },

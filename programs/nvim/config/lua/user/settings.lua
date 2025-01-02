@@ -50,6 +50,7 @@ opt.cmdwinheight = 15
 opt.matchpairs = "(:),{:},<:>,[:]"
 opt.scrollback = 100000
 opt.guicursor = "n-v-i-c:block-Cursor"
+g.lsp_completions_enabled = false
 g.searchindex_line_limit = 1000000
 g.neovide_transparency = 1
 g.do_filetype_lua = 1
