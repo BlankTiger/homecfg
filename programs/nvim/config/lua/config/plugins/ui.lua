@@ -112,4 +112,6 @@ return {
             "MunifTanjim/nui.nvim",
         },
     },
+
+    { "BlankTiger/mintabline.vim" },
 }
