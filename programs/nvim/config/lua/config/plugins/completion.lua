@@ -1,7 +1,7 @@
 return {
     {
         "BlankTiger/blink.cmp",
-        dev = true,
+        dev = false,
         event = "VeryLazy",
         dependencies = {
             {
@@ -17,11 +17,6 @@ return {
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config
         opts = {
-            fuzzy = {
-                prebuilt_binaries = {
-                    force_version = "0.9.0",
-                },
-            },
             snippets = {
                 expand = function(snippet)
                     require("luasnip").lsp_expand(snippet)

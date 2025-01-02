@@ -262,7 +262,7 @@ return {
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
             "stevearc/conform.nvim",
-            "saghen/blink.cmp",
+            -- "BlankTiger/blink.cmp",
         },
     },
 
