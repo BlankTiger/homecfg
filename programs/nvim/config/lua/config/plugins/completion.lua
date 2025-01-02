@@ -1,6 +1,7 @@
 return {
     {
-        "saghen/blink.cmp",
+        "BlankTiger/blink.cmp",
+        dev = true,
         event = "VeryLazy",
         dependencies = {
             {
