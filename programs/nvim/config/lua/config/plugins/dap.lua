@@ -120,6 +120,7 @@ return {
                     {
                         elements = {
                             "repl",
+                            "console",
                         },
                         size = 10,
                         position = "bottom",

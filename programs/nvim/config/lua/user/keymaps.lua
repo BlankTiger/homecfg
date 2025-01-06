@@ -660,6 +660,7 @@ local mappings = {
         c = {
             function()
                 require("dap").continue()
+                vim.api.nvim_command("stopinsert")
             end,
             "Continue",
         },
@@ -1102,31 +1103,44 @@ vim.keymap.set({ "i" }, "<C-w>", function()
     end
 end, {})
 
-vim.api.nvim_set_keymap("i", "<C-j>", "<esc><cmd>TmuxNavigateDown<cr>", {})
-vim.api.nvim_set_keymap("i", "<C-k>", "<esc><cmd>TmuxNavigateUp<cr>", {})
-vim.api.nvim_set_keymap("i", "<C-h>", "<esc><cmd>TmuxNavigateLeft<cr>", {})
-vim.api.nvim_set_keymap("i", "<C-l>", "<esc><cmd>TmuxNavigateRight<cr>", {})
+vim.keymap.set("i", "<C-j>", "<esc><cmd>TmuxNavigateDown<cr>", {})
+vim.keymap.set("i", "<C-k>", "<esc><cmd>TmuxNavigateUp<cr>", {})
+vim.keymap.set("i", "<C-h>", "<esc><cmd>TmuxNavigateLeft<cr>", {})
+vim.keymap.set("i", "<C-l>", "<esc><cmd>TmuxNavigateRight<cr>", {})
 
-vim.api.nvim_set_keymap("n", "<C-d>", "<C-d>zz", {})
-vim.api.nvim_set_keymap("n", "<C-u>", "<C-u>zz", {})
-vim.api.nvim_set_keymap("n", "<C-f>", "<C-f>zz", {})
-vim.api.nvim_set_keymap("n", "<C-b>", "<C-b>zz", {})
-vim.api.nvim_set_keymap("n", "n", "nzz", {})
-vim.api.nvim_set_keymap("n", "N", "Nzz", {})
-vim.api.nvim_set_keymap("n", "*", "*zz", {})
-vim.api.nvim_set_keymap("n", "#", "#zz", {})
-vim.api.nvim_set_keymap("n", "g*", "g*zz", {})
-vim.api.nvim_set_keymap("n", "g#", "g#zz", {})
+vim.keymap.set("n", "<C-d>", "<C-d>zz", {})
+vim.keymap.set("n", "<C-u>", "<C-u>zz", {})
+vim.keymap.set("n", "<C-f>", "<C-f>zz", {})
+vim.keymap.set("n", "<C-b>", "<C-b>zz", {})
+vim.keymap.set("n", "n", "nzz", {})
+vim.keymap.set("n", "N", "Nzz", {})
+vim.keymap.set("n", "*", "*zz", {})
+vim.keymap.set("n", "#", "#zz", {})
+vim.keymap.set("n", "g*", "g*zz", {})
+vim.keymap.set("n", "g#", "g#zz", {})
 
 -- vim.api.nvim_set_keymap("n", "<M-,>", get_prev_entry, {})
 -- vim.api.nvim_set_keymap("n", "<M-.>", get_next_entry, {})
-vim.api.nvim_set_keymap("n", "<M-;>", "<cmd>cpfile<cr>", {})
-vim.api.nvim_set_keymap("n", "<M-'>", "<cmd>cnfile<cr>", {})
-vim.api.nvim_set_keymap("n", "<C-i>", "<C-i>zz", {})
-vim.api.nvim_set_keymap("n", "<C-o>", "<C-o>zz", {})
-vim.api.nvim_set_keymap("n", "<F2>", "<cmd>Make<cr>", { silent = true })
-vim.api.nvim_set_keymap("n", "<F3>", "<cmd>Make!<cr>", { silent = true })
-vim.api.nvim_set_keymap("n", "<F1>", "<cmd>b make<cr>", { silent = true })
+vim.keymap.set("n", "<M-;>", "<cmd>cpfile<cr>", {})
+vim.keymap.set("n", "<M-'>", "<cmd>cnfile<cr>", {})
+vim.keymap.set("n", "<C-i>", "<C-i>zz", {})
+vim.keymap.set("n", "<C-o>", "<C-o>zz", {})
+vim.keymap.set("n", "<F2>", "<cmd>Make<cr>", { silent = true })
+vim.keymap.set("n", "<F3>", "<cmd>Make!<cr>", { silent = true })
+
+local curr_buf = nil
+vim.keymap.set("n", "<F1>", function()
+    local c_buf = vim.api.nvim_get_current_buf()
+    vim.api.nvim_command("b make")
+    local cn_buf = vim.api.nvim_get_current_buf()
+    if c_buf ~= cn_buf then
+        curr_buf = c_buf
+    else
+        if curr_buf then
+            vim.api.nvim_command("b " .. curr_buf)
+        end
+    end
+end, { silent = true })
 -- vim.api.nvim_set_keymap("n", "<F1>", "<cmd>AsyncMake<cr>", { silent = true })
 
 vim.api.nvim_set_keymap("x", "<M-w>", "<esc><cmd>'<,'>!remove-widows<cr>", { noremap = true })

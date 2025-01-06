@@ -102,7 +102,9 @@ return {
             },
             completion = {
                 list = {
-                    selection = "auto_insert",
+                    selection = {
+                        auto_insert = true,
+                    },
                 },
                 menu = {
                     border = "rounded",
