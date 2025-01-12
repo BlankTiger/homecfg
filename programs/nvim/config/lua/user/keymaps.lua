@@ -81,16 +81,6 @@ local opts = {
 }
 
 local mappings = {
-    -- Bufferline and buffer management
-    ["gb"] = { "<cmd>BufferLinePick<CR>", "Pick a buffer" },
-    --[[ ["<S-l>"] = { "<cmd>BufferLineCycleNext<CR>", "Cycle to next buffer" }, ]]
-    --[[ ["<S-h>"] = { "<cmd>BufferLineCyclePrev<CR>", "Cycle to previous buffer" }, ]]
-    ["gf"] = {
-        function()
-            vim.api.nvim_command("vertical wincmd F")
-        end,
-        "goto file in specified line in vertical split",
-    },
     ["<leader>"] = {
         name = "Some utility leader mappings",
         ["<leader>"] = {
@@ -180,21 +170,6 @@ local mappings = {
     ["<leader>x"] = { "<cmd>HopWord<CR>", "Hop to any word" },
     ["<leader>X"] = { "<cmd>HopAnywhere<CR>", "Hop to anywhere" },
     ["<F10>"] = { "<cmd>TagbarToggle<CR>", "Show ctags" },
-    --[[ -- System clipboard ]]
-    --[[ ["<space>yy"] = { '"+yy' }, ]]
-    --[[ ["<space>yg_"] = { '"+yg_' }, ]]
-    --[[ ["<space>p"] = { '"+p' }, ]]
-    --[[ ["<space>P"] = { '"+P' }, ]]
-
-    -- nvim-tree/file explorer
-    -- ["<leader>e"] = { "<cmd>Neotree toggle<CR>", "Open neotree" },
-    --[[ ["<leader>e"] = { ]]
-    --[[ 	name = "Explorer", ]]
-    --[[ 	e = { "<cmd>NvimTreeToggle<cr>", "Toggle" }, ]]
-    --[[ 	o = { "<cmd>NvimTreeOpen<cr>", "Open" }, ]]
-    --[[ 	c = { "<cmd>NvimTreeClose<cr>", "Close" }, ]]
-    --[[ 	r = { "<cmd>NvimTreeRefresh<cr>", "Refresh" }, ]]
-    --[[ }, ]]
 
     -- telescope
     ["<leader>A"] = {
@@ -1068,6 +1043,23 @@ vim.keymap.set("n", "<down>", "<c-e>")
 vim.keymap.set("n", "gs", "<cmd>vs<cr>")
 vim.keymap.set("n", "gh", "<cmd>sp<cr>")
 vim.keymap.set("n", "gi", "`^zzi")
+
+-- goto file in existing split on the left
+-- or the right, if non are open then create them
+local gf_to_the = require("user.custom-gf").gf_to_the
+vim.keymap.set("n", "gfh", function()
+    gf_to_the({ left = true })
+end, {})
+vim.keymap.set("n", "<C-S-H>", function()
+    gf_to_the({ left = true })
+end, {})
+
+vim.keymap.set("n", "gfl", function()
+    gf_to_the({ left = false })
+end, {})
+vim.keymap.set("n", "<C-S-L>", function()
+    gf_to_the({ left = false })
+end, {})
 
 -- repeat last macro with a single key instead of toggling case
 vim.keymap.set("n", "~", "@@", {})
