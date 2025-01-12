@@ -17,6 +17,17 @@ vim.api.nvim_create_autocmd({ "TermOpen" }, {
         vim.opt_local.relativenumber = false
         vim.opt_local.number = false
         vim.api.nvim_command("startinsert")
+        local pat = [[\(^\|\s\+\)\zs\(\a\|\/\)\w\+\(\(\.\|/\).\{-}\)\+:\ze\(\s\+\|$\)]]
+        vim.cmd([[
+            highlight Files gui=undercurl
+            call matchadd('Files', ']] .. pat .. [[')
+        ]])
+        vim.keymap.set("n", "<C-S-p>", function()
+            vim.fn.search(pat, "b")
+        end, { silent = true })
+        vim.keymap.set("n", "<C-S-n>", function()
+            vim.fn.search(pat)
+        end, { silent = true })
     end,
 })
 
