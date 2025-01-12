@@ -121,7 +121,9 @@ font-synthetic-style = bold,italic,bold-italic
 # 
 # To generally disable most ligatures, use `-calt`, `-liga`, and `-dlig` (as
 # separate repetitive entries in your config).
-font-feature = 
+font-feature = -calt
+font-feature = -liga
+font-feature = -dlig
 
 # Font size in points. This value can be a non-integer and the nearest integer
 # pixel size will be selected. If you have a high dpi display where 1pt = 2px
@@ -1151,6 +1153,7 @@ keybind = super+alt+shift+j=write_scrollback_file:open
 keybind = shift+down=adjust_selection:down
 keybind = ctrl+shift+tab=previous_tab
 keybind = super+n=new_window
+keybind = ctrl+shift+n=unbind
 keybind = super+alt+left=goto_split:left
 keybind = super+page_down=scroll_page_down
 keybind = super+alt+shift+w=close_all_windows
