@@ -45,12 +45,12 @@
           # ./programs/fish.nix
           ./programs/git.nix
           ./programs/starship.nix
-          ./programs/kitty
+          # ./programs/kitty
           ./programs/ghostty
-          ./programs/wezterm
+          # ./programs/wezterm
           ./programs/tmux
           ./programs/nvim
-          ./programs/firefox
+          # ./programs/irefox
           # hyprland.homeManagerModules.default
           # { wayland.windowManager.hyprland.enable = true; }
           # ./programs/hyprland.nix
