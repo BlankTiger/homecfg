@@ -971,6 +971,10 @@ vim.api.nvim_set_keymap("t", "<C-h>", "<cmd>TmuxNavigateLeft<cr>", {})
 vim.api.nvim_set_keymap("t", "<C-l>", "<cmd>TmuxNavigateRight<cr>", {})
 vim.keymap.set("t", "<C-e>", "<cmd>TermEditPrompt<cr>", {})
 
+vim.keymap.set("t", "<C-o>", "<C-\\><C-n><C-o>", {})
+vim.keymap.set("t", "<C-i>", "<C-\\><C-n><C-i>", {})
+vim.keymap.set("t", "<Tab>", "<Tab>", {})
+
 -- remove full line like dd
 vim.keymap.set("n", "<A-d>", "dd", {})
 

@@ -70,7 +70,7 @@ return {
                         return file
                     end,
                     cwd = "${workspaceFolder}",
-                    stopOnEntry = false,
+                    stopOnEntry = true,
                     args = { "--port", "13000" },
                 },
             }

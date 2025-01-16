@@ -25,6 +25,7 @@ end
 
 return function()
     vim.opt.termguicolors = true
-    -- custom_paragon()
-    vim.cmd.colorscheme("catppuccin-mocha")
+    custom_paragon()
+    vim.cmd([[hi Comment guifg=#7FFFD4]])
+    -- vim.cmd.colorscheme("catppuccin-mocha")
 end

@@ -9,15 +9,6 @@ return {
         end,
     },
 
-    -- {
-    --     "folke/todo-comments.nvim",
-    --     event = "VeryLazy",
-    --     config = function()
-    --         require("todo-comments").setup()
-    --     end,
-    --     dependencies = { "nvim-lua/plenary.nvim" },
-    -- },
-
     { "tpope/vim-sleuth", event = "VeryLazy" },
     { "tpope/vim-obsession", event = "VeryLazy" },
 

@@ -17,11 +17,32 @@ vim.api.nvim_create_autocmd({ "TermOpen" }, {
         vim.opt_local.relativenumber = false
         vim.opt_local.number = false
         vim.api.nvim_command("startinsert")
-        local pat = [[\(^\|\s\+\)\zs\(\a\|\/\)\w\+\(\(\.\|/\).\{-}\)\+:\ze\(\s\+\|$\)]]
+    end,
+})
+
+-- local matches = {}
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+    group = autocmd_group,
+    pattern = "*",
+    callback = function(opts)
+        if vim.bo[opts["buf"]].buftype ~= "terminal" then
+            -- for _, v in pairs(matches) do
+            --     local _, _ = pcall(vim.fn.matchdelete, v)
+            -- end
+            -- matches = {}
+            vim.cmd([[highlight clear ExtraWhitespace]])
+            vim.cmd([[highlight clear Files]])
+            return
+        end
+
+        -- local pat = [[\(^\|\s\+\)\zs\(\a\|\/\)\w\+\(\(\.\|/\).\{-}\)\+:\ze\(\s\+\|$\)]]
+        local pat = [[\(^\|\s\+\)\zs\(\a\|\/\)\w\+\(\(\.\|\/\).\{-}\)\+:\ze\(\s\+\|$\)]]
         vim.cmd([[
-            highlight Files gui=undercurl
-            call matchadd('Files', ']] .. pat .. [[')
-        ]])
+        highlight Files gui=undercurl
+        match Files /]] .. pat .. [[/]])
+        -- local m = vim.fn.matchadd("Files", pat)
+        -- table.insert(matches, m)
+
         vim.keymap.set("n", "<C-S-p>", function()
             vim.fn.search(pat, "b")
         end, { silent = true })
@@ -108,16 +129,5 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
             highlight ExtraWhitespace ctermbg=red guibg=red
             match ExtraWhitespace /\s\+$/
         ]])
-    end,
-})
-
-vim.api.nvim_create_autocmd({ "BufEnter" }, {
-    group = autocmd_group,
-    desc = "clear highlight for trailing whitespace",
-    pattern = "*",
-    callback = function(state)
-        if vim.bo[state.buf].buftype == "terminal" then
-            vim.cmd([[highlight clear ExtraWhitespace]])
-        end
     end,
 })

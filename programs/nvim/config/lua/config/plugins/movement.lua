@@ -26,8 +26,9 @@ return {
             "TmuxNavigatePrevious",
         },
     },
-    {
-        "chaoren/vim-wordmotion",
-        -- lazy = true,
-    },
+
+    -- {
+    --     "chaoren/vim-wordmotion",
+    --     -- lazy = true,
+    -- },
 }
