@@ -10,7 +10,10 @@
     syntaxHighlighting.enable = true;
     oh-my-zsh = {
       enable = true;
-      plugins = [ "z" "vi-mode" ];
+      plugins = [
+        "z"
+        # "vi-mode"
+      ];
     };
 
     initExtra = ''
