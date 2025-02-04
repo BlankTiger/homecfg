@@ -7,7 +7,8 @@ local servers = {
     "marksman",
     "ols",
     "bashls",
-    "zls",
+    -- NOTE: install from source into ~/.local/bin instead to follow nightly zig
+    -- "zls",
     "nil_ls",
     "clangd",
 }
@@ -28,6 +29,11 @@ return {
         config = function()
             require("mason-lspconfig").setup({
                 ensure_installed = servers,
+                automatic_installation = {
+                    exclude = {
+                        "zls",
+                    },
+                },
             })
         end,
     },
@@ -250,11 +256,16 @@ return {
                 on_attach = on_attach,
             }
 
+            -- local _servers = servers
+            -- table.insert(_servers, "zls")
             for _, server in pairs(servers) do
                 local server_opts =
                     vim.tbl_deep_extend("force", opts, custom_server_settings[server] or {})
                 lspconfig[server].setup(server_opts)
             end
+            local server_opts =
+                vim.tbl_deep_extend("force", opts, custom_server_settings["zls"] or {})
+            lspconfig["zls"].setup(server_opts)
 
             setup_diagnostics()
         end,
