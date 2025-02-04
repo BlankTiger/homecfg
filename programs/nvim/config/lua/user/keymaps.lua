@@ -227,61 +227,20 @@ local mappings = {
     -- UndoTree
     ["<leader>U"] = { "<cmd>UndotreeToggle<cr>", "Toggle Undotree" },
 
-    -- still harpoon
-    -- ["<M-A>"] = {
-    --     function()
-    --         harpoon:list():select(1)
-    --     end,
-    --     "Navigate to 1st harpoon file",
-    -- },
-    -- ["<M-S>"] = {
-    --     function()
-    --         harpoon:list():select(2)
-    --     end,
-    --     "Navigate to 2st harpoon file",
-    -- },
-    -- ["<M-D>"] = {
-    --     function()
-    --         harpoon:list():select(3)
-    --     end,
-    --     "Navigate to 3st harpoon file",
-    -- },
-    -- ["<M-F>"] = {
-    --     function()
-    --         harpoon:list():select(4)
-    --     end,
-    --     "Navigate to 4st harpoon file",
-    -- },
-    -- ["<M-G>"] = {
-    --     function()
-    --         harpoon:list():select(5)
-    --     end,
-    --     "Navigate to 5st harpoon file",
-    -- },
-    -- ["<M-H>"] = {
-    --     function()
-    --         harpoon:list():select(6)
-    --     end,
-    --     "Navigate to 6st harpoon file",
-    -- },
-    -- ["<M-J>"] = {
-    --     function()
-    --         harpoon:list():select(7)
-    --     end,
-    --     "Navigate to 7st harpoon file",
-    -- },
-
     ["<space>"] = {
         -- harpoon
-        ["h"] = {
+        ["H"] = {
             function()
                 require("telescope").extensions.harpoon.marks()
             end,
             "Harpoon marks in telescope",
         },
-        ["H"] = {
+        ["h"] = {
             function()
-                harpoon.ui:toggle_quick_menu(harpoon:list())
+                harpoon.ui:toggle_quick_menu(harpoon:list(), {
+                    height_in_lines = 16,
+                    title = "",
+                })
             end,
             "Harpoon menu",
         },
