@@ -7,24 +7,24 @@ return {
             require("mini.ai").setup()
         end,
     },
-    {
-        "echasnovski/mini.indentscope",
-        version = false,
-        event = "VeryLazy",
-        config = function()
-            local mini_indentscope = require("mini.indentscope")
-            mini_indentscope.setup({
-                options = {
-                    try_as_border = true,
-                },
-                symbol = "│",
-                draw = {
-                    delay = 0,
-                    animation = mini_indentscope.gen_animation.none(),
-                },
-            })
-        end,
-    },
+    -- {
+    --     "echasnovski/mini.indentscope",
+    --     version = false,
+    --     event = "VeryLazy",
+    --     config = function()
+    --         local mini_indentscope = require("mini.indentscope")
+    --         mini_indentscope.setup({
+    --             options = {
+    --                 try_as_border = true,
+    --             },
+    --             symbol = "│",
+    --             draw = {
+    --                 delay = 0,
+    --                 animation = mini_indentscope.gen_animation.none(),
+    --             },
+    --         })
+    --     end,
+    -- },
     {
         "echasnovski/mini.surround",
         version = false,
