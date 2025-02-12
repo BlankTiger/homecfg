@@ -145,9 +145,11 @@ vim.api.nvim_create_user_command("Make", function(args)
         end
     end
     local make_channel = vim.bo[bufnr].channel
-    local shellpipe = "2>&1| tee $HOME/.local/share/nvim/make"
-    local cmd = vim.g.mk .. " " .. shellpipe .. "\n"
-    vim.fn.chansend(make_channel, vim.g.mk .. " " .. shellpipe .. "\n")
+    -- local shellpipe = "2>&1| tee $HOME/.local/share/nvim/make"
+    -- local cmd = vim.g.mk .. " " .. shellpipe .. "\n"
+    -- vim.fn.chansend(make_channel, vim.g.mk .. " " .. shellpipe .. "\n")
+    local cmd = vim.g.mk .. "\n"
+    vim.fn.chansend(make_channel, vim.g.mk .. "\n")
     vim.notify("executing g:mk cmd: " .. cmd)
 end, { bang = true })
 -- vim.api.nvim_create_user_command("Make", function()
