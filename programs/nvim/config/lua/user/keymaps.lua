@@ -534,6 +534,7 @@ local mappings = {
     ["<F5>"] = {
         function()
             require("dap").continue()
+            vim.api.nvim_command("stopinsert")
         end,
         "dap continue",
     },
@@ -962,6 +963,12 @@ end, {})
 vim.keymap.set({ "t", "n", "i" }, "<M-J>", function()
     harpoon:list():select(7)
 end, {})
+vim.keymap.set({ "t", "n", "i" }, "<M-K>", function()
+    harpoon:list():select(8)
+end, {})
+vim.keymap.set({ "t", "n", "i" }, "<M-L>", function()
+    harpoon:list():select(9)
+end, {})
 
 -- tabs
 vim.keymap.set({ "t", "n", "i" }, "<M-Z>", function()
@@ -984,6 +991,12 @@ vim.keymap.set({ "t", "n", "i" }, "<M-N>", function()
 end, {})
 vim.keymap.set({ "t", "n", "i" }, "<M-M>", function()
     vim.api.nvim_command("tabnext 7")
+end, {})
+vim.keymap.set({ "t", "n", "i" }, "<M-,>", function()
+    vim.api.nvim_command("tabnext 8")
+end, {})
+vim.keymap.set({ "t", "n", "i" }, "<M-.>", function()
+    vim.api.nvim_command("tabnext 9")
 end, {})
 
 -- set : to q: (instead of cmdline have cmdwin)
@@ -1073,6 +1086,8 @@ vim.keymap.set("n", "*", "*zz", {})
 vim.keymap.set("n", "#", "#zz", {})
 vim.keymap.set("n", "g*", "g*zz", {})
 vim.keymap.set("n", "g#", "g#zz", {})
+
+vim.keymap.set("n", "<bs>", "hx", { noremap = true })
 
 -- vim.api.nvim_set_keymap("n", "<M-,>", get_prev_entry, {})
 -- vim.api.nvim_set_keymap("n", "<M-.>", get_next_entry, {})
