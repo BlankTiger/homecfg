@@ -70,8 +70,27 @@ return {
                         return file
                     end,
                     cwd = "${workspaceFolder}",
-                    stopOnEntry = true,
-                    args = { "--port", "13000" },
+                    stopOnEntry = false,
+                    args = {},
+                    -- args = { "--port", "13000" },
+                },
+
+                {
+                    name = "Launch file with args",
+                    type = "codelldb",
+                    request = "launch",
+                    program = function()
+                        local file =
+                            vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+                        vim.notify(file)
+                        return file
+                    end,
+                    cwd = "${workspaceFolder}",
+                    stopOnEntry = false,
+                    args = function()
+                        local argument_string = vim.fn.input("Program arguments: ")
+                        return vim.fn.split(argument_string, " ", true)
+                    end,
                 },
             }
 
