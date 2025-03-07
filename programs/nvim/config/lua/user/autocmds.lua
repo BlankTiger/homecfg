@@ -20,6 +20,18 @@ vim.api.nvim_create_autocmd({ "TermOpen" }, {
     end,
 })
 
+-- Add this to your init.lua
+vim.api.nvim_create_autocmd("BufWritePre", {
+    group = autocmd_group,
+    pattern = "*",
+    callback = function()
+        local save_cursor = vim.fn.getpos(".")
+        vim.cmd([[%s/\s\+$//e]])
+        vim.fn.setpos(".", save_cursor)
+    end,
+    desc = "Remove trailing whitespace on save",
+})
+
 -- local matches = {}
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
     group = autocmd_group,
@@ -30,7 +42,6 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
             --     local _, _ = pcall(vim.fn.matchdelete, v)
             -- end
             -- matches = {}
-            vim.cmd([[highlight clear ExtraWhitespace]])
             vim.cmd([[highlight clear Files]])
             return
         end
@@ -116,18 +127,5 @@ vim.api.nvim_create_autocmd({ "TabEnter", "TabClosed" }, {
                 vim.api.nvim_set_current_tabpage(tab_prev)
             end
         end
-    end,
-})
-
-vim.api.nvim_create_autocmd({ "BufEnter" }, {
-    group = autocmd_group,
-    desc = "highlight trailing whitespace",
-    pattern = { "*.zig", "*.lua", "*.rs", ".py", "*.js" },
-    callback = function()
-        vim.cmd([[
-            " set list listchars=tab:\ \ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨
-            highlight ExtraWhitespace ctermbg=red guibg=red
-            match ExtraWhitespace /\s\+$/
-        ]])
     end,
 })
