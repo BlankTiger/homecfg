@@ -1,6 +1,13 @@
+local source_priority = {
+    snippets = 4,
+    lsp = 3,
+    path = 2,
+    buffer = 1,
+}
+
 return {
     {
-        "BlankTiger/blink.cmp",
+        "Saghen/blink.cmp",
         dev = false,
         event = "VeryLazy",
         dependencies = {
@@ -12,11 +19,27 @@ return {
                 build = "make install_jsregexp",
             },
         },
-        version = "v0.9.8",
+        -- version = "v0.9.8",
+        version = "*",
 
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config
         opts = {
+            fuzzy = {
+                sorts = {
+                    function(a, b)
+                        local a_priority = source_priority[a.source_id]
+                        local b_priority = source_priority[b.source_id]
+                        if a_priority ~= b_priority then
+                            return a_priority > b_priority
+                        end
+                    end,
+                    -- defaults
+                    "score",
+                    "sort_text",
+                },
+            },
+
             snippets = { preset = "luasnip" },
             -- snippets = {
             --     expand = function(snippet)
@@ -43,9 +66,9 @@ return {
             },
             sources = {
                 default = {
+                    "snippets",
                     "lsp",
                     "path",
-                    "snippets",
                     "buffer",
                 },
                 providers = {
