@@ -1071,10 +1071,10 @@ vim.keymap.set({ "i" }, "<C-w>", function()
     end
 end, {})
 
-vim.keymap.set("i", "<C-j>", "<esc><cmd>TmuxNavigateDown<cr>", {})
-vim.keymap.set("i", "<C-k>", "<esc><cmd>TmuxNavigateUp<cr>", {})
-vim.keymap.set("i", "<C-h>", "<esc><cmd>TmuxNavigateLeft<cr>", {})
-vim.keymap.set("i", "<C-l>", "<esc><cmd>TmuxNavigateRight<cr>", {})
+-- vim.keymap.set("i", "<C-j>", "<esc><cmd>TmuxNavigateDown<cr>", {})
+-- vim.keymap.set("i", "<C-k>", "<esc><cmd>TmuxNavigateUp<cr>", {})
+-- vim.keymap.set("i", "<C-h>", "<esc><cmd>TmuxNavigateLeft<cr>", {})
+-- vim.keymap.set("i", "<C-l>", "<esc><cmd>TmuxNavigateRight<cr>", {})
 
 vim.keymap.set("n", "<C-d>", "<C-d>zz", {})
 vim.keymap.set("n", "<C-u>", "<C-u>zz", {})
