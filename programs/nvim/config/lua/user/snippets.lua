@@ -38,6 +38,108 @@ vim.keymap.set({ "i", "s" }, "<C-E>", function()
     end
 end, { silent = true })
 
+ls.add_snippets("zig", {
+    s("fn", {
+        t("fn "),
+        i(1),
+        t("("),
+        c(2, {
+            t(""),
+            sn(nil, {
+                i(1, "foo: bar"),
+            }),
+        }),
+        t(") "),
+        i(3, "void"),
+        t({ " {", "\t" }),
+        i(4, "..."),
+        t({ "", "}" }),
+    }),
+
+    s("st", {
+        t("const "),
+        i(1),
+        t(" = struct {"),
+        t({ "", "\tconst Self = @This();", "", "\t" }),
+        i(2),
+        t({ "", "};" }),
+    }),
+
+    s("dbg", {
+        t('std.debug.print("'),
+        i(1),
+        t('", .{'),
+        i(2),
+        t({ "});" }),
+    }),
+
+    s("ldbg", {
+        t('log.debug("'),
+        i(1),
+        t('", .{'),
+        i(2),
+        t({ "});" }),
+    }),
+
+    s("linfo", {
+        t('log.info("'),
+        i(1),
+        t('", .{'),
+        i(2),
+        t({ "});" }),
+    }),
+
+    s("lerr", {
+        t('log.err("'),
+        i(1),
+        t('", .{'),
+        i(2),
+        t({ "});" }),
+    }),
+
+    s("lwarn", {
+        t('log.warn("'),
+        i(1),
+        t('", .{'),
+        i(2),
+        t({ "});" }),
+    }),
+
+    s("imp", {
+        t("const "),
+        i(1),
+        t(' = @import("'),
+        i(2),
+        t({ '");' }),
+    }),
+
+    s("assert", {
+        t("std.debug.assert("),
+        i(1),
+        t(");"),
+    }),
+
+    s("istd", {
+        t('const std = @import("std");'),
+    }),
+
+    s("ialloc", {
+        t("const Allocator = std.mem.Allocator;"),
+    }),
+
+    s("itesting", {
+        t("const t = std.testing;"),
+    }),
+
+    s("italloc", {
+        t("const t_alloc = std.testing.allocator;"),
+    }),
+
+    s("Self", {
+        t("const Self = @This();"),
+    }),
+})
+
 ls.add_snippets("python", {
     -- def some_func(foo: bar) -> None: ...
     s("def", {
