@@ -1,8 +1,10 @@
 local servers = {
+    "astro",
     "gopls",
     "ruff",
     "basedpyright",
     "lua_ls",
+    "ts_ls",
     "html",
     "marksman",
     "ols",
