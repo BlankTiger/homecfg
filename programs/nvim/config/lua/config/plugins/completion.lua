@@ -7,6 +7,16 @@ local source_priority = {
 
 return {
     {
+        "supermaven-inc/supermaven-nvim",
+        dev = true,
+        event = "VeryLazy",
+        config = function()
+            require("supermaven-nvim").setup({
+                current_line_only = true,
+            })
+        end,
+    },
+    {
         "Saghen/blink.cmp",
         dev = false,
         event = "VeryLazy",
@@ -19,8 +29,8 @@ return {
                 build = "make install_jsregexp",
             },
         },
-        -- version = "v0.9.8",
-        version = "*",
+        version = "v0.12.4",
+        -- version = "*",
 
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config
