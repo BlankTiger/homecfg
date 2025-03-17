@@ -19,6 +19,7 @@ vim.o.foldenable = true
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 opt.splitright = true
 opt.laststatus = 3
+opt.showmode = false
 opt.clipboard = "unnamedplus"
 opt.mouse = "a"
 
