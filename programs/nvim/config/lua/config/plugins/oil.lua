@@ -4,7 +4,7 @@ return {
         -- "stevearc/oil.nvim",
         event = "VeryLazy",
         config = function()
-            local showing_details = true
+            local showing_details = false
             local oil = require("oil")
             oil.setup({
                 keymaps = {
