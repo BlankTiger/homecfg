@@ -415,7 +415,7 @@ local mappings = {
         },
         l = {
             function()
-                require("gitsigns").blame_line()
+                require("gitsigns").toggle_current_line_blame()
             end,
             "Blame",
         },
