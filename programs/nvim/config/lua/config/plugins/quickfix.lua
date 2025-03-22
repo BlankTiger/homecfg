@@ -7,7 +7,7 @@ return {
             require("aqf").setup({
                 show_instructions = false,
                 windowed = false,
-                -- debug = true,
+                debug = false,
             })
         end,
     },
