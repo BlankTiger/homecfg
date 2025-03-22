@@ -36,7 +36,9 @@ return {
                     show_hidden = true,
                 },
             })
-            oil.set_columns({ "icon", "permissions", "size", "mtime" })
+            if showing_details then
+                oil.set_columns({ "icon", "permissions", "size", "mtime" })
+            end
         end,
         opts = {},
         dependencies = { "nvim-tree/nvim-web-devicons" },
