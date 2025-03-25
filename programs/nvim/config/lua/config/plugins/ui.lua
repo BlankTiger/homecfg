@@ -65,6 +65,7 @@ return {
     {
         "RRethy/vim-illuminate",
         lazy = true,
+        dev = true,
         -- event = "VeryLazy",
     },
 
