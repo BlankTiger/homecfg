@@ -8,6 +8,8 @@ return {
         "stevearc/conform.nvim",
         lazy = true,
         config = function()
+            vim.g.disable_autoformat = false
+
             require("conform").setup({
                 formatters = {
                     ruff_format = {
@@ -45,6 +47,8 @@ return {
                     python = { "ruff_isort", "ruff_format" },
                     -- Use a sub-list to run only the first available formatter
                     javascript = { { "prettierd", "prettier" } },
+                    zig = { "zigfmt" },
+                    go = { "gofmt" },
                 },
                 format_on_save = function(bufnr)
                     if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then

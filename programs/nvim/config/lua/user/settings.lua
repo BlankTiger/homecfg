@@ -91,7 +91,7 @@ g.jupytext_fmt = "py"
 g.jupytext_style = "hydrogen"
 
 g.zig_fmt_parse_errors = 0
-g.zig_fmt_autosave = 0
+g.zig_fmt_autosave = 1
 
 -- Set colorscheme
 local set_theme = require("user.theme")
