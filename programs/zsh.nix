@@ -84,6 +84,8 @@
       gcm = "git checkout master";
       gco = "git commit";
       gap = "git add -p";
+      gwip = "git wip";
+      gauto = "git autosquash";
 
       # other
       dps = "docker ps";
