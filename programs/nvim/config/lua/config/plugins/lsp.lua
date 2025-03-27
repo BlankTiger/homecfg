@@ -13,6 +13,7 @@ local servers = {
     -- "zls",
     "nil_ls",
     "clangd",
+    "ocamllsp",
 }
 
 function table.contains(table, element)
