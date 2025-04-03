@@ -110,7 +110,7 @@ return {
                     },
                     ripgrep = {
                         path_display = { "absolute" },
-                        default_args_text = "--vimgrep --glob-case-insensitive -i",
+                        default_args_text = "--vimgrep --glob-case-insensitive -i -g *",
                         default_args_files = "--files --glob-case-insensitive -i -g",
                     },
                     aqf = { path_display = { "absolute" } },
