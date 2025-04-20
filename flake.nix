@@ -11,19 +11,15 @@
     hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = { nixpkgs, nixpkgs-stable, home-manager, hyprland, zig, ... }@inputs:
+  outputs = { nixpkgs, nixpkgs-stable, home-manager, hyprland, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-      overlays = [ inputs.neovim-nightly-overlay.overlay ];
     in {
       homeConfigurations."blanktiger" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = { inherit inputs; inherit system; };
         modules = [
-          ({
-           nixpkgs.overlays = overlays;
-          })
           ./home.nix
           ./programs/zsh.nix
         ];
