@@ -3,7 +3,6 @@ return {
         "nvim-lualine/lualine.nvim",
         event = "VeryLazy",
         config = function()
-            vim.g.lualine_hidden = false
             local custom_auto = require("lualine.themes.auto")
             local lualine = require("lualine")
 
@@ -157,6 +156,10 @@ return {
                 tabline = {},
                 extensions = {},
             })
+
+            if vim.g.lualine_hidden then
+                require("lualine").hide()
+            end
         end,
     },
 }

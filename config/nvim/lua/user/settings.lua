@@ -18,7 +18,7 @@ vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 opt.splitright = true
-opt.laststatus = 3
+opt.laststatus = 0
 opt.showmode = false
 opt.clipboard = "unnamedplus"
 opt.mouse = "a"
@@ -93,6 +93,8 @@ g.jupytext_style = "hydrogen"
 
 g.zig_fmt_parse_errors = 0
 g.zig_fmt_autosave = 1
+
+g.lualine_hidden = true
 
 -- Set colorscheme
 local set_theme = require("user.theme")
