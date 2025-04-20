@@ -5,10 +5,10 @@
   home.stateVersion = "23.11";
 
   home.packages = with pkgs; [
-    zsh
-    zsh-completions
-    zsh-syntax-highlighting
-    zsh-autosuggestions
+    # zsh
+    # zsh-completions
+    # zsh-syntax-highlighting
+    # zsh-autosuggestions
 
     # python3
     # python3Packages.pip
@@ -87,7 +87,7 @@
     ENABLE_CORRECTION = "true";
     TERMINAL="kitty";
     BROWSER="firefox";
-    SHELL = "zsh";
+    SHELL = "fish";
     # OPENSSL_DEV = pkgs.openssl.dev;
     # PKG_CONFIG_PATH = pkgs.openssl.dev + "/lib/pkgconfig";
     # LD_LIBRARY_PATH = pkgs.openssl.out + "/lib";
