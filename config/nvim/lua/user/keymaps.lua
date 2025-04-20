@@ -711,7 +711,7 @@ local mappings = {
             function()
                 local opt = vim.opt.splitright
                 vim.opt.splitright = false
-                vim.api.nvim_command("vs term://zsh")
+                vim.api.nvim_command("vs term://" .. vim.g.shell)
                 vim.opt.splitright = opt
             end,
             "terminal split to the left",
@@ -720,7 +720,7 @@ local mappings = {
             function()
                 local opt = vim.opt.splitright
                 vim.opt.splitright = true
-                vim.api.nvim_command("vs term://zsh")
+                vim.api.nvim_command("vs term://" .. vim.g.shell)
                 vim.opt.splitright = opt
             end,
             "terminal split to the right",
@@ -731,13 +731,12 @@ local mappings = {
         O = { "<cmd>tabonly<cr>", "close all other tabs other than the current one" },
     },
 
-    -- ["<C-t>"] = { "<cmd>6 split term://zsh<cr>", "Open horizontal terminal" },
     ["<C-t>"] = { "<cmd>TermToggle<cr>", "Open horizontal terminal" },
     ["<leader>T"] = {
         name = "Terminal",
         f = { "<cmd>terminal<cr>", "Open fullscreen terminal" },
-        v = { "<cmd>vsplit term://zsh<cr>", "Open vertical split terminal" },
-        h = { "<cmd>6 split term://zsh<cr>", "Open horizontal split terminal" },
+        v = { "<cmd>vsplit term://" .. vim.g.shell .. "<cr>", "Open vertical split terminal" },
+        h = { "<cmd>6 split term://" .. vim.g.shell .. "<cr>", "Open horizontal split terminal" },
     },
 
     ["<leader>n"] = {

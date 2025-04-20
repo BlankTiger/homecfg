@@ -135,7 +135,7 @@ vim.api.nvim_create_user_command("Make", function(args)
     local term_exists = vim.fn.bufexists(bufname)
     local bufnr = nil
     if term_exists == 0 then
-        vim.api.nvim_command("e term://zsh")
+        vim.api.nvim_command("e term://" .. vim.g.shell)
         bufnr = vim.api.nvim_get_current_buf()
         vim.api.nvim_buf_set_name(bufnr, bufname)
     else
