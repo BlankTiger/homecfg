@@ -1,1 +1,1 @@
-cargo binstall starship
+cargo:starship

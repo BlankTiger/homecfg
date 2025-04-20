@@ -44,7 +44,7 @@
           ./programs/zsh.nix
           # ./programs/fish.nix
           ./programs/git.nix
-          ./programs/starship.nix
+          # ./programs/starship.nix
           # ./programs/kitty
           ./programs/ghostty
           # ./programs/wezterm
