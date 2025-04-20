@@ -127,9 +127,16 @@ return {
                     lualine_a = { mode, is_recording },
                     lualine_b = { branch },
                     -- lualine_b = { branch, diagnostics, time },
-                    lualine_c = { diagnostics, time, "%=", filetype, filename, diff },
+                    lualine_c = {
+                        diagnostics,
+                        -- time,
+                        "%=",
+                        filetype,
+                        filename,
+                        diff,
+                    },
                     lualine_x = {
-                        spacer,
+                        -- spacer,
                         searchcount,
                         "selectioncount",
                         spaces,
