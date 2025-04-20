@@ -1,19 +1,15 @@
 # <p align="center">🏠 homecfg 🏠</p>
 
-This project uses nix home-manager to manage my user configuration in a simple and declarative way.
+This project uses a custom-built configuration file manager `hm` that's currently not publicly available.
 
 ## Using this config
 
 To use this config you have to:
 
-1. Install [nix](https://nixos.org/) (package manager, not the OS)
-2. Enable nix-command and flakes (I did it in `/etc/nix/nix.conf`, but you can also do it in `~/.config/nix/nix.conf` I think):
-```
-extra-experimental-features = nix-command flakes
-```
-3. Clone this repo and put it in `~/.config` as `home-manager`
-4. Enter a shell with home-manager, and set it up permanently by doing:
+1. Install [`hm`](https://github.com/blanktiger/hm)
+2. Clone this repo to `~/.config`:
 ```bash
-nix-shell -p home-manager
-home-manager switch
+git clone https://github.com/blanktiger/homecfg ~/.config/homecfg
 ```
+3. Deploy dotfiles either in `copy` mode by doing `hm` or in `symlink` mode by doing `hm --dev`
+4. Optionally to install dependencies as per the `INSTALL` instructions, do `hm install`
