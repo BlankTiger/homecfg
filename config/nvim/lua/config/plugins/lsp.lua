@@ -14,7 +14,7 @@ local servers = {
     "nil_ls",
     "clangd",
     "ocamllsp",
-    "gleam",
+    -- "gleam",
 }
 
 function table.contains(table, element)
@@ -36,6 +36,7 @@ return {
                 automatic_installation = {
                     exclude = {
                         "zls",
+                        "gleam",
                     },
                 },
             })
@@ -267,9 +268,12 @@ return {
                     vim.tbl_deep_extend("force", opts, custom_server_settings[server] or {})
                 lspconfig[server].setup(server_opts)
             end
+            -- TODO: factor this out next time this needs to happen
             local server_opts =
                 vim.tbl_deep_extend("force", opts, custom_server_settings["zls"] or {})
             lspconfig["zls"].setup(server_opts)
+            server_opts = vim.tbl_deep_extend("force", opts, custom_server_settings["gleam"] or {})
+            lspconfig["gleam"].setup(server_opts)
 
             setup_diagnostics()
         end,
