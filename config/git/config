@@ -1,0 +1,20 @@
+[alias]
+	autosquash = "!f() { GIT_SEQUENCE_EDITOR=: git rebase -i --autosquash; }; f"
+	fetch-all = "!git fetch origin \"*:*\" --update-head-ok"
+	mr = "!sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -"
+	pull-all = "!git pull origin \"*:*\""
+	pull-branch = "!sh -c 'echo \"Fetching and setting a branch $1 from origin\"; git fetch origin $1 && git branch $1 FETCH_HEAD' -"
+	pushfwl = "push --force-with-lease"
+	wip = "!f() { git add -A && git commit -m \"fixup! $(git log -1 --pretty=%B)\"; }; f"
+
+[core]
+	autocrif = "input"
+	autocrlf = "input"
+
+[rebase]
+	autosquash = true
+	autostash = true
+
+[user]
+	email = "maciej-urban@outlook.com"
+	name = "Maciej Urban"
