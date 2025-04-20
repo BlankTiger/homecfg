@@ -8,22 +8,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    firefox-addons = {
-      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     hyprland.url = "github:hyprwm/Hyprland";
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-    };
-    zig = {
-      url = "github:mitchellh/zig-overlay";
-      inputs = {
-        nixpkgs.follows = "nixpkgs-stable";
-        flake-compat.follows = "";
-      };
-    };
   };
 
   outputs = { nixpkgs, nixpkgs-stable, home-manager, hyprland, zig, ... }@inputs:
@@ -34,7 +19,6 @@
     in {
       homeConfigurations."blanktiger" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        # configuration = { pkgs, ... }: { nixpkgs.overlays = overlays; };
         extraSpecialArgs = { inherit inputs; inherit system; };
         modules = [
           ({
@@ -42,18 +26,6 @@
           })
           ./home.nix
           ./programs/zsh.nix
-          # ./programs/fish.nix
-          ./programs/git.nix
-          ./programs/starship.nix
-          # ./programs/kitty
-          ./programs/ghostty
-          # ./programs/wezterm
-          ./programs/tmux
-          ./programs/nvim
-          # ./programs/irefox
-          # hyprland.homeManagerModules.default
-          # { wayland.windowManager.hyprland.enable = true; }
-          # ./programs/hyprland.nix
         ];
       };
     };
