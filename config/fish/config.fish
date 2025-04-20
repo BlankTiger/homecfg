@@ -73,12 +73,4 @@ alias vz      'vim ~/.zshrc'
 function fish_greeting
 end
 
-function git
-    if $argv == 'push --force'*
-        echo "Hey stupid, use --force-with-lease instead (git pushfwl)"
-    else
-        command git $argv
-    end
-end
-
 starship init fish | source
