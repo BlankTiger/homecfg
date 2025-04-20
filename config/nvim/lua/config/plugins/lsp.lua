@@ -14,6 +14,7 @@ local servers = {
     "nil_ls",
     "clangd",
     "ocamllsp",
+    "gleam",
 }
 
 function table.contains(table, element)
