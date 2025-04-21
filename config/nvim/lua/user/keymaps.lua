@@ -134,13 +134,6 @@ local mappings = {
     ["<C-A-H>"] = { "<cmd>vertical resize -2<CR>", "Resize window left" },
     ["<C-A-L>"] = { "<cmd>vertical resize +2<CR>", "Resize window right" },
 
-    -- Moving around in windows
-    ["<C-h>"] = { "<cmd>TmuxNavigateLeft<cr>", "Move to window on the left" },
-    ["<C-l>"] = { "<cmd>TmuxNavigateRight<cr>", "Move to window on the right" },
-    ["<C-j>"] = { "<cmd>TmuxNavigateDown<cr>", "Move to the bottom window" },
-    ["<C-k>"] = { "<cmd>TmuxNavigateUp<cr>", "Move to the upper window" },
-    ["<C-\\>"] = { "<cmd>TmuxNavigatePrevious<cr>", "Move to previous window" },
-
     -- Move between prev and next buffer
     ["<C-A-i>"] = { "<cmd>bnext<cr>", "Jump to next buffer" },
     ["<C-A-o>"] = { "<cmd>bprev<cr>", "Jump to previous buffer" },
