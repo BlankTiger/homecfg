@@ -29,8 +29,8 @@ return {
                 build = "make install_jsregexp",
             },
         },
-        version = "v0.12.4",
-        -- version = "*",
+        -- version = "v0.12.4",
+        version = "*",
 
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config
