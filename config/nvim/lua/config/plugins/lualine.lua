@@ -1,3 +1,22 @@
+local function hide()
+    require("lualine").hide()
+    vim.opt.laststatus = 0
+    vim.opt.stl = "%{repeat('─',winwidth('.'))}"
+end
+
+local function show()
+    require("lualine").hide({ unhide = true })
+end
+
+function TOGGLE_LUALINE()
+    if vim.g.lualine_shown then
+        hide()
+    else
+        show()
+    end
+    vim.g.lualine_shown = not vim.g.lualine_shown
+end
+
 return {
     {
         "nvim-lualine/lualine.nvim",
@@ -121,6 +140,7 @@ return {
                     section_separators = { left = "", right = "" },
                     disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
                     always_divide_middle = true,
+                    globalstatus = true,
                 },
                 sections = {
                     lualine_a = { mode, is_recording },
@@ -157,8 +177,8 @@ return {
                 extensions = {},
             })
 
-            if vim.g.lualine_hidden then
-                require("lualine").hide()
+            if not vim.g.lualine_shown then
+                hide()
             end
         end,
     },

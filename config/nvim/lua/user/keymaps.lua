@@ -160,17 +160,7 @@ local mappings = {
         end,
         "Toggle zen-mode",
     },
-    ["<leader>lt"] = {
-        function()
-            if vim.g.lualine_hidden then
-                require("lualine").hide({ unhide = true })
-            else
-                require("lualine").hide()
-            end
-            vim.g.lualine_hidden = not vim.g.lualine_hidden
-        end,
-        "Toggle lualine",
-    },
+    ["<leader>lt"] = { TOGGLE_LUALINE, "Toggle lualine" },
     ["<leader>x"] = { "<cmd>HopWord<CR>", "Hop to any word" },
     ["<leader>X"] = { "<cmd>HopAnywhere<CR>", "Hop to anywhere" },
     ["<F10>"] = { "<cmd>TagbarToggle<CR>", "Show ctags" },
