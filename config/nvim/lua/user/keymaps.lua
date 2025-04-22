@@ -988,6 +988,21 @@ vim.keymap.set({ "t", "n", "i" }, "<M-.>", function()
     pcall(vim.api.nvim_command, "tabnext 9")
 end, {})
 
+vim.keymap.set("t", "<c-h>", "<C-\\><C-n><cmd>TmuxNavigateLeft<cr>", {})
+vim.keymap.set("t", "<c-j>", "<C-\\><C-n><cmd>TmuxNavigateDown<cr>", {})
+vim.keymap.set("t", "<c-k>", "<C-\\><C-n><cmd>TmuxNavigateUp<cr>", {})
+vim.keymap.set("t", "<c-l>", "<C-\\><C-n><cmd>TmuxNavigateRight<cr>", {})
+
+vim.keymap.set("n", "<c-h>", "<cmd>TmuxNavigateLeft<cr>", {})
+vim.keymap.set("n", "<c-j>", "<cmd>TmuxNavigateDown<cr>", {})
+vim.keymap.set("n", "<c-k>", "<cmd>TmuxNavigateUp<cr>", {})
+vim.keymap.set("n", "<c-l>", "<cmd>TmuxNavigateRight<cr>", {})
+
+vim.keymap.set("i", "<c-h>", "<esc><cmd>TmuxNavigateLeft<cr>", {})
+vim.keymap.set("i", "<c-j>", "<esc><cmd>TmuxNavigateDown<cr>", {})
+vim.keymap.set("i", "<c-k>", "<esc><cmd>TmuxNavigateUp<cr>", {})
+vim.keymap.set("i", "<c-l>", "<esc><cmd>TmuxNavigateRight<cr>", {})
+
 -- set : to q: (instead of cmdline have cmdwin)
 vim.keymap.set("n", ":", "q:i", {})
 
