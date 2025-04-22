@@ -18,7 +18,6 @@ vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 opt.splitright = true
-opt.laststatus = 0
 opt.showmode = false
 opt.clipboard = "unnamedplus"
 opt.mouse = "a"
@@ -94,7 +93,16 @@ g.jupytext_style = "hydrogen"
 g.zig_fmt_parse_errors = 0
 g.zig_fmt_autosave = 1
 
-g.lualine_hidden = true
+g.lualine_shown = false
+
+g.accent_color = "#17d87e"
+g.bg_color = "#000000"
+g.divider_color = "#15161e"
+g.original_stl = vim.o.stl
+if not g.lualine_shown then
+    opt.laststatus = 0
+    opt.stl = "%{repeat('─',winwidth('.'))}"
+end
 
 -- Set colorscheme
 local set_theme = require("user.theme")
