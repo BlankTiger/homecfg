@@ -918,10 +918,6 @@ vim.api.nvim_set_keymap("v", "<C-b>", "<CMD>SearchReplaceWithinVisualSelectionCW
 vim.api.nvim_set_keymap("t", "<C-q>", "<CMD>q!<CR>", {})
 vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", {})
 vim.api.nvim_set_keymap("t", "<C-t>", "<CMD>TermToggle<CR>", {})
-vim.api.nvim_set_keymap("t", "<C-j>", "<cmd>TmuxNavigateDown<cr>", {})
-vim.api.nvim_set_keymap("t", "<C-k>", "<cmd>TmuxNavigateUp<cr>", {})
-vim.api.nvim_set_keymap("t", "<C-h>", "<cmd>TmuxNavigateLeft<cr>", {})
-vim.api.nvim_set_keymap("t", "<C-l>", "<cmd>TmuxNavigateRight<cr>", {})
 vim.keymap.set("t", "<C-e>", "<cmd>TermEditPrompt<cr>", {})
 
 vim.keymap.set("t", "<C-o>", "<C-\\><C-n><C-o>", {})
