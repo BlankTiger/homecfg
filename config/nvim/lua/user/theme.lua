@@ -21,13 +21,34 @@
 -- highlight! link GitConflictCurrent DiffText
 -- highlight! link GitConflictCurrentLabel DiffText
 -- ]])
+-- vim.cmd([[hi Comment guifg=#7FFFD4]])
 -- end
 --
-return function()
-    -- custom_paragon()
-    -- vim.cmd([[hi Comment guifg=#7FFFD4]])
-    vim.opt.termguicolors = true
+
+local black = "#000000"
+
+local function custom_tokyonight()
+    vim.cmd.colorscheme("tokyonight-night")
+
     vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
     vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-    vim.cmd.colorscheme("tokyonight-night")
+    vim.api.nvim_set_hl(0, "TabLine", { bg = black })
+    vim.api.nvim_set_hl(0, "TabLineFill", { bg = black })
+    vim.api.nvim_set_hl(0, "TabLineSel", { fg = vim.g.accent_color })
+    vim.api.nvim_set_hl(
+        0,
+        "StatusLineNC",
+        { bg = vim.g.bg_color, fg = vim.g.divider_color, ctermbg = 0 }
+    )
+    vim.api.nvim_set_hl(
+        0,
+        "StatusLine",
+        { bg = vim.g.bg_color, fg = vim.g.divider_color, ctermbg = 0 }
+    )
+end
+
+return function()
+    vim.opt.termguicolors = true
+    -- custom_paragon()
+    custom_tokyonight()
 end
