@@ -73,4 +73,5 @@ alias vz      'vim ~/.zshrc'
 function fish_greeting
 end
 
+fish_default_key_bindings
 starship init fish | source
