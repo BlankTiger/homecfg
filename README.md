@@ -11,5 +11,5 @@ To use this config you have to:
 ```bash
 git clone https://github.com/blanktiger/homecfg ~/.config/homecfg
 ```
-3. Deploy dotfiles either in `copy` mode by doing `hm` or in `symlink` mode by doing `hm --dev`
-4. Optionally to install dependencies as per the `INSTALL` instructions, do `hm install`
+3. Deploy dotfiles either in `symlink` mode by doing `hm` or in `copy` mode by doing `hm --copy`
+4. Optionally to install dependencies as per the `INSTALL` instructions, do `hm --install`
