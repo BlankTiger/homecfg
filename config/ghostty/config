@@ -917,7 +917,7 @@ link-url = true
 # On macOS, this setting does not work if window-decoration is set to
 # "false", because native fullscreen on macOS requires window decorations
 # to be set.
-fullscreen = true
+fullscreen = false
 
 # The title Ghostty will use for the window. This will force the title of the
 # window to be this title at all times and Ghostty will ignore any set title
@@ -1421,7 +1421,7 @@ window-new-tab-position = current
 #                     subsequently resized.
 #
 # The default is `after-first`.
-resize-overlay = after-first
+resize-overlay = never
 
 # If resize overlays are enabled, this controls the position of the overlay.
 # The possible options are:
