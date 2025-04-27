@@ -14,6 +14,13 @@ return {
                             require("dap-python").setup(path)
                         end,
                     },
+                    {
+                        "leoluz/nvim-dap-go",
+                        config = function()
+                            require("dap-go").setup()
+                        end,
+                    },
+                    "jay-babu/mason-nvim-dap.nvim",
                     "nvim-neotest/nvim-nio",
                 },
                 config = function()
@@ -35,6 +42,18 @@ return {
         config = function()
             local dap = require("dap")
             local dapui = require("dapui")
+            local mason_dap = require("mason-nvim-dap")
+
+            mason_dap.setup({
+                ensure_installed = { "cppdbg", "delve" },
+                automatic_installation = true,
+                handlers = {
+                    function(config)
+                        require("mason-nvim-dap").default_setup(config)
+                    end,
+                },
+            })
+
             dap.adapters.codelldb = {
                 type = "server",
                 port = "${port}",
@@ -57,6 +76,40 @@ return {
                     stopOnEntry = true,
                 },
             }
+
+            -- dap.configurations.go = {
+            --     {
+            --         type = "delve",
+            --         name = "Debug",
+            --         request = "launch",
+            --         program = "${file}",
+            --     },
+            --     {
+            --         type = "delve",
+            --         name = "Debug with cli args",
+            --         request = "launch",
+            --         program = "${file}",
+            --         args = function()
+            --             local args_txt = vim.fn.input("args: ")
+            --             return vim.split(args_txt, " ", {})
+            --         end,
+            --     },
+            --     {
+            --         type = "delve",
+            --         name = "Debug test", -- configuration for debugging test files
+            --         request = "launch",
+            --         mode = "test",
+            --         program = "${file}",
+            --     },
+            --     -- works with go.mod packages and sub packages
+            --     {
+            --         type = "delve",
+            --         name = "Debug test (go.mod)",
+            --         request = "launch",
+            --         mode = "test",
+            --         program = "./${relativeFileDirname}",
+            --     },
+            -- }
 
             dap.configurations.zig = {
                 {

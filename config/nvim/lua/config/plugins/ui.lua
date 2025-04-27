@@ -62,12 +62,12 @@ return {
         event = "VeryLazy",
     },
 
-    {
-        "RRethy/vim-illuminate",
-        lazy = true,
-        dev = true,
-        -- event = "VeryLazy",
-    },
+    -- {
+    --     "RRethy/vim-illuminate",
+    --     lazy = true,
+    --     dev = true,
+    --     -- event = "VeryLazy",
+    -- },
 
     { "romainl/vim-cool", event = "VeryLazy" },
 

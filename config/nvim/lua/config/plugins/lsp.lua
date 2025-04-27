@@ -57,7 +57,10 @@ return {
         cmd = { "Mason", "LspInfo", "LspInstall", "LspUninstall" },
         config = function()
             local function lsp_highlight_document(client)
-                require("illuminate").on_attach(client)
+                local ok, illuminate = pcall(require, "illuminate")
+                if ok then
+                    illuminate.on_attach(client)
+                end
             end
 
             local function lsp_keymaps(bufnr)
