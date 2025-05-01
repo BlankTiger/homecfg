@@ -54,4 +54,6 @@ return {
             vim.fn["mkdp#util#install"]()
         end,
     },
+
+    { "skywind3000/asyncrun.vim" },
 }
