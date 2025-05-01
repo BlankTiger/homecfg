@@ -1,3 +1,4 @@
 system:cargo-binstall
 system:git
 system:eza
+system:go
