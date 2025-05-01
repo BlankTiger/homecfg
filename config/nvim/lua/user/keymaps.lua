@@ -449,12 +449,12 @@ local mappings = {
         --     end,
         --     "Checkout commit",
         -- },
-        w = {
-            function()
-                require("telescope").extensions.git_worktree.git_worktrees()
-            end,
-            "Change worktree",
-        },
+        -- w = {
+        --     function()
+        --         require("telescope").extensions.git_worktree.git_worktrees()
+        --     end,
+        --     "Change worktree",
+        -- },
         C = {
             function()
                 require("telescope").extensions.git_worktree.create_git_worktree()
@@ -1059,8 +1059,8 @@ vim.keymap.set("n", "<leader>r", "<cmd>e!<cr>", {})
 -- change neovim directory for all windows and a tab/window or whatever to currently open file path
 vim.keymap.set("n", "<leader>cl", "<cmd>lcd %:h<cr>", {})
 vim.keymap.set("n", "<leader>cbl", "<cmd>lcd -<cr>", {})
-vim.keymap.set("n", "<leader>ca", "<cmd>cd %:h", {})
-vim.keymap.set("n", "<leader>cba", "<cmd>cd -", {})
+vim.keymap.set("n", "<leader>ca", "<cmd>cd %:h<cr>", {})
+vim.keymap.set("n", "<leader>cba", "<cmd>cd -<cr>", {})
 
 vim.keymap.set({ "i" }, "<C-w>", function()
     -- if on last character then remove it too
@@ -1085,6 +1085,11 @@ vim.keymap.set("n", "*", "*zz", {})
 vim.keymap.set("n", "#", "#zz", {})
 vim.keymap.set("n", "g*", "g*zz", {})
 vim.keymap.set("n", "g#", "g#zz", {})
+vim.keymap.set("n", "<leader>gw", "<cmd>windo set wrap!<CR>", {})
+-- vim.keymap.set({ "n", "v" }, "<leader>gf", function()
+--     local builtin = require("telescope.builtin")
+--     builtin.current_buffer_fuzzy_find({ default_text = vim.fn.expand("<cword>") })
+-- end, {})
 
 vim.keymap.set("n", "<bs>", "hx", { noremap = true })
 
