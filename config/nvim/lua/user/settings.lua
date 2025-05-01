@@ -52,6 +52,7 @@ opt.matchpairs = "(:),{:},<:>,[:]"
 opt.scrollback = 100000
 opt.guicursor = "n-v-i-c:block-Cursor,a:blinkwait700-blinkoff400-blinkon250-Cursor"
 opt.updatetime = 50
+opt.wrap = false
 g.lsp_completions_enabled = false
 g.searchindex_line_limit = 1000000
 g.neovide_transparency = 1
@@ -94,6 +95,13 @@ g.zig_fmt_parse_errors = 0
 g.zig_fmt_autosave = 1
 
 g.lualine_shown = false
+
+vim.cmd([[
+set errorformat+=%f:%l
+set errorformat+=%f:%l:
+set errorformat+=%f:%l:\ %m
+set errorformat+=%f:%l\ %m
+]])
 
 g.accent_color = "#17d87e"
 g.bg_color = "#000000"
