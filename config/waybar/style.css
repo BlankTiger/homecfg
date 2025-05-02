@@ -1,8 +1,8 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: "Ubuntu Nerd Font";
-    font-size: 13px;
+    font-family: "Berkeley Mono Condensed";
+    font-size: 15px;
     min-height: 0;
 }
 
@@ -13,7 +13,7 @@ window#waybar {
 
 #window {
     font-weight: bold;
-    font-family: "Ubuntu";
+    font-family: "Berkeley Mono Condensed";
 }
 /*
 #workspaces {
@@ -26,6 +26,10 @@ window#waybar {
     background: transparent;
     color: white;
     border-top: 2px solid transparent;
+}
+
+#workspaces button.active {
+    color: #17d87e;
 }
 
 #workspaces button.focused {
