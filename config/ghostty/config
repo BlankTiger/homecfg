@@ -145,7 +145,8 @@ font-feature =
 # depending on your `window-inherit-font-size` setting. If that setting is
 # true, only the first window will be affected by this change since all
 # subsequent windows will inherit the font size of the previous window.
-font-size = 12
+# font-size = 12
+font-size = 14
 
 # A repeatable configuration to set one or more font variations values for
 # a variable font. A variable font is a single font, usually with a filename
@@ -2118,3 +2119,21 @@ enquiry-response =
 #
 # Changing this value at runtime works after a small delay.
 auto-update = check
+
+# PREPARATION FOR SWITCHING AWAY FROM TMUX
+# keybind = ctrl+escape>c=new_tab
+#
+# keybind = ctrl+h=goto_split:left
+# keybind = ctrl+j=goto_split:bottom
+# keybind = ctrl+k=goto_split:top
+# keybind = ctrl+l=goto_split:right
+# keybind = ctrl+q=close_surface
+#
+# keybind = ctrl+escape>h=new_split:left
+# keybind = ctrl+escape>j=new_split:down
+# keybind = ctrl+escape>k=new_split:up
+# keybind = ctrl+escape>l=new_split:right
+# keybind = ctrl+escape>f=toggle_split_zoom
+
+# keybind = ctrl+esc>n=next_tab
+# keybind = ctrl+esc>p=previous_tab
