@@ -12,12 +12,12 @@ return {
         end,
     },
 
-    {
-        "kevinhwang91/nvim-bqf",
-        event = "VeryLazy",
-        dependencies = {
-
-            "junegunn/fzf",
-        },
-    },
+    -- {
+    --     "kevinhwang91/nvim-bqf",
+    --     event = "VeryLazy",
+    --     dependencies = {
+    --
+    --         "junegunn/fzf",
+    --     },
+    -- },
 }
