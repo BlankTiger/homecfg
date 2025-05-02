@@ -117,14 +117,27 @@ return {
                     type = "codelldb",
                     request = "launch",
                     program = function()
-                        local file =
-                            vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-                        vim.notify(file)
-                        return file
+                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
                     end,
                     cwd = "${workspaceFolder}",
                     stopOnEntry = false,
                     args = {},
+                    -- args = { "--port", "13000" },
+                },
+
+                {
+                    name = "Launch file (args)",
+                    type = "codelldb",
+                    request = "launch",
+                    program = function()
+                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+                    end,
+                    cwd = "${workspaceFolder}",
+                    stopOnEntry = false,
+                    args = function()
+                        local input = vim.fn.input("args: ")
+                        return vim.split(input, " ")
+                    end,
                     -- args = { "--port", "13000" },
                 },
 
@@ -192,7 +205,7 @@ return {
                     {
                         elements = {
                             "repl",
-                            -- "console",
+                            "console",
                         },
                         size = 10,
                         position = "bottom",
