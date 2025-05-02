@@ -13,7 +13,10 @@ vim.api.nvim_create_autocmd({ "CmdwinEnter" }, {
 vim.api.nvim_create_autocmd({ "TermOpen" }, {
     group = autocmd_group,
     pattern = "*",
-    callback = function()
+    callback = function(opts)
+        if opts.file:match("dap%-terminal") then
+            return
+        end
         vim.opt_local.relativenumber = false
         vim.opt_local.number = false
         vim.api.nvim_command("startinsert")
