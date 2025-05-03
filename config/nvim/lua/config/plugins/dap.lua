@@ -77,40 +77,6 @@ return {
                 },
             }
 
-            -- dap.configurations.go = {
-            --     {
-            --         type = "delve",
-            --         name = "Debug",
-            --         request = "launch",
-            --         program = "${file}",
-            --     },
-            --     {
-            --         type = "delve",
-            --         name = "Debug with cli args",
-            --         request = "launch",
-            --         program = "${file}",
-            --         args = function()
-            --             local args_txt = vim.fn.input("args: ")
-            --             return vim.split(args_txt, " ", {})
-            --         end,
-            --     },
-            --     {
-            --         type = "delve",
-            --         name = "Debug test", -- configuration for debugging test files
-            --         request = "launch",
-            --         mode = "test",
-            --         program = "${file}",
-            --     },
-            --     -- works with go.mod packages and sub packages
-            --     {
-            --         type = "delve",
-            --         name = "Debug test (go.mod)",
-            --         request = "launch",
-            --         mode = "test",
-            --         program = "./${relativeFileDirname}",
-            --     },
-            -- }
-
             dap.configurations.zig = {
                 {
                     name = "Launch file",
@@ -122,7 +88,6 @@ return {
                     cwd = "${workspaceFolder}",
                     stopOnEntry = false,
                     args = {},
-                    -- args = { "--port", "13000" },
                 },
 
                 {
@@ -138,51 +103,8 @@ return {
                         local input = vim.fn.input("args: ")
                         return vim.split(input, " ")
                     end,
-                    -- args = { "--port", "13000" },
-                },
-
-                {
-                    name = "Launch file with args",
-                    type = "codelldb",
-                    request = "launch",
-                    program = function()
-                        local file =
-                            vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-                        vim.notify(file)
-                        return file
-                    end,
-                    cwd = "${workspaceFolder}",
-                    stopOnEntry = false,
-                    args = function()
-                        local argument_string = vim.fn.input("Program arguments: ")
-                        return vim.fn.split(argument_string, " ", true)
-                    end,
                 },
             }
-
-            -- dap.configurations.rust = dap.configurations.cpp
-            -- dap.configurations.rust = {
-            --     {
-            --         name = "hello-world",
-            --         type = "lldb",
-            --         request = "launch",
-            --         program = function()
-            --             return vim.fn.getcwd() .. "/target/debug/hello-world"
-            --         end,
-            --         cwd = "${workspaceFolder}",
-            --         stopOnEntry = false,
-            --     },
-            --     {
-            --         name = "hello-dap",
-            --         type = "lldb",
-            --         request = "launch",
-            --         program = function()
-            --             return vim.fn.getcwd() .. "/target/debug/hello-dap"
-            --         end,
-            --         cwd = "${workspaceFolder}",
-            --         stopOnEntry = false,
-            --     },
-            -- }
 
             dap.configurations.c = dap.configurations.cpp
 
