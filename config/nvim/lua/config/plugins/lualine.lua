@@ -180,6 +180,9 @@ return {
             if not vim.g.lualine_shown then
                 hide()
             end
+
+            local set = vim.keymap.set
+            set("n", "<leader>lt", TOGGLE_LUALINE)
         end,
     },
 }
