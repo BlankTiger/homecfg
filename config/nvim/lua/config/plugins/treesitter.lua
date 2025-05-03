@@ -3,6 +3,17 @@ return {
         "nvim-treesitter/nvim-treesitter",
         event = { "BufReadPre" },
         lazy = true,
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter-textobjects",
+            {
+                "nvim-treesitter/nvim-treesitter-context",
+                config = function()
+                    -- disable context by default
+                    vim.cmd("TSContextToggle")
+                end,
+            },
+            "JoosepAlviste/nvim-ts-context-commentstring",
+        },
         config = function()
             local configs = require("nvim-treesitter.configs")
             local compiler = require("nvim-treesitter.install")
@@ -146,17 +157,10 @@ return {
             -- vim.keymap.set({"n", "x", "o"}, "F", repeatable.builtin_F)
             -- vim.keymap.set({"n", "x", "o"}, "t", repeatable.builtin_t)
             -- vim.keymap.set({"n", "x", "o"}, "T", repeatable.builtin_T)
+
+            local set = vim.keymap.set
+
+            set("n", "<leader>c", ":TSContextToggle<cr>")
         end,
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter-textobjects",
-            {
-                "nvim-treesitter/nvim-treesitter-context",
-                config = function()
-                    -- disable context by default
-                    vim.cmd("TSContextToggle")
-                end,
-            },
-            "JoosepAlviste/nvim-ts-context-commentstring",
-        },
     },
 }
