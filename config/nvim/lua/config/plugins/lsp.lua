@@ -26,6 +26,8 @@ function table.contains(table, element)
     return false
 end
 
+local set = vim.keymap.set
+
 return {
     {
         "williamboman/mason-lspconfig.nvim",
@@ -55,6 +57,10 @@ return {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
         cmd = { "Mason", "LspInfo", "LspInstall", "LspUninstall" },
+        dependencies = {
+            "williamboman/mason.nvim",
+            "williamboman/mason-lspconfig.nvim",
+        },
         config = function()
             local function lsp_highlight_document(client)
                 local ok, illuminate = pcall(require, "illuminate")
@@ -279,11 +285,54 @@ return {
             lspconfig["gleam"].setup(server_opts)
 
             setup_diagnostics()
+
+            local diagnostic = vim.lsp.diagnostic
+            local codelens = vim.lsp.codelens
+            local buf = vim.lsp.buf
+
+            set("n", "<leader>li", ":LspInfo<cr>")
+            set("n", "<leader>lI", ":LspInstallInfo<cr>")
+
+            set("n", "<leader>ll", codelens.run)
+            set("n", "<leader>lr", buf.rename)
+            set("n", "<leader>la", buf.code_action)
+            set("n", "<leader>lj", diagnostic.goto_next)
+            set("n", "<leader>lk", diagnostic.goto_prev)
+            set("n", "<leader>lq", diagnostic.set_loclist)
+
+            -- toggle diagnostics
+            set("n", "<leader>lv", function()
+                if LSP_DIAGNOSTICS_HIDDEN == nil then
+                    LSP_DIAGNOSTICS_HIDDEN = false
+                end
+                if LSP_DIAGNOSTICS_HIDDEN then
+                    vim.diagnostic.config({
+                        virtual_text = true,
+                        signs = true,
+                        underline = true,
+                    })
+                else
+                    vim.diagnostic.config({
+                        virtual_text = false,
+                        signs = false,
+                        underline = false,
+                    })
+                end
+                LSP_DIAGNOSTICS_HIDDEN = not LSP_DIAGNOSTICS_HIDDEN
+            end)
+
+            set("n", "<leader>lR", function()
+                vim.api.nvim_command("LspRestart")
+                vim.diagnostic.reset()
+            end)
+
+            -- TODO: move to conform if actually used
+            -- set("n", "<leader>lf", ":lua require('conform').format()<cr>")
+
+            -- TODO: move to telescope if actually used
+            -- set("n", "<leader>ld", ":Telescope diagnostics bufnr=0<cr>")
+            -- set("n", "<leader>lw", ":Telescope diagnostics<cr>")
         end,
-        dependencies = {
-            "williamboman/mason.nvim",
-            "williamboman/mason-lspconfig.nvim",
-        },
     },
 
     {
