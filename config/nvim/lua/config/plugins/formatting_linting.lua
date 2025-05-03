@@ -8,7 +8,9 @@ return {
         "stevearc/conform.nvim",
         event = "VeryLazy",
         config = function()
-            require("conform").setup({
+            local conform = require("conform")
+
+            conform.setup({
                 formatters = {
                     ruff_format = {
                         inherit = false,
@@ -55,6 +57,10 @@ return {
                     return { timeout_ms = 500, lsp_format = "fallback" }
                 end,
             })
+
+            vim.keymap.set("n", "\\", function()
+                conform.format({ async = true })
+            end)
         end,
     },
 }
