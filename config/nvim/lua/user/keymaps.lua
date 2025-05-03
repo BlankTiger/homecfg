@@ -233,7 +233,10 @@ local mappings = {
             function()
                 harpoon.ui:toggle_quick_menu(harpoon:list(), {
                     height_in_lines = 16,
+                    -- title = "  bruh  ",
                     title = "",
+                    title_pos = "center",
+                    border = "rounded",
                 })
             end,
             "Harpoon menu",
@@ -494,15 +497,14 @@ local mappings = {
                         signs = true,
                         underline = true,
                     })
-                    LSP_DIAGNOSTICS_HIDDEN = false
-                    return
+                else
+                    vim.diagnostic.config({
+                        virtual_text = false,
+                        signs = false,
+                        underline = false,
+                    })
                 end
-                vim.diagnostic.config({
-                    virtual_text = false,
-                    signs = false,
-                    underline = false,
-                })
-                LSP_DIAGNOSTICS_HIDDEN = true
+                LSP_DIAGNOSTICS_HIDDEN = not LSP_DIAGNOSTICS_HIDDEN
             end,
             "Toggle virtual text and signs",
         },
@@ -528,7 +530,6 @@ local mappings = {
     ["<F5>"] = {
         function()
             require("dap").continue()
-            vim.api.nvim_command("stopinsert")
         end,
         "dap continue",
     },
@@ -558,15 +559,6 @@ local mappings = {
     },
     ["<leader>d"] = {
         name = "DAP",
-        -- keymap("n", "<leader>db", function() require'dap'.toggle_breakpoint() end, opts)
-        -- keymap("n", "<leader>dc", function() require'dap'.continue() end, opts)
-        -- keymap("n", "<leader>di", function() require'dap'.step_into() end, opts)
-        -- keymap("n", "<leader>do", function() require'dap'.step_over() end, opts)
-        -- keymap("n", "<leader>dO", function() require'dap'.step_out() end, opts)
-        -- keymap("n", "<leader>dr", function() require'dap'.repl.toggle() end, opts)
-        -- keymap("n", "<leader>dl", function() require'dap'.run_last() end, opts)
-        -- keymap("n", "<leader>du", function() require'dapui'.toggle() end, opts)
-        -- keymap("n", "<leader>dt", function() require'dap'.terminate() end, opts)
         b = {
             function()
                 require("dap").toggle_breakpoint()
@@ -581,7 +573,7 @@ local mappings = {
         },
         B = {
             function()
-                local conditional = vim.fn.input("Enter conditional: ")
+                local conditional = vim.fn.input("Break if -> ")
                 require("dap").set_breakpoint(conditional)
             end,
             "Toggle breakpoint",
@@ -589,7 +581,6 @@ local mappings = {
         c = {
             function()
                 require("dap").continue()
-                vim.api.nvim_command("stopinsert")
             end,
             "Continue",
         },
@@ -831,11 +822,6 @@ local mappings = {
 
 -- Bindings for moving lines up and down
 local mappings_n = {
-    ["<S-h>"] = { "^", "Go to line start" },
-    ["<S-l>"] = { "$", "Go to line end" },
-    -- ["<S-m>"] = { "J", "Concatenate next line" },
-    -- ["<S-k>"] = { "<cmd>MoveLine(-1)<CR>", "Move line up" },
-    -- ["<S-j>"] = { "<cmd>MoveLine(1)<CR>", "Move line down" },
     [">"] = { ">>", "Indent" },
     ["<"] = { "<<", "Dedent" },
     ["zR"] = { require("ufo").openAllFolds, "Open all folds" },
@@ -1091,7 +1077,7 @@ vim.keymap.set("n", "<leader>gw", "<cmd>windo set wrap!<CR>", {})
 --     builtin.current_buffer_fuzzy_find({ default_text = vim.fn.expand("<cword>") })
 -- end, {})
 
-vim.keymap.set("n", "<bs>", "hx", { noremap = true })
+-- vim.keymap.set("n", "<bs>", "hx", { noremap = true })
 
 -- vim.api.nvim_set_keymap("n", "<M-,>", get_prev_entry, {})
 -- vim.api.nvim_set_keymap("n", "<M-.>", get_next_entry, {})
@@ -1119,13 +1105,6 @@ vim.keymap.set({ "t", "n" }, "<F1>", function()
         end
     end
 end, { silent = true })
--- vim.api.nvim_set_keymap("n", "<F1>", "<cmd>AsyncMake<cr>", { silent = true })
-
-vim.api.nvim_set_keymap("x", "<M-w>", "<esc><cmd>'<,'>!remove-widows<cr>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<M-w>", "<S-v><esc><cmd>'<,'>!remove-widows<cr>", { noremap = true })
--- vim.keymap.set("n", "J", "mzJ`z")
---
-vim.keymap.set("x", "/", "<Esc>/\\%V")
 
 which_key.setup(setup)
 which_key.register(mappings, opts)
