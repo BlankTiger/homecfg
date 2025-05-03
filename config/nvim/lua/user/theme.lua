@@ -35,6 +35,10 @@ local function custom_tokyonight()
     vim.api.nvim_set_hl(0, "TabLine", { bg = black })
     vim.api.nvim_set_hl(0, "TabLineFill", { bg = black })
     vim.api.nvim_set_hl(0, "TabLineSel", { fg = vim.g.accent_color })
+
+    vim.api.nvim_set_hl(0, "FloatBorder", { bg = "#000000", fg = vim.g.accent_color })
+    vim.api.nvim_set_hl(0, "FloatTitle", { bg = "#000000", fg = "#ffffff" })
+
     vim.api.nvim_set_hl(
         0,
         "StatusLineNC",
