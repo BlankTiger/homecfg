@@ -286,18 +286,22 @@ return {
 
             setup_diagnostics()
 
-            local diagnostic = vim.lsp.diagnostic
+            local diagnostic = vim.diagnostic
             local codelens = vim.lsp.codelens
             local buf = vim.lsp.buf
 
-            set("n", "<leader>li", ":LspInfo<cr>")
-            set("n", "<leader>lI", ":LspInstallInfo<cr>")
+            set("n", "<leader>li", ":LspInfo<cr>", vim.g.n_opts)
+            set("n", "<leader>lI", ":LspInstallInfo<cr>", vim.g.n_opts)
 
             set("n", "<leader>ll", codelens.run)
             set("n", "<leader>lr", buf.rename)
             set("n", "<leader>la", buf.code_action)
-            set("n", "<leader>lj", diagnostic.goto_next)
-            set("n", "<leader>lk", diagnostic.goto_prev)
+            set("n", "<leader>lj", function()
+                diagnostic.jump({ count = 1, float = true })
+            end)
+            set("n", "<leader>lk", function()
+                diagnostic.jump({ count = 1, float = true })
+            end)
             set("n", "<leader>lq", diagnostic.set_loclist)
 
             -- toggle diagnostics
