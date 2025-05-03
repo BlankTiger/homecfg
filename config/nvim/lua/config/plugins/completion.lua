@@ -155,5 +155,11 @@ return {
             },
         },
         opts_extend = { "sources.default" },
+
+        config = function()
+            vim.keymap.set("n", "<leader>lc", function()
+                vim.g.lsp_completions_enabled = not vim.g.lsp_completions_enabled
+            end)
+        end,
     },
 }
