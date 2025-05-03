@@ -1,17 +1,5 @@
 return {
     {
-        "sindrets/diffview.nvim",
-        event = "VeryLazy",
-    },
-
-    {
-        "akinsho/git-conflict.nvim",
-        event = "VeryLazy",
-        version = "*",
-        config = true,
-    },
-
-    {
         "lewis6991/gitsigns.nvim",
         event = "VeryLazy",
         tag = "v0.8.0",
@@ -88,11 +76,6 @@ return {
     },
 
     {
-        "ThePrimeagen/git-worktree.nvim",
-        event = "VeryLazy",
-    },
-
-    {
         "TimUntersberger/neogit",
         branch = "master",
         event = "VeryLazy",
@@ -112,9 +95,7 @@ return {
             })
         end,
         dependencies = {
-            "sindrets/diffview.nvim",
+            { "sindrets/diffview.nvim" },
         },
     },
-
-    -- { "tpope/vim-fugitive", event = "VeryLazy" },
 }
