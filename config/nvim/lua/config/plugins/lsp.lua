@@ -283,8 +283,6 @@ return {
         dependencies = {
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
-            "stevearc/conform.nvim",
-            -- "BlankTiger/blink.cmp",
         },
     },
 
