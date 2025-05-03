@@ -12,6 +12,8 @@ return {
                 "blanktiger/telescope-rg.nvim",
                 dev = true,
             },
+
+            { "nvim-telescope/telescope-ui-select.nvim" },
         },
         config = function()
             local telescope = require("telescope")
@@ -124,6 +126,11 @@ return {
                         default_args_files = "--files --glob-case-insensitive -i -g",
                     },
                     aqf = { path_display = { "absolute" } },
+                    ["ui-select"] = {
+                        require("telescope.themes").get_dropdown({
+                            -- even more opts
+                        }),
+                    },
                 },
             })
 
@@ -131,6 +138,7 @@ return {
             telescope.load_extension("aqf")
             telescope.load_extension("fzf")
             telescope.load_extension("harpoon")
+            telescope.load_extension("ui-select")
 
             local set = vim.keymap.set
             local builtin = require("telescope.builtin")
