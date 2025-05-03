@@ -1,34 +1,29 @@
+local function set_hl()
+    -- local accent = "#DF006B"
+    local accent = "#ffffff"
+    vim.api.nvim_set_hl(0, "LeapMatch", {})
+    vim.api.nvim_set_hl(0, "LeapBackdrop", {})
+    vim.api.nvim_set_hl(0, "LeapLabel", { fg = accent })
+end
+
 return {
-    { "fedepujol/move.nvim", event = "VeryLazy" },
-    { "buztard/vim-rel-jump", event = "VeryLazy" },
     {
         "ggandor/leap.nvim",
         event = "VeryLazy",
-        dependencies = {
-            { "tpope/vim-repeat", event = "VeryLazy" },
-        },
         config = function()
-            local leap = require("leap")
-            vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)")
-            vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)")
-            vim.keymap.set({ "n", "x", "o" }, "gS", "<Plug>(leap-from-window)")
-            leap.opts.equivalence_classes = { " \t\r\n", "([{", ")]}", "'\"`" }
+            require("leap").set_default_mappings()
+            require("leap.user").set_repeat_keys("<del>", "<backspace>", {
+                relative_directions = true,
+                modes = { "n", "x", "o" },
+            })
+
+            set_hl()
+            vim.api.nvim_create_autocmd("ColorScheme", { callback = set_hl })
         end,
     },
+
     {
         "christoomey/vim-tmux-navigator",
-        cmd = {
-            "TmuxNavigateLeft",
-            "TmuxNavigateDown",
-            "TmuxNavigateUp",
-            "TmuxNavigateRight",
-            "TmuxNavigatePrevious",
-            "TmuxNavigatorProcessList",
-        },
+        event = "VeryLazy",
     },
-
-    -- {
-    --     "chaoren/vim-wordmotion",
-    --     -- lazy = true,
-    -- },
 }
