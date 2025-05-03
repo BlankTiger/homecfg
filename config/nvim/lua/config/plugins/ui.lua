@@ -234,11 +234,23 @@ return {
         event = "VeryLazy",
         dependencies = "kevinhwang91/promise-async",
         config = function()
-            require("ufo").setup({
+            local ufo = require("ufo")
+            ufo.setup({
                 provider_selector = function(bufnr, filetype, buftype)
                     return { "lsp", "indent" }
                 end,
             })
+
+            local set = vim.keymap.set
+
+            set("n", "zR", ufo.openAllFolds)
+            set("n", "zM", ufo.closeAllFolds)
+            set("n", "zK", function()
+                local winid = require("ufo").peekFoldedLinesUnderCursor()
+                if not winid then
+                    vim.lsp.buf.hover()
+                end
+            end)
         end,
     },
 
@@ -301,7 +313,8 @@ return {
             {
                 "echasnovski/mini.notify",
                 config = function()
-                    require("mini.notify").setup({
+                    local notify = require("mini.notify")
+                    notify.setup({
                         lsp_progress = { enable = false },
                         window = {
                             config = {
@@ -311,7 +324,12 @@ return {
                             winblend = 50,
                         },
                     })
-                    vim.notify = MiniNotify.make_notify()
+                    vim.notify = notify.make_notify()
+
+                    local set = vim.keymap.set
+                    set("n", "<leader>nd", notify.clear)
+                    set("n", "<leader>nh", notify.show_history)
+                    set("n", "<leader>nr", notify.refresh)
                 end,
             },
             {
