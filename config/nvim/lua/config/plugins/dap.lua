@@ -155,6 +155,22 @@ return {
             dap.listeners.before.event_exited["dapui_config"] = function()
                 dapui.close()
             end
+
+            local set = vim.keymap.set
+
+            set("n", "<F4>", dap.pause)
+            set("n", "<F5>", dap.continue)
+            set("n", "<F6>", dap.step_over)
+            set("n", "<F7>", dap.step_into)
+            set("n", "<F8>", dap.step_out)
+            set("n", "<F9>", dap.terminate)
+            set("n", "<leader>db", dap.toggle_breakpoint)
+            set("n", "<leader>dB", function()
+                local conditional = vim.fn.input("Break if -> ")
+                require("dap").set_breakpoint(conditional)
+            end)
+            set("n", "<leader>du", dapui.toggle)
+            set("n", "<leader>dr", dap.repl.toggle)
         end,
     },
 }
