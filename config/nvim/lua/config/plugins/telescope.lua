@@ -120,24 +120,14 @@ return {
             telescope.load_extension("ripgrep")
             telescope.load_extension("aqf")
             telescope.load_extension("fzf")
-            -- telescope.load_extension("notify")
-            telescope.load_extension("git_worktree")
-            telescope.load_extension("git_diffs")
             telescope.load_extension("harpoon")
         end,
         dependencies = {
-            "nvim-telescope/telescope-file-browser.nvim",
-            "junegunn/fzf",
             {
                 "nvim-telescope/telescope-fzf-native.nvim",
                 build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
             },
-            {
-                "paopaol/telescope-git-diffs.nvim",
-                config = function()
-                    require("diffview")
-                end,
-            },
+
             {
                 "blanktiger/telescope-rg.nvim",
                 dev = true,
