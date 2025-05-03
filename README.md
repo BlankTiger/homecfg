@@ -1,6 +1,6 @@
 # <p align="center">🏠 homecfg 🏠</p>
 
-This project uses a custom-built configuration file manager `hm` that's currently not publicly available.
+This project uses a custom-built configuration file manager `hm`.
 
 ## Using this config
 
