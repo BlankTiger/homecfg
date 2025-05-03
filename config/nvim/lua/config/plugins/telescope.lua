@@ -1,8 +1,18 @@
 return {
     {
         "nvim-telescope/telescope.nvim",
-        -- event = "VeryLazy",
-        lazy = true,
+        event = "VeryLazy",
+        dependencies = {
+            {
+                "nvim-telescope/telescope-fzf-native.nvim",
+                build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+            },
+
+            {
+                "blanktiger/telescope-rg.nvim",
+                dev = true,
+            },
+        },
         config = function()
             local telescope = require("telescope")
             local actions = require("telescope.actions")
@@ -121,17 +131,40 @@ return {
             telescope.load_extension("aqf")
             telescope.load_extension("fzf")
             telescope.load_extension("harpoon")
-        end,
-        dependencies = {
-            {
-                "nvim-telescope/telescope-fzf-native.nvim",
-                build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-            },
 
-            {
-                "blanktiger/telescope-rg.nvim",
-                dev = true,
-            },
-        },
+            local set = vim.keymap.set
+            local builtin = require("telescope.builtin")
+            local extensions = require("telescope").extensions
+
+            set("n", "<leader>sb", builtin.buffers)
+            set("n", "<leader>tr", builtin.resume)
+            set("n", "<leader>A", builtin.live_grep)
+            set("n", "<leader>f", builtin.find_files)
+            set("n", "<leader>i", builtin.git_files)
+            set("n", "<leader>a", function()
+                extensions.ripgrep.ripgrep_text({
+                    path_display = { "absolute" },
+                })
+            end)
+            -- use rg to find files in the directory of the currently open file
+            set("n", "<leader>sa", function()
+                extensions.ripgrep.ripgrep_text({
+                    path_display = { "absolute" },
+                    curr_file_dir = true,
+                })
+            end)
+
+            -- misc search
+            set("n", "<leader>sh", builtin.help_tags)
+            set("n", "<leader>sM", builtin.man_pages)
+            set("n", "<leader>sR", builtin.registers)
+            set("n", "<leader>sk", builtin.keymaps)
+            set("n", "<leader>sc", builtin.commands)
+            set("n", "<leader>st", builtin.treesitter)
+
+            -- lsp telescope keymaps
+            set("n", "<leader>ls", builtin.lsp_document_symbols)
+            set("n", "<leader>lS", builtin.lsp_dynamic_workspace_symbols)
+        end,
     },
 }
