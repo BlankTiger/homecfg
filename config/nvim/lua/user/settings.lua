@@ -75,5 +75,12 @@ if not g.lualine_shown then
     opt.stl = "%{repeat('─',winwidth('.'))}"
 end
 
+-- base normal mode options for all keymaps
+g.n_opts = {
+    silent = true,
+    noremap = true,
+    nowait = true,
+}
+
 local set_theme = require("user.theme")
 set_theme()

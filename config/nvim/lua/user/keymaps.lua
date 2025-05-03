@@ -4,11 +4,7 @@ vim.g.maplocalleader = ","
 local set = vim.keymap.set
 
 -- normal mode opts
-local n_opts = {
-    silent = true,
-    noremap = true,
-    nowait = true,
-}
+local n_opts = vim.g.n_opts
 
 -- indent/dedent
 set("n", ">", ">>", n_opts)
@@ -18,7 +14,7 @@ set("n", "<", "<<", n_opts)
 set("n", "<leader>r", ":e!<cr>", n_opts)
 
 -- remove buffer completely from memory
-set("n", "<space>w", "<cmd>bw!<cr>", {}, n_opts)
+set("n", "<space>w", "<cmd>bw!<cr>", n_opts)
 
 -- zz -> zm
 set("n", "zm", "zz", n_opts)
@@ -110,9 +106,9 @@ set("n", "<M-;>", ":cpfile<cr>", n_opts)
 set("n", "<M-'>", ":cnfile<cr>", n_opts)
 
 -- concat lines in visual mode, because I have J remapped to moving blocks
-set("v", "<S-m>", "J")
-set("v", "<S-j>", ":m '>+1<cr>gv=gv")
-set("v", "<S-k>", ":m '<-2<cr>gv=gv")
+set("v", "<S-m>", "J", n_opts)
+set("v", "<S-j>", ":m '>+1<cr>gv=gv", n_opts)
+set("v", "<S-k>", ":m '<-2<cr>gv=gv", n_opts)
 
 -- terminal
 
@@ -125,7 +121,7 @@ set("n", "<leader>th", function()
     vim.opt.splitright = false
     vim.api.nvim_command("vs term://" .. vim.g.shell)
     vim.opt.splitright = opt
-end)
+end, n_opts)
 
 -- terminal in a split to the right
 set("n", "<leader>tl", function()
@@ -133,18 +129,18 @@ set("n", "<leader>tl", function()
     vim.opt.splitright = true
     vim.api.nvim_command("vs term://" .. vim.g.shell)
     vim.opt.splitright = opt
-end)
+end, n_opts)
 
 -- toggle a horizontal terminal via my own command
 set({ "n", "t" }, "<C-t>", ":TermToggle<cr>", n_opts)
 
 -- close terminal window forcefully by default
-set("t", "<C-q>", ":q!<cr>")
+set("t", "<C-q>", ":q!<cr>", n_opts)
 -- make esc work
-set("t", "<esc>", "<C-\\><C-n>")
+set("t", "<esc>", "<C-\\><C-n>", n_opts)
 -- navigating through jumplist without doing <esc>
-set("t", "<C-o>", "<C-\\><C-n><C-o>")
-set("t", "<C-i>", "<C-\\><C-n><C-i>")
+set("t", "<C-o>", "<C-\\><C-n><C-o>", n_opts)
+set("t", "<C-i>", "<C-\\><C-n><C-i>", n_opts)
 
 -- remove full line like dd
 set("n", "<A-d>", "dd", n_opts)
@@ -153,23 +149,23 @@ set("n", "<A-d>", "dd", n_opts)
 set("v", "//", [["hy:%s/<C-r>h//gc<left><left><left>]], { noremap = true })
 
 -- navigating through splits and tmux panes without any hassle
-set("t", "<c-h>", "<C-\\><C-n><cmd>TmuxNavigateLeft<cr>")
-set("t", "<c-j>", "<C-\\><C-n><cmd>TmuxNavigateDown<cr>")
-set("t", "<c-k>", "<C-\\><C-n><cmd>TmuxNavigateUp<cr>")
-set("t", "<c-l>", "<C-\\><C-n><cmd>TmuxNavigateRight<cr>")
+set("t", "<c-h>", "<C-\\><C-n><cmd>TmuxNavigateLeft<cr>", n_opts)
+set("t", "<c-j>", "<C-\\><C-n><cmd>TmuxNavigateDown<cr>", n_opts)
+set("t", "<c-k>", "<C-\\><C-n><cmd>TmuxNavigateUp<cr>", n_opts)
+set("t", "<c-l>", "<C-\\><C-n><cmd>TmuxNavigateRight<cr>", n_opts)
 
 set("n", "<c-h>", "<cmd>TmuxNavigateLeft<cr>", n_opts)
 set("n", "<c-j>", "<cmd>TmuxNavigateDown<cr>", n_opts)
 set("n", "<c-k>", "<cmd>TmuxNavigateUp<cr>", n_opts)
 set("n", "<c-l>", "<cmd>TmuxNavigateRight<cr>", n_opts)
 
-set("i", "<c-h>", "<esc><cmd>TmuxNavigateLeft<cr>")
-set("i", "<c-j>", "<esc><cmd>TmuxNavigateDown<cr>")
-set("i", "<c-k>", "<esc><cmd>TmuxNavigateUp<cr>")
-set("i", "<c-l>", "<esc><cmd>TmuxNavigateRight<cr>")
+set("i", "<c-h>", "<esc><cmd>TmuxNavigateLeft<cr>", n_opts)
+set("i", "<c-j>", "<esc><cmd>TmuxNavigateDown<cr>", n_opts)
+set("i", "<c-k>", "<esc><cmd>TmuxNavigateUp<cr>", n_opts)
+set("i", "<c-l>", "<esc><cmd>TmuxNavigateRight<cr>", n_opts)
 
 -- set : to q: (instead of cmdline have cmdwin)
-vim.keymap.set("n", ":", "q:i", {}, n_opts)
+vim.keymap.set("n", ":", "q:i", n_opts)
 
 -- quickly duplicate line I'm on and don't change the horizontal cursor position
 vim.keymap.set("n", "<leader>vd", function()
@@ -178,7 +174,7 @@ vim.keymap.set("n", "<leader>vd", function()
     vim.api.nvim_command("norm yyp")
     cursorpos[1] = cursorpos[1] + 1
     vim.api.nvim_win_set_cursor(win, cursorpos)
-end, {})
+end, n_opts)
 
 -- goto file in existing split on the left
 -- or the right, if non are open then create them
@@ -198,7 +194,7 @@ set("n", "<C-S-L>", function()
 end)
 
 -- repeat last macro with a single key instead of toggling case
-set("n", "~", "@@", {}, n_opts)
+set("n", "~", "@@", n_opts)
 
 -- refresh keymap
 set("n", "<leader>kr", function()
@@ -218,7 +214,7 @@ set("i", "<C-w>", function()
         local res = vim.api.nvim_replace_termcodes("<C-o>db", true, false, true)
         vim.api.nvim_feedkeys(res, "i", false)
     end
-end)
+end, n_opts)
 
 -- keep the cursor in the middle of the screen
 set("n", "<C-d>", "<C-d>zz", n_opts)
