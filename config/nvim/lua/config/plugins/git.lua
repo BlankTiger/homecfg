@@ -1,10 +1,13 @@
+local set = vim.keymap.set
+
 return {
     {
         "lewis6991/gitsigns.nvim",
         event = "VeryLazy",
         tag = "v0.8.0",
         config = function()
-            require("gitsigns").setup({
+            local gss = require("gitsigns")
+            gss.setup({
                 signs = {
                     add = {
                         hl = "GitSignsAdd",
@@ -72,6 +75,16 @@ return {
                     enable = false,
                 },
             })
+
+            set("n", "<leader>gq", gss.setqflist)
+            set("n", "<leader>gj", gss.next_hunk)
+            set("n", "<leader>gk", gss.prev_hunk)
+            set("n", "<leader>gP", gss.preview_hunk_inline)
+            set("n", "<leader>gp", gss.preview_hunk)
+            set("n", "<leader>gr", gss.reset_buffer)
+            set("n", "<leader>gl", gss.toggle_current_line_blame)
+            set("n", "<leader>gs", gss.stage_hunk)
+            set("n", "<leader>gu", gss.undo_stage_hunk)
         end,
     },
 
@@ -80,7 +93,8 @@ return {
         branch = "master",
         event = "VeryLazy",
         config = function()
-            require("neogit").setup({
+            local neogit = require("neogit")
+            neogit.setup({
                 console_timeout = 10000,
                 auto_show_console = true,
                 disable_line_numbers = false,
@@ -93,9 +107,24 @@ return {
                     },
                 },
             })
+
+            -- in a new tab
+            set("n", "<leader>go", neogit.open)
+            -- in a split
+            set("n", "<leader>gO", function()
+                neogit.open({ kind = "vsplit" })
+            end)
         end,
         dependencies = {
-            { "sindrets/diffview.nvim" },
+            {
+                "sindrets/diffview.nvim",
+                config = function()
+                    local diffview = require("diffview")
+                    set("n", "<leader>gd", diffview.open)
+                    set("n", "<leader>gc", diffview.close)
+                    set("n", "<leader>gr", ":DiffviewRefresh<cr>")
+                end,
+            },
         },
     },
 }
