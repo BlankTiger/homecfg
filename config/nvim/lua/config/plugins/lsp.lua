@@ -302,7 +302,7 @@ return {
             set("n", "<leader>lk", function()
                 diagnostic.jump({ count = 1, float = true })
             end)
-            set("n", "<leader>lq", diagnostic.set_loclist)
+            set("n", "<leader>lq", diagnostic.setloclist)
 
             -- toggle diagnostics
             set("n", "<leader>lv", function()
