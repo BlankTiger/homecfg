@@ -27,6 +27,13 @@ vim.api.nvim_create_autocmd({ "TermOpen" }, {
     group = autocmd_group,
     pattern = "*",
     callback = function(opts)
+        -- unfortunate, but we have to set the keymaps per terminal buffer cause they
+        -- are somehow getting reset and I don't feel like checking how thats happening
+        local n_opts = vim.tbl_extend("force", vim.g.n_opts, { buffer = opts.buf })
+        set("t", "<c-h>", "<esc><cmd>TmuxNavigateLeft<cr>", n_opts)
+        set("t", "<c-j>", "<esc><cmd>TmuxNavigateDown<cr>", n_opts)
+        set("t", "<c-k>", "<esc><cmd>TmuxNavigateUp<cr>", n_opts)
+        set("t", "<c-l>", "<esc><cmd>TmuxNavigateRight<cr>", n_opts)
         if opts.file:match("dap%-terminal") then
             return
         end
