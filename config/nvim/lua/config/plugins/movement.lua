@@ -24,6 +24,11 @@ return {
 
     {
         "christoomey/vim-tmux-navigator",
-        event = "VeryLazy",
+        cmd = {
+            "TmuxNavigateRight",
+            "TmuxNavigateUp",
+            "TmuxNavigateLeft",
+            "TmuxNavigateDown",
+        },
     },
 }
