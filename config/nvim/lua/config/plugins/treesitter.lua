@@ -34,17 +34,13 @@ return {
                     "yaml",
                     "toml",
                     "zig",
-                }, -- one of "all" or a list of languages
-                ignore_install = { "" }, -- List of parsers to ignore installing
+                },
+                ignore_install = { "" },
                 auto_install = true,
 
                 highlight = {
-                    enable = true, -- false will disable the whole extension
-                    disable = { "json" }, -- list of language that will be disabled
-                },
-
-                autopairs = {
                     enable = true,
+                    disable = { "json" },
                 },
 
                 indent = {
@@ -52,115 +48,60 @@ return {
                     disable = { "zig" },
                 },
 
-                -- incremental_selection = {
-                -- 	enable = true,
-                -- 	keymaps = {
-                -- 		init_selection = "<C-space>",
-                -- 		node_incremental = "<C-space>",
-                -- 		scope_incremental = false,
-                -- 		node_decremental = "<bs>",
-                -- 	}
-                -- },
-
                 textobjects = {
                     select = {
                         enable = true,
                         lookahead = true,
                         keymaps = {
-                            ["a="] = { query = "@assignment.outer" },
-                            ["i="] = { query = "@assignment.inner" },
-                            -- ["e="] = { query = "@assignment.lhs" },
-                            ["r="] = { query = "@assignment.rhs" },
+                            -- to use those do e.g.: vfo to select the whole function
+                            ["ao"] = { query = "@assignment.outer" },
+                            ["ai"] = { query = "@assignment.inner" },
+                            ["a<"] = { query = "@assignment.lhs" },
+                            ["a>"] = { query = "@assignment.rhs" },
 
-                            ["aa"] = { query = "@parameter.outer" },
-                            ["ia"] = { query = "@parameter.inner" },
+                            ["po"] = { query = "@parameter.outer" },
+                            ["pi"] = { query = "@parameter.inner" },
 
-                            ["ai"] = { query = "@conditional.outer" },
+                            ["io"] = { query = "@conditional.outer" },
                             ["ii"] = { query = "@conditional.inner" },
 
-                            ["al"] = { query = "@loop.outer" },
-                            ["il"] = { query = "@loop.inner" },
+                            ["l("] = { query = "@loop.outer" },
+                            ["l)"] = { query = "@loop.inner" },
 
-                            ["av"] = { query = "@call.outer" },
-                            ["iv"] = { query = "@call.inner" },
+                            ["co"] = { query = "@call.outer" },
+                            ["ci"] = { query = "@call.inner" },
 
-                            ["af"] = { query = "@function.outer" },
-                            ["if"] = { query = "@function.inner" },
+                            ["fo"] = { query = "@function.outer" },
+                            ["fi"] = { query = "@function.inner" },
 
-                            ["ac"] = { query = "@class.outer" },
-                            ["ic"] = { query = "@class.inner" },
-                        },
-                    },
-
-                    move = {
-                        enable = true,
-                        set_jumps = true,
-                        goto_next_start = {
-                            ["]f"] = { query = "@function.outer" },
-                            ["]a"] = { query = "@parameter.outer" },
-                            ["]l"] = { query = "@loop.outer" },
-                            ["]c"] = { query = "@class.outer" },
-                            ["]i"] = { query = "@conditional.outer" },
-                            ["]v"] = { query = "@call.outer" },
-                            ["]="] = { query = "@assignment.outer" },
-                        },
-                        goto_next_end = {
-                            ["]F"] = { query = "@function.outer" },
-                            ["]A"] = { query = "@parameter.outer" },
-                            ["]L"] = { query = "@loop.outer" },
-                            ["]C"] = { query = "@class.outer" },
-                            ["]I"] = { query = "@conditional.outer" },
-                            ["]V"] = { query = "@call.outer" },
-                            ["]="] = { query = "@assignment.outer" },
-                        },
-
-                        goto_previous_start = {
-                            ["[f"] = { query = "@function.outer" },
-                            ["[a"] = { query = "@parameter.outer" },
-                            ["[l"] = { query = "@loop.outer" },
-                            ["[c"] = { query = "@class.outer" },
-                            ["[i"] = { query = "@conditional.outer" },
-                            ["[v"] = { query = "@call.outer" },
-                            ["[="] = { query = "@assignment.outer" },
-                        },
-                        goto_previous_end = {
-                            ["[F"] = { query = "@function.outer" },
-                            ["[A"] = { query = "@parameter.outer" },
-                            ["[L"] = { query = "@loop.outer" },
-                            ["[C"] = { query = "@class.outer" },
-                            ["[I"] = { query = "@conditional.outer" },
-                            ["[V"] = { query = "@call.outer" },
-                            ["[="] = { query = "@assignment.outer" },
+                            ["Co"] = { query = "@class.outer" },
+                            ["Ci"] = { query = "@class.inner" },
                         },
                     },
 
                     swap = {
                         enable = true,
                         swap_next = {
-                            ["<leader>spn"] = "@parameter.inner",
-                            ["<leader>sfn"] = "@function.outer",
-                            ["<leader>scn"] = "@class.outer",
+                            ["<leader>snpi"] = "@parameter.inner",
+                            ["<leader>snpo"] = "@parameter.outer",
+                            ["<leader>snfo"] = "@function.outer",
+                            ["<leader>snfi"] = "@function.inner",
+                            ["<leader>snco"] = "@class.outer",
+                            ["<leader>snci"] = "@class.inner",
                         },
                         swap_previous = {
-                            ["<leader>spp"] = "@parameter.inner",
-                            ["<leader>sfp"] = "@function.outer",
-                            ["<leader>scp"] = "@class.outer",
+                            ["<leader>sppi"] = "@parameter.inner",
+                            ["<leader>sppo"] = "@parameter.outer",
+                            ["<leader>spfo"] = "@function.outer",
+                            ["<leader>spfi"] = "@function.inner",
+                            ["<leader>spcp"] = "@class.outer",
+                            ["<leader>spci"] = "@class.inner",
                         },
                     },
                 },
             })
 
-            -- vim.keymap.set({"n", "x", "o"}, ";", repeatable.repeat_last_move)
-            -- vim.keymap.set({"n", "x", "o"}, "&", repeatable.repeat_last_move_opposite)
-            --
-            -- vim.keymap.set({"n", "x", "o"}, "f", repeatable.builtin_f)
-            -- vim.keymap.set({"n", "x", "o"}, "F", repeatable.builtin_F)
-            -- vim.keymap.set({"n", "x", "o"}, "t", repeatable.builtin_t)
-            -- vim.keymap.set({"n", "x", "o"}, "T", repeatable.builtin_T)
-
-            local set = vim.keymap.set
-
-            set("n", "<leader>c", ":TSContextToggle<cr>", vim.g.n_opts)
+            vim.keymap.set("n", "<leader>c", ":TSContextToggle<cr>", vim.g.n_opts)
         end,
     },
 }
