@@ -92,42 +92,52 @@ return {
                 client.server_capabilities.semanticTokensProvider = nil
             end
 
-            local function setup_diagnostics()
-                local signs_text = {
-                    -- [vim.diagnostic.severity.ERROR] = "",
-                    -- [vim.diagnostic.severity.WARN] = "",
-                    -- [vim.diagnostic.severity.HINT] = "",
-                    -- [vim.diagnostic.severity.INFO] = "",
-                    [vim.diagnostic.severity.ERROR] = "",
-                    [vim.diagnostic.severity.WARN] = "",
-                    [vim.diagnostic.severity.HINT] = "",
-                    [vim.diagnostic.severity.INFO] = "",
-                }
-                local signs_numhl = {
-                    [vim.diagnostic.severity.ERROR] = "ErrorMsg",
-                    [vim.diagnostic.severity.WARN] = "WarningMsg",
-                    [vim.diagnostic.severity.HINT] = "HintMsg",
-                    [vim.diagnostic.severity.INFO] = "InfoMsg",
-                }
+            local signs_text = {
+                -- [vim.diagnostic.severity.ERROR] = "",
+                -- [vim.diagnostic.severity.WARN] = "",
+                -- [vim.diagnostic.severity.HINT] = "",
+                -- [vim.diagnostic.severity.INFO] = "",
+                [vim.diagnostic.severity.ERROR] = "",
+                [vim.diagnostic.severity.WARN] = "",
+                [vim.diagnostic.severity.HINT] = "",
+                [vim.diagnostic.severity.INFO] = "",
+            }
+            local signs_numhl = {
+                [vim.diagnostic.severity.ERROR] = "ErrorMsg",
+                [vim.diagnostic.severity.WARN] = "WarningMsg",
+                [vim.diagnostic.severity.HINT] = "HintMsg",
+                [vim.diagnostic.severity.INFO] = "InfoMsg",
+            }
 
-                local config = {
-                    virtual_text = true,
-                    signs = {
-                        text = signs_text,
-                        numhl = signs_numhl,
-                    },
-                    -- annoying when in insert mode
-                    update_in_insert = false,
-                    underline = true,
-                    severity_sort = true,
-                    float = {
-                        focusable = false,
-                        border = "rounded",
-                        source = "always",
-                        header = "",
-                        prefix = "",
-                    },
-                }
+            local diagnostics_config = {
+                virtual_text = true,
+                signs = {
+                    text = signs_text,
+                    numhl = signs_numhl,
+                },
+                -- annoying when in insert mode
+                update_in_insert = false,
+                underline = true,
+                severity_sort = true,
+                float = {
+                    focusable = false,
+                    border = "rounded",
+                    source = "always",
+                    header = "",
+                    prefix = "",
+                },
+            }
+
+            local function setup_diagnostics(enabled)
+                local config = diagnostics_config
+
+                if not enabled then
+                    config = vim.tbl_deep_extend("force", diagnostics_config, {
+                        virtual_text = false,
+                        signs = false,
+                        underline = false,
+                    })
+                end
 
                 vim.diagnostic.config(config)
             end
@@ -223,19 +233,7 @@ return {
                 if LSP_DIAGNOSTICS_HIDDEN == nil then
                     LSP_DIAGNOSTICS_HIDDEN = false
                 end
-                if LSP_DIAGNOSTICS_HIDDEN then
-                    vim.diagnostic.config({
-                        virtual_text = true,
-                        signs = true,
-                        underline = true,
-                    })
-                else
-                    vim.diagnostic.config({
-                        virtual_text = false,
-                        signs = false,
-                        underline = false,
-                    })
-                end
+                setup_diagnostics(LSP_DIAGNOSTICS_HIDDEN)
                 LSP_DIAGNOSTICS_HIDDEN = not LSP_DIAGNOSTICS_HIDDEN
             end)
 
