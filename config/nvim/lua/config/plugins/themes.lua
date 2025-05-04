@@ -1,10 +1,10 @@
 return {
 
-    {
-        "seandewar/paragon.vim",
-        lazy = false,
-        priority = 1000,
-    },
+    -- {
+    --     "seandewar/paragon.vim",
+    --     lazy = false,
+    --     priority = 1000,
+    -- },
 
     {
         "folke/tokyonight.nvim",
