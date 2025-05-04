@@ -8,7 +8,7 @@ local function show()
     require("lualine").hide({ unhide = true })
 end
 
-function TOGGLE_LUALINE()
+local function toggle_lualine()
     if vim.g.lualine_shown then
         hide()
     else
@@ -22,7 +22,6 @@ return {
         "nvim-lualine/lualine.nvim",
         event = "VeryLazy",
         config = function()
-            local custom_auto = require("lualine.themes.auto")
             local lualine = require("lualine")
 
             local hide_in_width = function()
@@ -85,36 +84,8 @@ return {
                 maxcount = 2000000,
             }
 
-            -- cool function for progress
-            local progress = function()
-                local current_line = vim.fn.line(".")
-                local total_lines = vim.fn.line("$")
-                local chars = {
-                    "__",
-                    "▁▁",
-                    "▂▂",
-                    "▃▃",
-                    "▄▄",
-                    "▅▅",
-                    "▆▆",
-                    "▇▇",
-                    "██",
-                }
-                local line_ratio = current_line / total_lines
-                local index = math.ceil(line_ratio * #chars)
-                return chars[index]
-            end
-
             local spaces = function()
-                return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
-            end
-
-            local time = function()
-                return os.date("%H:%M:%S")
-            end
-
-            local spacer = function()
-                return "         "
+                return "spaces: " .. vim.bo[0].shiftwidth
             end
 
             local function is_recording()
@@ -124,13 +95,6 @@ return {
                 end -- not recording
                 return "@" .. reg
             end
-
-            -- custom_auto.normal.x = custom_auto.normal.c
-            -- custom_auto.insert.x = custom_auto.insert.c
-            -- custom_auto.visual.x = custom_auto.visual.c
-            -- custom_auto.replace.x = custom_auto.replace.c
-            -- custom_auto.command.x = custom_auto.command.c
-            -- custom_auto.inactive.x = custom_auto.inactive.c
 
             lualine.setup({
                 options = {
@@ -145,17 +109,14 @@ return {
                 sections = {
                     lualine_a = { mode, is_recording },
                     lualine_b = { branch },
-                    -- lualine_b = { branch, diagnostics, time },
                     lualine_c = {
                         diagnostics,
-                        -- time,
                         "%=",
                         filetype,
                         filename,
                         diff,
                     },
                     lualine_x = {
-                        -- spacer,
                         searchcount,
                         "selectioncount",
                         spaces,
@@ -165,14 +126,6 @@ return {
                     lualine_y = { "progress" },
                     lualine_z = { "location" },
                 },
-                -- inactive_sections = {
-                --   lualine_a = {},
-                --   lualine_b = {},
-                --   lualine_c = { "filename" },
-                --   lualine_x = { "location" },
-                --   lualine_y = {},
-                --   lualine_z = {},
-                -- },
                 tabline = {},
                 extensions = {},
             })
@@ -182,7 +135,7 @@ return {
             end
 
             local set = vim.keymap.set
-            set("n", "<leader>lt", TOGGLE_LUALINE)
+            set("n", "<leader>lt", toggle_lualine)
         end,
     },
 }
