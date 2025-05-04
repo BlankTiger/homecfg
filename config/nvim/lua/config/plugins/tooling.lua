@@ -10,7 +10,7 @@ return {
         event = "VeryLazy",
         config = function()
             local set = vim.keymap.set
-            set("n", "<f10>", ":TagbarToggle<cr>")
+            set("n", "<f10>", ":TagbarToggle<cr>", vim.g.n_opts)
         end,
     },
 
@@ -22,7 +22,7 @@ return {
 
             set({ "t", "n" }, "<F2>", function()
                 vim.cmd("copen | AsyncStop | AsyncStop | AsyncRun " .. vim.g.mk)
-            end, { silent = true })
+            end, vim.g.n_opts)
         end,
     },
 }

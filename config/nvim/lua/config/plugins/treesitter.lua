@@ -160,7 +160,7 @@ return {
 
             local set = vim.keymap.set
 
-            set("n", "<leader>c", ":TSContextToggle<cr>")
+            set("n", "<leader>c", ":TSContextToggle<cr>", vim.g.n_opts)
         end,
     },
 }

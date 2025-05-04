@@ -95,13 +95,13 @@ set("n", "<M-,>", function()
     if ok then
         vim.api.nvim_command("norm zz")
     end
-end)
+end, n_opts)
 set("n", "<M-.>", function()
     local ok, _ = pcall(vim.api.nvim_command, "cnext")
     if ok then
         vim.api.nvim_command("norm zz")
     end
-end)
+end, n_opts)
 set("n", "<M-;>", ":cpfile<cr>", n_opts)
 set("n", "<M-'>", ":cnfile<cr>", n_opts)
 
@@ -165,10 +165,10 @@ set("i", "<c-k>", "<esc><cmd>TmuxNavigateUp<cr>", n_opts)
 set("i", "<c-l>", "<esc><cmd>TmuxNavigateRight<cr>", n_opts)
 
 -- set : to q: (instead of cmdline have cmdwin)
-vim.keymap.set("n", ":", "q:i", n_opts)
+set("n", ":", "q:i", n_opts)
 
 -- quickly duplicate line I'm on and don't change the horizontal cursor position
-vim.keymap.set("n", "<leader>vd", function()
+set("n", "<leader>vd", function()
     local win = vim.api.nvim_get_current_win()
     local cursorpos = vim.api.nvim_win_get_cursor(win)
     vim.api.nvim_command("norm yyp")

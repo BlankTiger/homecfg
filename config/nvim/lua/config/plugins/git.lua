@@ -122,7 +122,7 @@ return {
                     local diffview = require("diffview")
                     set("n", "<leader>gd", diffview.open)
                     set("n", "<leader>gc", diffview.close)
-                    set("n", "<leader>gr", ":DiffviewRefresh<cr>")
+                    set("n", "<leader>gr", ":DiffviewRefresh<cr>", vim.g.n_opts)
                 end,
             },
         },

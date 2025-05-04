@@ -242,7 +242,7 @@ return {
             set("n", "<leader>lR", function()
                 vim.api.nvim_command("LspRestart")
                 vim.diagnostic.reset()
-            end)
+            end, vim.g.n_opts)
         end,
     },
 
