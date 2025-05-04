@@ -59,20 +59,18 @@ return {
                             ["a<"] = { query = "@assignment.lhs" },
                             ["a>"] = { query = "@assignment.rhs" },
 
-                            ["po"] = { query = "@parameter.outer" },
-                            ["pi"] = { query = "@parameter.inner" },
+                            -- this messes up pasting in visual
+                            -- ["po"] = { query = "@parameter.outer" },
+                            -- ["pi"] = { query = "@parameter.inner" },
 
                             ["io"] = { query = "@conditional.outer" },
                             ["ii"] = { query = "@conditional.inner" },
 
-                            ["l("] = { query = "@loop.outer" },
-                            ["l)"] = { query = "@loop.inner" },
+                            ["L("] = { query = "@loop.outer" },
+                            ["L)"] = { query = "@loop.inner" },
 
-                            ["co"] = { query = "@call.outer" },
-                            ["ci"] = { query = "@call.inner" },
-
-                            ["fo"] = { query = "@function.outer" },
-                            ["fi"] = { query = "@function.inner" },
+                            ["Fo"] = { query = "@function.outer" },
+                            ["Fi"] = { query = "@function.inner" },
 
                             ["Co"] = { query = "@class.outer" },
                             ["Ci"] = { query = "@class.inner" },
