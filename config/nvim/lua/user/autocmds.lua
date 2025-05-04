@@ -23,7 +23,6 @@ vim.api.nvim_create_autocmd({ "TermOpen" }, {
     end,
 })
 
--- Add this to your init.lua
 vim.api.nvim_create_autocmd("BufWritePre", {
     group = autocmd_group,
     pattern = "*",
