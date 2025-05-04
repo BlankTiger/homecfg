@@ -9,6 +9,26 @@ return {
     },
 
     {
+        "echasnovski/mini.move",
+        event = "VeryLazy",
+        config = function()
+            require("mini.move").setup({
+                mappings = {
+                    left = "",
+                    right = "",
+                    up = "K",
+                    down = "J",
+
+                    line_left = "",
+                    line_right = "",
+                    line_down = "",
+                    line_up = "",
+                },
+            })
+        end,
+    },
+
+    {
         "echasnovski/mini.surround",
         version = false,
         event = "VeryLazy",
