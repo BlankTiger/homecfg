@@ -1,12 +1,13 @@
-local autocmd_group = vim.api.nvim_create_augroup("My custom auto commands", { clear = true })
+local autocmd_group = vim.api.nvim_create_augroup("BlankTiger custom autocmds", { clear = true })
+local set = vim.keymap.set
 
+-- for easier quitting from the cmdline window q:
 vim.api.nvim_create_autocmd({ "CmdwinEnter" }, {
     group = autocmd_group,
     pattern = "*",
-    callback = function()
-        local bufnr = vim.api.nvim_get_current_buf()
-        vim.keymap.set({ "n", "i" }, "<C-q>", "<C-c><C-c>", { buffer = bufnr })
-        vim.keymap.set({ "n" }, "q", "<C-c><C-c>", { buffer = bufnr })
+    callback = function(args)
+        set({ "n", "i" }, "<C-q>", "<C-c><C-c>", { buffer = args.buf })
+        set({ "n" }, "q", "<C-c><C-c>", { buffer = args.buf })
     end,
 })
 
@@ -34,37 +35,32 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     desc = "Remove trailing whitespace on save",
 })
 
--- local matches = {}
+-- this enables me to go through all files detemined by the `pat` pattern
+-- from the output of a command in a terminal buffer
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
     group = autocmd_group,
     pattern = "*",
     callback = function(opts)
         if vim.bo[opts["buf"]].buftype ~= "terminal" then
-            -- for _, v in pairs(matches) do
-            --     local _, _ = pcall(vim.fn.matchdelete, v)
-            -- end
-            -- matches = {}
             vim.cmd([[highlight clear Files]])
             return
         end
 
-        -- local pat = [[\(^\|\s\+\)\zs\(\a\|\/\)\w\+\(\(\.\|/\).\{-}\)\+:\ze\(\s\+\|$\)]]
         local pat = [[\(^\|\s\+\)\zs\(\a\|\/\)\w\+\(\(\.\|\/\).\{-}\)\+:\ze\(\s\+\|$\)]]
         vim.cmd([[
         highlight Files gui=undercurl
         match Files /]] .. pat .. [[/]])
-        -- local m = vim.fn.matchadd("Files", pat)
-        -- table.insert(matches, m)
 
-        vim.keymap.set("n", "<C-S-p>", function()
+        set("n", "<C-S-p>", function()
             vim.fn.search(pat, "b")
         end, { silent = true })
-        vim.keymap.set("n", "<C-S-n>", function()
+        set("n", "<C-S-n>", function()
             vim.fn.search(pat)
         end, { silent = true })
     end,
 })
 
+-- flash yanked text
 vim.api.nvim_create_autocmd("TextYankPost", {
     group = vim.api.nvim_create_augroup("highlight_yank", {}),
     desc = "Hightlight selection on yank",
@@ -99,6 +95,8 @@ local remove_curr_tabpage_from_hist = function(tab_hist, tab_curr)
 end
 
 local tab_hist = { vim.api.nvim_get_current_tabpage() }
+-- this makes it so that when I close a tabpage, neovim opens the one that I
+-- visited last before the one that was just closed
 vim.api.nvim_create_autocmd({ "TabEnter", "TabClosed" }, {
     group = autocmd_group,
     desc = "switch to previously open tab when closing another one",
