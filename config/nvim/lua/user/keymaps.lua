@@ -159,11 +159,6 @@ set("n", "<c-j>", "<cmd>TmuxNavigateDown<cr>", n_opts)
 set("n", "<c-k>", "<cmd>TmuxNavigateUp<cr>", n_opts)
 set("n", "<c-l>", "<cmd>TmuxNavigateRight<cr>", n_opts)
 
-set("i", "<c-h>", "<esc><cmd>TmuxNavigateLeft<cr>", n_opts)
-set("i", "<c-j>", "<esc><cmd>TmuxNavigateDown<cr>", n_opts)
-set("i", "<c-k>", "<esc><cmd>TmuxNavigateUp<cr>", n_opts)
-set("i", "<c-l>", "<esc><cmd>TmuxNavigateRight<cr>", n_opts)
-
 -- set : to q: (instead of cmdline have cmdwin)
 set("n", ":", "q:i", n_opts)
 
