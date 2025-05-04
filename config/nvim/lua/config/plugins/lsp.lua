@@ -1,20 +1,19 @@
 local servers = {
-    "astro",
     "gopls",
     "ruff",
     "basedpyright",
     "lua_ls",
     "ts_ls",
     "html",
-    "marksman",
     "ols",
     "bashls",
-    -- NOTE: install from source into ~/.local/bin instead to follow nightly zig
-    -- "zls",
-    "nil_ls",
     "clangd",
     "ocamllsp",
-    -- "gleam",
+}
+
+local non_mason_servers = {
+    "zls",
+    "gleam",
 }
 
 function table.contains(table, element)
@@ -25,8 +24,6 @@ function table.contains(table, element)
     end
     return false
 end
-
-local set = vim.keymap.set
 
 return {
     {
@@ -62,143 +59,69 @@ return {
             "williamboman/mason-lspconfig.nvim",
         },
         config = function()
-            local function lsp_highlight_document(client)
-                local ok, illuminate = pcall(require, "illuminate")
-                if ok then
-                    illuminate.on_attach(client)
-                end
-            end
+            local diagnostic = vim.diagnostic
+            local codelens = vim.lsp.codelens
+            local buf = vim.lsp.buf
+            local set = vim.keymap.set
 
-            local function lsp_keymaps(bufnr)
-                local opts = { noremap = true, silent = true }
-                vim.api.nvim_buf_set_keymap(
-                    bufnr,
-                    "n",
-                    "gD",
-                    "<cmd>lua vim.lsp.buf.declaration()<CR>zm",
-                    opts
-                )
-                vim.api.nvim_buf_set_keymap(
-                    bufnr,
-                    "n",
-                    "gd",
-                    "<cmd>lua vim.lsp.buf.definition()<CR>zm",
-                    opts
-                )
-                vim.api.nvim_buf_set_keymap(
-                    bufnr,
-                    "n",
-                    "<leader>k",
-                    "<cmd>lua vim.lsp.buf.hover()<CR>",
-                    opts
-                )
-                vim.api.nvim_buf_set_keymap(
-                    bufnr,
-                    "n",
-                    "gi",
-                    "<cmd>lua vim.lsp.buf.implementation()<CR>zm",
-                    opts
-                )
-                vim.api.nvim_buf_set_keymap(
-                    bufnr,
-                    "n",
-                    "gr",
-                    "<cmd>lua vim.lsp.buf.references()<CR>",
-                    opts
-                )
-                vim.api.nvim_buf_set_keymap(
-                    bufnr,
-                    "n",
-                    "[d",
-                    '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>',
-                    opts
-                )
-                vim.api.nvim_buf_set_keymap(
-                    bufnr,
-                    "n",
-                    "]d",
-                    '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>',
-                    opts
-                )
-                vim.api.nvim_buf_set_keymap(
-                    bufnr,
-                    "n",
-                    "gl",
-                    '<cmd>lua vim.diagnostic.open_float({ border = "rounded" })<CR>',
-                    opts
-                )
-                vim.api.nvim_buf_set_keymap(
-                    bufnr,
-                    "n",
-                    "<leader>.",
-                    "<cmd>lua vim.diagnostic.setloclist()<CR>",
-                    opts
-                )
-                vim.cmd(
-                    [[ command! Format execute "<cmd>lua require('conform').format({ async = true })<cr>" ]]
-                )
-            end
+            local func_map = {
+                declaration = function()
+                    buf.declaration()
+                    vim.cmd("norm zz")
+                end,
+                definition = function()
+                    buf.definition()
+                    vim.cmd("norm zz")
+                end,
+                implementation = function()
+                    buf.implementation()
+                    vim.cmd("norm zz")
+                end,
+                diag_goto_prev = function()
+                    diagnostic.jump({ count = -1, float = true })
+                    vim.cmd("norm zz")
+                end,
+                diag_goto_next = function()
+                    diagnostic.jump({ count = 1, float = true })
+                    vim.cmd("norm zz")
+                end,
+            }
 
-            local on_attach = function(client, bufnr)
+            local on_attach = function(client, _bufnr)
                 client.server_capabilities.documentFormattingProvider = false
                 client.server_capabilities.semanticTokensProvider = nil
-                lsp_keymaps(bufnr)
-                lsp_highlight_document(client)
-            end
-
-            local function setup_cargotomllsp()
-                local lspconfig = require("lspconfig")
-                local configs = require("lspconfig.configs")
-
-                if vim.fn.executable("cargotomllsp") == 0 then
-                    vim.api.nvim_echo({ { "Installing cargotomllsp..." } }, true, {})
-                    local on_exit = function(obj)
-                        print(obj.code)
-                        print(obj.signal)
-                        print(obj.stdout)
-                        print(obj.stderr)
-                    end
-                    vim.system({ "cargo", "install", "cargotomllsp" }, { text = true }, on_exit)
-                end
-
-                configs.cargotomllsp = {
-                    default_config = {
-                        cmd = { "cargotomllsp" },
-                        filetypes = { "toml" },
-                        root_dir = lspconfig.util.root_pattern("Cargo.toml"),
-                        settings = {},
-                    },
-                }
             end
 
             local function setup_diagnostics()
-                local signs = {
-                    { name = "DiagnosticSignError", text = "" },
-                    { name = "DiagnosticSignWarn", text = "" },
-                    { name = "DiagnosticSignHint", text = "" },
-                    { name = "DiagnosticSignInfo", text = "" },
+                local signs_text = {
+                    -- [vim.diagnostic.severity.ERROR] = "",
+                    -- [vim.diagnostic.severity.WARN] = "",
+                    -- [vim.diagnostic.severity.HINT] = "",
+                    -- [vim.diagnostic.severity.INFO] = "",
+                    [vim.diagnostic.severity.ERROR] = "",
+                    [vim.diagnostic.severity.WARN] = "",
+                    [vim.diagnostic.severity.HINT] = "",
+                    [vim.diagnostic.severity.INFO] = "",
+                }
+                local signs_numhl = {
+                    [vim.diagnostic.severity.ERROR] = "ErrorMsg",
+                    [vim.diagnostic.severity.WARN] = "WarningMsg",
+                    [vim.diagnostic.severity.HINT] = "HintMsg",
+                    [vim.diagnostic.severity.INFO] = "InfoMsg",
                 }
 
-                for _, sign in ipairs(signs) do
-                    vim.fn.sign_define(
-                        sign.name,
-                        { texthl = sign.name, text = sign.text, numhl = "" }
-                    )
-                end
-
                 local config = {
-                    -- disable virtual text
                     virtual_text = true,
-                    -- show signs
                     signs = {
-                        active = signs,
+                        text = signs_text,
+                        numhl = signs_numhl,
                     },
-                    update_in_insert = true,
+                    -- annoying when in insert mode
+                    update_in_insert = false,
                     underline = true,
                     severity_sort = true,
                     float = {
                         focusable = false,
-                        -- style = "minimal",
                         border = "rounded",
                         source = "always",
                         header = "",
@@ -208,8 +131,9 @@ return {
 
                 vim.diagnostic.config(config)
             end
+
             if table.contains(servers, "cargotomllsp") then
-                setup_cargotomllsp()
+                require("user.cargotomllsp").setup()
             end
 
             local custom_server_settings = {
@@ -270,39 +194,29 @@ return {
                 on_attach = on_attach,
             }
 
-            -- local _servers = servers
-            -- table.insert(_servers, "zls")
-            for _, server in pairs(servers) do
+            local all_servers = vim.tbl_extend("force", servers, non_mason_servers)
+            for _, server in pairs(all_servers) do
                 local server_opts =
                     vim.tbl_deep_extend("force", opts, custom_server_settings[server] or {})
                 lspconfig[server].setup(server_opts)
             end
-            -- TODO: factor this out next time this needs to happen
-            local server_opts =
-                vim.tbl_deep_extend("force", opts, custom_server_settings["zls"] or {})
-            lspconfig["zls"].setup(server_opts)
-            server_opts = vim.tbl_deep_extend("force", opts, custom_server_settings["gleam"] or {})
-            lspconfig["gleam"].setup(server_opts)
 
             setup_diagnostics()
 
-            local diagnostic = vim.diagnostic
-            local codelens = vim.lsp.codelens
-            local buf = vim.lsp.buf
-
+            -- keymaps
             set("n", "<leader>li", ":LspInfo<cr>", vim.g.n_opts)
             set("n", "<leader>lI", ":LspInstallInfo<cr>", vim.g.n_opts)
 
             set("n", "<leader>ll", codelens.run)
             set("n", "<leader>lr", buf.rename)
             set("n", "<leader>la", buf.code_action)
-            set("n", "<leader>lj", function()
-                diagnostic.jump({ count = 1, float = true })
-            end)
-            set("n", "<leader>lk", function()
-                diagnostic.jump({ count = 1, float = true })
-            end)
             set("n", "<leader>lq", diagnostic.setloclist)
+            set("n", "gr", buf.references)
+            set("n", "gD", func_map.declaration)
+            set("n", "gd", func_map.definition)
+            set("n", "gi", func_map.implementation)
+            set("n", "[d", func_map.diag_goto_prev)
+            set("n", "]d", func_map.diag_goto_next)
 
             -- toggle diagnostics
             set("n", "<leader>lv", function()
@@ -329,13 +243,6 @@ return {
                 vim.api.nvim_command("LspRestart")
                 vim.diagnostic.reset()
             end)
-
-            -- TODO: move to conform if actually used
-            -- set("n", "<leader>lf", ":lua require('conform').format()<cr>")
-
-            -- TODO: move to telescope if actually used
-            -- set("n", "<leader>ld", ":Telescope diagnostics bufnr=0<cr>")
-            -- set("n", "<leader>lw", ":Telescope diagnostics<cr>")
         end,
     },
 
@@ -351,7 +258,7 @@ return {
     {
         "mrcjkb/rustaceanvim",
         ft = "rs",
-        version = "^5", -- Recommended
-        lazy = false, -- This plugin is already lazy
+        version = "^5",
+        lazy = false,
     },
 }

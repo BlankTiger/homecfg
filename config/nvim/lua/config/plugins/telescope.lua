@@ -169,6 +169,7 @@ return {
             set("n", "<leader>sk", builtin.keymaps)
             set("n", "<leader>sc", builtin.commands)
             set("n", "<leader>st", builtin.treesitter)
+            set("n", "<leader>sd", builtin.diagnostics)
 
             -- lsp telescope keymaps
             set("n", "<leader>ls", builtin.lsp_document_symbols)
