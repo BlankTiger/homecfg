@@ -11,6 +11,18 @@ vim.api.nvim_create_autocmd({ "CmdwinEnter" }, {
     end,
 })
 
+-- highlight nocheck/in (the things that prevents commiting stuff with it via hooks)
+vim.api.nvim_create_autocmd({ "VimEnter" }, {
+    group = autocmd_group,
+    pattern = "*",
+    callback = function()
+        local pat = [[nocheck.n]]
+        vim.cmd([[
+        highlight Nocheckin guifg=#fe0000
+        match Nocheckin /]] .. pat .. [[/]])
+    end,
+})
+
 vim.api.nvim_create_autocmd({ "TermOpen" }, {
     group = autocmd_group,
     pattern = "*",
