@@ -1,9 +1,12 @@
 local source_priority = {
-    snippets = 4,
-    lsp = 3,
-    path = 2,
+    snippets = 5,
+    lsp = 4,
+    path = 3,
+    -- omni = 2,
     buffer = 1,
 }
+
+local sources = vim.tbl_keys(source_priority)
 
 return {
     -- {
@@ -33,8 +36,6 @@ return {
         -- version = "v0.12.4",
         version = "*",
 
-        opts_extend = { "sources.default" },
-
         config = function()
             ---@module 'blink.cmp'
             ---@type blink.cmp.Config
@@ -58,6 +59,7 @@ return {
 
                 keymap = {
                     preset = "default",
+                    ["<C-y>"] = { "accept" },
                     ["<Tab>"] = {},
                 },
 
@@ -66,12 +68,7 @@ return {
                 },
 
                 sources = {
-                    default = {
-                        "snippets",
-                        "lsp",
-                        "path",
-                        "buffer",
-                    },
+                    default = sources,
                     providers = {
                         lsp = {
                             enabled = function()
@@ -85,6 +82,10 @@ return {
                             timeout_ms = 20000,
                         },
                         snippets = {
+                            fallbacks = {},
+                            timeout_ms = 20000,
+                        },
+                        omni = {
                             fallbacks = {},
                             timeout_ms = 20000,
                         },
@@ -157,7 +158,9 @@ return {
                     },
                 },
             }
-            require("blink.cmp").setup(opts)
+
+            local blink = require("blink.cmp")
+            blink.setup(opts)
 
             vim.keymap.set("n", "<leader>lc", function()
                 vim.g.lsp_completions_enabled = not vim.g.lsp_completions_enabled
