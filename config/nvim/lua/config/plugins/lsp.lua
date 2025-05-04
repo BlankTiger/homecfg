@@ -204,8 +204,8 @@ return {
             setup_diagnostics()
 
             -- keymaps
-            set("n", "<leader>li", ":LspInfo<cr>", vim.g.n_opts)
-            set("n", "<leader>lI", ":LspInstallInfo<cr>", vim.g.n_opts)
+            set("n", "<leader>li", "<cmd>LspInfo<cr>", vim.g.n_opts)
+            set("n", "<leader>lI", "<cmd>LspInstallInfo<cr>", vim.g.n_opts)
 
             set("n", "<leader>ll", codelens.run)
             set("n", "<leader>lr", buf.rename)

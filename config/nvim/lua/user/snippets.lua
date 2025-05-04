@@ -27,10 +27,10 @@ local set = vim.keymap.set
 set({ "i" }, "<C-K>", function()
     ls.expand()
 end, { silent = true })
-set({ "i", "s" }, "<C-l>", function()
+set({ "i", "s" }, "<C-Right>", function()
     ls.jump(1)
 end, { silent = true })
-set({ "i", "s" }, "<C-h>", function()
+set({ "i", "s" }, "<C-Left>", function()
     ls.jump(-1)
 end, { silent = true })
 

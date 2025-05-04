@@ -101,7 +101,7 @@ return {
                 },
             })
 
-            vim.keymap.set("n", "<leader>c", ":TSContextToggle<cr>", vim.g.n_opts)
+            vim.keymap.set("n", "<leader>c", "<cmd>TSContextToggle<cr>", vim.g.n_opts)
         end,
     },
 }

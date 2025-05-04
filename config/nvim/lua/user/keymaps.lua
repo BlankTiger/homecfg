@@ -11,7 +11,7 @@ set("n", ">", ">>", n_opts)
 set("n", "<", "<<", n_opts)
 
 -- reload file from disk
-set("n", "<leader>r", ":e!<cr>", n_opts)
+set("n", "<leader>r", "<cmd>e!<cr>", n_opts)
 
 -- remove buffer completely from memory
 set("n", "<space>w", "<cmd>bw!<cr>", n_opts)
@@ -33,28 +33,23 @@ set("n", "gh", "<cmd>sp<cr>", n_opts)
 set("n", "gi", "`^zzi", n_opts)
 
 -- resizing splits
-set("n", "<C-Down>", ":resize -2<CR>", n_opts)
-set("n", "<C-Up>", ":resize +2<CR>", n_opts)
-set("n", "<C-Left>", ":vertical resize -2<CR>", n_opts)
-set("n", "<C-Right>", ":vertical resize +2<CR>", n_opts)
-
-set("n", "<C-A-J>", ":resize -2<CR>", n_opts)
-set("n", "<C-A-K>", ":resize +2<CR>", n_opts)
-set("n", "<C-A-H>", ":vertical resize -2<CR>", n_opts)
-set("n", "<C-A-L>", ":vertical resize +2<CR>", n_opts)
+set("n", "<C-A-J>", "<cmd>resize -2<cr>", n_opts)
+set("n", "<C-A-K>", "<cmd>resize +2<cr>", n_opts)
+set("n", "<C-A-H>", "<cmd>vertical resize -2<cr>", n_opts)
+set("n", "<C-A-L>", "<cmd>vertical resize +2<cr>", n_opts)
 
 -- moving between loaded buffers like with C-o, C-i
-set("n", "<C-A-i>", ":bnext<cr>", n_opts)
-set("n", "<C-A-o>", ":bprev<cr>", n_opts)
+set("n", "<C-A-i>", "<cmd>bnext<cr>", n_opts)
+set("n", "<C-A-o>", "<cmd>bprev<cr>", n_opts)
 
 -- saving and quitting
-set("n", "<leader>w", ":w!<CR>", n_opts)
-set("n", "<leader>W", ":wq!<CR>", n_opts)
-set("n", "<leader>q", ":q<CR>", n_opts)
-set("n", "<C-q>", ":q<CR>", n_opts)
-set("n", "<A-q>", ":q!<CR>", n_opts)
-set("n", "<A-q>", ":q!<CR>", n_opts)
-set("n", "<leader>C", ":quitall!<CR>", n_opts)
+set("n", "<leader>w", "<cmd>w!<cr>", n_opts)
+set("n", "<leader>W", "<cmd>wq!<cr>", n_opts)
+set("n", "<leader>q", "<cmd>q<cr>", n_opts)
+set("n", "<C-q>", "<cmd>q<cr>", n_opts)
+set("n", "<A-q>", "<cmd>q!<cr>", n_opts)
+set("n", "<A-q>", "<cmd>q!<cr>", n_opts)
+set("n", "<leader>C", "<cmd>quitall!<cr>", n_opts)
 
 -- tabs
 
@@ -102,18 +97,18 @@ set("n", "<M-.>", function()
         vim.api.nvim_command("norm zz")
     end
 end, n_opts)
-set("n", "<M-;>", ":cpfile<cr>", n_opts)
-set("n", "<M-'>", ":cnfile<cr>", n_opts)
+set("n", "<M-;>", "<cmd>cpfile<cr>", n_opts)
+set("n", "<M-'>", "<cmd>cnfile<cr>", n_opts)
 
 -- concat lines in visual mode, because I have J remapped to moving blocks
 set("v", "<S-m>", "J", n_opts)
-set("v", "<S-j>", ":m '>+1<cr>gv=gv", n_opts)
-set("v", "<S-k>", ":m '<-2<cr>gv=gv", n_opts)
+set("v", "<S-j>", "<cmd>m '>+1<cr>gv=gv", n_opts)
+set("v", "<S-k>", "<cmd>m '<-2<cr>gv=gv", n_opts)
 
 -- terminal
 
 -- fullscreen terminal in new tab
-set("n", "<leader>to", ":tabnew | term<cr>", n_opts)
+set("n", "<leader>to", "<cmd>tabnew | term<cr>", n_opts)
 
 -- terminal in a split to the left
 set("n", "<leader>th", function()
@@ -132,10 +127,10 @@ set("n", "<leader>tl", function()
 end, n_opts)
 
 -- toggle a horizontal terminal via my own command
-set({ "n", "t" }, "<C-t>", ":TermToggle<cr>", n_opts)
+set({ "n", "t" }, "<C-t>", "<cmd>TermToggle<cr>", n_opts)
 
 -- close terminal window forcefully by default
-set("t", "<C-q>", ":q!<cr>", n_opts)
+set("t", "<C-q>", "<cmd>q!<cr>", n_opts)
 -- make esc work
 set("t", "<esc>", "<C-\\><C-n>", n_opts)
 -- navigating through jumplist without doing <esc>
@@ -149,15 +144,15 @@ set("n", "<A-d>", "dd", n_opts)
 set("v", "//", [["hy:%s/<C-r>h//gc<left><left><left>]], { noremap = true })
 
 -- navigating through splits and tmux panes without any hassle
-set("t", "<c-h>", "<C-\\><C-n><cmd>TmuxNavigateLeft<cr>", n_opts)
-set("t", "<c-j>", "<C-\\><C-n><cmd>TmuxNavigateDown<cr>", n_opts)
-set("t", "<c-k>", "<C-\\><C-n><cmd>TmuxNavigateUp<cr>", n_opts)
-set("t", "<c-l>", "<C-\\><C-n><cmd>TmuxNavigateRight<cr>", n_opts)
-
 set("n", "<c-h>", "<cmd>TmuxNavigateLeft<cr>", n_opts)
 set("n", "<c-j>", "<cmd>TmuxNavigateDown<cr>", n_opts)
 set("n", "<c-k>", "<cmd>TmuxNavigateUp<cr>", n_opts)
 set("n", "<c-l>", "<cmd>TmuxNavigateRight<cr>", n_opts)
+
+set({ "i", "t" }, "<c-h>", "<esc><cmd>TmuxNavigateLeft<cr>", n_opts)
+set({ "i", "t" }, "<c-j>", "<esc><cmd>TmuxNavigateDown<cr>", n_opts)
+set({ "i", "t" }, "<c-k>", "<esc><cmd>TmuxNavigateUp<cr>", n_opts)
+set({ "i", "t" }, "<c-l>", "<esc><cmd>TmuxNavigateRight<cr>", n_opts)
 
 -- set : to q: (instead of cmdline have cmdwin)
 set("n", ":", "q:i", n_opts)
