@@ -67,9 +67,6 @@ set errorformat+=%f:%l:\ %m
 set errorformat+=%f:%l\ %m
 ]])
 
-g.accent_color = "#17d87e"
-g.bg_color = "#000000"
-g.divider_color = "#15161e"
 if not g.lualine_shown then
     opt.laststatus = 0
     opt.stl = "%{repeat('─',winwidth('.'))}"

@@ -29,15 +29,20 @@ local black = "#000000"
 
 local function custom_tokyonight()
     vim.cmd.colorscheme("tokyonight-night")
+    vim.g.accent_color = "#17d87e"
+    vim.g.comment_color = "#88fce3"
+    vim.g.bg_color = "#000000"
+    vim.g.divider_color = "#15161e"
 
     vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+    vim.api.nvim_set_hl(0, "Comment", { fg = vim.g.comment_color })
     vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-    vim.api.nvim_set_hl(0, "TabLine", { bg = black })
-    vim.api.nvim_set_hl(0, "TabLineFill", { bg = black })
+    vim.api.nvim_set_hl(0, "TabLine", { bg = vim.g.bg_color })
+    vim.api.nvim_set_hl(0, "TabLineFill", { bg = vim.g.bg_color })
     vim.api.nvim_set_hl(0, "TabLineSel", { fg = vim.g.accent_color })
 
-    vim.api.nvim_set_hl(0, "FloatBorder", { bg = "#000000", fg = vim.g.accent_color })
-    vim.api.nvim_set_hl(0, "FloatTitle", { bg = "#000000", fg = "#ffffff" })
+    vim.api.nvim_set_hl(0, "FloatBorder", { bg = vim.g.bg_color, fg = vim.g.accent_color })
+    vim.api.nvim_set_hl(0, "FloatTitle", { bg = vim.g.bg_color, fg = "#ffffff" })
 
     vim.api.nvim_set_hl(
         0,
