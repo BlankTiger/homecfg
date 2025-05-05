@@ -11,8 +11,17 @@ vim.api.nvim_create_autocmd({ "CmdwinEnter" }, {
     end,
 })
 
+-- highlight ttcn
+vim.api.nvim_create_autocmd("BufEnter", {
+    group = autocmd_group,
+    pattern = { "*.ttcn", "*.ttcn3" },
+    callback = function()
+        vim.cmd("set filetype=ttcn")
+    end,
+})
+
 -- highlight nocheck/in (the things that prevents commiting stuff with it via hooks)
-vim.api.nvim_create_autocmd({ "VimEnter" }, {
+vim.api.nvim_create_autocmd("BufEnter", {
     group = autocmd_group,
     pattern = "*",
     callback = function()
