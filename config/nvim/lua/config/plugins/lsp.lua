@@ -16,6 +16,8 @@ local non_mason_servers = {
     "gleam",
 }
 
+local servers_lists = { servers, non_mason_servers }
+
 function table.contains(table, element)
     for _, value in pairs(table) do
         if value == element then
@@ -26,37 +28,29 @@ function table.contains(table, element)
 end
 
 return {
-    {
-        "williamboman/mason-lspconfig.nvim",
-        lazy = true,
-        config = function()
-            require("mason-lspconfig").setup({
-                ensure_installed = servers,
-                automatic_installation = {
-                    exclude = {
-                        "zls",
-                        "gleam",
-                    },
-                },
-            })
-        end,
-    },
-
-    {
-        "williamboman/mason.nvim",
-        lazy = true,
-        config = function()
-            require("mason").setup()
-        end,
-    },
 
     {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
         cmd = { "Mason", "LspInfo", "LspInstall", "LspUninstall" },
         dependencies = {
-            "williamboman/mason.nvim",
-            "williamboman/mason-lspconfig.nvim",
+            {
+                "williamboman/mason.nvim",
+                config = function()
+                    require("mason").setup()
+                end,
+            },
+            {
+                "williamboman/mason-lspconfig.nvim",
+                config = function()
+                    require("mason-lspconfig").setup({
+                        ensure_installed = servers,
+                        automatic_installation = {
+                            exclude = non_mason_servers,
+                        },
+                    })
+                end,
+            },
         },
         config = function()
             local diagnostic = vim.diagnostic
@@ -73,6 +67,7 @@ return {
                     buf.definition()
                     vim.cmd("norm zz")
                 end,
+
                 implementation = function()
                     buf.implementation()
                     vim.cmd("norm zz")
@@ -204,11 +199,12 @@ return {
                 on_attach = on_attach,
             }
 
-            local all_servers = vim.tbl_extend("force", servers, non_mason_servers)
-            for _, server in pairs(all_servers) do
-                local server_opts =
-                    vim.tbl_deep_extend("force", opts, custom_server_settings[server] or {})
-                lspconfig[server].setup(server_opts)
+            for _, list in ipairs(servers_lists) do
+                for _, server in ipairs(list) do
+                    local server_opts =
+                        vim.tbl_deep_extend("force", opts, custom_server_settings[server] or {})
+                    lspconfig[server].setup(server_opts)
+                end
             end
 
             setup_diagnostics()
@@ -221,6 +217,7 @@ return {
             set("n", "<leader>lr", buf.rename)
             set("n", "<leader>la", buf.code_action)
             set("n", "<leader>lq", diagnostic.setloclist)
+            set("n", "gl", diagnostic.open_float)
             set("n", "gr", buf.references)
             set("n", "gD", func_map.declaration)
             set("n", "gd", func_map.definition)
