@@ -123,10 +123,10 @@ return {
                 },
             }
 
-            local function setup_diagnostics(enabled)
+            local function setup_diagnostics(diagnostics_hidden)
                 local config = diagnostics_config
 
-                if not enabled then
+                if diagnostics_hidden then
                     config = vim.tbl_deep_extend("force", diagnostics_config, {
                         virtual_text = false,
                         signs = false,
@@ -207,7 +207,7 @@ return {
                 end
             end
 
-            setup_diagnostics()
+            setup_diagnostics(vim.g.lsp_diagnostics_hidden)
 
             -- keymaps
             set("n", "<leader>li", "<cmd>LspInfo<cr>", vim.g.n_opts)
@@ -227,11 +227,11 @@ return {
 
             -- toggle diagnostics
             set("n", "<leader>lv", function()
-                if LSP_DIAGNOSTICS_HIDDEN == nil then
-                    LSP_DIAGNOSTICS_HIDDEN = false
+                if vim.g.lsp_diagnostics_hidden == nil then
+                    vim.g.lsp_diagnostics_hidden = false
                 end
-                setup_diagnostics(LSP_DIAGNOSTICS_HIDDEN)
-                LSP_DIAGNOSTICS_HIDDEN = not LSP_DIAGNOSTICS_HIDDEN
+                setup_diagnostics(vim.g.lsp_diagnostics_hidden)
+                vim.g.lsp_diagnostics_hidden = not vim.g.lsp_diagnostics_hidden
             end)
 
             set("n", "<leader>lR", function()

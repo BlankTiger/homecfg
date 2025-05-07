@@ -54,7 +54,8 @@ g.mk = "echo 'update g:mk cmd'"
 g.rg_command = "rg --vimgrep"
 g.lsp_completions_enabled = false
 g.lualine_shown = false
-vim.g.disable_autoformat = false
+g.disable_autoformat = false
+g.lsp_diagnostics_hidden = false
 
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 g.zig_fmt_parse_errors = 0
