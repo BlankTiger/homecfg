@@ -227,11 +227,8 @@ return {
 
             -- toggle diagnostics
             set("n", "<leader>lv", function()
-                if vim.g.lsp_diagnostics_hidden == nil then
-                    vim.g.lsp_diagnostics_hidden = false
-                end
-                setup_diagnostics(vim.g.lsp_diagnostics_hidden)
                 vim.g.lsp_diagnostics_hidden = not vim.g.lsp_diagnostics_hidden
+                setup_diagnostics(vim.g.lsp_diagnostics_hidden)
             end)
 
             set("n", "<leader>lR", function()
