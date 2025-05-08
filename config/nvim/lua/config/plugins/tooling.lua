@@ -23,4 +23,14 @@ return {
         "skywind3000/asyncrun.vim",
         cmd = { "AsyncRun", "AsyncStop" },
     },
+
+    {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        config = function()
+            require("nvim-autopairs").setup({
+                map_c_h = true,
+            })
+        end,
+    },
 }
