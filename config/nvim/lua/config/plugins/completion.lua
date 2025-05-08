@@ -131,7 +131,7 @@ return {
                 completion = {
                     list = {
                         selection = {
-                            auto_insert = true,
+                            auto_insert = false,
                         },
                     },
                     menu = {
