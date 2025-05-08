@@ -107,6 +107,9 @@ set("v", "<S-k>", "<cmd>m '<-2<cr>gv=gv", n_opts)
 
 -- terminal
 
+-- tab indeed do tab
+set("t", "<tab>", "<tab>", n_opts)
+
 -- fullscreen terminal in new tab
 set("n", "<leader>to", "<cmd>tabnew | term<cr>", n_opts)
 
