@@ -7,6 +7,16 @@ local function set_hl()
 end
 
 return {
+    -- for moving quicker with f/t
+    {
+        "echasnovski/mini.jump",
+        version = "*",
+        event = "VeryLazy",
+        config = function()
+            require("mini.jump").setup()
+        end,
+    },
+
     {
         "ggandor/leap.nvim",
         event = "VeryLazy",
