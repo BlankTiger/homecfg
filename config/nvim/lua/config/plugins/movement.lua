@@ -14,6 +14,7 @@ return {
         event = "VeryLazy",
         config = function()
             require("mini.jump").setup()
+            vim.api.nvim_set_hl(0, "MiniJump", {})
         end,
     },
 
