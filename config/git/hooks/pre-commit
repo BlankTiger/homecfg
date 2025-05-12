@@ -1,18 +1,24 @@
 #!/bin/sh
-
 # Path to the hook itself
 HOOK_PATH="config/git/hooks/pre-commit"
 
-if git diff --cached --name-only | grep -v "$HOOK_PATH" | xargs grep 'nocheckin' >/dev/null 2>&1
-then
-  echo "Trying to commit non-committable code."
-  echo "Remove the 'nocheckin' string and try again."
-  exit 1
-else
-  # Run local pre-commit hook if exists
-  if [ -e ./.git/hooks/pre-commit ]; then
-    ./.git/hooks/pre-commit "$@"
-  else
-    exit 0
+# Get a list of staged files, excluding the hook itself
+STAGED_FILES=$(git diff --cached --name-only | grep -v "$HOOK_PATH")
+
+# Only proceed if there are staged files to check
+if [ -n "$STAGED_FILES" ]; then
+  # Check only the actual staged changes (hunks) for 'nocheckin'
+  if echo "$STAGED_FILES" | xargs git diff --cached | grep 'nocheckin' >/dev/null 2>&1
+  then
+    echo "Trying to commit non-committable code."
+    echo "Remove the 'nocheckin' string from your changes and try again."
+    exit 1
   fi
+fi
+
+# Run local pre-commit hook if exists
+if [ -e ./.git/hooks/pre-commit ]; then
+  ./.git/hooks/pre-commit "$@"
+else
+  exit 0
 fi
