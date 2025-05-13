@@ -76,15 +76,15 @@ return {
                 },
             })
 
-            set("n", "<leader>gq", gss.setqflist)
-            set("n", "<leader>gj", gss.next_hunk)
-            set("n", "<leader>gk", gss.prev_hunk)
-            set("n", "<leader>gP", gss.preview_hunk_inline)
-            set("n", "<leader>gp", gss.preview_hunk)
-            set("n", "<leader>gr", gss.reset_buffer)
-            set("n", "<leader>gl", gss.toggle_current_line_blame)
-            set("n", "<leader>gs", gss.stage_hunk)
-            set("n", "<leader>gu", gss.undo_stage_hunk)
+            set("n", "<leader>gq", gss.setqflist, vim.g.n_opts)
+            set("n", "<leader>gj", gss.next_hunk, vim.g.n_opts)
+            set("n", "<leader>gk", gss.prev_hunk, vim.g.n_opts)
+            set("n", "<leader>gP", gss.preview_hunk_inline, vim.g.n_opts)
+            set("n", "<leader>gp", gss.preview_hunk, vim.g.n_opts)
+            set("n", "<leader>gr", gss.reset_hunk, vim.g.n_opts)
+            set("n", "<leader>gl", gss.toggle_current_line_blame, vim.g.n_opts)
+            set("n", "<leader>gs", gss.stage_hunk, vim.g.n_opts)
+            set("n", "<leader>gu", gss.undo_stage_hunk, vim.g.n_opts)
         end,
     },
 
