@@ -162,9 +162,22 @@ return {
             local blink = require("blink.cmp")
             blink.setup(opts)
 
-            vim.keymap.set("n", "<leader>lc", function()
+            local set = vim.keymap.set
+            set("n", "<leader>lc", function()
                 vim.g.lsp_completions_enabled = not vim.g.lsp_completions_enabled
             end)
+
+            local function extend_keymap(mode, key, action_before)
+                local function extended_action()
+                    action_before()
+                    local key_code = vim.api.nvim_replace_termcodes(key, true, false, true)
+                    vim.api.nvim_feedkeys(key_code, "n", false)
+                end
+
+                set(mode, key, extended_action, { noremap = true })
+            end
+
+            extend_keymap("i", "<C-x>", blink.hide)
         end,
     },
 }
