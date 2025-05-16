@@ -58,9 +58,11 @@ return {
                 end,
             })
 
-            vim.keymap.set("n", "\\", function()
+            local set = vim.keymap.set
+            set("n", "\\", function()
                 conform.format({ async = true })
             end)
+            set("n", "<space>F", "<cmd>FToggle<cr>", vim.g.n_opts)
         end,
     },
 }

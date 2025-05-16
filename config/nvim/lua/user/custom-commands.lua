@@ -50,7 +50,6 @@ vim.api.nvim_create_user_command("TermKill", function()
     end
 end, {})
 
-
 -- filter quickfix, if file contains search pattern then keep it
 vim.api.nvim_create_user_command("Fqf", function(args)
     local aqf = require("aqf")
@@ -76,3 +75,7 @@ end, { desc = "Disable autoformat on save", bang = true })
 vim.api.nvim_create_user_command("FEnable", function()
     vim.g.disable_autoformat = false
 end, { desc = "Re-enable autoformat on save" })
+
+vim.api.nvim_create_user_command("FToggle", function()
+    vim.g.disable_autoformat = not vim.g.disable_autoformat
+end, { desc = "Toggle autoformat on save" })
