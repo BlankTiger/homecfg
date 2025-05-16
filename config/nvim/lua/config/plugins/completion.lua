@@ -135,6 +135,7 @@ return {
                         },
                     },
                     menu = {
+                        auto_show = false,
                         border = "rounded",
                         scrollbar = false,
                         winblend = 0,
