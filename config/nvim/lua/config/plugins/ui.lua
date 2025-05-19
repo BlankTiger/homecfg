@@ -300,6 +300,7 @@ return {
         event = "VeryLazy",
         config = function()
             require("todo-comments").setup({
+                signs = false,
                 search = { pattern = [[\b(KEYWORDS)(\([^\)]*\))?:]] },
                 highlight = {
                     -- TODO(CX): https://github.com/folke/todo-comments.nvim/issues/10

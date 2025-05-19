@@ -129,18 +129,21 @@ return {
                     },
                 },
                 completion = {
+                    -- keyword = {
+                    --     range = "full",
+                    -- },
                     list = {
                         selection = {
                             auto_insert = false,
                         },
                     },
                     menu = {
-                        auto_show = false,
-                        border = "rounded",
+                        auto_show = true,
+                        border = "single",
                         scrollbar = false,
                         winblend = 0,
                         scrolloff = 2,
-                        winhighlight = "Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None",
+                        winhighlight = "Normal:Pmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None",
                         draw = {
                             gap = 2,
                             columns = {

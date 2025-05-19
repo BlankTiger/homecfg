@@ -25,8 +25,6 @@ local custom_paragon = function()
     vim.cmd([[hi Comment guifg=#7FFFD4]])
 end
 
-local black = "#000000"
-
 local function custom_tokyonight()
     vim.cmd.colorscheme("tokyonight-night")
     vim.g.accent_color = "#17d87e"
@@ -40,6 +38,10 @@ local function custom_tokyonight()
     vim.api.nvim_set_hl(0, "TabLine", { bg = vim.g.bg_color })
     vim.api.nvim_set_hl(0, "TabLineFill", { bg = vim.g.bg_color })
     vim.api.nvim_set_hl(0, "TabLineSel", { fg = vim.g.accent_color })
+
+    vim.api.nvim_set_hl(0, "PmenuSel", { fg = "#ffffff" })
+    vim.api.nvim_set_hl(0, "Pmenu", { bg = vim.g.bg_color })
+    vim.api.nvim_set_hl(0, "PmenuSbar", {})
 
     vim.api.nvim_set_hl(0, "FloatBorder", { bg = vim.g.bg_color, fg = vim.g.accent_color })
     vim.api.nvim_set_hl(0, "FloatTitle", { bg = vim.g.bg_color, fg = "#ffffff" })
