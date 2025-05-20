@@ -137,11 +137,15 @@ ls.add_snippets("zig", {
         t(");"),
     }),
 
+    s("all", {
+        t("std.mem.Allocator"),
+    }),
+
     s("istd", {
         t('const std = @import("std");'),
     }),
 
-    s("ialloc", {
+    s("iall", {
         t("const Allocator = std.mem.Allocator;"),
     }),
 
@@ -153,7 +157,7 @@ ls.add_snippets("zig", {
         t("const t_alloc = std.testing.allocator;"),
     }),
 
-    s("Self", {
+    s("self", {
         t("const Self = @This();"),
     }),
 })
