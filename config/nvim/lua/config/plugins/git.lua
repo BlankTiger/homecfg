@@ -101,6 +101,16 @@ return {
                 disable_relative_line_numbers = false,
                 mappings = {
                     status = {
+                        ["1"] = false,
+                        ["2"] = false,
+                        ["3"] = false,
+                        ["4"] = false,
+
+                        ["<f1>"] = "Depth1",
+                        ["<f2>"] = "Depth2",
+                        ["<f3>"] = "Depth3",
+                        ["<f4>"] = "Depth4",
+
                         ["<c-s>"] = "VSplitOpen",
                         ["<c-h>"] = "SplitOpen",
                         ["R"] = "ShowRefs",
