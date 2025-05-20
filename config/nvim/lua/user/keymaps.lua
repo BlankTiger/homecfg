@@ -222,6 +222,8 @@ set("n", "g*", "g*zz", n_opts)
 set("n", "g#", "g#zz", n_opts)
 set("n", "<C-i>", "<C-i>zz", n_opts)
 set("n", "<C-o>", "<C-o>zz", n_opts)
+set("n", "g;", "g;zz", n_opts)
+set("n", "g,", "g,zz", n_opts)
 
 -- toggle line wrapping in all open windows
 set("n", "<leader>gw", "<cmd>windo set wrap!<CR>", n_opts)
