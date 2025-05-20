@@ -61,6 +61,17 @@ return {
                     preset = "default",
                     ["<C-y>"] = { "accept" },
                     ["<Tab>"] = {},
+
+                    ["<M-1>"] = { function(cmp) cmp.accept({ index = 1  }) end },
+                    ["<M-2>"] = { function(cmp) cmp.accept({ index = 2  }) end },
+                    ["<M-3>"] = { function(cmp) cmp.accept({ index = 3  }) end },
+                    ["<M-4>"] = { function(cmp) cmp.accept({ index = 4  }) end },
+                    ["<M-5>"] = { function(cmp) cmp.accept({ index = 5  }) end },
+                    ["<M-6>"] = { function(cmp) cmp.accept({ index = 6  }) end },
+                    ["<M-7>"] = { function(cmp) cmp.accept({ index = 7  }) end },
+                    ["<M-8>"] = { function(cmp) cmp.accept({ index = 8  }) end },
+                    ["<M-9>"] = { function(cmp) cmp.accept({ index = 9  }) end },
+                    ["<M-0>"] = { function(cmp) cmp.accept({ index = 10 }) end },
                 },
 
                 appearance = {
@@ -143,12 +154,13 @@ return {
                         scrollbar = false,
                         winblend = 0,
                         scrolloff = 2,
+                        max_height = 12,
                         winhighlight = "Normal:Pmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None",
                         draw = {
                             gap = 2,
                             columns = {
                                 { "label", "label_description", gap = 1 },
-                                { "kind_icon", "space" },
+                                { "kind_icon", "space", "space", "item_idx" },
                             },
                             components = {
                                 space = {
@@ -156,6 +168,14 @@ return {
                                     text = function()
                                         return " "
                                     end,
+                                },
+                                item_idx = {
+                                    text = function(ctx)
+                                        return ctx.idx == 10 and "0"
+                                            or ctx.idx >= 10 and " "
+                                            or tostring(ctx.idx)
+                                    end,
+                                    highlight = "BlinkCmpItemIdx", -- optional, only if you want to change its color
                                 },
                             },
                         },
