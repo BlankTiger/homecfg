@@ -18,6 +18,10 @@
 [user]
 	email = "maciej-urban@outlook.com"
 	name = "Maciej Urban"
+	signingkey = 651A5B5C7DFA0485
 
 [core]
     hooksPath = ~/.config/git/hooks
+
+[commit]
+	gpgsign = true
