@@ -47,6 +47,7 @@ opt.scrollback = 100000
 opt.guicursor = "n-v-i-c:block-Cursor,a:blinkwait700-blinkoff400-blinkon250-Cursor"
 opt.updatetime = 50
 opt.wrap = false
+opt.pumheight = 10
 g.searchindex_line_limit = 1000000
 g.do_filetype_lua = 1
 
