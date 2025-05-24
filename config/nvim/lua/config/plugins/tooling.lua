@@ -5,11 +5,13 @@ set({ "t", "n" }, "<F1>", "<cmd>AsyncStop<cr>", vim.g.n_opts)
 set({ "t", "n" }, "<F2>", function()
     vim.cmd("AsyncStop")
     vim.cmd("copen | AsyncRun " .. vim.g.mk)
+    vim.cmd("wincmd p")
 end, vim.g.n_opts)
 -- F26 = C-F2
 set({ "t", "n" }, "<F26>", function()
     vim.cmd("AsyncStop")
     vim.cmd("vert copen | wincmd = | AsyncRun " .. vim.g.mk)
+    vim.cmd("wincmd p")
 end, vim.g.n_opts)
 
 return {
