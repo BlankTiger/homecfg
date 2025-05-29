@@ -46,7 +46,6 @@ return {
 
                 indent = {
                     enable = true,
-                    disable = { "zig" },
                 },
 
                 textobjects = {
