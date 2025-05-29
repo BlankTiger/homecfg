@@ -262,6 +262,76 @@ return {
                 end)
             end
 
+            function find_dap_repl_buffer()
+                local buffers = vim.api.nvim_list_bufs()
+
+                for _, bufnr in ipairs(buffers) do
+                    if vim.api.nvim_buf_is_valid(bufnr) then
+                        local name = vim.api.nvim_buf_get_name(bufnr)
+                        local is_loaded = vim.api.nvim_buf_is_loaded(bufnr)
+
+                        if is_loaded and name:match("dap%-repl%-") then
+                            return bufnr
+                        end
+                    end
+                end
+
+                return nil
+            end
+
+            local repl_buffer = nil
+            local repl_window = nil
+
+            local function toggle_floating_repl()
+                if not repl_buffer then
+                    dap.repl.open()
+                    repl_buffer = find_dap_repl_buffer()
+                    dap.repl.toggle()
+                end
+
+                if repl_window and vim.api.nvim_win_is_valid(repl_window) then
+                    vim.api.nvim_win_close(repl_window, true)
+                    repl_window = nil
+                    return
+                end
+
+                local width = vim.api.nvim_get_option("columns")
+                local height = vim.api.nvim_get_option("lines")
+
+                local win_height = math.ceil(height * 0.9)
+                local win_width = math.ceil(width * 0.9)
+
+                local row = math.floor((height - win_height) / 2)
+                local col = math.floor((width - win_width) / 2)
+
+                local opts = {
+                    relative = "editor",
+                    width = win_width,
+                    height = win_height,
+                    row = row,
+                    col = col,
+                    style = "minimal",
+                    border = "rounded",
+                }
+
+                repl_window = vim.api.nvim_open_win(repl_buffer, true, opts)
+
+                vim.api.nvim_win_set_option(repl_window, "cursorline", true)
+                vim.api.nvim_win_set_option(repl_window, "winhl", "Normal:NormalFloat")
+
+                local close_keys = { "<Esc>", "q" }
+                for _, key in ipairs(close_keys) do
+                    vim.api.nvim_buf_set_keymap(
+                        repl_buffer,
+                        "n",
+                        key,
+                        "<cmd>ToggleRepl<cr>",
+                        { noremap = true, silent = true }
+                    )
+                end
+            end
+            vim.api.nvim_create_user_command("ToggleRepl", toggle_floating_repl, {})
+
             local set = vim.keymap.set
 
             set("n", "<F4>", dap.pause)
@@ -276,8 +346,7 @@ return {
                 local conditional = vim.fn.input("Break if -> ")
                 require("dap").set_breakpoint(conditional)
             end)
-            set("n", "<leader>du", dapui.toggle)
-            set("n", "<leader>dr", dap.repl.toggle)
+            set("n", "<leader>dr", toggle_floating_repl)
         end,
     },
 }
