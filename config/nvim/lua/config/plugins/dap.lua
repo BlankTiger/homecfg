@@ -346,6 +346,10 @@ return {
                 local conditional = vim.fn.input("Break if -> ")
                 require("dap").set_breakpoint(conditional)
             end)
+            set("n", "<leader>dU", dapui.toggle)
+            set("n", "<leader>du", dap.up)
+            set("n", "<leader>dd", dap.down)
+            set("n", "<leader>dc", dap.run_to_cursor)
             set("n", "<leader>dr", toggle_floating_repl)
         end,
     },
