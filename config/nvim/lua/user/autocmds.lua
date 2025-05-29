@@ -43,7 +43,7 @@ vim.api.nvim_create_autocmd({ "TermOpen" }, {
         set("t", "<c-j>", "<esc><cmd>TmuxNavigateDown<cr>", n_opts)
         set("t", "<c-k>", "<esc><cmd>TmuxNavigateUp<cr>", n_opts)
         set("t", "<c-l>", "<esc><cmd>TmuxNavigateRight<cr>", n_opts)
-        if opts.file:match("dap%-terminal") then
+        if opts.file:match("dap%-terminal") or opts.file:match("%adapter/codelldb") then
             return
         end
         vim.opt_local.relativenumber = false
