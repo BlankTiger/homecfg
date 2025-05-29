@@ -53,7 +53,7 @@ g.do_filetype_lua = 1
 
 g.mk = "echo 'update g:mk cmd'"
 g.rg_command = "rg --vimgrep"
-g.lsp_completions_enabled = true
+g.lsp_completions_enabled = false
 g.lualine_shown = false
 g.disable_autoformat = true
 g.lsp_diagnostics_hidden = true
