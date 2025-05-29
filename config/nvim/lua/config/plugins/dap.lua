@@ -104,6 +104,22 @@ return {
                         return vim.split(input, " ")
                     end,
                 },
+
+                {
+                    name = "Debug Zig Tests",
+                    type = "codelldb",
+                    request = "launch",
+                    program = function()
+                        -- Build test executable first
+                        vim.fn.system(
+                            "zig test --test-no-exec -femit-bin=zig-out/test " .. vim.fn.expand("%")
+                        )
+                        return vim.fn.getcwd() .. "/zig-out/test"
+                    end,
+                    cwd = "${workspaceFolder}",
+                    stopOnEntry = false,
+                    args = {},
+                },
             }
 
             dap.configurations.c = dap.configurations.cpp
