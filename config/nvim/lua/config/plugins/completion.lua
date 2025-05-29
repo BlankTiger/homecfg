@@ -101,31 +101,16 @@ return {
                             timeout_ms = 20000,
                         },
                         buffer = {
-                            -- opts = {
-                            --     get_bufnrs = function()
-                            --         -- use all buffers, even hidden ones
-                            --         -- HACK: blink.cmp by default cuts of buffer completions
-                            --         -- if buftext of all open buffers exceeds certain thresholds
-                            --         -- to get around that I edited the source code
-                            --         --
-                            --         -- there are some smart ways to solve this, some ideas:
-                            --         -- - if length is too long, include just current and alternate file
-                            --         -- - maintain a list of recently visited buffers and take N previous buffers
-                            --         --   until they don't fit anymore into the buftext
-                            --         -- - include only files of the same filetype as the current file
-                            --         -- - dont include certain filetypes
-                            --         -- - think of some way to optimize providing buftext for buffer completions
-                            --         --   currently blink.cmp loops over all files, appends their text to a list
-                            --         --   and then does table.concat on the resulting table, see if concating str
-                            --         --   could be faster without first collecting into a list, maybe nvim has a
-                            --         --   better/faster way of providing buftext for completions?
-                            --         -- - look into the algorithm for buffer completions in rust, maybe it could
-                            --         --   be parallelized further
-                            --         -- - give user more documentation on filtering out long buffers in get_bufnrs
-                            --         --   function
-                            --         return vim.api.nvim_list_bufs()
-                            --     end,
-                            -- },
+                          opts = {
+                                -- get all buffers, even ones like neo-tree
+                                get_bufnrs = vim.api.nvim_list_bufs
+                                -- -- or (recommended) filter to only "normal" buffers
+                                -- get_bufnrs = function()
+                                --     return vim.tbl_filter(function(bufnr)
+                                --         return vim.bo[bufnr].buftype == ''
+                                --     end, vim.api.nvim_list_bufs())
+                                -- end
+                            },
                             timeout_ms = 20000,
                         },
                     },
