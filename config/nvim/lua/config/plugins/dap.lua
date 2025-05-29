@@ -142,6 +142,7 @@ return {
 
             local dapui_setup = function(left, bottom)
                 dapui.setup({
+                    controls = { enabled = false },
                     layouts = {
                         {
                             elements = left,
