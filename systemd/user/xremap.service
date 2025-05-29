@@ -1,0 +1,9 @@
+[Unit]
+Description=xremap keyboard remapping service
+
+[Service]
+Type=oneshot
+ExecStart=/home/blanktiger/.cargo/bin/xremap --watch=device /home/blanktiger/.config/xremap.yml
+
+[Install]
+WantedBy=default.target
