@@ -128,28 +128,35 @@ return {
                 v["justMyCode"] = false
             end
 
-            dapui.setup({
-                layouts = {
-                    {
-                        elements = {
-                            "scopes",
-                            "breakpoints",
-                            "stacks",
-                            "watches",
+            local togglable = {
+                left = { "scopes", "breakpoints", "stacks", "watches" },
+                bottom = { "console", "repl" },
+            }
+
+            local elements_left = {
+                "scopes",
+            }
+            local elements_bottom = {
+                "console",
+            }
+
+            local dapui_setup = function(left, bottom)
+                dapui.setup({
+                    layouts = {
+                        {
+                            elements = left,
+                            size = 90,
+                            position = "left",
                         },
-                        size = 40,
-                        position = "left", -- Can be "left", "right", "top", "bottom"
-                    },
-                    {
-                        elements = {
-                            "repl",
-                            "console",
+                        {
+                            elements = bottom,
+                            size = 20,
+                            position = "bottom",
                         },
-                        size = 10,
-                        position = "bottom",
                     },
-                },
-            })
+                })
+            end
+            dapui_setup(elements_left, elements_bottom)
 
             vim.fn.sign_define(
                 "DapBreakpoint",
@@ -172,6 +179,88 @@ return {
                 dapui.close()
             end
 
+            -- Function to toggle UI elements with a menu
+            local function toggle_ui_element()
+                -- Create list of all togglable elements
+                local togglable_ui = {}
+                for position, elements in pairs(togglable) do
+                    for _, element in ipairs(elements) do
+                        table.insert(togglable_ui, element)
+                    end
+                end
+
+                vim.ui.select(togglable_ui, {
+                    prompt = "Select UI element to toggle:",
+                    format_item = function(item)
+                        return "󰙳 " .. item:gsub("^%l", string.upper) -- Add icon and capitalize first letter
+                    end,
+                }, function(choice, idx)
+                    if choice then
+                        -- Close current UI
+                        dapui.close()
+
+                        -- Determine which position this element belongs to
+                        local target_position = nil
+                        for position, elements in pairs(togglable) do
+                            for _, element in ipairs(elements) do
+                                if element == choice then
+                                    target_position = position
+                                    break
+                                end
+                            end
+                            if target_position then
+                                break
+                            end
+                        end
+
+                        -- Toggle the element in the appropriate elements table
+                        if target_position == "left" then
+                            -- Check if element is already in elements_left
+                            local found_index = nil
+                            for i, element in ipairs(elements_left) do
+                                if element == choice then
+                                    found_index = i
+                                    break
+                                end
+                            end
+
+                            if found_index then
+                                -- Remove element
+                                table.remove(elements_left, found_index)
+                            else
+                                -- Add element
+                                table.insert(elements_left, choice)
+                            end
+                        elseif target_position == "bottom" then
+                            -- Check if element is already in elements_bottom
+                            local found_index = nil
+                            for i, element in ipairs(elements_bottom) do
+                                if element == choice then
+                                    found_index = i
+                                    break
+                                end
+                            end
+
+                            if found_index then
+                                -- Remove element
+                                table.remove(elements_bottom, found_index)
+                            else
+                                -- Add element
+                                table.insert(elements_bottom, choice)
+                            end
+                        end
+
+                        -- Recreate UI with new configuration
+                        dapui_setup(elements_left, elements_bottom)
+
+                        -- Reopen UI
+                        dapui.open()
+
+                        vim.notify("Toggled " .. choice, vim.log.levels.INFO)
+                    end
+                end)
+            end
+
             local set = vim.keymap.set
 
             set("n", "<F4>", dap.pause)
@@ -179,7 +268,8 @@ return {
             set("n", "<F6>", dap.step_over)
             set("n", "<F7>", dap.step_into)
             set("n", "<F8>", dap.step_out)
-            set("n", "<F9>", dap.terminate)
+            set("n", "<F9>", toggle_ui_element, { desc = "Toggle DAP UI element" })
+            set("n", "<leader>dt", dap.terminate)
             set("n", "<leader>db", dap.toggle_breakpoint)
             set("n", "<leader>dB", function()
                 local conditional = vim.fn.input("Break if -> ")
