@@ -89,12 +89,22 @@ set("n", "<M-,>", function()
     local ok, _ = pcall(vim.api.nvim_command, "cprev")
     if ok then
         vim.api.nvim_command("norm zz")
+    else
+        ok, _ = pcall(vim.api.nvim_command, "clast")
+        if ok then
+            vim.api.nvim_command("norm zz")
+        end
     end
 end, n_opts)
 set("n", "<M-.>", function()
     local ok, _ = pcall(vim.api.nvim_command, "cnext")
     if ok then
         vim.api.nvim_command("norm zz")
+    else
+        ok, _ = pcall(vim.api.nvim_command, "cfirst")
+        if ok then
+            vim.api.nvim_command("norm zz")
+        end
     end
 end, n_opts)
 set("n", "<M-;>", "<cmd>cpfile<cr>", n_opts)
