@@ -120,6 +120,35 @@ return {
                     stopOnEntry = false,
                     args = {},
                 },
+
+                {
+                    name = "Debug Zig Tests (gdb)",
+                    type = "cppdbg",
+                    miDebuggerPath = "/usr/bin/gdb",
+                    request = "launch",
+                    program = function()
+                        -- Build test executable first
+                        vim.fn.system(
+                            "zig test --test-no-exec -femit-bin=zig-out/test " .. vim.fn.expand("%")
+                        )
+                        return vim.fn.getcwd() .. "/zig-out/test"
+                    end,
+                    cwd = "${workspaceFolder}",
+                    setupCommands = {
+                        -- {
+                        --     text = "target record-full",
+                        --     description = "enable stepping back",
+                        --     ignoreFailures = false,
+                        -- },
+                        {
+                            text = "-enable-pretty-printing",
+                            description = "enable pretty printing",
+                            ignoreFailures = false,
+                        },
+                    },
+                    stopOnEntry = true,
+                    stopAtEntry = true,
+                },
             }
 
             dap.configurations.c = dap.configurations.cpp
@@ -349,6 +378,7 @@ return {
             set("n", "<leader>dU", dapui.toggle)
             set("n", "<leader>du", dap.up)
             set("n", "<leader>dd", dap.down)
+            set("n", "<leader>dp", dap.step_back)
             set("n", "<leader>dc", dap.run_to_cursor)
             set("n", "<leader>dr", toggle_floating_repl)
         end,
