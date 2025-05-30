@@ -97,8 +97,8 @@ return {
             neogit.setup({
                 console_timeout = 10000,
                 auto_show_console = true,
-                disable_line_numbers = false,
-                disable_relative_line_numbers = false,
+                -- disable_line_numbers = false,
+                -- disable_relative_line_numbers = false,
                 mappings = {
                     status = {
                         ["1"] = false,
