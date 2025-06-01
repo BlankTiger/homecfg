@@ -1,66 +1,67 @@
-local custom_paragon = function()
-    vim.cmd.colorscheme("paragon")
-    -- highlight Keyword guifg=#ffdd33
-    -- highlight Keyword guifg=#ffaf00
-    vim.cmd([[
-        highlight DiffAdd guibg=NONE guifg=#5fd7af
-        highlight DiffText guibg=NONE guifg=#d7d787
-        highlight DiffDelete ctermfg=NONE ctermbg=NONE guifg=#d78787 guibg=NONE
-        highlight DiffChange ctermbg=NONE guifg=NONE guibg=NONE
-        highlight Visual guibg=#333333 guifg=#ffffff
-        highlight Keyword guifg=#ffaf00
+local set_hl = vim.api.nvim_set_hl
 
-        highlight NeogitDiffAdd guibg=#1a1a1a guifg=#5fd7af
-        highlight NeogitDiffAddHighlight guibg=#1a1a1a guifg=#5fd7af
-        highlight NeogitDiffAddCursor guibg=#0f0f0f guifg=#5fd7af
-        highlight NeogitDiffDelete ctermfg=NONE ctermbg=NONE guifg=#d78787 guibg=#1a1a1a
-        highlight NeogitDiffDeleteHighlight guifg=#d78787 guibg=#1a1a1a
-        highlight NeogitDiffDeleteCursor guibg=#0f0f0f guifg=#d78787
-        highlight! link GitConflictIncoming DiffAdd
-        highlight! link GitConflictIncomingLabel DiffAdd
-        highlight! link GitConflictCurrent DiffText
-        highlight! link GitConflictCurrentLabel DiffText
-    ]])
-
-    vim.cmd([[hi Comment guifg=#7FFFD4]])
-end
-
-local function custom_tokyonight()
-    vim.cmd.colorscheme("tokyonight-night")
+local function set_custom_colors()
     vim.g.accent_color = "#17d87e"
     vim.g.comment_color = "#88fce3"
     vim.g.bg_color = "#000000"
     vim.g.divider_color = "#15161e"
 
-    vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-    vim.api.nvim_set_hl(0, "Comment", { fg = vim.g.comment_color })
-    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-    vim.api.nvim_set_hl(0, "TabLine", { bg = vim.g.bg_color })
-    vim.api.nvim_set_hl(0, "TabLineFill", { bg = vim.g.bg_color })
-    vim.api.nvim_set_hl(0, "TabLineSel", { fg = vim.g.accent_color })
+    set_hl(0, "Normal", { bg = "none" })
+    set_hl(0, "Comment", { fg = vim.g.comment_color })
+    set_hl(0, "NormalFloat", { bg = "none" })
+    set_hl(0, "TabLine", { bg = vim.g.bg_color })
+    set_hl(0, "TabLineFill", { bg = vim.g.bg_color })
+    set_hl(0, "TabLineSel", { fg = vim.g.accent_color })
 
-    vim.api.nvim_set_hl(0, "PmenuSel", { fg = "#ffffff" })
-    vim.api.nvim_set_hl(0, "Pmenu", { bg = vim.g.bg_color })
-    vim.api.nvim_set_hl(0, "PmenuSbar", {})
+    set_hl(0, "PmenuSel", { fg = "#ffffff" })
+    set_hl(0, "Pmenu", { bg = vim.g.bg_color })
+    set_hl(0, "PmenuSbar", {})
 
-    vim.api.nvim_set_hl(0, "FloatBorder", { bg = vim.g.bg_color, fg = vim.g.accent_color })
-    vim.api.nvim_set_hl(0, "FloatTitle", { bg = vim.g.bg_color, fg = "#ffffff" })
+    set_hl(0, "FloatBorder", { bg = vim.g.bg_color, fg = vim.g.accent_color })
+    set_hl(0, "FloatTitle", { bg = vim.g.bg_color, fg = "#ffffff" })
 
-    vim.api.nvim_set_hl(
+    set_hl(0, "StatusLineNC", { bg = vim.g.bg_color, fg = vim.g.divider_color, ctermbg = 0 })
+    set_hl(0, "StatusLine", { bg = vim.g.bg_color, fg = vim.g.divider_color, ctermbg = 0 })
+end
+
+local custom_paragon = function()
+    vim.cmd.colorscheme("paragon")
+    set_custom_colors()
+
+    set_hl(0, "Keyword", { fg = "#ffaf00" })
+    set_hl(0, "Visual", { bg = "#333333", fg = "#ffffff" })
+
+    set_hl(0, "DiffAdd", { bg = "none", fg = "#5fd7af" })
+    set_hl(0, "DiffText", { bg = "none", fg = "#d7d787" })
+    set_hl(0, "DiffDelete", { ctermbg = "none", ctermfg = "none", bg = "none", fg = "#d78787" })
+    set_hl(0, "DiffChange", { ctermbg = "none", bg = "none", fg = "none" })
+
+    set_hl(0, "NeogitDiffAdd", { bg = "#1a1a1a", fg = "#5fd7af" })
+    set_hl(0, "NeogitDiffAddHighlight", { bg = "#1a1a1a", fg = "#5fd7af" })
+    set_hl(0, "NeogitDiffAddCursor", { bg = "#0f0f0f", fg = "#5fd7af" })
+    set_hl(
         0,
-        "StatusLineNC",
-        { bg = vim.g.bg_color, fg = vim.g.divider_color, ctermbg = 0 }
+        "NeogitDiffDelete",
+        { ctermfg = "none", ctermbg = "none", fg = "#d78787", bg = "#1a1a1a" }
     )
-    vim.api.nvim_set_hl(
-        0,
-        "StatusLine",
-        { bg = vim.g.bg_color, fg = vim.g.divider_color, ctermbg = 0 }
-    )
+    set_hl(0, "NeogitDiffDeleteHighlight", { fg = "#d78787", bg = "#1a1a1a" })
+    set_hl(0, "NeogitDiffDeleteCursor", { bg = "#0f0f0f", fg = "#d78787" })
+    set_hl(0, "GitConflictIncoming", { link = "DiffAdd" })
+    set_hl(0, "GitConflictIncomingLabel", { link = "DiffAdd" })
+    set_hl(0, "GitConflictCurrent", { link = "DiffText" })
+    set_hl(0, "GitConflictCurrentLabel", { link = "DiffText" })
+
+end
+
+local function custom_tokyonight()
+    vim.cmd.colorscheme("tokyonight-night")
+    set_custom_colors()
 end
 
 return function()
     vim.opt.termguicolors = true
-    -- custom_paragon()
-    _ = custom_paragon
-    custom_tokyonight()
+    custom_paragon()
+    -- _ = custom_paragon
+    _ = custom_tokyonight
+    -- custom_tokyonight()
 end
