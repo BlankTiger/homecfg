@@ -295,25 +295,25 @@ return {
         end,
     },
 
-    {
-        "folke/todo-comments.nvim",
-        event = "VeryLazy",
-        config = function()
-            require("todo-comments").setup({
-                signs = false,
-                search = { pattern = [[\b(KEYWORDS)(\([^\)]*\))?:]] },
-                highlight = {
-                    -- TODO(CX): https://github.com/folke/todo-comments.nvim/issues/10
-                    -- WARN: https://github.com/folke/todo-comments.nvim/issues/332
-                    pattern = [[.*<((KEYWORDS)%(\(.{-1,}\))?):]],
-                },
-                keywords = {
-                    TODO = { color = "#2563EB" },
-                },
-            })
-        end,
-        dependencies = { "nvim-lua/plenary.nvim" },
-    },
+    -- {
+    --     "folke/todo-comments.nvim",
+    --     event = "VeryLazy",
+    --     config = function()
+    --         require("todo-comments").setup({
+    --             signs = false,
+    --             search = { pattern = [[\b(KEYWORDS)(\([^\)]*\))?:]] },
+    --             highlight = {
+    --                 -- TODO(CX): https://github.com/folke/todo-comments.nvim/issues/10
+    --                 -- WARN: https://github.com/folke/todo-comments.nvim/issues/332
+    --                 pattern = [[.*<((KEYWORDS)%(\(.{-1,}\))?):]],
+    --             },
+    --             keywords = {
+    --                 TODO = { color = "#2563EB" },
+    --             },
+    --         })
+    --     end,
+    --     dependencies = { "nvim-lua/plenary.nvim" },
+    -- },
 
     { "romainl/vim-cool", event = "VeryLazy" },
 
