@@ -13,7 +13,7 @@ local function set_custom_colors()
     set_hl(0, "TabLineFill", { bg = vim.g.bg_color })
     set_hl(0, "TabLineSel", { fg = vim.g.accent_color })
 
-    set_hl(0, "PmenuSel", { fg = "#ffffff" })
+    set_hl(0, "PmenuSel", { fg = vim.g.accent_color })
     set_hl(0, "Pmenu", { bg = vim.g.bg_color })
     set_hl(0, "PmenuSbar", {})
 
