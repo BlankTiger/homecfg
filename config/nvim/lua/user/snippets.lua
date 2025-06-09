@@ -92,7 +92,7 @@ ls.add_snippets("zig", {
     }),
 
     s("ldbg", {
-        t('log.debug("'),
+        t('std.log.debug("'),
         i(1),
         t('", .{'),
         i(2),
@@ -100,7 +100,7 @@ ls.add_snippets("zig", {
     }),
 
     s("linfo", {
-        t('log.info("'),
+        t('std.log.info("'),
         i(1),
         t('", .{'),
         i(2),
@@ -108,7 +108,7 @@ ls.add_snippets("zig", {
     }),
 
     s("lerr", {
-        t('log.err("'),
+        t('std.log.err("'),
         i(1),
         t('", .{'),
         i(2),
@@ -116,7 +116,7 @@ ls.add_snippets("zig", {
     }),
 
     s("lwarn", {
-        t('log.warn("'),
+        t('std.log.warn("'),
         i(1),
         t('", .{'),
         i(2),
