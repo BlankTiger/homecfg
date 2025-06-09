@@ -96,10 +96,45 @@ return {
                 return "@" .. reg
             end
 
+            local colors = { bg = vim.g.background_color, fg = "#ffffff" }
+            local custom = {
+                normal = {
+                    a = colors,
+                    b = colors,
+                    c = colors,
+                },
+                insert = {
+                    a = colors,
+                    b = colors,
+                    c = colors,
+                },
+                visual = {
+                    a = colors,
+                    b = colors,
+                    c = colors,
+                },
+                replace = {
+                    a = colors,
+                    b = colors,
+                    c = colors,
+                },
+                command = {
+                    a = colors,
+                    b = colors,
+                    c = colors,
+                },
+                inactive = {
+                    a = colors,
+                    b = colors,
+                    c = colors,
+                },
+            }
+
             lualine.setup({
                 options = {
                     icons_enabled = true,
-                    theme = "tokyonight",
+                    theme = custom,
+                    -- theme = "tokyonight",
                     component_separators = { left = "", right = "" },
                     section_separators = { left = "", right = "" },
                     disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
@@ -112,7 +147,7 @@ return {
                     lualine_c = {
                         diagnostics,
                         "%=",
-                        filetype,
+                        -- filetype,
                         filename,
                         diff,
                     },
