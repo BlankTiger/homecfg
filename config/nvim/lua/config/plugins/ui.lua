@@ -1,4 +1,3 @@
-local header_idx = 4
 local headers = {
     {
         "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠛⠛⠛⠋⠉⠈⠉⠉⠉⠉⠛⠻⢿⣿⣿⣿⣿⣿⣿⣿",
@@ -217,6 +216,9 @@ local headers = {
         "*..          .    .    ....::...           .::    .....          ......",
     },
 }
+
+math.randomseed(os.time())
+local header_idx = math.random(#headers)
 
 local function get_header(increment)
     if increment then
