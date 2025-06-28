@@ -6,9 +6,16 @@ _G.MyQuickfixtextfunc = function(info)
         local item = qflist.items[i]
         if item.valid == 1 then
             local filename = vim.api.nvim_buf_get_name(item.bufnr)
-            table.insert(result, "" .. filename .. ":" .. item.lnum .. ":" .. item.col .. " ->" .. item.text)
+            table.insert(
+                result,
+                "" .. filename .. ":" .. item.lnum .. ":" .. item.col .. " ->" .. item.text
+            )
         else
-            table.insert(result, item.text)
+            if #item.text > 0 then
+                table.insert(result, item.text)
+            else
+                table.insert(result, " ")
+            end
         end
     end
 
