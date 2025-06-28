@@ -14,3 +14,5 @@ _G.MyQuickfixtextfunc = function(info)
 
     return result
 end
+
+vim.o.quickfixtextfunc = "v:lua.MyQuickfixtextfunc"
