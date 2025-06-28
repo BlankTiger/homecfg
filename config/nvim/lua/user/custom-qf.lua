@@ -23,3 +23,9 @@ _G.MyQuickfixtextfunc = function(info)
 end
 
 vim.o.quickfixtextfunc = "v:lua.MyQuickfixtextfunc"
+
+local set_hl = vim.api.nvim_set_hl
+set_hl(0, "qfFileName", { link = "Normal" })
+set_hl(0, "qfLineNr", { link = "Normal" })
+set_hl(0, "qfError", { fg = "#ff4444" })
+set_hl(0, "QuickFixLine", { fg = vim.g.accent_color })
