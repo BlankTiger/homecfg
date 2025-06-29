@@ -157,6 +157,22 @@ return {
 
             dap.configurations.c = dap.configurations.cpp
 
+            table.insert(dap.configurations.python, {
+                type = "python",
+                request = "launch",
+                name = "pytest: current file",
+                module = "pytest",
+                args = {
+                    "${file}",
+                    "-v",
+                    "-s",
+                    "--tb=short",
+                },
+                console = "integratedTerminal",
+                -- NOTE: dont forget to install stuff like pytest and pytest-mock
+                cwd = "${workspaceFolder}",
+            })
+
             for _, v in pairs(dap.configurations.python) do
                 v["justMyCode"] = false
             end
