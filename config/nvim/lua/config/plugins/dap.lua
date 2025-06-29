@@ -10,7 +10,11 @@ return {
                         "mfussenegger/nvim-dap-python",
                         ft = "python",
                         config = function(_, _)
-                            local path = "~/venv/bin/python"
+                            local venv_path = os.getenv("VIRTUAL_ENV") or ""
+                            local path = ""
+                            if #venv_path > 0 then
+                                path = venv_path .. "/bin/python"
+                            end
                             require("dap-python").setup(path)
                         end,
                     },
