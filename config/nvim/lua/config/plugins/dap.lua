@@ -116,7 +116,8 @@ return {
                     program = function()
                         -- Build test executable first
                         vim.fn.system(
-                            "zig test --test-no-exec -femit-bin=zig-out/test -fllvm " .. vim.fn.expand("%")
+                            "zig test --test-no-exec -femit-bin=zig-out/test -fllvm "
+                                .. vim.fn.expand("%")
                         )
                         return vim.fn.getcwd() .. "/zig-out/test"
                     end,
@@ -133,7 +134,8 @@ return {
                     program = function()
                         -- Build test executable first
                         vim.fn.system(
-                            "zig test --test-no-exec -femit-bin=zig-out/test -fllvm " .. vim.fn.expand("%")
+                            "zig test --test-no-exec -femit-bin=zig-out/test -fllvm "
+                                .. vim.fn.expand("%")
                         )
                         return vim.fn.getcwd() .. "/zig-out/test"
                     end,

@@ -165,7 +165,7 @@ return {
             -- misc search
             set("n", "<leader>sh", builtin.help_tags)
             set("n", "<leader>sM", builtin.man_pages)
-            set("n", "<leader>sR", builtin.registers)
+            set("n", "<leader>sr", builtin.registers)
             set("n", "<leader>sk", builtin.keymaps)
             set("n", "<leader>sc", builtin.commands)
             set("n", "<leader>st", builtin.treesitter)
