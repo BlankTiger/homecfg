@@ -220,11 +220,11 @@ set("i", "<C-w>", function()
 end, n_opts)
 
 -- keep the cursor in the middle of the screen
-set('n', "'", function()
+set("n", "'", function()
     return "'" .. vim.fn.nr2char(vim.fn.getchar()) .. "zz"
 end, { expr = true })
 
-set('n', "`", function()
+set("n", "`", function()
     return "`" .. vim.fn.nr2char(vim.fn.getchar()) .. "zz"
 end, { expr = true })
 set("n", "<C-d>", "<C-d>zz", n_opts)
