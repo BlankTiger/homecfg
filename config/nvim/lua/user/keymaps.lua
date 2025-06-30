@@ -244,3 +244,28 @@ set("n", "g,", "g,zz", n_opts)
 
 -- toggle line wrapping in all open windows
 set("n", "<leader>gw", "<cmd>windo set wrap!<CR>", n_opts)
+
+local function toggle_word_highlight()
+    local word = vim.fn.expand("<cword>")
+    if word == "" then
+        return
+    end
+
+    -- Check if the word is already highlihted
+    local search_reg = vim.fn.getreg("/")
+    if search_reg == "\\<" .. word .. "\\>" then
+        -- Clear highlight
+        vim.cmd("nohlsearch")
+        vim.fn.setreg("/", "")
+    else
+        -- Highlight the word
+        vim.fn.setreg("/", "\\<" .. word .. "\\>")
+        vim.cmd("set hlsearch")
+    end
+end
+
+set("n", "&", toggle_word_highlight, {
+    desc = "Toggle highlight word under cursor",
+    noremap = true,
+    silent = true,
+})
