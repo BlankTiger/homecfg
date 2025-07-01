@@ -8,7 +8,7 @@ _G.MyQuickfixtextfunc = function(info)
             local filename = vim.api.nvim_buf_get_name(item.bufnr)
             table.insert(
                 result,
-                "" .. filename .. ":" .. item.lnum .. ":" .. item.col .. " ->" .. item.text
+                "" .. filename .. ":" .. item.lnum .. ":" .. item.col .. " -> " .. item.text
             )
         else
             if #item.text > 0 then
