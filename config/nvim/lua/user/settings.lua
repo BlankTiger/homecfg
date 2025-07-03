@@ -56,6 +56,7 @@ g.mk = "echo 'update g:mk cmd'"
 g.rg_command = "rg --vimgrep"
 g.lsp_completions_enabled = false
 g.lualine_shown = false
+g.lualine_full_filename = false
 g.disable_autoformat = true
 g.lsp_diagnostics_hidden = true
 

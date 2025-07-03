@@ -17,6 +17,10 @@ local function toggle_lualine()
     vim.g.lualine_shown = not vim.g.lualine_shown
 end
 
+local function toggle_full_filename()
+    vim.g.lualine_full_filename = not vim.g.lualine_full_filename
+end
+
 return {
     {
         "nvim-lualine/lualine.nvim",
@@ -54,7 +58,13 @@ return {
             }
 
             local function filename()
-                return vim.fn.expand("%")
+                local result = ""
+                if vim.g.lualine_full_filename then
+                    result = vim.fn.expand("%")
+                else
+                    result = vim.fn.expand("%:t")
+                end
+                return result
             end
 
             local filetype_no_icon = {
@@ -171,6 +181,7 @@ return {
 
             local set = vim.keymap.set
             set("n", "<leader>lt", toggle_lualine)
+            set("n", "<leader>lT", toggle_full_filename)
         end,
     },
 }
