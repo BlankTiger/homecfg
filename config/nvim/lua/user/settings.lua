@@ -74,6 +74,8 @@ set errorformat+=%f:%l\ %m
 if not g.lualine_shown then
     opt.laststatus = 0
     opt.stl = "%{repeat('─',winwidth('.'))}"
+else
+    opt.laststatus = 3
 end
 
 -- base normal mode options for all keymaps
