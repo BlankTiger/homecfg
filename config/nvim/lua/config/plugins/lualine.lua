@@ -161,9 +161,9 @@ return {
                         diff,
                     },
                     lualine_x = {
-                        diagnostics,
                         searchcount,
                         "selectioncount",
+                        diagnostics,
                         -- spaces,
                         "encoding",
                         -- filetype_no_icon,
