@@ -157,3 +157,20 @@ vim.api.nvim_create_autocmd({ "TabEnter", "TabClosed" }, {
         end
     end,
 })
+
+local group = vim.api.nvim_create_augroup("autosave", {})
+
+vim.api.nvim_create_autocmd("User", {
+    pattern = "AutoSaveWritePost",
+    group = group,
+    callback = function(opts)
+        if opts.data.saved_buffer ~= nil then
+            local filename = vim.api.nvim_buf_get_name(opts.data.saved_buffer)
+            require("fidget").notify(
+                "" .. vim.fn.strftime("%H:%M:%S") .. ": saved",
+                vim.log.levels.INFO,
+                { ttl = 0.5, group = nil }
+            )
+        end
+    end,
+})
