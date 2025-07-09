@@ -14,6 +14,36 @@ set({ "t", "n" }, "<F26>", function()
     vim.cmd("wincmd p")
 end, vim.g.n_opts)
 
+local excluded_filetypes = {
+    "gitcommit",
+    "NvimTree",
+    "Outline",
+    "TelescopePrompt",
+    "alpha",
+    "dashboard",
+    "lazygit",
+    "neo-tree",
+    "oil",
+    "prompt",
+    "toggleterm",
+    "harpoon",
+    "neogit",
+}
+
+local excluded_filenames = {
+    "do-not-autosave-me.lua",
+}
+
+local function save_condition(buf)
+    if
+        vim.tbl_contains(excluded_filetypes, vim.fn.getbufvar(buf, "&filetype"))
+        or vim.tbl_contains(excluded_filenames, vim.fn.expand("%:t"))
+    then
+        return false
+    end
+    return true
+end
+
 return {
     "nvim-lua/plenary.nvim",
 
@@ -46,6 +76,19 @@ return {
         version = "^1.0.0",
         cmd = "ASToggle",
         event = { "InsertLeave", "TextChanged" },
-        opts = {},
+        opts = {
+            condition = save_condition,
+            trigger_events = {
+                immediate_save = {
+                    "BufLeave",
+                    "FocusLost",
+                    "QuitPre",
+                    "VimSuspend",
+                    "InsertLeave",
+                    "TextChanged",
+                },
+                cancel_deferred_save = { "InsertEnter" },
+            },
+        },
     },
 }
