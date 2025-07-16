@@ -60,8 +60,8 @@ end
 
 return function()
     vim.opt.termguicolors = true
-    custom_paragon()
-    -- _ = custom_paragon
-    _ = custom_tokyonight
-    -- custom_tokyonight()
+    -- custom_paragon()
+    _ = custom_paragon
+    -- _ = custom_tokyonight
+    custom_tokyonight()
 end
