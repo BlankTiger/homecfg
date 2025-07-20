@@ -253,4 +253,6 @@ return {
         version = "^5",
         lazy = false,
     },
+
+    "rluba/jai.vim",
 }

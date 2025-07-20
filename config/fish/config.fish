@@ -14,7 +14,7 @@ set -gx XDG_STATE_HOME    "$HOME/.local/state"
 set -gx STARSHIP_CONFIG   "$HOME/.config/starship/config.toml"
 set -gx JAVA_HOME         "$HOME/.local/bin/android-studio/jbr"
 set -gx ANDROID_HOME      "$HOME/Android/Sdk"
-set -gx PATH              "$HOME/.local/bin:$HOME/.bun/bin:$HOME/projects/Odin:$ANDROID_HOME/platform-tools:$HOME/.local/bin/android-studio/bin:$HOME/.pyenv/shims:$PATH:$HOME/.config/nvm/versions/node/v22.14.0/bin:$HOME/go/bin:$HOME/.cargo/bin"
+set -gx PATH              "$HOME/.local/bin:$HOME/.bun/bin:$HOME/projects/Odin:$ANDROID_HOME/platform-tools:$HOME/.local/bin/android-studio/bin:$HOME/.pyenv/shims:$PATH:$HOME/.config/nvm/versions/node/v22.14.0/bin:$HOME/go/bin:$HOME/.cargo/bin:$HOME/.local/jai/bin"
 
 alias c       'clear'
 alias d       'cd "$(director)"'
