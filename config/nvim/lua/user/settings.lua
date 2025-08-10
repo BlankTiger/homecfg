@@ -23,6 +23,7 @@ opt.indentexpr = ""
 
 opt.pumblend = 0
 
+opt.swapfile = false
 opt.expandtab = true
 opt.tabstop = 4
 opt.shiftwidth = 4
@@ -46,7 +47,7 @@ opt.matchpairs = "(:),{:},<:>,[:]"
 opt.scrollback = 100000
 opt.guicursor = "n-v-i-c:block-Cursor,a:blinkwait700-blinkoff400-blinkon250-Cursor"
 opt.updatetime = 50
-opt.wrap = false
+opt.wrap = true
 opt.pumheight = 10
 opt.fillchars = { eob = " " }
 g.searchindex_line_limit = 1000000
@@ -56,7 +57,7 @@ g.mk = "echo 'update g:mk cmd'"
 g.rg_command = "rg --vimgrep"
 g.lsp_completions_enabled = false
 g.lualine_shown = true
-g.lualine_full_filename = false
+g.lualine_full_filename = true
 g.disable_autoformat = true
 g.lsp_diagnostics_hidden = true
 
