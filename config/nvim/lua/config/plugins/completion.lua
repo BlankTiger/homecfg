@@ -2,8 +2,8 @@ local source_priority = {
     snippets = 5,
     lsp = 4,
     path = 3,
-    -- omni = 2,
-    buffer = 1,
+    buffer = 3,
+    omni = 2,
 }
 
 local sources = vim.tbl_keys(source_priority)
@@ -86,15 +86,10 @@ return {
                             timeout_ms = 20000,
                         },
                         buffer = {
-                          opts = {
-                                -- get all buffers, even ones like neo-tree
-                                get_bufnrs = vim.api.nvim_list_bufs
-                                -- -- or (recommended) filter to only "normal" buffers
-                                -- get_bufnrs = function()
-                                --     return vim.tbl_filter(function(bufnr)
-                                --         return vim.bo[bufnr].buftype == ''
-                                --     end, vim.api.nvim_list_bufs())
-                                -- end
+                            opts = {
+                                get_bufnrs = vim.api.nvim_list_bufs,
+                                max_async_buffer_size = 50000000,
+                                max_total_buffer_size = 90000000,
                             },
                             timeout_ms = 20000,
                         },
