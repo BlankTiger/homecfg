@@ -14,6 +14,7 @@ local servers = {
 local non_mason_servers = {
     "zls",
     "gleam",
+    "jails",
 }
 
 local servers_lists = { servers, non_mason_servers }
@@ -137,9 +138,11 @@ return {
                 vim.diagnostic.config(config)
             end
 
-            if table.contains(servers, "cargotomllsp") then
+            if table.contains(servers_lists, "cargotomllsp") then
                 require("user.cargotomllsp").setup()
             end
+
+            require("user.jails").setup()
 
             local custom_server_settings = {
                 basedpyright = {
@@ -191,6 +194,9 @@ return {
                 cargotomllsp = {
                     filetypes = { "toml" },
                 },
+                jails = {
+                    filetypes = { "jai" },
+                }
             }
 
             local lspconfig = require("lspconfig")
