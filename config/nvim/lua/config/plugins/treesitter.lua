@@ -34,6 +34,7 @@ return {
                     "python",
                     "yaml",
                     "toml",
+                    "hlsl",
                     "zig",
                 },
                 ignore_install = { "" },

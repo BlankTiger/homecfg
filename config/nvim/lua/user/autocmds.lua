@@ -20,6 +20,14 @@ vim.api.nvim_create_autocmd("BufEnter", {
     end,
 })
 
+vim.api.nvim_create_autocmd("BufEnter", {
+    group = autocmd_group,
+    pattern = { "*.hlsl" },
+    callback = function()
+        vim.cmd("set filetype=hlsl")
+    end,
+})
+
 -- highlight nocheck/in (the things that prevents commiting stuff with it via hooks)
 vim.api.nvim_create_autocmd("BufEnter", {
     group = autocmd_group,
