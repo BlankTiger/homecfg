@@ -34,12 +34,15 @@ return {
             },
         },
         -- version = "v0.12.4",
-        version = "*",
+        -- version = "*",
+
+        build = "cargo build --release",
 
         config = function()
             ---@module 'blink.cmp'
             ---@type blink.cmp.Config
             local opts = {
+                fuzzy = { implementation = "rust" },
                 snippets = { preset = "luasnip" },
 
                 keymap = {
@@ -47,16 +50,56 @@ return {
                     ["<C-y>"] = { "accept" },
                     ["<Tab>"] = {},
 
-                    ["<M-1>"] = { function(cmp) cmp.accept({ index = 1  }) end },
-                    ["<M-2>"] = { function(cmp) cmp.accept({ index = 2  }) end },
-                    ["<M-3>"] = { function(cmp) cmp.accept({ index = 3  }) end },
-                    ["<M-4>"] = { function(cmp) cmp.accept({ index = 4  }) end },
-                    ["<M-5>"] = { function(cmp) cmp.accept({ index = 5  }) end },
-                    ["<M-6>"] = { function(cmp) cmp.accept({ index = 6  }) end },
-                    ["<M-7>"] = { function(cmp) cmp.accept({ index = 7  }) end },
-                    ["<M-8>"] = { function(cmp) cmp.accept({ index = 8  }) end },
-                    ["<M-9>"] = { function(cmp) cmp.accept({ index = 9  }) end },
-                    ["<M-0>"] = { function(cmp) cmp.accept({ index = 10 }) end },
+                    ["<M-1>"] = {
+                        function(cmp)
+                            cmp.accept({ index = 1 })
+                        end,
+                    },
+                    ["<M-2>"] = {
+                        function(cmp)
+                            cmp.accept({ index = 2 })
+                        end,
+                    },
+                    ["<M-3>"] = {
+                        function(cmp)
+                            cmp.accept({ index = 3 })
+                        end,
+                    },
+                    ["<M-4>"] = {
+                        function(cmp)
+                            cmp.accept({ index = 4 })
+                        end,
+                    },
+                    ["<M-5>"] = {
+                        function(cmp)
+                            cmp.accept({ index = 5 })
+                        end,
+                    },
+                    ["<M-6>"] = {
+                        function(cmp)
+                            cmp.accept({ index = 6 })
+                        end,
+                    },
+                    ["<M-7>"] = {
+                        function(cmp)
+                            cmp.accept({ index = 7 })
+                        end,
+                    },
+                    ["<M-8>"] = {
+                        function(cmp)
+                            cmp.accept({ index = 8 })
+                        end,
+                    },
+                    ["<M-9>"] = {
+                        function(cmp)
+                            cmp.accept({ index = 9 })
+                        end,
+                    },
+                    ["<M-0>"] = {
+                        function(cmp)
+                            cmp.accept({ index = 10 })
+                        end,
+                    },
                 },
 
                 appearance = {
@@ -147,6 +190,24 @@ return {
                     },
                 },
             }
+
+            local original = require("blink.cmp.completion.list").show
+            ---@diagnostic disable-next-line: duplicate-set-field
+            require("blink.cmp.completion.list").show = function(ctx, items_by_source)
+                local seen = {}
+                local function filter(item)
+                    if seen[item.label] then
+                        return false
+                    end
+                    seen[item.label] = true
+                    return true
+                end
+                for id in vim.iter(sources) do
+                    items_by_source[id] = items_by_source[id]
+                        and vim.iter(items_by_source[id]):filter(filter):totable()
+                end
+                return original(ctx, items_by_source)
+            end
 
             local blink = require("blink.cmp")
             blink.setup(opts)
