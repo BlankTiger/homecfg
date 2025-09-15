@@ -51,6 +51,14 @@ set("n", "<A-q>", "<cmd>q!<cr>", n_opts)
 set("n", "<A-q>", "<cmd>q!<cr>", n_opts)
 set("n", "<leader>C", "<cmd>quitall!<cr>", n_opts)
 
+local paste_and_indent = function()
+    vim.cmd('normal! "+p')
+    vim.cmd("normal! '[V']")
+    vim.cmd("normal! =")
+end
+
+set("n", "<leader>V", paste_and_indent, n_opts)
+
 -- tabs
 
 set({ "t", "n", "i" }, "<M-Z>", function()
