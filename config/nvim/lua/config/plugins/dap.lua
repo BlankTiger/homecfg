@@ -187,6 +187,10 @@ return {
 
             dap.configurations.c = dap.configurations.cpp
 
+            if not dap.configurations.python then
+                dap.configurations.python = {}
+            end
+
             table.insert(dap.configurations.python, {
                 type = "python",
                 request = "launch",
