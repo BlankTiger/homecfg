@@ -25,7 +25,7 @@ end, vim.g.n_opts)
 set({ "t", "n" }, "<F2>", function()
     local o = require("overseer")
     local s = require("overseer.constants").STATUS
-    o.open({ enter = false })
+    -- o.open({ enter = false })
 
     local all_tasks = o.list_tasks({})
     local len_tasks = #all_tasks
@@ -141,7 +141,7 @@ return {
                     { "display_duration", detail_level = 2 },
                     "on_output_summarize",
                     "on_exit_set_status",
-                    { "on_output_quickfix" },
+                    { "on_output_quickfix", open = true },
                 },
             },
         },
