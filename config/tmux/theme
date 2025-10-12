@@ -10,7 +10,8 @@ set -g status-left "#[fg=$accent]#[bg=$bg] "
 
 # Right side - show time, date, and session name
 set -g status-right-length 60
-set -g status-right "#[fg=white]%H:%M:%S #[fg=white]%d-%m-%Y #[fg=white][#S]"
+# set -g status-right "#[fg=white]%H:%M:%S #[fg=white]%d-%m-%Y #[fg=white][#S]"
+set -g status-right "#[fg=white]%d-%m-%Y #[fg=white][#S]"
 
 # Center the window list and style it
 set -g status-justify left
