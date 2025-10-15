@@ -143,6 +143,7 @@ return {
             local set = vim.keymap.set
             local builtin = require("telescope.builtin")
             local extensions = require("telescope").extensions
+            local utils = require("telescope.utils")
 
             set("n", "<leader>sb", builtin.buffers)
             set("n", "<leader>tr", builtin.resume)
@@ -159,6 +160,18 @@ return {
                 extensions.ripgrep.ripgrep_text({
                     path_display = { "absolute" },
                     curr_file_dir = true,
+                })
+            end)
+
+            set("n", "<leader>sf", function()
+                path = utils.buffer_dir()
+                local start = "oil:///"
+                if path:sub(1, #start) == start then
+                    path = path:sub(#start, #path)
+                end
+
+                builtin.find_files({
+                    cwd = path
                 })
             end)
 
