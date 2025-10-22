@@ -53,8 +53,8 @@ local custom_paragon = function()
 
 end
 
-local function custom_tokyonight()
-    vim.cmd.colorscheme("tokyonight-night")
+local function custom_whatever()
+    vim.cmd.colorscheme("ayu-dark")
     set_custom_colors()
 end
 
@@ -62,6 +62,7 @@ return function()
     vim.opt.termguicolors = true
     -- custom_paragon()
     _ = custom_paragon
-    -- _ = custom_tokyonight
-    custom_tokyonight()
+    -- _ = custom_whatever
+    custom_whatever()
+    -- vim.cmd.colorscheme("catppuccin-latte")
 end

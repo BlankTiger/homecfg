@@ -14,6 +14,12 @@ return {
     },
 
     {
+        "Shatur/neovim-ayu",
+        lazy = false,
+        priority = 1000,
+    },
+
+    {
         "folke/tokyonight.nvim",
         config = function()
             require("tokyonight").setup({
