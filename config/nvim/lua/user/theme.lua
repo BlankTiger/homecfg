@@ -5,6 +5,7 @@ local function set_custom_colors()
     vim.g.comment_color = "#88fce3"
     vim.g.bg_color = "#000000"
     vim.g.divider_color = "#15161e"
+    vim.g.white_color = "#ffffff"
 
     set_hl(0, "Normal", { bg = "none" })
     set_hl(0, "Comment", { fg = vim.g.comment_color })
@@ -18,10 +19,15 @@ local function set_custom_colors()
     set_hl(0, "PmenuSbar", {})
 
     set_hl(0, "FloatBorder", { bg = vim.g.bg_color, fg = vim.g.accent_color })
-    set_hl(0, "FloatTitle", { bg = vim.g.bg_color, fg = "#ffffff" })
+    set_hl(0, "FloatTitle", { bg = vim.g.bg_color, fg = vim.g.white_color })
 
     set_hl(0, "StatusLineNC", { bg = vim.g.bg_color, fg = vim.g.divider_color, ctermbg = 0 })
     set_hl(0, "StatusLine", { bg = vim.g.bg_color, fg = vim.g.divider_color, ctermbg = 0 })
+
+    set_hl(0, "SignColumn", { bg = vim.g.bg_color, fg = vim.g.white_color, ctermbg = 0 })
+    set_hl(0, "LineNr", { bg = vim.g.bg_color, fg = vim.g.white_color })
+    set_hl(0, "WinSeparator", { bg = vim.g.bg_color })
+    set_hl(0, "MatchParen", { fg = vim.g.comment_color })
 end
 
 local custom_paragon = function()
