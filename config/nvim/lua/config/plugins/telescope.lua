@@ -144,11 +144,22 @@ return {
             local builtin = require("telescope.builtin")
             local extensions = require("telescope").extensions
             local utils = require("telescope.utils")
+            local themes = require("telescope.themes")
 
             set("n", "<leader>sb", builtin.buffers)
             set("n", "<leader>tr", builtin.resume)
             set("n", "<leader>A", builtin.live_grep)
             set("n", "<leader>f", builtin.find_files)
+            set("n", "<leader>F", function()
+                builtin.find_files(themes.get_dropdown({
+                    layout_config = {
+                        width = 0.85,
+                        height = 0.5,
+                    },
+                    hidden = true,
+                    no_ignore = true,
+                }))
+            end)
             set("n", "<leader>i", builtin.git_files)
             set("n", "<leader>a", function()
                 extensions.ripgrep.ripgrep_text({
