@@ -26,7 +26,7 @@ local function set_custom_colors()
 
     set_hl(0, "SignColumn", { bg = vim.g.bg_color, fg = vim.g.white_color, ctermbg = 0 })
     set_hl(0, "LineNr", { bg = vim.g.bg_color, fg = vim.g.white_color })
-    set_hl(0, "WinSeparator", { bg = vim.g.bg_color })
+    set_hl(0, "WinSeparator", { bg = vim.g.bg_color, fg = vim.g.accent_color })
     set_hl(0, "MatchParen", { fg = vim.g.comment_color })
 end
 
