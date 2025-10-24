@@ -49,8 +49,8 @@ return {
             local mason_dap = require("mason-nvim-dap")
 
             mason_dap.setup({
-                ensure_installed = { "cppdbg", "delve" },
-                automatic_installation = true,
+                -- ensure_installed = { "cppdbg", "delve" },
+                -- automatic_installation = true,
                 handlers = {
                     function(config)
                         require("mason-nvim-dap").default_setup(config)
@@ -207,6 +207,22 @@ return {
                 cwd = "${workspaceFolder}",
             })
 
+            table.insert(dap.configurations.python, {
+                name = "Attach",
+                type = "debugpy",
+                request = "attach",
+                connect = {
+                    host = "127.0.0.1",
+                    port = 5678
+                },
+                pathMappings = {
+                    {
+                        localRoot = "${workspaceFolder}",
+                        remoteRoot = "."
+                    }
+                },
+            })
+
             for _, v in pairs(dap.configurations.python) do
                 v["justMyCode"] = false
             end
@@ -220,7 +236,7 @@ return {
                 "scopes",
             }
             local elements_bottom = {
-                "console",
+                -- "console",
             }
 
             local dapui_setup = function(left, bottom)
