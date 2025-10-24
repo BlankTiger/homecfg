@@ -34,6 +34,9 @@ return {
                 },
                 view_options = {
                     show_hidden = true,
+                    sort = {
+                        { "mtime", "desc" },
+                    }
                 },
             })
             if showing_details then
