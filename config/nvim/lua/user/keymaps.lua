@@ -122,6 +122,7 @@ set("n", "<M-'>", "<cmd>cnfile<cr>", n_opts)
 set("v", "<S-m>", "J", n_opts)
 set("v", "<S-j>", "<cmd>m '>+1<cr>gv=gv", n_opts)
 set("v", "<S-k>", "<cmd>m '<-2<cr>gv=gv", n_opts)
+set("v", "\\", "<Esc>/\\%V", { desc = "Search within visual selection " })
 
 -- terminal
 
@@ -170,10 +171,10 @@ set("n", "<c-j>", "<cmd>TmuxNavigateDown<cr>", n_opts)
 set("n", "<c-k>", "<cmd>TmuxNavigateUp<cr>", n_opts)
 set("n", "<c-l>", "<cmd>TmuxNavigateRight<cr>", n_opts)
 
-set("i", "<c-h>", "<esc><cmd>TmuxNavigateLeft<cr>", n_opts)
-set("i", "<c-j>", "<esc><cmd>TmuxNavigateDown<cr>", n_opts)
-set("i", "<c-k>", "<esc><cmd>TmuxNavigateUp<cr>", n_opts)
-set("i", "<c-l>", "<esc><cmd>TmuxNavigateRight<cr>", n_opts)
+-- set("i", "<c-h>", "<esc><cmd>TmuxNavigateLeft<cr>", n_opts)
+-- set("i", "<c-j>", "<esc><cmd>TmuxNavigateDown<cr>", n_opts)
+-- set("i", "<c-k>", "<esc><cmd>TmuxNavigateUp<cr>", n_opts)
+-- set("i", "<c-l>", "<esc><cmd>TmuxNavigateRight<cr>", n_opts)
 
 -- set : to q: (instead of cmdline have cmdwin)
 set("n", ":", "q:i", n_opts)
@@ -189,20 +190,20 @@ end, n_opts)
 
 -- goto file in existing split on the left
 -- or the right, if non are open then create them
-local gf_to_the = require("user.custom-gf").gf_to_the
-set("n", "gfh", function()
-    gf_to_the({ left = true })
-end)
-set("n", "<C-S-H>", function()
-    gf_to_the({ left = true })
-end)
-
-set("n", "gfl", function()
-    gf_to_the({ left = false })
-end)
-set("n", "<C-S-L>", function()
-    gf_to_the({ left = false })
-end)
+-- local gf_to_the = require("user.custom-gf").gf_to_the
+-- set("n", "gfh", function()
+--     gf_to_the({ left = true })
+-- end)
+-- set("n", "<C-S-H>", function()
+--     gf_to_the({ left = true })
+-- end)
+--
+-- set("n", "gfl", function()
+--     gf_to_the({ left = false })
+-- end)
+-- set("n", "<C-S-L>", function()
+--     gf_to_the({ left = false })
+-- end)
 
 -- repeat last macro with a single key instead of toggling case
 set("n", "~", "@@", n_opts)
@@ -252,6 +253,12 @@ set("n", "g,", "g,zz", n_opts)
 
 -- toggle line wrapping in all open windows
 set("n", "<leader>gw", "<cmd>windo set wrap!<CR>", n_opts)
+
+-- we goin places in insert mode guys
+set("i", "<C-h>", "<C-o>b", n_opts)
+set("i", "<C-j>", "<C-o>j", n_opts)
+set("i", "<C-k>", "<C-o>k", n_opts)
+set("i", "<C-l>", "<C-o>w", n_opts)
 
 local function toggle_word_highlight()
     local word = vim.fn.expand("<cword>")

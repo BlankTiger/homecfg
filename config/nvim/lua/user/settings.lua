@@ -23,6 +23,7 @@ opt.indentexpr = ""
 
 opt.pumblend = 0
 
+opt.fixeol = false
 opt.swapfile = false
 opt.expandtab = true
 opt.tabstop = 4
@@ -55,7 +56,7 @@ g.do_filetype_lua = 1
 
 g.mk = "echo 'update g:mk cmd'"
 g.rg_command = "rg --vimgrep"
-g.lsp_completions_enabled = false
+g.lsp_completions_enabled = true
 g.lualine_shown = true
 g.lualine_full_filename = true
 g.disable_autoformat = true
