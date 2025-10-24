@@ -1,14 +1,9 @@
 local servers = {
-    "gopls",
     "ruff",
     "basedpyright",
     "lua_ls",
-    "ts_ls",
-    "html",
-    "ols",
     "bashls",
     "clangd",
-    "ocamllsp",
 }
 
 local non_mason_servers = {
