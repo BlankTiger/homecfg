@@ -34,9 +34,9 @@ return {
             },
         },
         -- version = "v0.12.4",
-        -- version = "*",
+        version = "*",
 
-        build = "cargo build --release",
+        -- build = "cargo build --release",
 
         config = function()
             ---@module 'blink.cmp'
@@ -215,7 +215,7 @@ return {
             local set = vim.keymap.set
             set("n", "<leader>lc", function()
                 vim.g.lsp_completions_enabled = not vim.g.lsp_completions_enabled
-            end)
+            end, { desc = "Toggle LSP completions" })
 
             local function extend_keymap(mode, key, action_before)
                 local function extended_action()
