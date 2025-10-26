@@ -90,14 +90,19 @@ return {
                         return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
                     end,
                     cwd = "${workspaceFolder}",
-                    stopOnEntry = true,
+                    stopOnEntry = false,
+                    initCommands = {
+                        "command script import "
+                            .. vim.fn.stdpath("config")
+                            .. "/scripts/jai_lldb.py",
+                    },
                 },
 
                 {
                     name = "debug cppdbg",
                     type = "cppdbg",
                     request = "launch",
-                    preLaunchTask = "build",
+                    -- preLaunchTask = "build",
                     visualizerFile = "~/.local/jai/editor_support/msvc/jai.natvis",
                     program = function()
                         return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
@@ -213,13 +218,13 @@ return {
                 request = "attach",
                 connect = {
                     host = "127.0.0.1",
-                    port = 5678
+                    port = 5678,
                 },
                 pathMappings = {
                     {
                         localRoot = "${workspaceFolder}",
-                        remoteRoot = "."
-                    }
+                        remoteRoot = ".",
+                    },
                 },
             })
 
