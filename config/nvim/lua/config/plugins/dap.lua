@@ -1,3 +1,6 @@
+local last_jai_executable = nil
+vim.g.build_cmd = nil
+
 return {
     {
         "mfussenegger/nvim-dap",
@@ -87,7 +90,10 @@ return {
                     type = "codelldb",
                     request = "launch",
                     program = function()
-                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+                        local default = last_jai_executable or (vim.fn.getcwd() .. "/")
+                        local path = vim.fn.input("Path to executable: ", default, "file")
+                        last_jai_executable = path
+                        return path
                     end,
                     cwd = "${workspaceFolder}",
                     stopOnEntry = false,
@@ -98,21 +104,27 @@ return {
                     },
                 },
 
-                {
-                    name = "debug cppdbg",
-                    type = "cppdbg",
-                    request = "launch",
-                    -- preLaunchTask = "build",
-                    visualizerFile = "~/.local/jai/editor_support/msvc/jai.natvis",
-                    program = function()
-                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-                    end,
-                    args = {},
-                    stopAtEntry = false,
-                    cwd = "${workspaceFolder}",
-                    environment = {},
-                },
+                -- {
+                --     name = "debug cppdbg",
+                --     type = "cppdbg",
+                --     request = "launch",
+                --     -- preLaunchTask = "build",
+                --     visualizerFile = "~/.local/jai/editor_support/msvc/jai.natvis",
+                --     program = function()
+                --         return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+                --     end,
+                --     args = {},
+                --     stopAtEntry = false,
+                --     cwd = "${workspaceFolder}",
+                --     environment = {},
+                -- },
             }
+
+            table.insert(dap.configurations.jai, vim.fn.deepcopy(dap.configurations.jai[1]))
+            dap.configurations.jai[#dap.configurations.jai].program = function()
+                return last_jai_executable
+            end
+            dap.configurations.jai[#dap.configurations.jai].name = "Launch last"
 
             dap.configurations.zig = {
                 {
@@ -251,7 +263,7 @@ return {
                         {
                             elements = left,
                             size = 90,
-                            position = "left",
+                            position = "right",
                         },
                         {
                             elements = bottom,
@@ -438,8 +450,38 @@ return {
 
             local set = vim.keymap.set
 
-            set("n", "<F4>", dap.pause)
-            set("n", "<F5>", dap.continue)
+            set("n", "<F3>", dap.pause)
+            set("n", "<F4>", function()
+                if dap.session() then
+                    dap.terminate()
+                end
+
+                if not last_jai_executable then
+                    dap.continue()
+                    return
+                end
+
+                vim.defer_fn(function()
+                    if vim.g.build_cmd then
+                        local o = require("overseer")
+                        local task = o.new_task({
+                            cmd = vim.g.build_cmd,
+                        })
+                        task:subscribe("on_complete", function(task, status)
+                            local STATUS = require("overseer").STATUS
+                            if status == STATUS.SUCCESS then
+                                dap.run(dap.configurations.jai[2])
+                            end
+                        end)
+                        task:start()
+                    else
+                        dap.run(dap.configurations.jai[2])
+                    end
+                end, 100)
+            end)
+            set("n", "<F5>", function()
+                dap.continue()
+            end)
             set("n", "<F6>", dap.step_over)
             set("n", "<F7>", dap.step_into)
             set("n", "<F8>", dap.step_out)
