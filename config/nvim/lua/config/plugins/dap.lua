@@ -1,6 +1,62 @@
 local last_jai_executable = nil
 vim.g.build_cmd = nil
 
+local breakpoint_state = {}
+
+local function save_file_breakpoints()
+    local bufnr   = vim.api.nvim_get_current_buf()
+    local dap_bps = require("dap.breakpoints")
+    local bps     = dap_bps.get()
+
+    if bps and bps[bufnr] then
+        breakpoint_state[bufnr] = vim.deepcopy(bps[bufnr])
+        vim.notify("Saved " .. #breakpoint_state[bufnr] .. " breakpoints", vim.log.levels.INFO)
+    else
+        breakpoint_state[bufnr] = {}
+        vim.notify("No breakpoints to save", vim.log.levels.INFO)
+    end
+end
+
+local function set_all_line_breakpoints()
+    local dap_bps = require("dap.breakpoints")
+
+    local bufnr = vim.api.nvim_get_current_buf()
+    local lines = vim.api.nvim_buf_line_count(bufnr)
+    for i = 1, lines do
+        dap_bps.set({}, bufnr, i)
+    end
+
+    vim.notify("Set breakpoints on all " .. lines .. " lines", vim.log.levels.INFO)
+end
+
+local function restore_file_breakpoints()
+    local bufnr     = vim.api.nvim_get_current_buf()
+    local saved_bps = breakpoint_state[bufnr]
+
+    local dap     = require("dap")
+    local dap_bps = require("dap.breakpoints")
+
+    if not saved_bps or #saved_bps == 0 then
+        vim.notify("No saved breakpoints for this buffer", vim.log.levels.WARN)
+        dap_bps.clear(bufnr)
+        return
+    end
+
+    dap_bps.clear()
+
+    for _, bp in ipairs(saved_bps) do
+        vim.api.nvim_win_set_cursor(0, {bp.line, 0})
+        dap.set_breakpoint(bp.condition, bp.hitCondition, bp.logMessage)
+    end
+
+    local session = dap.session()
+    if session then
+        session:set_breapoints(dap_bps.get())
+    end
+
+    vim.notify("Restored " .. #saved_bps .. " breakpoints", vim.log.levels.INFO)
+end
+
 return {
     {
         "mfussenegger/nvim-dap",
@@ -492,6 +548,13 @@ return {
                 local conditional = vim.fn.input("Break if -> ")
                 require("dap").set_breakpoint(conditional)
             end)
+
+            set("n", "<leader>dM", function()
+                save_file_breakpoints()
+                set_all_line_breakpoints()
+            end, { desc = "DAP: save breakpoints in the current file and set breakpoints on all lines" })
+            set("n", "<leader>dR", restore_file_breakpoints, { desc = "DAP: restore saved breakpoints" })
+
             set("n", "<leader>dU", dapui.toggle)
             set("n", "<leader>du", dap.up)
             set("n", "<leader>dd", dap.down)
