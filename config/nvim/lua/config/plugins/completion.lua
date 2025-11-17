@@ -212,6 +212,13 @@ return {
             local blink = require("blink.cmp")
             blink.setup(opts)
 
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = { "dap-repl", "dapui_watches", "dapui_hover" },
+                callback = function()
+                    vim.b.completion = false
+                end
+            })
+
             local set = vim.keymap.set
             set("n", "<leader>lc", function()
                 vim.g.lsp_completions_enabled = not vim.g.lsp_completions_enabled
