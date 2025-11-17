@@ -22,19 +22,13 @@ restart_externals() {
 handle_monitor_event() {
     case $1 in
         monitoradded>>*)
-            monitor_name="${1#monitoradded>>}"
-            if [[ "$monitor_name" != "$LAPTOP_MONITOR" ]]; then
-                hyprctl keyword monitor "$LAPTOP_MONITOR, disable"
-                restart_externals
-            fi
+            hyprctl keyword monitor "$LAPTOP_MONITOR, disable"
+            restart_externals
             ;;
 
         monitorremoved>>*)
-            monitor_name="${1#monitorremoved>>}"
-            if [[ "$monitor_name" != "$LAPTOP_MONITOR" ]]; then
-                hyprctl keyword monitor "$LAPTOP_MONITOR, preferred, auto, 2"
-                disable_externals
-            fi
+            hyprctl keyword monitor "$LAPTOP_MONITOR, preferred, auto, 2"
+            disable_externals
             ;;
     esac
 }
