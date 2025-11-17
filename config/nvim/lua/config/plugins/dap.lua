@@ -42,7 +42,7 @@ local function restore_file_breakpoints()
         return
     end
 
-    dap_bps.clear()
+    dap_bps.clear(bufnr)
 
     for _, bp in ipairs(saved_bps) do
         vim.api.nvim_win_set_cursor(0, {bp.line, 0})
@@ -51,11 +51,15 @@ local function restore_file_breakpoints()
 
     local session = dap.session()
     if session then
-        session:set_breapoints(dap_bps.get())
+        session:set_breakpoints(dap_bps.get())
     end
 
     vim.notify("Restored " .. #saved_bps .. " breakpoints", vim.log.levels.INFO)
 end
+
+local dapui_render_settings = {
+    indent = 3,
+}
 
 return {
     {
@@ -89,7 +93,7 @@ return {
                 config = function()
                     local dap = require("dap")
                     local dapui = require("dapui")
-                    dapui.setup()
+                    dapui.setup({ render = dapui_render_settings })
                     dap.listeners.after.event_initialized["dapui_config"] = function()
                         dapui.open()
                     end
@@ -323,10 +327,11 @@ return {
                         },
                         {
                             elements = bottom,
-                            size = 20,
+                            size = 8,
                             position = "bottom",
                         },
                     },
+                    render = dapui_render_settings,
                 })
             end
             dapui_setup(elements_left, elements_bottom)
