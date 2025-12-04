@@ -22,13 +22,11 @@ restart_externals() {
 handle_monitor_event() {
     case $1 in
         monitoradded>>*)
-            hyprctl keyword monitor "$LAPTOP_MONITOR, disable"
-            restart_externals
+            hyprctl keyword monitor "$LAPTOP_MONITOR, disable" && restart_externals
             ;;
 
         monitorremoved>>*)
-            hyprctl keyword monitor "$LAPTOP_MONITOR, preferred, auto, 2"
-            disable_externals
+            hyprctl keyword monitor "$LAPTOP_MONITOR, preferred, auto, 2" && disable_externals
             ;;
     esac
 }
