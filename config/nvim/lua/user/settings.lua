@@ -54,7 +54,9 @@ opt.fillchars = { eob = " " }
 g.searchindex_line_limit = 1000000
 g.do_filetype_lua = 1
 
-g.mk = "echo 'update g:mk cmd'"
+if g.mk == nil then
+    g.mk = "echo 'update g:mk cmd'"
+end
 g.rg_command = "rg --vimgrep"
 g.lsp_completions_enabled = true
 g.lualine_shown = true

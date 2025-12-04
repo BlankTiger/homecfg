@@ -2,7 +2,7 @@ local set = vim.keymap.set
 
 local function run_new_task_from_mk(o)
     local task = o.new_task({
-        cmd = vim.g.mk
+        cmd = vim.g.mk,
     })
     task:start()
 end
@@ -101,6 +101,16 @@ return {
     -- },
 
     -- "tpope/vim-dispatch",
+
+    {
+        "blanktiger/keeper.nvim",
+        dev = true,
+        lazy = false,
+        config = function()
+            local keeper = require("keeper")
+            keeper.setup()
+        end,
+    },
 
     {
         "blanktiger/overseer.nvim",
