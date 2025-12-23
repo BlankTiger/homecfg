@@ -1,8 +1,8 @@
 local set = vim.keymap.set
 
-local function run_new_task_from_mk(o)
+local function run_new_task_from_cmd(o, cmd)
     local task = o.new_task({
-        cmd = vim.g.mk,
+        cmd = cmd,
     })
     task:start()
 end
@@ -22,7 +22,7 @@ set({ "t", "n" }, "<F1>", function()
     last_task:stop()
 end, vim.g.n_opts)
 
-set({ "t", "n" }, "<F2>", function()
+local function run_command(cmd)
     local o = require("overseer")
     local s = require("overseer.constants").STATUS
     -- o.open({ enter = false })
@@ -30,12 +30,12 @@ set({ "t", "n" }, "<F2>", function()
     local all_tasks = o.list_tasks({})
     local len_tasks = #all_tasks
     if len_tasks == 0 then
-        run_new_task_from_mk(o)
+        run_new_task_from_cmd(o, cmd)
         return
     end
 
     local last_task = all_tasks[len_tasks]
-    if last_task.cmd == vim.g.mk then
+    if last_task.cmd == cmd then
         if last_task.status == s.RUNNING then
             last_task:stop()
         end
@@ -44,14 +44,26 @@ set({ "t", "n" }, "<F2>", function()
         return
     end
 
-    run_new_task_from_mk(o)
+    run_new_task_from_cmd(o, cmd)
+end
+
+set({ "t", "n" }, "<F2>", function()
+    run_command(vim.g.mk)
 end, vim.g.n_opts)
+
 -- F26 = C-F2
-set({ "t", "n" }, "<F26>", function()
-    vim.cmd("AsyncStop")
-    vim.cmd("vert copen | wincmd = | AsyncRun " .. vim.g.mk)
-    vim.cmd("wincmd p")
-end, vim.g.n_opts)
+-- F50 = M-F2
+for _, key in ipairs({ "<C-F2>", "<M-F2>"} ) do
+    set({ "t", "n" }, key, function()
+        -- @TODO: Remove this?
+        --
+        -- vim.cmd("AsyncStop")
+        -- vim.cmd("vert copen | wincmd = | AsyncRun " .. vim.g.mk)
+        -- vim.cmd("wincmd p")
+        run_command(vim.g.mk_check)
+    end, vim.g.n_opts)
+end
+
 
 local excluded_filetypes = {
     "gitcommit",
@@ -108,7 +120,9 @@ return {
         lazy = false,
         config = function()
             local keeper = require("keeper")
-            keeper.setup()
+            keeper.setup({
+                vars_to_save = { "mk", "build_cmd", "mk_check" }
+            })
         end,
     },
 
@@ -151,7 +165,7 @@ return {
                     { "display_duration", detail_level = 2 },
                     "on_output_summarize",
                     "on_exit_set_status",
-                    { "on_output_quickfix", open = true },
+                    { "on_output_quickfix", open = true, open_height = 14 },
                 },
             },
         },
