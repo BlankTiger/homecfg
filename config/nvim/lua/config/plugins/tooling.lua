@@ -19,6 +19,7 @@ set({ "t", "n" }, "<F1>", function()
     end
 
     local last_task = all_tasks[len_tasks]
+    vim.notify("stopping task")
     last_task:stop()
 end, vim.g.n_opts)
 
