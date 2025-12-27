@@ -382,7 +382,7 @@ selection-background =
 #
 # If you select across cells with differing foregrounds and backgrounds, the
 # selection color will vary across the selection.
-selection-invert-fg-bg = false
+# selection-invert-fg-bg = false
 
 # The minimum contrast ratio between the foreground and background colors.
 # The contrast ratio is a value between 1 and 21. A value of 1 allows for no
@@ -666,7 +666,7 @@ cursor-color =
 
 # Swap the foreground and background colors of the cell under the cursor. This
 # option overrides the `cursor-color` and `cursor-text` options.
-cursor-invert-fg-bg = false
+# cursor-invert-fg-bg = false
 
 # The opacity level (opposite of transparency) of the cursor. A value of 1
 # is fully opaque and a value of 0 is fully transparent. A value less than 0
@@ -790,7 +790,7 @@ background-opacity = 1
 # rendering issues as well as performance issues.
 #
 # This is only supported on macOS.
-background-blur-radius = 0
+# background-blur-radius = 0
 
 # The opacity level (opposite of transparency) of an unfocused split.
 # Unfocused splits by default are slightly faded out to make it easier to see
@@ -2019,7 +2019,7 @@ linux-cgroup-hard-fail = false
 #
 # Note that debug builds of Ghostty have a separate single-instance ID
 # so you can test single instance without conflicting with release builds.
-gtk-single-instance = desktop
+gtk-single-instance = detect
 
 # When enabled, the full GTK titlebar is displayed instead of your window
 # manager's simple titlebar. The behavior of this option will vary with your
@@ -2030,7 +2030,7 @@ gtk-single-instance = desktop
 #
 # Changing this value at runtime and reloading the configuration will only
 # affect new windows.
-gtk-titlebar = true
+gtk-titlebar = false
 
 # Determines the side of the screen that the GTK tab bar will stick to.
 # Top, bottom, left, right, and hidden are supported. The default is top.
@@ -2044,7 +2044,7 @@ gtk-titlebar = true
 # tab overview for displaying tabs. Alternatively, you can use the
 # `toggle_tab_overview` action in a keybind if your window doesn't have a
 # title bar, or you can switch tabs with keybinds.
-gtk-tabs-location = hidden
+# gtk-tabs-location = hidden
 
 # Determines the appearance of the top and bottom bars when using the
 # Adwaita tab bar. This requires `gtk-adwaita` to be enabled (it is
@@ -2058,7 +2058,7 @@ gtk-tabs-location = hidden
 #    more subtle border.
 #
 # Changing this value at runtime will only affect new windows.
-adw-toolbar-style = raised
+# adw-toolbar-style = raised
 
 # If `true` (default), then the Ghostty GTK tabs will be "wide." Wide tabs
 # are the new typical Gnome style where tabs fill their available space.
@@ -2085,7 +2085,7 @@ gtk-wide-tabs = true
 desktop-notifications = true
 
 # If `true`, the bold text will use the bright color palette.
-bold-is-bright = false
+# bold-is-bright = false
 
 # This will be used to set the `TERM` environment variable.
 # HACK: We set this with an `xterm` prefix because vim uses that to enable key

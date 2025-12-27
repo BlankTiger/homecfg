@@ -11,6 +11,9 @@ foreground = "#ffffff"
 [font]
 size = 12.5
 
+[terminal]
+shell = "/usr/bin/fish"
+
 [font.normal]
 family = "Berkeley Mono"
 style = "Condensed"
