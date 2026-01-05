@@ -51,6 +51,10 @@ set("n", "<A-q>", "<cmd>q!<cr>", n_opts)
 set("n", "<A-q>", "<cmd>q!<cr>", n_opts)
 set("n", "<leader>C", "<cmd>quitall!<cr>", n_opts)
 
+set("n", "<leader>cp", function()
+    vim.fn.setreg("+", vim.fn.expand("%:p:."))
+end, { desc = "Copy file path relative to project directory" })
+
 local paste_and_indent = function()
     vim.cmd('normal! "+p')
     vim.cmd("normal! '[V']")
