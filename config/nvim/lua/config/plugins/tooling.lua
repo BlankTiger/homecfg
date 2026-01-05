@@ -54,7 +54,7 @@ end, vim.g.n_opts)
 
 -- F26 = C-F2
 -- F50 = M-F2
-for _, key in ipairs({ "<C-F2>", "<M-F2>"} ) do
+for _, key in ipairs({ "<C-F2>", "<M-F2>" }) do
     set({ "t", "n" }, key, function()
         -- @TODO: Remove this?
         --
@@ -166,7 +166,8 @@ return {
                     { "display_duration", detail_level = 2 },
                     "on_output_summarize",
                     "on_exit_set_status",
-                    { "on_output_quickfix", open = true, open_height = 14 },
+                    { "on_output_quickfix", open = true },
+                    "user.qf_tail_on_complete",
                 },
             },
         },
