@@ -338,11 +338,18 @@ return {
 
             vim.fn.sign_define(
                 "DapBreakpoint",
-                { text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "" }
+                -- { text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "" }
+                { text = "", texthl = "", linehl = "DiagnosticSignError", numhl = "" }
             )
             vim.fn.sign_define(
                 "DapBreakpointCondition",
-                { text = "", texthl = "DiagnosticSignWarn", linehl = "", numhl = "" }
+                -- { text = "", texthl = "DiagnosticSignWarn", linehl = "", numhl = "" }
+                { text = "", texthl = "", linehl = "DiagnosticSignWarn", numhl = "" }
+            )
+            vim.api.nvim_set_hl(0, "DapStopped", { bg = "#1e1e1e" })
+            vim.fn.sign_define(
+                "DapStopped",
+                { text = "", texthl = "", linehl = "DapStopped", numhl = ""}
             )
 
             dap.listeners.after.event_initialized["dapui_config"] = function()
