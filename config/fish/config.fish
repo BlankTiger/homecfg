@@ -72,3 +72,6 @@ end
 
 fish_default_key_bindings
 starship init fish | source
+
+# opencode
+fish_add_path /home/blanktiger/.opencode/bin
