@@ -48,6 +48,7 @@ return {
                 keymap = {
                     preset = "default",
                     ["<C-y>"] = { "accept" },
+                    ["<C-f>"] = {},
                     ["<Tab>"] = {},
 
                     ["<M-1>"] = {
@@ -216,7 +217,7 @@ return {
                 pattern = { "dap-repl", "dapui_watches", "dapui_hover" },
                 callback = function()
                     vim.b.completion = false
-                end
+                end,
             })
 
             local set = vim.keymap.set
