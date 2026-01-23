@@ -65,7 +65,6 @@ for _, key in ipairs({ "<C-F2>", "<M-F2>" }) do
     end, vim.g.n_opts)
 end
 
-
 local excluded_filetypes = {
     "gitcommit",
     "NvimTree",
@@ -122,7 +121,7 @@ return {
         config = function()
             local keeper = require("keeper")
             keeper.setup({
-                vars_to_save = { "mk", "build_cmd", "mk_check" }
+                vars_to_save = { "mk", "build_cmd", "mk_check" },
             })
         end,
     },

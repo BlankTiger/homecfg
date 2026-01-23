@@ -116,6 +116,20 @@ return {
                         ["R"] = "ShowRefs",
                         ["y"] = false,
                     },
+                    popup = {
+                        ["l"] = false,
+                        ["L"] = "LogPopup",
+
+                        ["b"] = false,
+                        ["<C-b>"] = "BranchPopup",
+
+                        ["B"] = false,
+
+                        ["w"] = false,
+                        ["<c-w>"] = "WorktreePopup",
+
+                        ["v"] = false,
+                    },
                 },
             })
 
