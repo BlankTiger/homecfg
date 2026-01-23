@@ -163,7 +163,7 @@ return {
                     lualine_x = {
                         searchcount,
                         "selectioncount",
-                        diagnostics,
+                        -- diagnostics,
                         -- spaces,
                         "encoding",
                         -- filetype_no_icon,
