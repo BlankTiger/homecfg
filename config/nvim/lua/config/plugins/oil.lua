@@ -28,6 +28,8 @@ return {
                             end
                         end,
                     },
+                    ["gs"] = false,
+                    ["gS"] = { "actions.change_sort", mode = "n" },
                     ["<A-s>"] = "actions.select_vsplit",
                     ["<A-h>"] = "actions.select_split",
                     ["<A-t>"] = "actions.select_tab",
