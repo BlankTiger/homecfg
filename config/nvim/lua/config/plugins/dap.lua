@@ -525,6 +525,7 @@ return {
                 end
 
                 if not last_jai_executable then
+                    vim.cmd("cclose")
                     dap.continue()
                     return
                 end
@@ -538,16 +539,19 @@ return {
                         task:subscribe("on_complete", function(task, status)
                             local STATUS = require("overseer").STATUS
                             if status == STATUS.SUCCESS then
+                                vim.cmd("cclose")
                                 dap.run(dap.configurations.jai[2])
                             end
                         end)
                         task:start()
                     else
+                        vim.cmd("cclose")
                         dap.run(dap.configurations.jai[2])
                     end
                 end, 100)
             end)
             set("n", "<F5>", function()
+                vim.cmd("cclose")
                 dap.continue()
             end)
             set("n", "<F6>", dap.step_over)

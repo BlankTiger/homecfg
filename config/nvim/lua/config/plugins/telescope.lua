@@ -182,7 +182,7 @@ return {
                 end
 
                 builtin.find_files({
-                    cwd = path
+                    cwd = path,
                 })
             end)
 
