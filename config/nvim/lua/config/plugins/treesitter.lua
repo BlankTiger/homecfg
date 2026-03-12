@@ -1,29 +1,46 @@
+local function toggle_context()
+    require("treesitter-context").toggle()
+end
+
 return {
-    {
-        "nvim-treesitter/nvim-treesitter",
-        event = { "BufReadPre" },
-        lazy = true,
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter-textobjects",
-            {
-                "nvim-treesitter/nvim-treesitter-context",
-                config = function()
-                    -- disable context by default
-                    vim.cmd("TSContextToggle")
-                end,
-            },
-            "JoosepAlviste/nvim-ts-context-commentstring",
+    "nvim-treesitter/nvim-treesitter",
+    event = { "BufReadPre" },
+    lazy = true,
+    branch = "main",
+    build = ":TSUpdate",
+    dependencies = {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        {
+            "nvim-treesitter/nvim-treesitter-context",
+            config = function()
+                toggle_context()
+            end,
         },
-        config = function()
-            local configs = require("nvim-treesitter.configs")
-            local compiler = require("nvim-treesitter.install")
-            local repeatable = require("nvim-treesitter.textobjects.repeatable_move")
+        "JoosepAlviste/nvim-ts-context-commentstring",
+    },
+    config = function()
+        local t = require("nvim-treesitter")
 
-            compiler.compilers = { "clang++" }
-            compiler.compilers = { "clang" }
+        local parsers_loaded = {}
+        local parsers_pending = {}
+        local parsers_failed = {}
 
-            configs.setup({
-                ensure_installed = {
+        local namespace = vim.api.nvim_create_namespace("treesitter.async")
+
+        local function start(buffer, language)
+            local ok = pcall(vim.treesitter.start, buffer, language)
+            if ok then
+                vim.bo[buffer].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+            end
+
+            return ok
+        end
+
+        vim.api.nvim_create_autocmd("User", {
+            pattern = "LazyDone",
+            once = true,
+            callback = function()
+                t.install({
                     "c",
                     "cpp",
                     "lua",
@@ -36,71 +53,83 @@ return {
                     "toml",
                     "hlsl",
                     "zig",
-                },
-                ignore_install = { "" },
-                auto_install = true,
+                    "dapui_breakpoints",
+                    "dap-repl",
+                    "dap-repl",
+                    "dapui_scopes",
+                    "dapui_stacks",
+                    "dapui_watches",
+                    "dapui_hover",
+                    "dapui_console",
+                }, {
+                    max_jobs = 16,
+                })
+            end,
+        })
 
-                highlight = {
-                    enable = true,
-                    disable = { "json" },
-                },
+        vim.api.nvim_set_decoration_provider(namespace, {
+            on_start = vim.schedule_wrap(function()
+                if #parsers_pending == 0 then
+                    return false
+                end
 
-                indent = {
-                    enable = true,
-                },
+                for _, pending_parser in ipairs(parsers_pending) do
+                    if vim.api.nvim_buf_is_valid(pending_parser.buffer) then
+                        if start(pending_parser.buffer, pending_parser.language) then
+                            parsers_loaded[pending_parser.language] = true
+                        else
+                            parsers_failed[pending_parser.language] = true
+                        end
+                    end
+                end
 
-                textobjects = {
-                    select = {
-                        enable = true,
-                        lookahead = true,
-                        keymaps = {
-                            -- to use those do e.g.: vfo to select the whole function
-                            ["ao"] = { query = "@assignment.outer" },
-                            ["ai"] = { query = "@assignment.inner" },
-                            ["a<"] = { query = "@assignment.lhs" },
-                            ["a>"] = { query = "@assignment.rhs" },
+                parsers_pending = {}
+            end),
+        })
 
-                            -- this messes up pasting in visual
-                            -- ["po"] = { query = "@parameter.outer" },
-                            -- ["pi"] = { query = "@parameter.inner" },
+        local group = vim.api.nvim_create_augroup("Treesitter_Setup", { clear = true })
 
-                            ["io"] = { query = "@conditional.outer" },
-                            ["ii"] = { query = "@conditional.inner" },
+        local ignored_filetypes = {
+            "checkhealth",
+            "lazy",
+            "mason",
+            "noice",
+            "fidget",
+            "oil",
+            "TelescopeResults",
+            "TelescopePrompt",
+            "NeogitStatus",
+            "NeogitPopup",
+            "NeogitDiffView",
+            "blink-cmp-menu",
+            "mininotify",
+            "NeogitCommitView"
+        }
 
-                            ["L("] = { query = "@loop.outer" },
-                            ["L)"] = { query = "@loop.inner" },
+        vim.api.nvim_create_autocmd("FileType", {
+            group = group,
+            desc = "Enable treesitter highlighting and indentation.",
+            callback = function(event)
+                if vim.tbl_contains(ignored_filetypes, event.match) then
+                    return
+                end
 
-                            ["Fo"] = { query = "@function.outer" },
-                            ["Fi"] = { query = "@function.inner" },
+                local language = vim.treesitter.language.get_lang(event.match) or event.match
+                local buffer = event.buf
+                if parsers_failed[language] then
+                    return
+                end
 
-                            ["Co"] = { query = "@class.outer" },
-                            ["Ci"] = { query = "@class.inner" },
-                        },
-                    },
+                if parsers_loaded[language] then
+                    start(buffer, language)
+                else
+                    table.insert(parsers_pending, { buffer = buffer, language = language })
+                end
 
-                    swap = {
-                        enable = true,
-                        swap_next = {
-                            ["<leader>snpi"] = "@parameter.inner",
-                            ["<leader>snpo"] = "@parameter.outer",
-                            ["<leader>snfo"] = "@function.outer",
-                            ["<leader>snfi"] = "@function.inner",
-                            ["<leader>snco"] = "@class.outer",
-                            ["<leader>snci"] = "@class.inner",
-                        },
-                        swap_previous = {
-                            ["<leader>sppi"] = "@parameter.inner",
-                            ["<leader>sppo"] = "@parameter.outer",
-                            ["<leader>spfo"] = "@function.outer",
-                            ["<leader>spfi"] = "@function.inner",
-                            ["<leader>spcp"] = "@class.outer",
-                            ["<leader>spci"] = "@class.inner",
-                        },
-                    },
-                },
-            })
+                t.install({ language })
+            end,
+        })
 
-            vim.keymap.set("n", "<leader>ct", "<cmd>TSContextToggle<cr>", vim.g.n_opts)
-        end,
-    },
+        vim.keymap.set("n", "<leader>ct", "<cmd>TSContextToggle<cr>", vim.g.n_opts)
+    end,
 }
