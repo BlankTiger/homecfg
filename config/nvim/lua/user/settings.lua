@@ -1,4 +1,3 @@
--- load keymapping
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.netrw_banner = 0
@@ -8,9 +7,9 @@ local g = vim.g
 
 g.tagbar_position = "topleft vertical"
 
-vim.o.foldlevel = 99
-vim.o.foldlevelstart = 99
-vim.o.foldenable = true
+opt.foldlevel = 99
+opt.foldlevelstart = 99
+opt.foldenable = true
 
 opt.splitright = true
 opt.showmode = false
@@ -90,5 +89,3 @@ g.n_opts = {
     nowait = true,
 }
 
-local set_theme = require("user.theme")
-set_theme()

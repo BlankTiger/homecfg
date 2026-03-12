@@ -28,6 +28,11 @@ local function set_custom_colors()
     set_hl(0, "LineNr", { bg = vim.g.bg_color, fg = vim.g.white_color })
     set_hl(0, "WinSeparator", { bg = vim.g.bg_color, fg = vim.g.accent_color })
     set_hl(0, "MatchParen", { fg = vim.g.comment_color })
+
+    set_hl(0, "qfFileName", { link = "Normal" })
+    set_hl(0, "qfLineNr", { link = "Normal" })
+    set_hl(0, "qfError", { fg = "#ff4444" })
+    set_hl(0, "QuickFixLine", { fg = vim.g.accent_color })
 end
 
 local custom_paragon = function()
@@ -56,7 +61,6 @@ local custom_paragon = function()
     set_hl(0, "GitConflictIncomingLabel", { link = "DiffAdd" })
     set_hl(0, "GitConflictCurrent", { link = "DiffText" })
     set_hl(0, "GitConflictCurrentLabel", { link = "DiffText" })
-
 end
 
 local function custom_whatever()
@@ -64,11 +68,8 @@ local function custom_whatever()
     set_custom_colors()
 end
 
-return function()
-    vim.opt.termguicolors = true
-    -- custom_paragon()
-    _ = custom_paragon
-    -- _ = custom_whatever
-    custom_whatever()
-    -- vim.cmd.colorscheme("catppuccin-latte")
-end
+vim.opt.termguicolors = true
+-- custom_paragon()
+_ = custom_paragon
+-- _ = custom_whatever
+custom_whatever()
