@@ -26,7 +26,6 @@ end, vim.g.n_opts)
 local function run_command(cmd)
     local o = require("overseer")
     local s = require("overseer.constants").STATUS
-    -- o.open({ enter = false })
 
     local all_tasks = o.list_tasks({})
     local len_tasks = #all_tasks
@@ -56,11 +55,6 @@ end, vim.g.n_opts)
 -- F50 = M-F2
 for _, key in ipairs({ "<C-F2>", "<M-F2>" }) do
     set({ "t", "n" }, key, function()
-        -- @TODO: Remove this?
-        --
-        -- vim.cmd("AsyncStop")
-        -- vim.cmd("vert copen | wincmd = | AsyncRun " .. vim.g.mk)
-        -- vim.cmd("wincmd p")
         run_command(vim.g.mk_check)
     end, vim.g.n_opts)
 end

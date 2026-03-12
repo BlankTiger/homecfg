@@ -14,7 +14,7 @@ return {
                         args = {
                             "format",
                             "--line-length",
-                            "100",
+                            "120",
                             "--stdin-filename",
                             "$FILENAME",
                             "-",
@@ -30,7 +30,7 @@ return {
                             "--select",
                             "I",
                             "--line-length",
-                            "100",
+                            "120",
                             "--stdin-filename",
                             "$FILENAME",
                             "-",

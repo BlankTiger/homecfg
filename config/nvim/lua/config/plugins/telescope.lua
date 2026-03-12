@@ -47,6 +47,8 @@ return {
 
                             ["<C-u>"] = actions.preview_scrolling_up,
                             ["<C-d>"] = actions.preview_scrolling_down,
+                            ["<C-f>"] = actions.preview_scrolling_right,
+                            ["<C-b>"] = actions.preview_scrolling_left,
 
                             ["<PageUp>"] = actions.results_scrolling_up,
                             ["<PageDown>"] = actions.results_scrolling_down,
