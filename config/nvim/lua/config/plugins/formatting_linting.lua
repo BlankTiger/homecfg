@@ -1,9 +1,4 @@
 return {
-    -- {
-    --     "nvimtools/none-ls.nvim",
-    --     lazy = true,
-    -- },
-
     {
         "stevearc/conform.nvim",
         event = "VeryLazy",

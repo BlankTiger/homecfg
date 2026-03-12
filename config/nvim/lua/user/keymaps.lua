@@ -29,8 +29,9 @@ set("n", "<down>", "<c-e>", n_opts)
 set("n", "gs", "<cmd>vs<cr>", n_opts)
 set("n", "gh", "<cmd>sp<cr>", n_opts)
 
--- ???
-set("n", "gi", "`^zzi", n_opts)
+-- Go back to the last place where insert mode was used.
+set("n", "gi", "`^zz", n_opts)
+set("n", "gI", "`^zza", n_opts)
 
 -- resizing splits
 set("n", "<C-A-J>", "<cmd>resize -2<cr>", n_opts)
@@ -47,9 +48,6 @@ set("n", "<leader>w", "<cmd>w!<cr>", n_opts)
 set("n", "<leader>W", "<cmd>wq!<cr>", n_opts)
 set("n", "<leader>q", "<cmd>q<cr>", n_opts)
 set("n", "<C-q>", "<cmd>q<cr>", n_opts)
-set("n", "<A-q>", "<cmd>q!<cr>", n_opts)
-set("n", "<A-q>", "<cmd>q!<cr>", n_opts)
-set("n", "<leader>C", "<cmd>quitall!<cr>", n_opts)
 
 set("n", "<leader>cp", function()
     vim.fn.setreg("+", vim.fn.expand("%:p:."))
@@ -67,7 +65,6 @@ end
 set("n", "<leader>V", paste_and_indent, n_opts)
 
 -- tabs
-
 set({ "t", "n", "i" }, "<M-Z>", function()
     pcall(vim.api.nvim_command, "tabnext 1")
 end)
@@ -178,11 +175,6 @@ set("n", "<c-j>", "<cmd>TmuxNavigateDown<cr>", n_opts)
 set("n", "<c-k>", "<cmd>TmuxNavigateUp<cr>", n_opts)
 set("n", "<c-l>", "<cmd>TmuxNavigateRight<cr>", n_opts)
 
--- set("i", "<c-h>", "<esc><cmd>TmuxNavigateLeft<cr>", n_opts)
--- set("i", "<c-j>", "<esc><cmd>TmuxNavigateDown<cr>", n_opts)
--- set("i", "<c-k>", "<esc><cmd>TmuxNavigateUp<cr>", n_opts)
--- set("i", "<c-l>", "<esc><cmd>TmuxNavigateRight<cr>", n_opts)
-
 -- set : to q: (instead of cmdline have cmdwin)
 set("n", ":", "q:i", n_opts)
 
@@ -194,23 +186,6 @@ set("n", "<leader>vd", function()
     cursorpos[1] = cursorpos[1] + 1
     vim.api.nvim_win_set_cursor(win, cursorpos)
 end, n_opts)
-
--- goto file in existing split on the left
--- or the right, if non are open then create them
--- local gf_to_the = require("user.custom-gf").gf_to_the
--- set("n", "gfh", function()
---     gf_to_the({ left = true })
--- end)
--- set("n", "<C-S-H>", function()
---     gf_to_the({ left = true })
--- end)
---
--- set("n", "gfl", function()
---     gf_to_the({ left = false })
--- end)
--- set("n", "<C-S-L>", function()
---     gf_to_the({ left = false })
--- end)
 
 -- repeat last macro with a single key instead of toggling case
 set("n", "~", "@@", n_opts)

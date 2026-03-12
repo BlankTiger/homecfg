@@ -1,6 +1,5 @@
 return {
     {
-        -- url = "https://github.com/BlankTiger/oil.nvim",
         "stevearc/oil.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()

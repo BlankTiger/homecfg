@@ -50,24 +50,6 @@ vim.api.nvim_create_user_command("TermKill", function()
     end
 end, {})
 
--- filter quickfix, if file contains search pattern then keep it
-vim.api.nvim_create_user_command("Fqf", function(args)
-    local aqf = require("aqf")
-    aqf.filter_qf_by_query(args.bang)
-end, { bang = true })
-
--- toggle previous quickfix list
-vim.api.nvim_create_user_command("Pqf", function()
-    local aqf = require("aqf")
-    aqf.prev_qf()
-end, {})
-
--- save current quickfix list as previoous quickfix list
-vim.api.nvim_create_user_command("Sqf", function()
-    local aqf = require("aqf")
-    aqf.save_qf()
-end, {})
-
 vim.api.nvim_create_user_command("FDisable", function()
     vim.b.disable_autoformat = true
 end, { desc = "Disable autoformat on save", bang = true })

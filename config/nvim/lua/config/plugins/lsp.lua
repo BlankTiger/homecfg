@@ -24,7 +24,6 @@ function table.contains(table, element)
 end
 
 return {
-
     {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
@@ -48,6 +47,8 @@ return {
                 end,
             },
         },
+
+        -- @TODO: Redo.
         config = function()
             local diagnostic = vim.diagnostic
             local codelens = vim.lsp.codelens
@@ -133,10 +134,6 @@ return {
                 vim.diagnostic.config(config)
             end
 
-            if table.contains(servers_lists, "cargotomllsp") then
-                require("user.cargotomllsp").setup()
-            end
-
             require("user.jails").setup()
 
             local custom_server_settings = {
@@ -186,9 +183,6 @@ return {
                         },
                     },
                 },
-                cargotomllsp = {
-                    filetypes = { "toml" },
-                },
                 jails = {
                     filetypes = { "jai" },
                 }
@@ -222,7 +216,6 @@ return {
             set("n", "gr", buf.references)
             set("n", "gD", func_map.declaration)
             set("n", "gd", func_map.definition)
-            set("n", "gi", func_map.implementation)
             set("n", "[d", func_map.diag_goto_prev)
             set("n", "]d", func_map.diag_goto_next)
 
@@ -239,21 +232,23 @@ return {
         end,
     },
 
-    {
-        "folke/neodev.nvim",
-        ft = "lua",
-        config = function()
-            require("neodev").setup({})
-        end,
-        opts = {},
-    },
-
-    {
-        "mrcjkb/rustaceanvim",
-        ft = "rs",
-        version = "^5",
-        lazy = false,
-    },
+    -- rust
+    --
+    -- {
+    --     "folke/neodev.nvim",
+    --     ft = "lua",
+    --     config = function()
+    --         require("neodev").setup({})
+    --     end,
+    --     opts = {},
+    -- },
+    --
+    -- {
+    --     "mrcjkb/rustaceanvim",
+    --     ft = "rs",
+    --     version = "^5",
+    --     lazy = false,
+    -- },
 
     "rluba/jai.vim",
 }

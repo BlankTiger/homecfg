@@ -299,14 +299,6 @@ return {
 
     { "romainl/vim-cool", event = "VeryLazy" },
 
-    -- {
-    --     "norcalli/nvim-colorizer.lua",
-    --     event = "VeryLazy",
-    --     config = function()
-    --         require("colorizer").setup()
-    --     end,
-    -- },
-
     {
         "folke/noice.nvim",
         event = "VeryLazy",

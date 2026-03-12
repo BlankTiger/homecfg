@@ -125,7 +125,6 @@ return {
                         default_args_text = "--vimgrep --glob-case-insensitive -i -g *",
                         default_args_files = "--files --glob-case-insensitive -i -g",
                     },
-                    aqf = { path_display = { "absolute" } },
                     ["ui-select"] = {
                         require("telescope.themes").get_dropdown({
                             -- even more opts
@@ -135,7 +134,6 @@ return {
             })
 
             telescope.load_extension("ripgrep")
-            telescope.load_extension("aqf")
             telescope.load_extension("fzf")
             telescope.load_extension("harpoon")
             telescope.load_extension("ui-select")
