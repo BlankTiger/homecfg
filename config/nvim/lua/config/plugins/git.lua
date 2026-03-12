@@ -99,6 +99,12 @@ return {
                 disable_hint = true,
                 console_timeout = 10000,
                 auto_show_console = true,
+
+                integrations = {
+                    telescope = true,
+                    diffview = true,
+                },
+
                 mappings = {
                     status = {
                         ["1"] = false,
