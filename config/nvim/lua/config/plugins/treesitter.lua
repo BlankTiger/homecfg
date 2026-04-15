@@ -16,7 +16,6 @@ return {
                 toggle_context()
             end,
         },
-        "JoosepAlviste/nvim-ts-context-commentstring",
     },
     config = function()
         local t = require("nvim-treesitter")
