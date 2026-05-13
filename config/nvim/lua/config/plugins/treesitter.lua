@@ -129,6 +129,6 @@ return {
             end,
         })
 
-        vim.keymap.set("n", "<leader>ct", "<cmd>TSContextToggle<cr>", vim.g.n_opts)
+        vim.keymap.set("n", "<leader>ct", toggle_context, vim.g.n_opts)
     end,
 }
