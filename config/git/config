@@ -16,9 +16,9 @@
 	autostash = true
 
 [user]
-	email = "maciej-urban@outlook.com"
+	email = "maciejj.urban@gmail.com"
 	name = "Maciej Urban"
-	signingkey = 651A5B5C7DFA0485
+	signingkey = D5F37EC84EE729CFC54F7E9EC626CD84B6DB0AA8
 
 [core]
     hooksPath = ~/.config/git/hooks
