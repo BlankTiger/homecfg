@@ -6,10 +6,38 @@ return {
     "nvim-treesitter/nvim-treesitter",
     event = { "BufReadPre" },
     lazy = true,
+    -- lazy = false,
     branch = "main",
     build = ":TSUpdate",
     dependencies = {
-        "nvim-treesitter/nvim-treesitter-textobjects",
+        {
+            "nvim-treesitter/nvim-treesitter-textobjects",
+            config = function()
+                local ts_select = require("nvim-treesitter-textobjects.select")
+                local map = function(mode, lhs, query)
+                    vim.keymap.set(mode, lhs, function()
+                        ts_select.select_textobject(query, "textobjects")
+                    end, { desc = "TS: " .. query })
+                end
+
+                map({ "x", "o" }, "af", "@function.outer")
+                map({ "x", "o" }, "if", "@function.inner")
+                map({ "x", "o" }, "ac", "@class.outer")
+                map({ "x", "o" }, "ic", "@class.inner")
+                map({ "x", "o" }, "al", "@loop.outer")
+                map({ "x", "o" }, "il", "@loop.inner")
+                map({ "x", "o" }, "ai", "@conditional.outer")
+                map({ "x", "o" }, "ii", "@conditional.inner")
+                map({ "x", "o" }, "am", "@call.outer")
+                map({ "x", "o" }, "im", "@call.inner")
+                map({ "x", "o" }, "aa", "@parameter.outer")
+                map({ "x", "o" }, "ia", "@parameter.inner")
+                map({ "x", "o" }, "a=", "@assignment.outer")
+                map({ "x", "o" }, "i=", "@assignment.inner")
+                map({ "x", "o" }, "ar", "@return.outer")
+                map({ "x", "o" }, "ir", "@return.inner")
+            end,
+        },
         {
             "nvim-treesitter/nvim-treesitter-context",
             config = function()
@@ -44,6 +72,7 @@ return {
                     "cpp",
                     "lua",
                     "vim",
+                    "zig",
                     "vimdoc",
                     "query",
                     "rust",
@@ -102,7 +131,11 @@ return {
             "NeogitDiffView",
             "blink-cmp-menu",
             "mininotify",
-            "NeogitCommitView"
+            "NeogitCommitView",
+            "harpoon",
+            "qf",
+            "conf",
+            "jai",
         }
 
         vim.api.nvim_create_autocmd("FileType", {
@@ -114,13 +147,18 @@ return {
                 end
 
                 local language = vim.treesitter.language.get_lang(event.match) or event.match
+
+                if language == "" then
+                    return
+                end
+
                 local buffer = event.buf
                 if parsers_failed[language] then
                     return
                 end
 
+                start(buffer, language)
                 if parsers_loaded[language] then
-                    start(buffer, language)
                 else
                     table.insert(parsers_pending, { buffer = buffer, language = language })
                 end
