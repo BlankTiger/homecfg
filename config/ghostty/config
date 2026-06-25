@@ -364,7 +364,7 @@ freetype-load-flags = hinting,autohint,no-monochrome
 
 # Background color for the window.
 # background = #282c34
-theme = /home/blanktiger/.local/share/ghostty/themes/tokyonight_night
+# theme = /home/blanktiger/.local/share/ghostty/themes/tokyonight_night
 background = #000000
 
 # Foreground color for the window.
