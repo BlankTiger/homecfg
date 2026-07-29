@@ -236,6 +236,20 @@ set("n", "g,", "g,zz", n_opts)
 -- toggle line wrapping in all open windows
 set("n", "<leader>gw", "<cmd>windo set wrap!<CR>", n_opts)
 
+-- subword motion: w/e/b but also stop at _ and camelCase boundaries
+local subword_start_pat = [[\(^\|\W\|_\)\zs\w\|\(\l\|\d\)\zs\u]]
+local subword_end_pat   = [[\w\(\W\|_\|$\)\@=\|\(\l\|\d\)\(\u\)\@=]]
+
+local function subword_move(pattern, flags)
+    for _ = 1, vim.v.count1 do
+        vim.fn.search(pattern, flags)
+    end
+end
+
+set("n", "<M-w>", function() subword_move(subword_start_pat, "W") end, n_opts)
+set("n", "<M-e>", function() subword_move(subword_end_pat, "W") end, n_opts)
+set("n", "<M-b>", function() subword_move(subword_start_pat, "bW") end, n_opts)
+
 -- we goin places in insert mode guys
 set("i", "<C-h>", "<C-o>b", n_opts)
 set("i", "<C-j>", "<C-o>j", n_opts)
