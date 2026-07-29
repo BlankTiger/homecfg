@@ -119,3 +119,15 @@ hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special())
 -----------------------
 
 hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(noctCall .. "notifications toggleHistory"))
+
+
+local ZOOM_STEP = 0.05
+
+local function adjust_zoom(delta)
+    local zoom = hl.get_config("cursor.zoom_factor") + delta
+    hl.config({ cursor = { zoom_factor = zoom } })
+end
+
+hl.bind(mainMod .. " + SHIFT + mouse_down", function() adjust_zoom( ZOOM_STEP) end)
+hl.bind(mainMod .. " + SHIFT + mouse_up",   function() adjust_zoom(-ZOOM_STEP) end)
+hl.bind(mainMod .. " + SHIFT + Z",          function() hl.config({ cursor = { zoom_factor = 0 } }) end)
