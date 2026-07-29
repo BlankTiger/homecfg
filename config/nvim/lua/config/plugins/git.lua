@@ -102,7 +102,7 @@ return {
 
                 integrations = {
                     telescope = true,
-                    diffview = true,
+                    -- diffview = true,
                 },
 
                 mappings = {
@@ -147,15 +147,15 @@ return {
             end)
         end,
         dependencies = {
-            {
-                "sindrets/diffview.nvim",
-                config = function()
-                    local diffview = require("diffview")
-                    set("n", "<leader>gd", diffview.open)
-                    set("n", "<leader>gc", diffview.close)
-                    set("n", "<leader>gr", "<cmd>DiffviewRefresh<cr>", vim.g.n_opts)
-                end,
-            },
+            -- {
+            --     "sindrets/diffview.nvim",
+            --     config = function()
+            --         local diffview = require("diffview")
+            --         set("n", "<leader>gd", diffview.open)
+            --         set("n", "<leader>gc", diffview.close)
+            --         set("n", "<leader>gr", "<cmd>DiffviewRefresh<cr>", vim.g.n_opts)
+            --     end,
+            -- },
         },
     },
 }
