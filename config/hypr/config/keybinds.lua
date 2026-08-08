@@ -148,6 +148,12 @@ local function move_to_pair(i, follow)
     local active = hl.get_active_monitor()
     local ws     = (active and active.name == SIDE_MON) and (i + SIDE_OFFSET) or i
     hl.dispatch(hl.dsp.window.move({ workspace = ws, follow = follow }))
+
+    if follow then
+        -- follow already changed what the active monitor is showing;
+        -- keep the sibling monitor in lockstep, same as pressing Super+N.
+        focus_pair(i)
+    end
 end
 
 for i = 1, PAIR_COUNT do
