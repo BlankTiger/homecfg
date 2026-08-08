@@ -17,10 +17,15 @@ hl.config({
         animate_mouse_windowdragging = false,
     },
     xwayland = {
-        force_zero_scaling = true
+        force_zero_scaling = true,
     },
     ecosystem = {
         no_update_news = true,
         no_donation_nag = true,
+    },
+
+    -- @TODO: Remove after figuring out why the startup is delayed when logging in.
+    debug = {
+        disable_logs = true,
     },
 })
