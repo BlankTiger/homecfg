@@ -53,7 +53,7 @@ end, vim.g.n_opts)
 
 -- F26 = C-F2
 -- F50 = M-F2
-for _, key in ipairs({ "<C-F2>", "<M-F2>" }) do
+for _, key in ipairs({ "<F26>", "<C-F2>", "<M-F2>" }) do
     set({ "t", "n" }, key, function()
         run_command(vim.g.mk_check)
     end, vim.g.n_opts)
