@@ -29,6 +29,14 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 vim.api.nvim_create_autocmd("BufEnter", {
     group = autocmd_group,
+    pattern = { "*.S" },
+    callback = function()
+        vim.cmd("set filetype=asm")
+    end,
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+    group = autocmd_group,
     pattern = { "Jenkinsfile*" },
     callback = function()
         vim.cmd("set filetype=groovy")
