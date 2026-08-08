@@ -93,22 +93,79 @@ end)
 ---- WORKSPACES ----
 --------------------
 
-for i = 1, 10 do
-    local key = i % 10
-    hl.bind(mainMod .. " + " .. key,         hl.dsp.focus({ workspace = i }))
-    hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i, follow = true }))
-    hl.bind(mainMod .. " + ALT + " .. key,   hl.dsp.window.move({ workspace = i, follow = false }))
+-- Paired workspaces: DP-1 (main) uses 1-10, DP-2 (side) uses 11-20.
+-- Super+N focuses N on whichever monitor is active, and moves the other
+-- monitor to its paired workspace (N on main, N+10 on side) at the same time.
+-- Super+Shift+M toggles this pairing off/on.
+local SIDE_MON    = "DP-2"
+local SIDE_OFFSET = 10
+local PAIR_COUNT  = 10
+local paired_mode = true
+
+local function pair_index(ws)
+    local id = ws and ws.id or 1
+    if id > SIDE_OFFSET then id = id - SIDE_OFFSET end
+    if id < 1 then id = 1 end
+    if id > PAIR_COUNT then id = PAIR_COUNT end
+    return id
 end
 
-hl.bind(mainMod .. " + CONTROL + Right",       hl.dsp.focus({ workspace = "r+1" }))
-hl.bind(mainMod .. " + CONTROL + Left",        hl.dsp.focus({ workspace = "r-1" }))
+local function focus_pair(i)
+    if not paired_mode then
+        local active  = hl.get_active_monitor()
+        local on_side = active and active.name == SIDE_MON
+        hl.dispatch(hl.dsp.focus({ workspace = on_side and (i + SIDE_OFFSET) or i }))
+        return
+    end
+
+    local was_side = hl.get_active_monitor() and hl.get_active_monitor().name == SIDE_MON
+    -- Switch both monitors to their half of the pair.
+    hl.dispatch(hl.dsp.focus({ workspace = i }))
+    hl.dispatch(hl.dsp.focus({ workspace = i + SIDE_OFFSET }))
+    -- The dispatch above left focus on the side monitor; put it back
+    -- on the main monitor unless that's where the user actually was.
+    if not was_side then
+        hl.dispatch(hl.dsp.focus({ workspace = i }))
+    end
+end
+
+hl.bind(mainMod .. " + SHIFT + M", function()
+    paired_mode = not paired_mode
+    -- hl.notification.create() ignores monitor scale and can render off-screen;
+    -- notify-send routes through noctalia's own notification popup instead.
+    hl.exec_cmd('notify-send -a Hyprland "Paired workspace switching" "'
+        .. (paired_mode and "ON" or "OFF") .. '"')
+end)
+
+local function focus_pair_rel(delta)
+    local i = pair_index(hl.get_active_workspace()) + delta
+    if i < 1 then i = PAIR_COUNT end
+    if i > PAIR_COUNT then i = 1 end
+    focus_pair(i)
+end
+
+local function move_to_pair(i, follow)
+    local active = hl.get_active_monitor()
+    local ws     = (active and active.name == SIDE_MON) and (i + SIDE_OFFSET) or i
+    hl.dispatch(hl.dsp.window.move({ workspace = ws, follow = follow }))
+end
+
+for i = 1, PAIR_COUNT do
+    local key = i % 10
+    hl.bind(mainMod .. " + " .. key,         function() focus_pair(i) end)
+    hl.bind(mainMod .. " + SHIFT + " .. key, function() move_to_pair(i, true) end)
+    hl.bind(mainMod .. " + ALT + " .. key,   function() move_to_pair(i, false) end)
+end
+
+hl.bind(mainMod .. " + CONTROL + Right",       function() focus_pair_rel(1) end)
+hl.bind(mainMod .. " + CONTROL + Left",        function() focus_pair_rel(-1) end)
 hl.bind(mainMod .. " + CONTROL + Down",        hl.dsp.focus({ workspace = "empty" }))
 hl.bind(mainMod .. " + CONTROL + ALT + Right", hl.dsp.window.move({ workspace = "r+1" }))
 hl.bind(mainMod .. " + CONTROL + ALT + Left",  hl.dsp.window.move({ workspace = "r-1" }))
 
--- Scroll through existing workspaces
-hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
-hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
+-- Scroll through paired workspaces
+hl.bind(mainMod .. " + mouse_down", function() focus_pair_rel(1) end)
+hl.bind(mainMod .. " + mouse_up",   function() focus_pair_rel(-1) end)
 
 -- Special workspace (scratchpad)
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special" }))
