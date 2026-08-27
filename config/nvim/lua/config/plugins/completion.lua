@@ -36,6 +36,7 @@ return {
 
                 keymap = {
                     preset = "default",
+                    ["<C-e>"] = { "show" },
                     ["<C-y>"] = { "accept" },
                     ["<C-f>"] = {},
                     ["<Tab>"] = {},
@@ -130,6 +131,9 @@ return {
                 },
                 signature = {
                     enabled = true,
+                    trigger = {
+                        enabled = false
+                    },
                     window = {
                         border = "rounded",
                         scrollbar = false,
@@ -147,7 +151,7 @@ return {
                         },
                     },
                     menu = {
-                        auto_show = true,
+                        auto_show = false,
                         border = "single",
                         scrollbar = false,
                         winblend = 0,
