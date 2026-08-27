@@ -68,6 +68,7 @@ g.zig_fmt_parse_errors = 0
 g.zig_fmt_autosave = 1
 
 vim.cmd([[
+set errorformat+=%f(%l:%c)\ %m
 set errorformat+=%f:%l
 set errorformat+=%f:%l:
 set errorformat+=%f:%l\\,%c:\ %m
