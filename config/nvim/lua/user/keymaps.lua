@@ -56,13 +56,27 @@ set("n", "<leader>cP", function()
     vim.fn.setreg("+", vim.fn.expand("%:p"))
 end, { desc = "Copy file path relative to project directory" })
 
-local paste_and_indent = function()
-    vim.cmd('normal! "+p')
-    vim.cmd("normal! '[V']")
-    vim.cmd("normal! =")
+local paste_and_select = function(paste_command)
+    vim.cmd('normal! "+' .. paste_command)
+
+    local start = vim.api.nvim_buf_get_mark(0, "[")
+    local finish = vim.api.nvim_buf_get_mark(0, "]")
+
+    if start[1] == 0 or finish[1] == 0 then
+        return
+    end
+
+    if start[1] > finish[1] then
+        start, finish = finish, start
+    end
+
+    vim.api.nvim_win_set_cursor(0, { start[1], 0 })
+    vim.cmd("normal! V")
+    vim.api.nvim_win_set_cursor(0, { finish[1], 0 })
 end
 
-set("n", "<leader>V", paste_and_indent, n_opts)
+set("n", "gp", function() paste_and_select("p") end, n_opts)
+set("n", "gP", function() paste_and_select("P") end, n_opts)
 
 -- tabs
 set({ "t", "n", "i" }, "<M-Z>", function()
@@ -193,6 +207,7 @@ set("n", "~", "@@", n_opts)
 -- refresh keymap
 set("n", "<leader>kr", function()
     vim.notify("Refreshing keymaps")
+    package.loaded["user.keymaps"] = nil
     require("user.keymaps")
 end)
 
