@@ -142,6 +142,37 @@ return {
                     cwd = "${workspaceFolder}",
                     stopOnEntry = true,
                 },
+                {
+                    name = "Attach to remote GDB",
+                    type = "cppdbg",
+                    request = "launch",
+                    program = function()
+                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+                    end,
+                    cwd = "${workspaceFolder}",
+                    MIMode = "gdb",
+                    miDebuggerPath = "/usr/bin/gdb",
+                    miDebuggerServerAddress = function()
+                        return vim.fn.input("Remote GDB address: ", "127.0.0.1:1234")
+                    end,
+                    hardwareBreakpoints = {
+                        require = true,
+                        limit = 4,
+                    },
+                    stopAtEntry = false,
+                    setupCommands = {
+                        {
+                            text = '-interpreter-exec console "set breakpoint auto-hw on"',
+                            description = "use hardware breakpoints before kernel is loaded",
+                            ignoreFailures = false,
+                        },
+                        {
+                            text = "-enable-pretty-printing",
+                            description = "enable pretty printing",
+                            ignoreFailures = false,
+                        },
+                    },
+                },
             }
 
             dap.configurations.jai = {
@@ -259,6 +290,20 @@ return {
                     },
                     stopOnEntry = true,
                     stopAtEntry = true,
+                },
+            }
+
+            dap.configurations.odin = {
+                {
+                    name = "Launch file",
+                    type = "codelldb",
+                    request = "launch",
+                    program = function()
+                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+                    end,
+                    cwd = "${workspaceFolder}",
+                    stopOnEntry = false,
+                    args = {},
                 },
             }
 
