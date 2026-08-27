@@ -3,7 +3,12 @@ local function get_relative_path(absolute_path)
 end
 
 _G.MyQuickfixtextfunc = function(info)
-    local qflist = vim.fn.getqflist({ all = 0 })
+    local qflist
+    if info.quickfix == 1 then
+        qflist = vim.fn.getqflist({ all = 0 })
+    else
+        qflist = vim.fn.getloclist(info.winid or 0, { all = 0 })
+    end
 
     local result = {}
     for i = info.start_idx, info.end_idx do
@@ -17,7 +22,11 @@ _G.MyQuickfixtextfunc = function(info)
             )
         else
             if #item.text > 0 then
-                table.insert(result, item.text)
+                local text = item.text
+                if info.quickfix ~= 1 then
+                    text = text:gsub("^||%s*", "")
+                end
+                table.insert(result, text)
             else
                 table.insert(result, " ")
             end

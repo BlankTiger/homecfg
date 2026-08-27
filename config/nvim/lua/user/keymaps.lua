@@ -136,6 +136,30 @@ end, n_opts)
 set("n", "<M-;>", "<cmd>cpfile<cr>", n_opts)
 set("n", "<M-'>", "<cmd>cnfile<cr>", n_opts)
 
+-- loclist navigation
+set("n", "<M-k>", function()
+    local ok, _ = pcall(vim.api.nvim_command, "lprev")
+    if ok then
+        vim.api.nvim_command("norm zz")
+    else
+        ok, _ = pcall(vim.api.nvim_command, "llast")
+        if ok then
+            vim.api.nvim_command("norm zz")
+        end
+    end
+end, n_opts)
+set("n", "<M-l>", function()
+    local ok, _ = pcall(vim.api.nvim_command, "lnext")
+    if ok then
+        vim.api.nvim_command("norm zz")
+    else
+        ok, _ = pcall(vim.api.nvim_command, "lfirst")
+        if ok then
+            vim.api.nvim_command("norm zz")
+        end
+    end
+end, n_opts)
+
 -- concat lines in visual mode, because I have J remapped to moving blocks
 set("v", "<S-m>", "J", n_opts)
 set("v", "<S-j>", "<cmd>m '>+1<cr>gv=gv", n_opts)
