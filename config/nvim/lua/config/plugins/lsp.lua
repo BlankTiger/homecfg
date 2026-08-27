@@ -4,6 +4,7 @@ local servers = {
     "lua_ls",
     "bashls",
     "clangd",
+    "ols"
 }
 
 local non_mason_servers = {
