@@ -2,6 +2,8 @@ local function toggle_context()
     require("treesitter-context").toggle()
 end
 
+local ENABLE_TREESITTER_HIGHLIGHTING = true
+
 return {
     "nvim-treesitter/nvim-treesitter",
     event = { "BufReadPre" },
@@ -142,6 +144,10 @@ return {
             group = group,
             desc = "Enable treesitter highlighting and indentation.",
             callback = function(event)
+                if not ENABLE_TREESITTER_HIGHLIGHTING then
+                    return
+                end
+
                 if vim.tbl_contains(ignored_filetypes, event.match) then
                     return
                 end

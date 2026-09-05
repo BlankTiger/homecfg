@@ -135,7 +135,7 @@ font-style-bold-italic = "Bold Condensed Oblique"
 # font-feature = -calt
 # font-feature = -liga
 # font-feature = -dlig
-font-feature =
+font-feature = -calt
 
 # Font size in points. This value can be a non-integer and the nearest integer
 # pixel size will be selected. If you have a high dpi display where 1pt = 2px
@@ -2150,3 +2150,5 @@ keybind = ctrl+7=text:\x1b7
 keybind = ctrl+8=text:\x1b8
 keybind = ctrl+9=text:\x1b9
 keybind = ctrl+0=text:\x1b0
+
+config-file = ~/.config/ghostty/theme

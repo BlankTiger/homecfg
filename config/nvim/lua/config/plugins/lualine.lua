@@ -32,6 +32,8 @@ return {
                 return vim.fn.winwidth(0) > 80
             end
 
+            local is_naysayer = vim.g.theme == "naysayer"
+
             local diagnostics = {
                 "diagnostics",
                 sources = { "nvim_diagnostic" },
@@ -45,7 +47,7 @@ return {
 
             local diff = {
                 "diff",
-                colored = true,
+                colored = not is_naysayer,
                 symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
                 cond = hide_in_width,
             }
@@ -82,6 +84,7 @@ return {
                 "branch",
                 icons_enabled = true,
                 icon = "",
+                colored = not is_naysayer,
             }
 
             local location = {
@@ -143,8 +146,7 @@ return {
             lualine.setup({
                 options = {
                     icons_enabled = true,
-                    theme = custom,
-                    -- theme = "tokyonight",
+                    theme = is_naysayer and "naysayer" or custom,
                     component_separators = { left = "", right = "" },
                     section_separators = { left = "", right = "" },
                     disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },

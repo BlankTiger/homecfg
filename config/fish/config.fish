@@ -11,10 +11,14 @@ set -gx XDG_CACHE_HOME    "$HOME/.cache"
 set -gx XDG_CONFIG_HOME   "$HOME/.config"
 set -gx XDG_DATA_HOME     "$HOME/.local/share"
 set -gx XDG_STATE_HOME    "$HOME/.local/state"
-set -gx STARSHIP_CONFIG   "$HOME/.config/starship/config.toml"
+if test "$NVIM_THEME" = "naysayer"
+    set -gx STARSHIP_CONFIG "$HOME/.config/starship/themes/naysayer.toml"
+else
+    set -gx STARSHIP_CONFIG "$HOME/.config/starship/themes/ayu.toml"
+end
 set -gx JAVA_HOME         "$HOME/.local/bin/android-studio/jbr"
 set -gx ANDROID_HOME      "$HOME/Android/Sdk"
-set -gx PATH              "$HOME/.local/bin:$HOME/.bun/bin:$HOME/projects/Odin:$ANDROID_HOME/platform-tools:$HOME/.local/bin/android-studio/bin:$HOME/.pyenv/shims:$PATH:$HOME/.config/nvm/versions/node/v22.14.0/bin:$HOME/go/bin:$HOME/.cargo/bin:$HOME/.local/jai/bin"
+set -gx PATH              "$HOME/.local/bin:$HOME/.bun/bin:$ANDROID_HOME/platform-tools:$HOME/.local/bin/android-studio/bin:$HOME/.pyenv/shims:$PATH:$HOME/.config/nvm/versions/node/v22.14.0/bin:$HOME/go/bin:$HOME/.cargo/bin:$HOME/.local/jai/bin:/home/blanktiger/Downloads/odin-linux-amd64-dev-2026-08/odin-linux-amd64-nightly+2026-08-06"
 
 alias c       'clear'
 alias d       'cd "$(director)"'

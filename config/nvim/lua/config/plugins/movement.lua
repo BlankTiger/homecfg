@@ -1,6 +1,6 @@
 local function set_hl()
     -- local accent = "#DF006B"
-    local accent = "#ffffff"
+    local accent = vim.g.theme == "naysayer" and "#A6E22E" or "#ffffff"
     vim.api.nvim_set_hl(0, "LeapMatch", {})
     vim.api.nvim_set_hl(0, "LeapBackdrop", {})
     vim.api.nvim_set_hl(0, "LeapLabel", { fg = accent })

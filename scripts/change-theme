@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+theme=${1:-}
+config_dir="${XDG_CONFIG_HOME:-$HOME/.config}"
+ghostty_dir="$config_dir/ghostty"
+
+if [[ "$theme" != "naysayer" && "$theme" != "ayu" ]]; then
+    printf 'usage: change-theme <naysayer|ayu>\n' >&2
+    exit 1
+fi
+
+cp "$ghostty_dir/themes/$theme" "$ghostty_dir/theme"
+
+if command -v fish >/dev/null 2>&1; then
+    fish -c 'set -Ux NVIM_THEME $argv[1]' change-theme "$theme"
+fi
+
+if command -v tmux >/dev/null 2>&1 && tmux has-session 2>/dev/null; then
+    tmux set-environment -g NVIM_THEME "$theme"
+    tmux source-file "$config_dir/tmux/tmux.conf"
+fi
+
+if systemctl --user is-active --quiet app-com.mitchellh.ghostty.service 2>/dev/null; then
+    systemctl --user reload app-com.mitchellh.ghostty.service
+elif command -v pkill >/dev/null 2>&1; then
+    pkill -USR2 -x ghostty 2>/dev/null || true
+fi
