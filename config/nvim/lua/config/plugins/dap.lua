@@ -304,6 +304,11 @@ return {
                     cwd = "${workspaceFolder}",
                     stopOnEntry = false,
                     args = {},
+                    initCommands = {
+                        "command script import "
+                            .. vim.fn.stdpath("config")
+                            .. "/scripts/odin_lldb.py",
+                    },
                 },
             }
 
