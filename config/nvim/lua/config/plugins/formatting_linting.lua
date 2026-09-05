@@ -36,6 +36,13 @@ return {
                             "-",
                         },
                     },
+                    -- clang_format = {
+                    --     stdin = true,
+                    --     command = "clang-format",
+                    --     args = {
+                    --         "--style=\"{BasedOnStyle: LLVM, IndentWidth: 4}\"",
+                    --     },
+                    -- },
                 },
                 formatters_by_ft = {
                     lua = { "stylua" },

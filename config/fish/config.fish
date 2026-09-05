@@ -54,7 +54,7 @@ alias o       'fd --type f --hidden --exclude .git | fzf-tmux -p --reverse | xar
 alias rgf     'rg --files | rg'
 alias rgw     'rg -g '\''!*.bin'\'' -T json -i '
 alias s       'echo '\'',A'\'' | nvim -s -'
-alias so      'source ~/.config/zsh/.zshrc'
+alias so      'source ~/.config/fish/config.fish'
 alias sp      'sudo pacman'
 alias t       'tmux'
 alias ta      'tmux attach'
@@ -79,3 +79,5 @@ starship init fish | source
 
 # opencode
 fish_add_path /home/blanktiger/.opencode/bin
+fish_add_path "$HOME/.config/homecfg/scripts"
+direnv hook fish | source

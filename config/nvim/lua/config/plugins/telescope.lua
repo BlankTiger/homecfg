@@ -148,8 +148,8 @@ return {
 
             set("n", "<leader>sb", builtin.buffers)
             set("n", "<leader>tr", builtin.resume)
-            set("n", "<leader>A", builtin.live_grep)
-            set("n", "<leader>f", builtin.find_files)
+            set("n", "<leader>A", function() require("fff").live_grep() end)
+            set("n", "<leader>f", function() require("fff").find_files() end)
             set("n", "<leader>F", function()
                 builtin.find_files(themes.get_dropdown({
                     layout_config = {
@@ -181,9 +181,7 @@ return {
                     path = path:sub(#start, #path)
                 end
 
-                builtin.find_files({
-                    cwd = path,
-                })
+                require("fff").find_files_in_dir(path)
             end)
 
             -- misc search
@@ -199,5 +197,56 @@ return {
             set("n", "<leader>ls", builtin.lsp_document_symbols)
             set("n", "<leader>lS", builtin.lsp_dynamic_workspace_symbols)
         end,
+    },
+
+    {
+        "dmtrKovalenko/fff.nvim",
+        build = function()
+            -- downloads a prebuilt binary or falls back to cargo build
+            require("fff.download").download_or_build_binary()
+        end,
+        opts = function()
+            if vim.g.theme ~= "naysayer" then
+                return {
+                    debug = {
+                        enabled = true,
+                        show_scores = true,
+                    },
+                    grep = {
+                        modes = { "plain", "fuzzy", "regex" }, -- first entry is the default mode
+                    },
+                }
+            end
+
+            return {
+                debug = {
+                    enabled = true,
+                    show_scores = true,
+                },
+                grep = {
+                    modes = { "plain", "fuzzy", "regex" }, -- first entry is the default mode
+                },
+                hl = {
+                    border = "FffBorder",
+                    normal = "FffNormal",
+                    matched = "String",
+                    title = "Comment",
+                    prompt = "Comment",
+                    cursor = "Visual",
+                    frecency = "Comment",
+                    debug = "Comment",
+                    combo_header = "Comment",
+                    scrollbar = "Comment",
+                    directory_path = "Comment",
+                    grep_match = "String",
+                    grep_line_number = "LineNr",
+                    grep_regex_active = "Comment",
+                    grep_plain_active = "Comment",
+                    grep_fuzzy_active = "Comment",
+                    suggestion_header = "Comment",
+                },
+            }
+        end,
+        lazy = false, -- the plugin lazy-initialises itself
     },
 }
