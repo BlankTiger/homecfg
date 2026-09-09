@@ -30,6 +30,51 @@ return {
         config = function()
             ---@module 'blink.cmp'
             ---@type blink.cmp.Config
+            local function complete_without_menu(direction)
+                local blink = require("blink.cmp")
+                local trigger = require("blink.cmp.completion.trigger")
+                local list = require("blink.cmp.completion.list")
+                local menu = require("blink.cmp.completion.windows.menu")
+
+                if blink.is_menu_visible() then
+                    return direction == "next"
+                        and blink.select_next()
+                        or blink.select_prev()
+                end
+
+                if blink.is_active() then
+                    trigger.hide()
+                end
+
+                blink.show({
+                    initial_selected_item_idx = 1,
+                    callback = function()
+                        menu.auto_show = false
+                        local context = blink.get_context()
+                        local attempts = 0
+
+                        local function accept()
+                            attempts = attempts + 1
+                            if list.context == context and #list.items > 0 then
+                                if #list.items == 1 then
+                                    list.accept({ index = 1 })
+                                else
+                                    menu.auto_show = true
+                                    menu.open()
+                                    menu.update_position()
+                                    list.select(1, { auto_insert = true })
+                                end
+                            elseif attempts < 100 then
+                                vim.defer_fn(accept, 10)
+                            end
+                        end
+
+                        accept()
+                    end,
+                })
+                return true
+            end
+
             local opts = {
                 fuzzy = { implementation = "rust" },
                 snippets = { preset = "luasnip" },
@@ -39,6 +84,8 @@ return {
                     ["<C-e>"] = { "show" },
                     ["<C-y>"] = { "accept" },
                     ["<C-f>"] = {},
+                    ["<C-n>"] = { function() return complete_without_menu("next") end },
+                    ["<C-p>"] = { function() return complete_without_menu("prev") end },
                     ["<Tab>"] = {},
 
                     ["<M-1>"] = {
@@ -152,7 +199,7 @@ return {
                     },
                     menu = {
                         auto_show = false,
-                        border = "single",
+                        border = "rounded",
                         scrollbar = false,
                         winblend = 0,
                         scrolloff = 2,
@@ -161,7 +208,7 @@ return {
                         draw = {
                             gap = 2,
                             columns = {
-                                { "label", "label_description", gap = 1 },
+                                { "label" },
                                 { "kind_icon", "space", "space", "item_idx" },
                             },
                             components = {
