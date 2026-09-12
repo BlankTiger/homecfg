@@ -11,13 +11,27 @@ ls.setup()
 local set = vim.keymap.set
 
 set({ "i" }, "<C-K>", function()
-    ls.expand()
+    if ls.expand_or_jumpable() then
+        ls.expand_or_jump()
+    else
+        require("blink.cmp").show_signature()
+    end
 end, { silent = true })
-set({ "i", "s" }, "<C-right>", function()
-    ls.jump(1)
+local function jump_or_move(direction, motion)
+    if ls.jumpable(direction) then
+        ls.jump(direction)
+        return
+    end
+
+    local keys = vim.api.nvim_replace_termcodes(motion, true, false, true)
+    vim.api.nvim_feedkeys(keys, "i", false)
+end
+
+set("i", "<C-right>", function()
+    jump_or_move(1, "<C-o>w")
 end, { silent = true })
-set({ "i", "s" }, "<C-left>", function()
-    ls.jump(-1)
+set("i", "<C-left>", function()
+    jump_or_move(-1, "<C-o>b")
 end, { silent = true })
 
 set({ "i", "s" }, "<C-E>", function()
